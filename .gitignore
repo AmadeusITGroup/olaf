@@ -16,9 +16,104 @@ yarn-error.log
 *.swp
 *.swo
 
-# Conversation files
+# OS files
+Thumbs.db
+*.tmp
+*.temp
+
+# Logs and temporary files
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime data
+pids/
+logs/
+results/
+
+# Coverage directory used by tools like istanbul
+coverage/
+.nyc_output/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Conversation and data files
 olaf-data-store/handover-conversation*.md
+olaf-data-store/findings/*/
+olaf-data-store/conversations/
+olaf-data-store/sessions/
+olaf-data-store/temp/
 
+# Branch-specific ignores
+# (These will be customized per branch)
 
-# Project Folders
+# Documentation build outputs
+docs/_build/
+docs/site/
+
+# Example outputs and generated files
+examples/*/output/
+examples/*/generated/
+examples/*/.cache/
+
+# Research and experimental files
+research/
+experiments/
+prototypes/
+deprecated/
+
+# Configuration files with sensitive data
+config/local.*
+config/production.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Backup files
+*.bak
+*.backup
+*~
 
