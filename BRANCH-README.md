@@ -1,17 +1,24 @@
-# Messy Branch
+# Research Branch: UI Migration
 
-**Purpose:** Static snapshot of original main branch state  
-**Status:** FROZEN - No changes allowed  
-**Created:** 20250911-0825 CEDT
+**Purpose:** Research and development for UI migration functionality  
+**Status:** ACTIVE - Independent development  
+**Sync:** No automatic sync from main  
+**Created:** 20250911-0951 CEDT
 
-This branch preserves the original state of main before cleanup for reference purposes.
+This branch is dedicated to research and development of user interface migration and modernization.
 
-**DO NOT:**
-- Make any changes to this branch
-- Merge from or to this branch
-- Use as base for new work
+**Research Focus:**
+- UI framework migration strategies
+- Modern web interface patterns
+- User experience improvements
+- Component architecture design
+
+**Contribution Process:**
+1. Develop features independently
+2. Create PR to integration when ready
+3. Integration handles cleanup and main PR
 
 **Use for:**
-- Historical reference
-- Recovering accidentally deleted content
-- Understanding original project structure before cleanup
+- Experimental development
+- Feature prototyping
+- Research
