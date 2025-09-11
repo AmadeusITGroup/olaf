@@ -1,0 +1,38 @@
+
+* Building <componentPack> components: 
+
+ahpmw::sdaExternalApi 0.0.0.0 - (1/2)
+
+ahpmw::sdaExternalApi::channel 0.0.0.0 - (2/2)
+    shared_debug [object] Compiling 'src/eus-channel-profiles/EusChannelProfilesRetriever.cpp'... 
+    shared_debug [object] Compiling 'src/soa-vendor-profile/SoaVendorProfileRetriever.cpp'... 
+        Info: re-building because of: [SoaVendorProfileRetriever.cpp settings.mk]
+    shared_debug [object] Compiling 'include/sda-external-api/channel/EusChannelProfilesRetriever.hpp'... 
+        Info: re-building because of: [settings.mk]
+    shared_debug [object] Compiling 'include/sda-external-api/channel/SoaVendorProfileRetriever.hpp'... 
+        Info: re-building because of: [settings.mk]
+    shared_debug [object] Compiling 'include/sda-external-api/channel/StrongTypes.hpp'... 
+        Info: re-building because of: [settings.mk]
+    shared_debug [object] Compiling 'include/sda-external-api/channel/bom/EusChannelProfile.hpp'... 
+        Info: re-building because of: [settings.mk]
+src/eus-channel-profiles/EusChannelProfilesRetriever.cpp:20:10: fatal error: otf/ReroutingTokens.h: No such file or directory
+   20 | #include <otf/ReroutingTokens.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [/usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data/build.mk:641: /workspace/ghc/modernization/ACRS.Shopping.obe-mdw-sda-external-api/src/channel/bmstmp/84164368e0e7/build/obj/x86_64-v23/DebugSharedGccNoInstr/main/rootSymlink/src/eus-channel-profiles/EusChannelProfilesRetriever.cpp.o] Error 1
+make: *** Waiting for unfinished jobs....
+src/soa-vendor-profile/SoaVendorProfileRetriever.cpp:20:10: fatal error: otf/ReroutingTokens.h: No such file or directory
+   20 | #include <otf/ReroutingTokens.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [/usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data/build.mk:641: /workspace/ghc/modernization/ACRS.Shopping.obe-mdw-sda-external-api/src/channel/bmstmp/84164368e0e7/build/obj/x86_64-v23/DebugSharedGccNoInstr/main/rootSymlink/src/soa-vendor-profile/SoaVendorProfileRetriever.cpp.o] Error 1
+error: bmslib.BmsError: Make failed with code 2
+The command was: /opt/1A/toolchain/x86_64-v23/build-pack/default/bin/make -f /usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data/Makefile --no-builtin-rules --no-builtin-variables --silent --jobs=6 AMD_THREAD_COUNT=6 lib buildHeaders AMD_SHR=1 AMD_PARTIAL=0 BMS_LD=1 AMD_COMP=gnu_cxx AMD_COMP_C=C AMD_ENV=64 AMD_THREADS=1 AMD_DEBUG=1 AMD_STRICT_ALIASING=0 AMD_SYMBOLIC_FUNCTIONS_LINK=1 AMD_ENABLE_CLANG=0 AMD_LTO=0 AMD_HIDDEN_SYMBOLS=0 AMD_ENABLE_LAZY_RELOCATIONS=0 AMD_ENABLE_BOLT=0 AMD_ENABLE_COVERAGE=0 AMD_STRIP_DEBUG_SYMBOLS=0 AMD_TOOLCHAIN=x86_64-v23 BMS_PROF_CPPFLAGS=-Wall -Wextra -Werror BMS_PROF_CXXFLAGS=-Wcast-align -Wunused -Woverloaded-virtual -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wimplicit-fallthrough -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op BMS_COMPILER_PATH=/opt/1A/toolchain/x86_64-v23 BMS_DATA_DIRECTORY=/usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data BMS_PROFILE=shared_debug BMS_CONFIG=main BMS_COMPILATION_DIR=/workspace/ghc/modernization/ACRS.Shopping.obe-mdw-sda-external-api/src/channel/bmstmp/84164368e0e7/build BMS_BSYS_DIRECTORY=/workspace/ghc/modernization/ACRS.Shopping.obe-mdw-sda-external-api/src/channel/bmstmp/84164368e0e7/build/bsys AMD_COLORIZE_OUTPUT=0
+
+
+
+Final summary:
+
+  ahpmw::sdaExternalApi::channel: bmslib.BmsError: Make failed with code 2
+error: bmslib.BmsError: Error detected (see above).
+

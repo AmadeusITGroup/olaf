@@ -1,0 +1,27 @@
+
+* Building <componentPack> components: 
+    shared_debug [object] Compiling 'src/rest/DependencyInitializer.cpp'... 
+    shared_debug [object] Compiling 'src/rest/hac/HacProxy.cpp'... 
+src/rest/hac/HacProxy.cpp: In constructor 'cgi::rest::HacProxy::HacProxy(otf::RESTServiceObjectInterfacePtr)':
+src/rest/hac/HacProxy.cpp:17:58: error: invalid use of incomplete type 'using std::__shared_ptr_access<otf::api::ServiceInterface, __gnu_cxx::_S_atomic, false, false>::element_type = class otf::api::ServiceInterface' {aka 'class otf::api::ServiceInterface'}
+   17 |     : _hacIsp(KIT::HacIspAccessControl::create(iSvcObject->getResources().getSecurityManager().getSecurityContext(),
+      |                                                          ^~
+In file included from src/rest/hac/HacProxy.hpp:8,
+                 from src/rest/hac/HacProxy.cpp:6:
+/data/mwrep/res/mdw/OTF/23-0-0-76/include/otf/Service.h:25:15: note: forward declaration of 'using std::__shared_ptr_access<otf::api::ServiceInterface, __gnu_cxx::_S_atomic, false, false>::element_type = class otf::api::ServiceInterface' {aka 'class otf::api::ServiceInterface'}
+   25 |         class ServiceInterface;
+      |               ^~~~~~~~~~~~~~~~
+In file included from src/rest/DependencyInitializer.cpp:9:
+src/rest/DependenciesDefinition.hpp: In static member function 'static void cgi::rest::ReferentialDataDependency::doInitialization()':
+src/rest/DependenciesDefinition.hpp:52:31: error: 'GetConnection' is not a member of 'RFD_ApiConnectionHandler'
+   52 |     RFD_ApiConnectionHandler::GetConnection();
+      |                               ^~~~~~~~~~~~~
+make: *** [/usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data/build.mk:641: /workspace/ghc/modernization/ACRS.CGI.cgi-mdw-rest/bmstmp/84164368e0e7/build/obj/x86_64-v23/DebugSharedGccNoInstr/main/rootSymlink/src/rest/hac/HacProxy.cpp.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [/usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data/build.mk:641: /workspace/ghc/modernization/ACRS.CGI.cgi-mdw-rest/bmstmp/84164368e0e7/build/obj/x86_64-v23/DebugSharedGccNoInstr/main/rootSymlink/src/rest/DependencyInitializer.cpp.o] Error 1
+error: bmslib.BmsError: Make failed with code 2
+The command was: /opt/1A/toolchain/x86_64-v23/build-pack/default/bin/make -f /usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data/Makefile --no-builtin-rules --no-builtin-variables --silent --jobs=8 AMD_THREAD_COUNT=8 lib AMD_SHR=1 AMD_PARTIAL=0 BMS_LD=1 AMD_COMP=gnu_cxx AMD_COMP_C=C AMD_ENV=64 AMD_THREADS=1 AMD_DEBUG=1 AMD_STRICT_ALIASING=0 AMD_SYMBOLIC_FUNCTIONS_LINK=1 AMD_ENABLE_CLANG=0 AMD_LTO=0 AMD_HIDDEN_SYMBOLS=0 AMD_ENABLE_LAZY_RELOCATIONS=0 AMD_ENABLE_BOLT=0 AMD_ENABLE_COVERAGE=0 AMD_STRIP_DEBUG_SYMBOLS=0 AMD_TOOLCHAIN=x86_64-v23 BMS_COMPILER_PATH=/opt/1A/toolchain/x86_64-v23 BMS_DATA_DIRECTORY=/usr/lib/python3.9/site-packages/bmslib/plugins/buildsystem/data BMS_PROFILE=shared_debug BMS_CONFIG=main BMS_COMPILATION_DIR=/workspace/ghc/modernization/ACRS.CGI.cgi-mdw-rest/bmstmp/84164368e0e7/build BMS_BSYS_DIRECTORY=/workspace/ghc/modernization/ACRS.CGI.cgi-mdw-rest/bmstmp/84164368e0e7/build/bsys AMD_COLORIZE_OUTPUT=0
+
+
+error: bmslib.BmsError: Error detected (see above).
+
