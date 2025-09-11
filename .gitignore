@@ -19,6 +19,28 @@ yarn-error.log
 # Conversation files
 olaf-data-store/handover-conversation*.md
 
+# Examples branch specific ignores
+# Generated outputs from examples
+examples/*/output/
+examples/*/generated/
+examples/*/temp/
+examples/*/.cache/
+examples/*/logs/
+
+# Example-specific data stores
+examples/*/olaf-data-store/findings/
+examples/*/olaf-data-store/conversations/
+examples/*/olaf-data-store/sessions/
+
+# Documentation builds for examples
+examples/*/docs/_build/
+examples/*/docs/site/
+
+# Example runtime files
+examples/*/*.log
+examples/*/*.tmp
+examples/*/node_modules/
+examples/*/__pycache__/
 
 # Project Folders
 
