@@ -1,0 +1,60 @@
+{
+  "requirement": {
+    "id": "REQ-YYYYMMDD-HHmm",
+    "title": "STRING - Clear, concise requirement title",
+    "createdDate": "YYYY-MM-DD",
+    "createdTime": "HH:mm",
+    "status": "ELICITED"
+  },
+  "requestor": {
+    "name": "STRING - Full name of the person making the request",
+    "role": "STRING - Position/function in the organization",
+    "team": "STRING - Team or department",
+    "contactInfo": "STRING - Email or other contact method",
+    "targetSystem": "STRING - Application/system affected by this requirement"
+  },
+  "currentState": {
+    "problemDescription": "STRING - Clear description of the current problem or situation",
+    "frequency": "STRING - How often this problem occurs (daily, weekly, monthly, etc.)",
+    "businessImpact": "STRING - Quantified consequences and pain points",
+    "currentWorkarounds": "STRING - How users currently cope with the problem",
+    "constraints": "ARRAY of STRINGS - Known limitations or restrictions"
+  },
+  "desiredFutureState": {
+    "idealVision": "STRING - Optimal solution outcome described in business terms",
+    "minimumViableSolution": "STRING - Smallest useful improvement that would add value",
+    "successCriteria": "ARRAY of STRINGS - Measurable outcomes that define success",
+    "referenceExamples": "ARRAY of STRINGS - Similar solutions seen elsewhere",
+    "businessOutcomes": "ARRAY of STRINGS - Expected business benefits"
+  },
+  "stakeholderAnalysis": {
+    "primaryUsers": "ARRAY of STRINGS - Direct beneficiaries of the solution",
+    "secondaryUsers": "ARRAY of STRINGS - Indirectly affected parties",
+    "decisionMakers": "ARRAY of STRINGS - People who approve/influence the solution",
+    "organizationalBenefits": "STRING - Broader business value for the organization",
+    "externalImpact": "STRING - Effects on customers, partners, or external parties if applicable"
+  },
+  "priorityAssessment": {
+    "urgency": "ENUM ['High', 'Medium', 'Low']",
+    "importance": "ENUM ['High', 'Medium', 'Low']",
+    "businessJustification": "STRING - Specific business reasons for the urgency level",
+    "impactIfDelayed": "STRING - Consequences of waiting 3-6 months",
+    "strategicAlignment": "STRING - How this supports broader business goals",
+    "estimatedComplexity": "ENUM ['Simple', 'Medium', 'Complex'] - User's perception of effort required"
+  },
+  "elicitationSession": {
+    "sessionDuration": "INTEGER - Minutes spent in elicitation",
+    "facilitator": "STRING - Name of person conducting the elicitation",
+    "methodology": "review-user-demand",
+    "completenessScore": "FLOAT - Score from 0.0 to 1.0 indicating requirement completeness",
+    "clarificationNeeded": "ARRAY of STRINGS - Areas requiring further investigation",
+    "nextSteps": "ARRAY of STRINGS - Recommended follow-up actions"
+  },
+  "validation": {
+    "problemClearlyDefined": "BOOLEAN - Problem is understandable to outsiders",
+    "solutionVisionArticulated": "BOOLEAN - Desired outcome expressed in business terms",
+    "impactQuantified": "BOOLEAN - Benefits and consequences are specific",
+    "stakeholdersIdentified": "BOOLEAN - All affected parties mapped",
+    "priorityJustified": "BOOLEAN - Urgency has business rationale"
+  }
+}
