@@ -4,6 +4,29 @@ from pptx import Presentation
 from pptx.util import Inches
 from datetime import datetime
 
+def split_bullet_content(content_text, max_bullets=7):
+    """Split content if it has more than max_bullets bullet points."""
+    lines = content_text.split('\n')
+    bullets = [line for line in lines if line.strip().startswith('-') or line.strip().startswith('*')]
+    
+    if len(bullets) <= max_bullets:
+        return [content_text]
+    
+    # Split bullets into chunks
+    bullet_chunks = []
+    non_bullet_lines = [line for line in lines if not (line.strip().startswith('-') or line.strip().startswith('*'))]
+    
+    for i in range(0, len(bullets), max_bullets):
+        chunk_bullets = bullets[i:i + max_bullets]
+        # Add non-bullet content to first chunk only
+        if i == 0:
+            chunk_content = '\n'.join(non_bullet_lines + chunk_bullets)
+        else:
+            chunk_content = '\n'.join(chunk_bullets)
+        bullet_chunks.append(chunk_content)
+    
+    return bullet_chunks
+
 def parse_presentation_file(file_path):
     """Parse a markdown presentation file and extract slide data."""
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -15,25 +38,30 @@ def parse_presentation_file(file_path):
     
     # Extract slides
     slides = []
-    slide_pattern = r'### Slide \d+: (.+?)\n\*\*Layout\*\*: (.+?)\n\*\*Content\*\*:\n(.*?)(?=\n\*Image Prompt|\n###|\Z)'
+    slide_pattern = r'### (?:Slide|Diapositive) \d+: (.+?)\n\*\*(?:Layout|Mise en Page)\*\*: (.+?)\n\*\*(?:Content|Contenu)\*\*:\n(.*?)(?=\n\*Image Prompt|\n###|\Z)'
     
     for match in re.finditer(slide_pattern, content, re.DOTALL):
         slide_title = match.group(1)
         layout = match.group(2)
         content_text = match.group(3).strip()
         
-        # Extract image prompt if exists
-        image_prompt = None
-        image_match = re.search(r'\*Image Prompt[^:]*: (.+?)(?=\n###|\Z)', content[match.end():], re.DOTALL)
-        if image_match:
-            image_prompt = image_match.group(1).strip()
+        # Extract notes section if exists
+        notes_text = None
+        notes_match = re.search(r'\*\*(?:Notes|Remarques)\*\*:\n(.*?)(?=\n\*Image Prompt|\n###|\Z)', content[match.end():], re.DOTALL)
+        if notes_match:
+            notes_text = notes_match.group(1).strip()
         
-        slides.append({
-            'title': slide_title,
-            'layout': layout,
-            'content': content_text,
-            'image_prompt': image_prompt
-        })
+        # Split content if it has too many bullets
+        content_chunks = split_bullet_content(content_text)
+        
+        for i, chunk in enumerate(content_chunks):
+            slide_data = {
+                'title': slide_title if i == 0 else f"{slide_title} (Part {i+1})",
+                'layout': layout,
+                'content': chunk,
+                'notes': notes_text if i == 0 else None  # Only add notes to first slide
+            }
+            slides.append(slide_data)
     
     return presentation_title, slides
 
@@ -48,7 +76,7 @@ def create_presentation_from_file(input_file_path, output_dir="findings_dir/pres
     
     for i, slide_data in enumerate(slides):
         # Choose layout based on slide type
-        if slide_data['layout'] == 'Title Slide':
+        if slide_data['layout'] in ['Title Slide', 'Diapositive de Titre']:
             slide = prs.slides.add_slide(prs.slide_layouts[0])
             title = slide.shapes.title
             subtitle = slide.placeholders[1] if len(slide.placeholders) > 1 else None
@@ -57,7 +85,7 @@ def create_presentation_from_file(input_file_path, output_dir="findings_dir/pres
             if subtitle and slide_data['content']:
                 # Extract subtitle from content
                 lines = slide_data['content'].split('\n')
-                subtitle_text = next((line.replace('- Subtitle: ', '') for line in lines if 'Subtitle:' in line), '')
+                subtitle_text = next((line.replace('- Sous-titre: ', '').replace('- Subtitle: ', '') for line in lines if 'Sous-titre:' in line or 'Subtitle:' in line), '')
                 subtitle.text = subtitle_text
                 
         else:
@@ -69,12 +97,19 @@ def create_presentation_from_file(input_file_path, output_dir="findings_dir/pres
             title.text = slide_data['title']
             content.text = slide_data['content']
         
-        # Add image prompt as a comment/note if it exists
-        if slide_data['image_prompt']:
-            # Add image prompt as slide notes
-            notes_slide = slide.notes_slide
-            text_frame = notes_slide.notes_text_frame
-            text_frame.text = f"Image Prompt: {slide_data['image_prompt']}"
+        # Always add slide notes with content details
+        notes_slide = slide.notes_slide
+        text_frame = notes_slide.notes_text_frame
+        
+        # Create detailed notes about the slide content
+        notes_content = f"Slide: {slide_data['title']}\n\n"
+        notes_content += f"Content Summary:\n{slide_data['content']}\n\n"
+        
+        # Add custom notes if they exist
+        if slide_data.get('notes'):
+            notes_content += f"Additional Notes:\n{slide_data['notes']}"
+        
+        text_frame.text = notes_content
     
     # Generate output filename
     safe_title = re.sub(r'[^\w\s-]', '', presentation_title).strip()
