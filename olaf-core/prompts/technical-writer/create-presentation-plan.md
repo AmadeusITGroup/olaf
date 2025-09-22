@@ -33,10 +33,32 @@ Create a comprehensive presentation plan based on the user's requirements. This 
 - Apply the calculated slide count based on presentation type
 - Structure the presentation with logical flow in the target language
 - Define slide titles, layouts, and content for each slide
-- **IMPORTANT**: Do NOT use bullet point prefixes (•, -, *) in slide content - write content directly without prefixes
+- **IMPORTANT**: Use proper hierarchical structure with bullet points and sub-points:
+  - Main points should use bullet symbols (•)
+  - Sub-points should use dashes (-) and be indented
+  - Example format:
+    ```
+    • Main point one
+      - Supporting detail
+      - Additional context
+    • Main point two
+      - Sub-detail
+      - Further explanation
+    ```
 - Ask user if they want image prompts for visual elements (do not include by default)
 
-### Step 4: Save and Review
+### Step 4: Create Comprehensive Notes Section
+- Add detailed implementation notes covering:
+  - Technical implementation details (architecture, technologies, APIs)
+  - Security and compliance considerations
+  - Enterprise integration requirements
+  - Development workflow and best practices
+  - Performance and scalability factors
+  - Community and ecosystem information
+- Include specific technical details relevant to the presentation topic
+- Provide actionable information for implementation teams
+
+### Step 5: Save and Review
 - Save the plan as: `[id:findings_dir]pptx-folder/[presentation-name]-plan-YYYYMMDD-HHmm.md`
 - Inform user that the plan is ready for review and editing
 - Provide summary of created plan structure
