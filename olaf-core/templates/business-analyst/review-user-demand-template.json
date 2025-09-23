@@ -42,11 +42,78 @@
     "strategicAlignment": "STRING - How this supports broader business goals",
     "estimatedComplexity": "ENUM ['Simple', 'Medium', 'Complex'] - User's perception of effort required"
   },
+  "businessRules": {
+    "validationRules": "ARRAY of STRINGS - Order/request validation rules (amounts, quantities, etc.)",
+    "pricingLogic": "STRING - How pricing tiers and discounts are determined",
+    "approvalWorkflows": "ARRAY of STRINGS - Approval chains for different transaction types",
+    "accessRules": "ARRAY of STRINGS - User permissions and access control rules",
+    "exceptionHandling": "ARRAY of STRINGS - How edge cases and exceptions are managed",
+    "complianceRequirements": "ARRAY of STRINGS - Regulatory and policy requirements"
+  },
+  "userExperience": {
+    "userJourneys": "ARRAY of STRINGS - Complete user flows for each persona",
+    "accessibilityRequirements": "ARRAY of STRINGS - Accessibility standards and accommodations",
+    "deviceSupport": "ARRAY of STRINGS - Supported devices, browsers, screen sizes",
+    "errorHandling": "STRING - How errors and system feedback are presented",
+    "personalizationFeatures": "ARRAY of STRINGS - Customization and preference options",
+    "onboardingStrategy": "STRING - User training and adoption approach",
+    "performanceExpectations": "STRING - User-perceived performance requirements",
+    "notificationPreferences": "ARRAY of STRINGS - Alert and communication channels"
+  },
+  "operationalProcesses": {
+    "systemFailureHandling": "STRING - Procedures when external systems are unavailable",
+    "escalationProcedures": "ARRAY of STRINGS - How urgent requests are prioritized and routed",
+    "changeManagement": "ARRAY of STRINGS - How cancellations, refunds, modifications are handled",
+    "dataQualityMaintenance": "STRING - Procedures to ensure data accuracy and consistency",
+    "monitoringRequirements": "ARRAY of STRINGS - System monitoring and alerting needs",
+    "supportProcedures": "STRING - User support and maintenance approach"
+  },
+  "integrationRequirements": {
+    "dataSynchronization": "STRING - Frequency and method of data sync with external systems",
+    "errorRecovery": "STRING - How system failures and integration errors are handled",
+    "performanceBenchmarks": "ARRAY of STRINGS - Required response times, throughput, availability",
+    "securityProtocols": "ARRAY of STRINGS - Security standards and authentication methods",
+    "scalabilityRequirements": "STRING - Expected growth and capacity planning",
+    "disasterRecovery": "STRING - Backup and recovery capabilities needed"
+  },
+  "securityCompliance": {
+    "dataProtection": "STRING - Personal data collection and protection measures",
+    "regulatoryCompliance": "ARRAY of STRINGS - GDPR, industry standards, legal requirements",
+    "auditTrail": "STRING - Logging and audit trail requirements",
+    "authenticationAuthorization": "STRING - User authentication and access control approach",
+    "dataRetention": "STRING - Data retention and deletion policies",
+    "encryptionRequirements": "ARRAY of STRINGS - Required encryption and security measures"
+  },
+  "changeAdoption": {
+    "transitionStrategy": "STRING - How users will migrate from current processes",
+    "trainingPlan": "STRING - User training and support approach",
+    "resistanceManagement": "STRING - How to address change resistance",
+    "communicationPlan": "STRING - Stakeholder communication and engagement strategy",
+    "successMeasurement": "ARRAY of STRINGS - How adoption success will be measured"
+  },
+  "gapAnalysis": {
+    "businessStrategyGaps": "ARRAY of STRINGS - Missing business strategy and economics information",
+    "businessRulesGaps": "ARRAY of STRINGS - Undefined business rules and logic",
+    "userExperienceGaps": "ARRAY of STRINGS - Missing UI/UX and user journey details",
+    "operationalGaps": "ARRAY of STRINGS - Undefined operational processes and procedures",
+    "integrationGaps": "ARRAY of STRINGS - Missing integration and technical requirements",
+    "securityGaps": "ARRAY of STRINGS - Undefined security and compliance requirements",
+    "adoptionGaps": "ARRAY of STRINGS - Missing change management and adoption strategy"
+  },
   "elicitationSession": {
     "sessionDuration": "INTEGER - Minutes spent in elicitation",
     "facilitator": "STRING - Name of person conducting the elicitation",
     "methodology": "review-user-demand",
     "completenessScore": "FLOAT - Score from 0.0 to 1.0 indicating requirement completeness",
+    "categoryScores": {
+      "businessStrategy": "FLOAT - Completeness score for business strategy (0.0-1.0)",
+      "businessRules": "FLOAT - Completeness score for business rules (0.0-1.0)",
+      "userExperience": "FLOAT - Completeness score for UX requirements (0.0-1.0)",
+      "operationalProcesses": "FLOAT - Completeness score for operational processes (0.0-1.0)",
+      "integrationRequirements": "FLOAT - Completeness score for integration requirements (0.0-1.0)",
+      "securityCompliance": "FLOAT - Completeness score for security/compliance (0.0-1.0)",
+      "changeAdoption": "FLOAT - Completeness score for change management (0.0-1.0)"
+    },
     "clarificationNeeded": "ARRAY of STRINGS - Areas requiring further investigation",
     "nextSteps": "ARRAY of STRINGS - Recommended follow-up actions"
   },
@@ -55,6 +122,52 @@
     "solutionVisionArticulated": "BOOLEAN - Desired outcome expressed in business terms",
     "impactQuantified": "BOOLEAN - Benefits and consequences are specific",
     "stakeholdersIdentified": "BOOLEAN - All affected parties mapped",
-    "priorityJustified": "BOOLEAN - Urgency has business rationale"
+    "priorityJustified": "BOOLEAN - Urgency has business rationale",
+    "businessRulesDefined": "BOOLEAN - Business rules and logic comprehensively documented",
+    "userExperienceDetailed": "BOOLEAN - UI/UX requirements detailed with user journeys",
+    "operationalProcessesSpecified": "BOOLEAN - Operational processes including exception handling defined",
+    "integrationRequirementsDocumented": "BOOLEAN - Integration requirements and technical constraints specified",
+    "securityComplianceClear": "BOOLEAN - Security, privacy and compliance requirements documented",
+    "changeAdoptionOutlined": "BOOLEAN - Change management and adoption strategy defined"
+  },
+  "missingElementsReport": {
+    "technicalArchitectureGaps": [
+      {
+        "gap": "STRING - Specific technical decision or requirement missing",
+        "question": "STRING - Specific question to resolve this gap",
+        "stakeholder": "STRING - Recommended person/role to engage",
+        "timelineImpact": "STRING - Impact on project if unresolved",
+        "workshopFormat": "ENUM ['interview', 'workshop', 'prototype_review', 'technical_session']"
+      }
+    ],
+    "businessRulesGaps": [
+      {
+        "gap": "STRING - Business rule or logic needing clarification",
+        "question": "STRING - Specific question to resolve this gap",
+        "stakeholder": "STRING - Recommended person/role to engage",
+        "timelineImpact": "STRING - Impact on project if unresolved",
+        "workshopFormat": "ENUM ['interview', 'workshop', 'prototype_review', 'business_rules_session']"
+      }
+    ],
+    "operationalReadinessGaps": [
+      {
+        "gap": "STRING - Operational process or procedure missing",
+        "question": "STRING - Specific question to resolve this gap",
+        "stakeholder": "STRING - Recommended person/role to engage",
+        "timelineImpact": "STRING - Impact on project if unresolved",
+        "workshopFormat": "ENUM ['interview', 'workshop', 'operational_review', 'process_mapping']"
+      }
+    ],
+    "workshopQuestions": {
+      "businessStakeholders": "ARRAY of STRINGS - Questions about ROI, success criteria, business rules",
+      "technicalTeams": "ARRAY of STRINGS - Questions about architecture, integration, performance",
+      "endUsers": "ARRAY of STRINGS - Questions about workflows, usability, training needs",
+      "operations": "ARRAY of STRINGS - Questions about deployment, maintenance, support"
+    },
+    "prioritizedActionPlan": {
+      "immediateBlockers": "ARRAY of STRINGS - Critical gaps preventing project start",
+      "phase1Requirements": "ARRAY of STRINGS - Essential for MVP planning",
+      "futureClarifications": "ARRAY of STRINGS - Can be addressed during development"
+    }
   }
 }

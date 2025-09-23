@@ -67,6 +67,7 @@ To remove a competency:
 
   [["bootstrap functional spec", "func spec from code"], "business-analyst/bootstrap-functional-spec-from-code.md", "Act"],
   [["user story", "story review"], "business-analyst/review-user-story.md", "Act"],
+  [["gap analysis", "specification gaps", "stakeholder gaps", "analyze gaps", "specification analysis"], "business-analyst/analyze-specification-gaps.md", "Act"],
 
   [["questionnaire", "survey"], "business-analyst/generate-questionnaire.md", "Act"],
   [["write paper", "academic paper", "research paper"], "technical-writer/write-academic-paper.md", "Act"],
