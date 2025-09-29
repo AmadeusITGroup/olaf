@@ -7,7 +7,6 @@ import sys
 import json
 from pathlib import Path
 
-
 def test_windows_tools():
     """Test the Windows execution tools"""
     print("Testing Windows Execution Tools for OLAF Strands Agent")

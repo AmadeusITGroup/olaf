@@ -4,7 +4,6 @@ OLAF Strands Agent - Simplified Implementation
 A lightweight OLAF-compatible agent using AWS Strands SDK built-in tools
 """
 
-
 import argparse
 import json
 import os

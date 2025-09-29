@@ -11,7 +11,6 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-
 def spawn_agent(task_id, prompt, context):
     """Spawn a single agent and return the result"""
     script_dir = Path(__file__).parent
