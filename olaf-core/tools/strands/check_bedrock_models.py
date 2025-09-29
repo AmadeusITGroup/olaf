@@ -6,7 +6,6 @@ import boto3
 import os
 import json
 
-
 def check_bedrock_models():
     try:
         # Set the profile

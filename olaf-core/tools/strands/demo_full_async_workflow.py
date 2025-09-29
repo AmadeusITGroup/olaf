@@ -9,7 +9,6 @@ import sys
 import time
 from pathlib import Path
 
-
 def run_command(cmd, description):
     """Run a command and show the output"""
     print(f"\n🔧 {description}")

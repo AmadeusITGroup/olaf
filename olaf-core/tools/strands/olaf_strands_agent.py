@@ -4,7 +4,6 @@ OLAF Strands Agent - Simplified Implementation
 A lightweight OLAF-compatible agent using AWS Strands SDK built-in tools
 """
 
-
 import argparse
 import json
 import os
@@ -59,7 +58,7 @@ class StrandsConfig:
     def paths(self) -> Dict[str, Path]:
         """Get OLAF directory paths"""
         return {
-            'findings_dir': self.project_root / '.straf' / 'findings',
+            'findings_dir': self.project_root / 'olaf-data' / 'findings',
             'prompts_dir': self.project_root / 'olaf-core' / 'prompts',
             'templates_dir': self.project_root / 'olaf-core' / 'templates',
             'tools_dir': self.project_root / 'olaf-core' / 'tools',
@@ -71,7 +70,7 @@ class StrandsConfig:
         """Get AWS configuration"""
         return {
             'region': os.getenv('AWS_REGION', 'us-east-1'),
-            'max_tokens': int(os.getenv('MAX_TOKENS', '12000')),
+            'max_tokens': int(os.getenv('MAX_TOKENS', '4000')),
             'temperature': float(os.getenv('TEMPERATURE', '0.7'))
         }
 
@@ -155,8 +154,6 @@ class OLAFStrandsAgent:
         self.model_name = model_name or self.config.models[service_provider]['default']
         self.aws_profile = aws_profile or 'bedrock'  # Default to bedrock profile
         self.logger = logger or logging.getLogger(__name__)
-        # Optional override for max_tokens to allow backoff on token-limit errors
-        self._override_max_tokens: Optional[int] = None
         self.agent = self._create_agent()
     
     def _create_windows_execution_tools(self):
@@ -238,19 +235,19 @@ class OLAFStrandsAgent:
                 from strands.models import BedrockModel
                 import boto3
                 
-                # Use AWS profile via environment/credentials chain; do not pass unsupported kwargs to model
-                _ = boto3.Session(profile_name=self.aws_profile)
+                # Create session with specific profile
+                session = boto3.Session(profile_name=self.aws_profile)
                 self.logger.info(f"Using AWS profile: {self.aws_profile}")
                 
                 # Disable streaming for models that don't support tools
                 streaming = not ('titan' in self.model_name.lower())
                 
-                # Only pass supported parameters (per warning list)
                 model = BedrockModel(
                     model_id=self.model_name,
                     temperature=self.config.aws_config['temperature'],
-                    max_tokens=(self._override_max_tokens or self.config.aws_config['max_tokens']),
-                    streaming=streaming
+                    streaming=streaming,
+                    region=self.config.aws_config['region'],
+                    session=session  # Pass the session with bedrock profile
                 )
             elif self.service_provider == 'openai':
                 from strands.models import OpenAIModel
@@ -342,41 +339,8 @@ class OLAFStrandsAgent:
             return result
             
         except Exception as e:
-            # Check for token-limit style errors and retry once with lower max_tokens
-            message = str(e).lower()
-            token_hints = [
-                'max token', 'max_token', 'token limit', 'too many tokens', 'exceeds token', 'context length'
-            ]
-            if any(h in message for h in token_hints) and self._override_max_tokens is None:
-                self.logger.warning("Token limit issue detected. Retrying once with max_tokens=4000...")
-                # Set override and recreate agent
-                self._override_max_tokens = 4000
-                self.agent = self._create_agent()
-                # Retry once
-                try:
-                    response = self.agent(full_prompt)
-                    end_time = datetime.now()
-                    execution_time = (end_time - start_time).total_seconds()
-                    result = {
-                        'service_provider': self.service_provider,
-                        'model_name': self.model_name,
-                        'prompt_path': prompt_path,
-                        'response_text': response,
-                        'metadata': {
-                            'timestamp': end_time.isoformat(),
-                            'execution_time_seconds': execution_time,
-                            'prompt_metadata': prompt_data['metadata'],
-                            'backoff_max_tokens': 4000
-                        }
-                    }
-                    self.logger.info(f"Prompt execution completed in {execution_time:.2f}s (with backoff)")
-                    return result
-                except Exception as e2:
-                    self.logger.error(f"Retry after backoff failed: {e2}")
-                    raise
-            else:
-                self.logger.error(f"Failed to execute prompt: {e}")
-                raise
+            self.logger.error(f"Failed to execute prompt: {e}")
+            raise
     
     def _generate_olaf_context(self, timestamp: str = None) -> str:
         """Generate OLAF-specific context for the agent"""
