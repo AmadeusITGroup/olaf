@@ -11,6 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 
+i have files in the olaf-code/tools/strands  that don't appears in the git vhanges why is that
 
 class OLAFStrandsAPI:
     """Programmatic interface for OLAF Strands agents"""
