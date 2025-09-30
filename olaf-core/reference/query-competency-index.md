@@ -45,7 +45,7 @@ To remove a competency:
 
   [["progress", "status update", "how are we doing"], "project-manager/review-progress.md", "Act"],
   [["tasklist", "task list", "generate tasklist", "create tasklist"], "project-manager/generate-tasklist.md", "Act"],
-  [["changelog", "add to changelog"], "project-manager/analyze-changelog-and-report.md", "Act"],
+  [["changelog", "add to changelog"], "project-manager/create-changelog-entry.md", "Act"],
   [["archive changelog", "clean changelog"], "project-manager/archive-changelog-entries.md", "Propose-Confirm-Act"],
   [["analyze changelog", "summarize changes"], "project-manager/analyze-changelog-and-report.md", "Act"],
   [["person record", "add team member"], "project-manager/create-person-record.md", "Act"],
