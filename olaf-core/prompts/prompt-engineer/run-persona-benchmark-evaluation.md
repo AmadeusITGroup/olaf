@@ -26,9 +26,9 @@ You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
 
 You MUST request these parameters if not provided by the user:
 
-- **agent_name**: string - Name of the AI agent being tested (OPTIONAL, default: "windsurf-cascade")
-- **model_name**: string - Specific model version (OPTIONAL, default: "cascade") 
-- **persona**: string|coder|business_analyst|architect_designer|technical_writer|tester|project_manager - Role-based benchmark type (OPTIONAL, default: "coder")
+- **agent_name**: string - Name of the AI agent being tested (MANDATORY, no default)
+- **model_name**: string - Specific model version (MANDATORY, no default)
+- **persona**: string|coder|business_analyst|architect_designer|technical_writer|tester|project_manager - Role-based benchmark type (MANDATORY, default: "coder")
 
 ## User Interaction Protocol
 
