@@ -153,7 +153,7 @@ export class InstallationManager {
         try {
             const metadata = await this.readInstallationMetadata(installationPath);
             extractionPath = metadata.extractionPath ?? extractionPath;
-            installedFiles = metadata.installedFiles;
+            installedFiles = metadata.installedFiles || [];
             this.logger.info(`Extraction path: ${extractionPath}`);
             this.logger.info(`Files that were installed: ${installedFiles.length} files`);
         } catch {
