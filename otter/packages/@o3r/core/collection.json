@@ -1,0 +1,127 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/master/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter Library to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "ng-add-create": {
+      "description": "[o3r] Make project `ng add` compatible",
+      "factory": "./schematics/ng-add-create/index#ngAddCreate",
+      "schema": "./schematics/ng-add-create/schema.json",
+      "aliases": [
+        "o3r-ng-add-create"
+      ]
+    },
+    "page": {
+      "description": "[o3r] Generate a page into the project.",
+      "factory": "./schematics/page/index#ngGeneratePage",
+      "schema": "./schematics/page/schema.json",
+      "aliases": ["o3r-page"]
+    },
+    "component": {
+      "description": "[o3r] Generate an Otter component into the project.",
+      "factory": "./schematics/component/index#ngGenerateComponent",
+      "schema": "./schematics/component/schema.json",
+      "aliases": ["o3r-component"]
+    },
+    "context-to-component": {
+      "description": "[o3r] Add Otter Context to an existing component",
+      "factory": "./schematics/context-to-component/index#ngAddContext",
+      "schema": "./schematics/context-to-component/schema.json",
+      "aliases": ["o3r-context-to-component", "add-context"]
+    },
+    "component-container": {
+      "description": "[o3r] Generate an Otter container component into the project.",
+      "factory": "./schematics/component/container/index#ngGenerateComponentContainer",
+      "schema": "./schematics/component/container/schema.json",
+      "aliases": ["o3r-component-container"]
+    },
+    "component-presenter": {
+      "description": "[o3r] Generate an Otter presenter component into the project.",
+      "factory": "./schematics/component/presenter/index#ngGenerateComponentPresenter",
+      "schema": "./schematics/component/presenter/schema.json",
+      "aliases": ["o3r-component-presenter"]
+    },
+    "service": {
+      "description": "[o3r] Generate an Otter service into the project.",
+      "factory": "./schematics/service/index#ngGenerateService",
+      "schema": "./schematics/service/schema.json",
+      "aliases": ["o3r-service"]
+    },
+    "store": {
+      "description": "[o3r] Generate an Otter store into the project.",
+      "factory": "./schematics/store/index#ngGenerateStore",
+      "schema": "./schematics/store/schema.json",
+      "aliases": ["o3r-store"]
+    },
+    "store-entity-async": {
+      "description": "[o3r] Generate an Entity Async Otter Store.",
+      "factory": "./schematics/store/entity-async/index#ngGenerateEntityAsyncStore",
+      "schema": "./schematics/store/entity-async/schema.json",
+      "aliases": ["o3r-store-entity-async"]
+    },
+    "store-entity-sync": {
+      "description": "[o3r] Generate an Entity Sync Otter Store.",
+      "factory": "./schematics/store/entity-sync/index#ngGenerateEntitySyncStore",
+      "schema": "./schematics/store/entity-sync/schema.json",
+      "aliases": ["o3r-store-entity-sync"]
+    },
+    "store-simple-async": {
+      "description": "[o3r] Generate a Simple Async Otter Store.",
+      "factory": "./schematics/store/simple-async/index#ngGenerateSimpleAsyncStore",
+      "schema": "./schematics/store/simple-async/schema.json",
+      "aliases": ["o3r-store-simple-async"]
+    },
+    "store-simple-sync": {
+      "description": "[o3r] Generate an Simple Sync Otter Store.",
+      "factory": "./schematics/store/simple-sync/index#ngGenerateSimpleSyncStore",
+      "schema": "./schematics/store/simple-sync/schema.json",
+      "aliases": ["o3r-store-simple-sync"]
+    },
+    "store-action": {
+      "description": "[o3r] Generate an Otter store action into an existing store.",
+      "factory": "./schematics/store-action/index#ngGenerateStoreAction",
+      "schema": "./schematics/store-action/schema.json",
+      "aliases": ["o3r-store-action"]
+    },
+    "schematics-update": {
+      "description": "[o3r] Generate an new ng-update function for the current version",
+      "factory": "./schematics/schematics-update/index#ngGenerateUpdate",
+      "schema": "./schematics/schematics-update/schema.json",
+      "aliases": ["o3r-schematics-update"]
+    },
+    "renovate-bot": {
+      "description": "[o3r] Generate a Renovate basic bot repository",
+      "factory": "./schematics/renovate/index#ngGenerateRenovateBotComponent",
+      "schema": "./schematics/renovate/schema.json",
+      "aliases": ["o3r-renovate-bot"]
+    },
+    "show-modules": {
+      "description": "[o3r] Show available Otter modules",
+      "factory": "./schematics/show-modules/index#ngShowModules",
+      "schema": "./schematics/show-modules/schema.json",
+      "aliases": [
+        "o3r-show-modules",
+        "list-modules"
+      ]
+    },
+    "add-modules": {
+      "description": "[o3r] Add additional Otter module",
+      "factory": "./schematics/add-modules/index#ngAddModules",
+      "schema": "./schematics/add-modules/schema.json",
+      "aliases": [
+        "o3r-add-modules",
+        "add-module"
+      ]
+    },
+    "convert-component": {
+      "description": "[o3r] Convert an Angular component into an Otter component",
+      "factory": "./schematics/convert-component/index#convertToO3rComponent",
+      "schema": "./schematics/convert-component/schema.json",
+      "aliases": ["o3r-convert-component"]
+    }
+  }
+}

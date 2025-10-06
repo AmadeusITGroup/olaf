@@ -1,0 +1,94 @@
+{
+  "name": "ama-sdk-schematics",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@ama-sdk/schematics/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "outputs": ["{projectRoot}/dist/package.json"],
+      "options": {
+        "script": "postbuild"
+      },
+      "dependsOn": [
+        "build-builders",
+        "build-cli"
+      ]
+    },
+    "prepare-build-builders": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prepare:build:builders"
+      },
+      "outputs": [
+        "{projectRoot}/dist/package.json",
+        "{projectRoot}/dist/builders.json",
+        "{projectRoot}/dist/migration.json",
+        "{projectRoot}/dist/collection.json",
+        "{projectRoot}/dist/builders/**/*.json",
+        "{projectRoot}/dist/schemas/**/*.json",
+        "{projectRoot}/dist/schematics/**/*.json",
+        "{projectRoot}/dist/schematics/**/*.jar",
+        "{projectRoot}/dist/schematics/**/templates/**"
+      ]
+    },
+    "build-builders": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:builders"
+      },
+      "outputs": [
+        "{projectRoot}/dist/src/**/*.js",
+        "{projectRoot}/dist/src/**/*.d.ts",
+        "{projectRoot}/dist/src/**/*.d.ts.map",
+        "{projectRoot}/dist/builders/package.json",
+        "{projectRoot}/dist/builders/**/*.js",
+        "{projectRoot}/dist/builders/**/*.d.ts",
+        "{projectRoot}/dist/builders/**/*.d.ts.map",
+        "{projectRoot}/dist/schematics/package.json",
+        "{projectRoot}/dist/schematics/**/*.js",
+        "{projectRoot}/dist/schematics/**/*.d.ts",
+        "{projectRoot}/dist/schematics/**/*.d.ts.map",
+        "{projectRoot}/dist/middlewares/package.json",
+        "{projectRoot}/dist/middlewares/**/*.js",
+        "{projectRoot}/dist/middlewares/**/*.d.ts",
+        "{projectRoot}/dist/middlewares/**/*.d.ts.map",
+        "{projectRoot}/build/.tsbuildinfo.builders"
+      ]
+    },
+    "build-cli": {
+      "dependsOn": [
+        "build-builders"
+      ]
+    },
+    "lint": {},
+    "build-swagger": {
+      "executor": "nx:run-script",
+      "inputs": [
+        "base",
+        "{projectRoot}/schematics/**",
+        "!{projectRoot}/schematics/**/target/**"
+      ],
+      "outputs": [
+        "{projectRoot}/schematics/**/target/*.jar",
+        "{projectRoot}/dist/schematics/**/target/*.jar"
+      ],
+      "options": {
+        "script": "build:swagger"
+      },
+      "dependsOn": [
+        "build-builders"
+      ]
+    },
+    "test": {},
+    "test-int": {
+      "options": {
+        "passWithNoTests": true
+      }
+    },
+    "prepare-publish": {},
+    "publish": {}
+  },
+  "tags": []
+}

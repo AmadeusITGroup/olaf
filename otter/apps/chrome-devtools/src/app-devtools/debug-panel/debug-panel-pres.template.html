@@ -1,0 +1,43 @@
+@if (applicationInformation$ | async; as info) {
+  <div>
+    <h4 class="d-inline-block">Information</h4>
+    <button type="button" class="btn btn-link mb-2 text-decoration-none" (click)="refreshInfo()">&#10227;</button>
+    <ul>
+      <li>App name: <b>{{info.appName}}</b></li>
+      <li>App version: <b>{{info.appVersion}}</b></li>
+      <li>Mode: <b>{{info.isProduction ? 'Production' : 'Development'}}</b></li>
+      @if (info.sessionId) {
+        <li>Ama-Client-Ref: <b>{{info.sessionId}}</b></li>
+      }
+      @if (info.sessionGeneratedTime) {
+        <li>Started at: <b>{{info.sessionGeneratedTime}}</b></li>
+      }
+      @if (info.alfLink) {
+        <li><a target="_blank" [href]="info.alfLink">ALF search</a></li>
+      }
+    </ul>
+  </div>
+}
+<div>
+  <h4>Actions</h4>
+  <form class="d-inline-flex flex-column gap-4" [formGroup]="form">
+    <div class="d-flex flex-column">
+      <label for="toggleVisualTesting">
+        Toggle visual testing
+      </label>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" formControlName="visualTesting" id="toggleVisualTesting">
+        <label class="form-check-label" for="toggleVisualTesting">{{ form.controls.visualTesting.value ? 'On' : 'Off' }}</label>
+      </div>
+    </div>
+    <div class="d-flex flex-column">
+      <div>Placeholder mode</div>
+      <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        @for (mode of placeholderModes; track mode) {
+          <input type="radio" class="btn-check" [id]="mode" [value]="mode" autocomplete="off" formControlName="placeholderMode">
+          <label class="btn btn-outline-primary" [for]="mode">{{ mode | titlecase }}</label>
+        }
+      </div>
+    </div>
+  </form>
+</div>

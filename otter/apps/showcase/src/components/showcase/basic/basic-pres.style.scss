@@ -1,0 +1,21 @@
+@mixin style {
+
+  .bubble {
+    border-radius: var(--df-border-radius-xl);
+
+    div {
+      transform: translate(calc(-50% - var(--df-border-width)/2), -50%) rotate(-45deg) ;
+      width: 1em;
+      height: 1em;
+    }
+  }
+
+  .card img {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+  }
+}
+
+o3r-basic-pres {
+  @include style();
+}

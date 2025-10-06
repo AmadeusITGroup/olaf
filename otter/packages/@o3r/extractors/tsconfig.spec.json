@@ -1,0 +1,21 @@
+{
+  "extends": "../../../tsconfig.jest",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "test",
+    "rootDir": ".",
+    "esModuleInterop": false
+  },
+  "include": [
+    "**/*.spec.ts"
+  ],
+  "exclude": [],
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    },
+    {
+      "path": "./tsconfig.builders.json"
+    }
+  ]
+}

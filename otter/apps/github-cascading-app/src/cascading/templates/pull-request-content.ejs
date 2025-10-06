@@ -1,0 +1,62 @@
+<!-- <%- JSON.stringify({currentBranch, targetBranch, bypassReviewers, isConflicting}) %> -->
+
+## Cascading from <%= currentBranch %> to <%= targetBranch %>
+
+<% if (bypassReviewers) { %>
+The configuration requests the cascading to bypass reviewer in case of CI success.
+To not bypass the reviewing process, please check the following checkbox:
+
+- [ ] <!-- <%- cancelBypassReviewersMark %> --> :no_entry_sign: stop reviewing process bypass for this Pull Request
+<% } %>
+<% if (isConflicting) { %>
+
+---
+
+:warning: An update conflicting with this Pull Request has been done on **<%= currentBranch %>**.
+The cascading process will re-create the Pull Request after merging this one. To not re-trigger the process, please check the following checkbox:
+
+- [ ] <!-- <%- cancelRetriggerCascadingMark %> --> Cancel the re-Trigger of cascading process
+<% } %>
+<% if (!canBeMerged) { %>
+
+---
+
+:heavy_exclamation_mark: The pull request is conflicting with the target branch.
+You can fix the issue locally with the following commands:
+
+<details open>
+  <summary>Using <b>gh CLI</b></summary>
+
+  ```shell
+  gh pr checkout <%= id %>
+  git pull --ff origin <%= targetBranch %>
+  ```
+
+  and update this Pull Request with
+
+  ```shell
+  gh pr push <%= id %>
+  ```
+</details>
+
+<details>
+  <summary>Using <b>git</b> only</summary>
+
+  ```shell
+  git fetch origin
+  git checkout origin/<%= originBranchName %>
+  git pull --ff origin <%= targetBranch %>
+  ```
+
+  and update this Pull Request with
+
+  ```shell
+  git push origin HEAD:<%= originBranchName %>
+  ```
+</details>
+
+<% } %>
+
+---
+
+<small>This Pull Request has been generated with :heart: by the [Otter](https://github.com/AmadeusITGroup/otter) cascading tool.</small>

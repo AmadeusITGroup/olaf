@@ -1,0 +1,41 @@
+import {
+  existsSync,
+} from 'node:fs';
+import {
+  readFile,
+  writeFile,
+} from 'node:fs/promises';
+import * as path from 'node:path';
+
+/**
+ * Add import to a module in the root NgModule.
+ * In case of standalone app, import the module in the root component
+ * @param appFolderPath root of the app
+ * @param moduleName name of the module to import
+ * @param modulePath path of the module to import
+ */
+export async function addImportToAppModule(appFolderPath: string, moduleName: string, modulePath: string) {
+  const appModuleFilePath1 = path.join(appFolderPath, 'src/app/app-module.ts');
+  const appModuleFilePath2 = path.join(appFolderPath, 'src/app/app.module.ts');
+  let appModuleFilePath = existsSync(appModuleFilePath1) ? appModuleFilePath1 : (existsSync(appModuleFilePath2) ? appModuleFilePath2 : undefined);
+  if (!appModuleFilePath) {
+    // assume standalone component
+    const appComponentFilePath = path.join(appFolderPath, 'src/app/app.component.ts');
+    appModuleFilePath = existsSync(appComponentFilePath) ? appComponentFilePath : path.join(appFolderPath, 'src/app/app.ts');
+  }
+  const appModule = await readFile(appModuleFilePath, { encoding: 'utf8' });
+  const relativeModulePath = path.relative(path.dirname(appModuleFilePath), path.join(appFolderPath, modulePath)).replace(/\\+/g, '/');
+  await writeFile(appModuleFilePath, `import { ${moduleName} } from '${relativeModulePath}';\n${
+    appModule.replace(/(imports:\s*\[\s*\n?)/, `$1\n    ${moduleName},\n`)
+  }`);
+}
+
+/**
+ * Force Angular version in package.json to use tilde instead of caret
+ * @param appFolderPath
+ */
+export async function fixAngularVersion(appFolderPath: string) {
+  const workspacePackageJsonPath = path.join(appFolderPath, 'package.json');
+  const packageJsonString = await readFile(workspacePackageJsonPath, { encoding: 'utf8' });
+  await writeFile(workspacePackageJsonPath, packageJsonString.replace(/(@(?:angular|schematics).*)\^/g, '$1~'));
+}

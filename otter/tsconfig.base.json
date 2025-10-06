@@ -1,0 +1,274 @@
+{
+  "compileOnSave": false,
+  "include": [
+    "**/*.{m,c,}ts"
+  ],
+  "exclude": [
+    "**/dist/**"
+  ],
+  "compilerOptions": {
+    "types": [],
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "declaration": true,
+    "incremental": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "noEmitHelpers": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "dist/",
+    "removeComments": false,
+    "sourceMap": true,
+    "declarationMap": true,
+    "strict": true,
+    "pretty": true,
+    "preserveWatchOutput": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@ama-mfe/messages": [
+        "packages/@ama-mfe/messages/src/public_api"
+      ],
+      "@ama-mfe/ng-utils": [
+        "packages/@ama-mfe/ng-utils/src/public_api"
+      ],
+      "@ama-sdk/client-fetch": [
+        "packages/@ama-sdk/client-fetch/src/public_api"
+      ],
+      "@ama-sdk/core": [
+        "packages/@ama-sdk/core/src/public_api"
+      ],
+      "@ama-sdk/create": [
+        "packages/@ama-sdk/create"
+      ],
+      "@ama-sdk/schematics": [
+        "packages/@ama-sdk/schematics/src/public_api"
+      ],
+      "@ama-sdk/swagger-builder": [
+        "packages/@ama-sdk/swagger-builder"
+      ],
+      "@ama-styling/figma-extractor": [
+        "packages/@ama-styling/figma-extractor/src/public_api"
+      ],
+      "@ama-styling/figma-sdk": [
+        "packages/@ama-styling/figma-sdk/src/index"
+      ],
+      "@ama-styling/style-dictionary": [
+        "packages/@ama-styling/style-dictionary/src/public_api"
+      ],
+      "@ama-styling/stylelint-plugin": [
+        "packages/@ama-styling/stylelint-plugin/src/index"
+      ],
+      "@ama-terasu/cli": [
+        "packages/@ama-terasu/cli/src"
+      ],
+      "@ama-terasu/core": [
+        "packages/@ama-terasu/core/src/public_api"
+      ],
+      "@ama-terasu/schematics": [
+        "packages/@ama-terasu/schematics/src"
+      ],
+      "@o3r-training/showcase-sdk": [
+        "packages/@o3r-training/showcase-sdk/src"
+      ],
+      "@o3r-training/showcase-sdk/fixtures": [
+        "packages/@o3r-training/showcase-sdk/src/fixtures/jest"
+      ],
+      "@o3r-training/training-sdk": [
+        "packages/@o3r-training/training-sdk/src"
+      ],
+      "@o3r-training/training-tools": [
+        "packages/@o3r-training/training-tools/src/public_api"
+      ],
+      "@o3r/amaterasu-api-spec": [
+        "packages/@o3r/amaterasu/amaterasu-api-spec/src"
+      ],
+      "@o3r/amaterasu-dodo": [
+        "packages/@o3r/amaterasu/amaterasu-dodo/src"
+      ],
+      "@o3r/amaterasu-otter": [
+        "packages/@o3r/amaterasu/amaterasu-otter/src"
+      ],
+      "@o3r/amaterasu-sdk": [
+        "packages/@o3r/amaterasu/amaterasu-sdk/src"
+      ],
+      "@o3r/analytics": [
+        "packages/@o3r/analytics/src/public_api"
+      ],
+      "@o3r/analytics/plugins/*": [
+        "packages/@o3r/analytics/plugins/*"
+      ],
+      "@o3r/apis-manager": [
+        "packages/@o3r/apis-manager/src/public_api"
+      ],
+      "@o3r/application": [
+        "packages/@o3r/application/src/public_api"
+      ],
+      "@o3r/application/schemas/*": [
+        "packages/@o3r/application/schemas/*"
+      ],
+      "@o3r/artifactory-tools": [
+        "packages/@o3r/artifactory-tools/src"
+      ],
+      "@o3r/azure-tools": [
+        "packages/@o3r/azure-tools/src/public_api"
+      ],
+      "@o3r/chrome-devtools": [
+        "packages/@o3r/chrome-devtools/src"
+      ],
+      "@o3r/components": [
+        "packages/@o3r/components/src/public_api"
+      ],
+      "@o3r/components/schemas/*": [
+        "packages/@o3r/components/schemas/*"
+      ],
+      "@o3r/components/*": [
+        "packages/@o3r/components/src/*/public_api"
+      ],
+      "@o3r/configuration": [
+        "packages/@o3r/configuration/src/public_api"
+      ],
+      "@o3r/configuration/schemas/*": [
+        "packages/@o3r/configuration/schemas/*"
+      ],
+      "@o3r/configuration/*": [
+        "packages/@o3r/configuration/src/*/public_api"
+      ],
+      "@o3r/core": [
+        "packages/@o3r/core/src/public_api"
+      ],
+      "@o3r/design": [
+        "packages/@o3r/design/src/public_api"
+      ],
+      "@o3r/design/schemas/*": [
+        "packages/@o3r/design/schemas/*"
+      ],
+      "@o3r/dynamic-content": [
+        "packages/@o3r/dynamic-content/src/public_api"
+      ],
+      "@o3r/dynamic-content/*": [
+        "packages/@o3r/dynamic-content/src/*/public_api"
+      ],
+      "@o3r/eslint-config": [
+        "packages/@o3r/eslint-config"
+      ],
+      "@o3r/eslint-config/helpers": [
+        "packages/@o3r/eslint-config/src/helpers"
+      ],
+      "@o3r/eslint-config/typescript": [
+        "packages/@o3r/eslint-config/src/rules/typescript"
+      ],
+      "@o3r/eslint-config/template": [
+        "packages/@o3r/eslint-config/src/rules/template"
+      ],
+      "@o3r/eslint-plugin": [
+        "packages/@o3r/eslint-plugin/src"
+      ],
+      "@o3r/extractors": [
+        "packages/@o3r/extractors/src/public_api"
+      ],
+      "@o3r/forms": [
+        "packages/@o3r/forms/src/public_api"
+      ],
+      "@o3r/localization": [
+        "packages/@o3r/localization/src/public_api"
+      ],
+      "@o3r/localization/schemas/*": [
+        "packages/@o3r/localization/schemas/*"
+      ],
+      "@o3r/localization/*": [
+        "packages/@o3r/localization/src/*/public_api"
+      ],
+      "@o3r/logger": [
+        "packages/@o3r/logger/src/public_api"
+      ],
+      "@o3r/logger/*": [
+        "packages/@o3r/logger/src/services/*/public_api"
+      ],
+      "@o3r/mobile": [
+        "packages/@o3r/mobile/src"
+      ],
+      "@o3r/new-version": [
+        "packages/@o3r/new-version/src/public_api"
+      ],
+      "@o3r/routing": [
+        "packages/@o3r/routing/src/public_api"
+      ],
+      "@o3r/rules-engine": [
+        "packages/@o3r/rules-engine/src/public_api"
+      ],
+      "@o3r/rules-engine/schemas/*": [
+        "packages/@o3r/rules-engine/schemas/*"
+      ],
+      "@o3r/schematics": [
+        "packages/@o3r/schematics/src/public_api"
+      ],
+      "@o3r/store-sync": [
+        "packages/@o3r/store-sync/src/public_api"
+      ],
+      "@o3r/stylelint-plugin": [
+        "packages/@o3r/stylelint-plugin/src"
+      ],
+      "@o3r/style-dictionary": [
+        "packages/@o3r/style-dictionary/src/public_api.mts"
+      ],
+      "@o3r/style-dictionary/schemas/*": [
+        "packages/@o3r/style-dictionary/schemas/*"
+      ],
+      "@o3r/styling": [
+        "packages/@o3r/styling/src/public_api"
+      ],
+      "@o3r/styling/builders/*/helpers": [
+        "packages/@o3r/styling/builders/*/helpers/index"
+      ],
+      "@o3r/styling/schemas/*": [
+        "packages/@o3r/styling/schemas/*"
+      ],
+      "@o3r/telemetry": [
+        "packages/@o3r/telemetry/src/public_api"
+      ],
+      "@o3r/test-helpers": [
+        "packages/@o3r/test-helpers/src/public_api"
+      ],
+      "@o3r/test-helpers/setup-jest-builders": [
+        "packages/@o3r/test-helpers/src/setup-jest-builders"
+      ],
+      "@o3r/testing": [
+        "packages/@o3r/testing/src/public_api"
+      ],
+      "@o3r/testing/core": [
+        "packages/@o3r/testing/src/core/angular"
+      ],
+      "@o3r/testing/core/*": [
+        "packages/@o3r/testing/src/core/angular/*"
+      ],
+      "@o3r/testing/*": [
+        "packages/@o3r/testing/src/*"
+      ],
+      "@o3r/third-party": [
+        "packages/@o3r/third-party/src"
+      ],
+      "@o3r/workspace": [
+        "packages/@o3r/workspace/src/public_api"
+      ]
+    }
+  },
+  "plugins": [
+    {
+      "name": "@angular/language-service"
+    }
+  ],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true
+  }
+}

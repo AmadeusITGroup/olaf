@@ -1,0 +1,15 @@
+@switch (appState$ | async) {
+  @case ('loading') {
+    <div class="alert alert-warning m-2" role="alert">
+      Waiting for the application to connect to the Otter Chrome DevTools...
+    </div>
+  }
+  @case ('timeout') {
+    <div class="alert alert-danger m-2" role="alert">
+      The application does not seem to be compatible with the Otter Chrome DevTools.
+    </div>
+  }
+  @case ('connected') {
+    <ng-content></ng-content>
+  }
+}

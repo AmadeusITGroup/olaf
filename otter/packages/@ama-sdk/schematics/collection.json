@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/master/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter ama-sdk-schematics to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "migrate": {
+      "description": "[ama-sdk] Execute migration scripts between 2 versions.",
+      "factory": "./schematics/migrate/index#migrate",
+      "schema": "./schematics/migrate/schema.json",
+      "aliases": [
+        "ama-migrate"
+      ]
+    },
+    "typescript-mock": {
+      "description": "[ama-sdk] Generate an api mock into the project.",
+      "factory": "./schematics/typescript/mock/index#ngGenerateMock",
+      "schema": "./schematics/typescript/mock/schema.json",
+      "aliases": [
+        "ama-typescript-mock"
+      ]
+    },
+    "api-extension": {
+      "description": "[ama-sdk] Generate a api specification extension.",
+      "factory": "./schematics/api-extension/index#ngGenerateApiExtension",
+      "schema": "./schematics/api-extension/schema.json",
+      "aliases": [
+        "ama-api-extension"
+      ]
+    },
+    "typescript-core": {
+      "description": "[ama-sdk] Generate a typescript SDK source code based on swagger specification",
+      "factory": "./schematics/typescript/core/index#ngGenerateTypescriptSDK",
+      "schema": "./schematics/typescript/core/schema.json",
+      "aliases": [
+        "ama-typescript-core"
+      ]
+    },
+    "typescript-shell": {
+      "description": "[ama-sdk] Generate a typescript SDK repository shell",
+      "factory": "./schematics/typescript/shell/index#ngGenerateTypescriptSDK",
+      "schema": "./schematics/typescript/shell/schema.json",
+      "aliases": [
+        "ama-typescript-shell"
+      ]
+    }
+  }
+}

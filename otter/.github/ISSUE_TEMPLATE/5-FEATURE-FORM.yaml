@@ -1,0 +1,26 @@
+name: Feature request
+description: Request or contribute a new feature
+title: "[Feature]: "
+labels: ["triage"]
+type: Feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in our project! Feel free to contribute your feature proposal whenever possible.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Please describe the context in with the feature will be implemented
+      placeholder: Explain the context
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Please describe the feature you propose
+      placeholder: Tell us more about your proposal
+    validations:
+      required: true

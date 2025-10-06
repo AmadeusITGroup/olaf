@@ -1,0 +1,25 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "types": ["node"],
+    "incremental": true,
+    "composite": true,
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "rootDir": ".",
+    "tsBuildInfoFile": "build/.tsbuildinfo.builders",
+    "esModuleInterop": true,
+    "skipLibCheck": true, // because of @gerrit0/mini-shiki from typedoc
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "builders/**/*.ts",
+    "schematics/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/templates/**",
+    "**/mocks/**/*.ts"
+  ]
+}

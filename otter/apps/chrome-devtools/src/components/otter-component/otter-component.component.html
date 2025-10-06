@@ -1,0 +1,110 @@
+<ul ngbNav [(activeId)]="activeId" #nav="ngbNav" class="nav-tabs px-2 pt-2 navbar-light bg-light">
+  <li [ngbNavItem]="1" [disabled]="!(config | nbProp)">
+    <a ngbNavLink class="d-flex align-items-center gap-1">
+      Configuration
+      <span class="badge rounded-pill bg-info">
+        {{config | nbProp : ['id']}}
+      </span>
+    </a>
+    <ng-template ngbNavContent>
+      @if (config) {
+        <h3>{{config.id}}</h3>
+        <app-config-form class="config-form mb-2 d-block" [config]="config"></app-config-form>
+      } @else {
+        <h3>No configuration</h3>
+      }
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2" [disabled]="!(rulesetExecutions | nbProp)">
+    <a ngbNavLink>
+      Rules engine
+      <span class="badge rounded-pill bg-info">
+        {{rulesetExecutions | nbProp}}
+      </span>
+    </a>
+    <ng-template ngbNavContent>
+      @if (librariesLinkedToRulesetExecutions.length > 1) {
+        <div class="alert alert-warning" role="alert">
+          Warning. {{componentName}} exists in {{librariesLinkedToRulesetExecutions | list}}. Unable to choose one.
+        </div>
+      }
+      @if (rulesetExecutions?.length) {
+        <o3r-ruleset-history-pres [rulesetExecutions]="rulesetExecutions"></o3r-ruleset-history-pres>
+      } @else {
+        <h3>No ruleset executions</h3>
+      }
+      <ng-template #noRulesetExecutions></ng-template>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3" [disabled]="!(translations| nbProp)">
+    <a ngbNavLink>
+      Localization
+      <span class="badge rounded-pill bg-info">
+        {{translations | nbProp}}
+      </span>
+    </a>
+    <ng-template ngbNavContent>
+      @if (translations | nbProp) {
+        <div ngbAccordion [closeOthers]="true" #acc="ngbAccordion">
+          @for (componentTranslations of translations | keyvalue; track componentTranslations.key) {
+            <div ngbAccordionItem [id]="componentTranslations.key" [collapsed]="componentName === componentTranslations.key">
+              <h3 ngbAccordionHeader>
+                {{componentTranslations.key}}
+                @if (componentTranslations.key === componentName) {
+                  <i class="ms-1 fa-star"></i>
+                }
+              </h3>
+              <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                  <ul class="list-group list-group-flush">
+                    @for (translation of componentTranslations.value; track translation) {
+                      <li class="list-group-item">{{translation}}</li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <h3>No localizations</h3>
+      }
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="4" [disabled]="!(analytics | nbProp)">
+    <a ngbNavLink>
+      Analytics
+      <span class="badge rounded-pill bg-info">
+        {{analytics | nbProp}}
+      </span>
+    </a>
+    <ng-template ngbNavContent>
+      @if (analytics | nbProp) {
+        <div ngbAccordion [closeOthers]="true" #acc="ngbAccordion">
+          @for (componentAnalytics of analytics | keyvalue; track componentAnalytics.key) {
+            <div ngbAccordionItem [id]="componentAnalytics.key"  [collapsed]="componentName === componentAnalytics.key">
+              <h3 ngbAccordionHeader>
+                {{componentAnalytics.key}}
+                @if (componentAnalytics.key === componentName) {
+                  <i class="ms-1 fa-star"></i>
+                }
+              </h3>
+              <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                  <ul class="list-group list-group-flush">
+                    @for (componentAnalytic of componentAnalytics.value; track componentAnalytic) {
+                      <li class="list-group-item">{{componentAnalytic}}</li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <h3>No analytics</h3>
+      }
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2 px-2"></div>

@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.jest",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "incremental": true,
+    "outDir": "../../dist/out-tsc",
+    "module": "commonjs",
+    "moduleResolution": "node10"
+  },
+  "include": [
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.builders.json"
+    },
+    {
+      "path": "./tsconfig.build.composite.json"
+    }
+  ]
+}

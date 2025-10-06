@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/main/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter configuration to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "configuration-to-component": {
+      "description": "[o3r] Add Otter Configuration to an existing component",
+      "factory": "./schematics/configuration-to-component/index#ngAddConfig",
+      "schema": "./schematics/configuration-to-component/schema.json",
+      "aliases": ["o3r-configuration-to-component", "add-config"]
+    },
+    "use-config-signal": {
+      "description": "[o3r] Migrate from configuration observable to signal",
+      "factory": "./schematics/use-config-signal/index#ngUseConfigSignal",
+      "schema": "./schematics/use-config-signal/schema.json",
+      "aliases": ["o3r-use-config-signal", "migrate-to-signal-config"]
+    }
+  }
+}

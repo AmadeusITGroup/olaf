@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngAddSchematicsSchema",
+  "title": "Add Otter Workspace to an Angular project",
+  "description": "ngAdd Otter Framework to the Angular project",
+  "properties": {
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip the install process. If set to true, the pre-commit check setup will be skipped as well."
+    },
+    "commit": {
+      "description": "Initial git repository commit information. (Available at workspace setup only)",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "required": [
+            "name",
+            "email"
+          ]
+        }
+      ],
+      "default": true,
+      "additionalProperties": true
+    },
+    "skipGit": {
+      "description": "Do not initialize a git repository. (Available at workspace setup only)",
+      "type": "boolean",
+      "default": false,
+      "alias": "g"
+    },
+    "skipPreCommitChecks": {
+      "description": "Skip the setup of CommitLint and Lint-Staged configurations and pre-commit checks.",
+      "type": "boolean",
+      "default": false
+    },
+    "exactO3rVersion": {
+      "type": "boolean",
+      "description": "Use a pinned version for otter packages"
+    },
+    "monorepoManager": {
+      "description": "Which monorepo manager to use",
+      "type": "string",
+      "default": "lerna",
+      "enum": [
+        "lerna",
+        "none"
+      ]
+    },
+    "skipVscodeTools": {
+      "type": "boolean",
+      "description": "Skip adding VSCode tools"
+    },
+    "skipRenovate": {
+      "type": "boolean",
+      "description": "Skip adding Renovate config"
+    },
+    "skipEditorConfigSetup": {
+      "type": "boolean",
+      "description": "Skip adding Editor config"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+  ]
+}

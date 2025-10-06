@@ -67,13 +67,6 @@ export class InstallCommand {
                         // Validate access for private repos
                         const config = vscode.workspace.getConfiguration('olaf');
                         const usePrivateRepo = config.get<boolean>('usePrivateRepository');
-                        
-                        if (usePrivateRepo) {
-                            const validation = await this.githubService.validateAccess();
-                            if (!validation.valid) {
-                                throw new Error(validation.message);
-                            }
-                        }
 
                         // Get release based on default version preference
                         progress.report({ increment: 15, message: 'Fetching release information...' });

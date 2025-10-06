@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngGeneratePlaywrightScenarioSchematicsSchema",
+  "title": "Generate Playwright scenario",
+  "description": "[Deprecated - Removed in v14] ng generate Playwright scenario",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "project"
+    },
+    "name": {
+      "type": "string",
+      "description": "Scenario name",
+      "x-prompt": "Scenario name?",
+      "minLength": 1,
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "description": "Directory containing the playwright scenarios"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "name"
+  ]
+}

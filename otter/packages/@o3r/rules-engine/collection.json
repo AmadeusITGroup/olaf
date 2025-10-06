@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/main/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter rules-engine to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "rules-engine-to-component": {
+      "description": "[o3r] Generate the code to enable rules-engine to a Component",
+      "factory": "./schematics/rules-engine-to-component/index#ngGenerateRulesEngineToComponent",
+      "schema": "./schematics/rules-engine-to-component/schema.json",
+      "aliases": ["o3r-rules-engine-to-component"]
+    },
+    "facts-service": {
+      "description": "[o3r] Generate a facts service",
+      "factory": "./schematics/facts-service/index#ngGenerateFactsService",
+      "schema": "./schematics/facts-service/schema.json",
+      "aliases": ["o3r-facts-service"]
+    },
+    "operator": {
+      "description": "[o3r] Generate an operator",
+      "factory": "./schematics/operator/index#ngGenerateOperator",
+      "schema": "./schematics/operator/schema.json",
+      "aliases": ["o3r-operator"]
+    }
+  }
+}

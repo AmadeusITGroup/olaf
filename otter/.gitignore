@@ -1,0 +1,95 @@
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+.angular/
+.cache/
+/.env
+
+### yarn ###
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# if you are NOT using Zero-installs, then:
+# comment the following lines
+# !.yarn/cache
+
+# and uncomment the following lines
+.pnp.*
+
+
+### Otter ###
+# Build results
+test
+build/
+dist/
+dist-test/
+dist-lint/
+tmp/
+.acache/
+*.tsbuildinfo
+/bin
+
+# Documentations
+/documentation.json
+/storybook-static
+documentation/
+typedoc/
+generated-doc/
+/docs/summary.json
+/.storybook/*.metadata.json
+
+*.orig
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+*.bkp
+
+# Dependency directories
+node_modules
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# IDEs
+.idea
+*.iml
+
+# OS
+*.DS_Store
+
+# Nx
+.nx/cache
+.nx/workspace-data
+
+.github/instructions/nx.instructions.md

@@ -1,0 +1,10 @@
+const getJestProjectConfig = require('<%= rootRelativePath %>/jest.config.ut').getJestProjectConfig;
+
+const baseConfig = getJestProjectConfig(__dirname, <%= isAngularSetup %>);
+
+/** @type {import('ts-jest/dist/types').JestConfigWithTsJest} */
+module.exports = {
+  ...baseConfig,
+  displayName: require('./package.json').name
+};
+

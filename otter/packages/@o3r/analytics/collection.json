@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/main/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter analytics to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "analytics-to-component": {
+      "description": "[o3r] Add Otter Analytics to an existing component",
+      "factory": "./schematics/analytics-to-component/index#ngAddAnalytics",
+      "schema": "./schematics/analytics-to-component/schema.json",
+      "aliases": [
+        "o3r-analytics-to-component",
+        "add-analytics"
+      ]
+    }
+  }
+}

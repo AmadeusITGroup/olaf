@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  @for (item of controlsType() | keyvalue; track item.key) {
+    <div class="mb-2" [ngClass]="item.value === 'boolean' ? 'form-check form-switch' : 'form-group'">
+      @switch (item.value) {
+        @case ('boolean') {
+          <input class="form-check-input" [formControlName]="item.key" type="checkbox" [id]="item.key" />
+          <label class="form-check-label" [for]="item.key">{{item.key}}</label>
+        }
+        @case ('number') {
+          <label [for]="item.key">{{item.key}}</label>
+          <input class="form-control" [formControlName]="item.key" type="number" [id]="item.key" />
+        }
+        @default {
+          <label [for]="item.key">{{item.key}}</label>
+          <input class="form-control" [formControlName]="item.key" type="text" [id]="item.key" />
+        }
+      }
+    </div>
+  }
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Update config</button>
+</form>

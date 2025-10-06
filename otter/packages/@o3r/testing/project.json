@@ -1,0 +1,63 @@
+{
+  "name": "testing",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@o3r/testing/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "outputs": ["{projectRoot}/dist/package.json"],
+      "options": {
+        "script": "postbuild",
+        "tsConfig": "{projectRoot}/tsconfig.build.json"
+      },
+      "dependsOn": [
+        "compile",
+        "build-schematics",
+        "build-utils"
+      ]
+    },
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:source"
+      }
+    },
+    "prepare-build-builders": {},
+    "build-schematics": {
+      "executor": "nx:run-script",
+      "dependsOn": ["^build", "compile", "prepare-build-builders"],
+      "options": {
+        "script": "build:schematics"
+      },
+      "inputs": ["schematics", "^source"],
+      "outputs": ["{projectRoot}/dist/schematics"]
+    },
+    "build-utils": {
+      "executor": "nx:run-script",
+      "outputs": [
+        "{projectRoot}/dist/esm"
+      ],
+      "inputs": [
+        "base",
+        "{projectRoot}/tsconfig.build.utils.json",
+        "{projectRoot}/src/visual-test/utils.ts"
+      ],
+      "options": {
+        "script": "build:utils"
+      },
+      "dependsOn": [
+        "^build",
+        "compile"
+      ]
+    },
+    "lint": {},
+    "test": {},
+    "test-int": {},
+    "prepare-publish": {},
+    "publish": {},
+    "documentation": {}
+  },
+  "tags": []
+}

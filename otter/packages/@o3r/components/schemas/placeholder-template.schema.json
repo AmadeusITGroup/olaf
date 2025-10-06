@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ComponentMetadataSchema",
+  "description": "Schema of the placeholders descriptor",
+  "type": "object",
+  "required": [
+    "template"
+  ],
+  "properties": {
+    "template": {
+      "type": "string"
+    },
+    "vars": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "$ref": "#/definitions/placeholderVariable"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "placeholderVariable": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "fullUrl",
+                "relativeUrl",
+                "localisation"
+              ]
+            },
+            "value": {
+              "type": "string"
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": {
+                "type":  "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "fact"
+            },
+            "value": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

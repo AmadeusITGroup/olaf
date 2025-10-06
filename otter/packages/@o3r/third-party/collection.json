@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/main/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter third-party to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "iframe-to-component": {
+      "description": "[o3r] Add iframe to an existing component",
+      "factory": "./schematics/iframe-to-component/index#ngAddIframe",
+      "schema": "./schematics/iframe-to-component/schema.json",
+      "aliases": ["o3r-iframe-to-component", "add-iframe", "iframe"]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "incremental": true,
+    "composite": true,
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "allowJs": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*.cjs"
+  ],
+}

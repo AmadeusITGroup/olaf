@@ -1,0 +1,7 @@
+{
+  "$schema": "../apps/github-cascading-app/schemas/config.schema.json",
+  "labels": ["cascading"],
+  "ignoredPatterns": [
+    "-next$"
+  ]
+}

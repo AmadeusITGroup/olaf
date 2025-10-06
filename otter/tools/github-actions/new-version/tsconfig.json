@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "types": ["node"],
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "outDir": "./tmp",
+    "rootDir": "./src",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.ts"],
+  /* For IDE and EsLint usage */
+  "references": [
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

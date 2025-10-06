@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NgGenerateComponentContainerSchematicsSchema",
+  "title": "Generate Otter Container Component",
+  "description": "ng generate Otter Container Component",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "project"
+    },
+    "componentName": {
+      "type": "string",
+      "description": "Component name",
+      "x-prompt": "Your component name?",
+      "minLength": 1,
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "description": "Directory containing the components"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of your component selector"
+    },
+    "componentStructure": {
+      "type": "string",
+      "enum": [
+        "full",
+        "container"
+      ],
+      "description": "Structure of the component you want to generate ('full' | 'container')",
+      "default": "container"
+    },
+    "useComponentFixtures": {
+      "type": "boolean",
+      "description": "Generate component fixtures for tests"
+    },
+    "useOtterConfig": {
+      "type": "boolean",
+      "description": "Generate component with Otter configuration"
+    },
+    "useContext": {
+      "type": "boolean",
+      "description": "Generate component context"
+    },
+    "useRulesEngine": {
+      "type": "boolean",
+      "description": "Generate component with rules-engine"
+    },
+    "description": {
+      "type": "string",
+      "description": "Component description",
+      "x-prompt": "Your container description?"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "standalone": {
+      "type": "boolean",
+      "description": "Whether the generated component is standalone.",
+      "default": true
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "componentName"
+  ]
+}

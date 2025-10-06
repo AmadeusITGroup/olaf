@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngGeneratePageSchematicsSchema",
+  "title": "Generate Otter Page",
+  "description": "ng generate Otter Page",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "project"
+    },
+    "name": {
+      "type": "string",
+      "description": "Page name",
+      "x-prompt": "Page name?",
+      "minLength": 1,
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "scope": {
+      "type": "string",
+      "description": "Page scope (e.g. booking, servicing, ssci, etc.)",
+      "default": ""
+    },
+    "appRoutingModulePath": {
+      "type": "string",
+      "description": "Application routing module path (will be renamed into `appRoutesDefinitionPath` in Otter v14)",
+      "alias": "appRoutesDefinitionPath"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Selector prefix"
+    },
+    "path": {
+      "type": "string",
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "description": "Directory containing the pages"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "useOtterTheming": {
+      "type": "boolean",
+      "description": "Generate page with Otter theming architecture"
+    },
+    "useOtterConfig": {
+      "type": "boolean",
+      "description": "Generate page with Otter configuration"
+    },
+    "useLocalization": {
+      "type": "boolean",
+      "description": "Generate page with localization"
+    },
+    "standalone": {
+      "type": "boolean",
+      "description": "Whether the generated component is standalone.",
+      "default": true
+    },
+    "usePageFixtures": {
+      "type": "boolean",
+      "description": "Generate page fixtures for tests"
+    },
+    "activateDummy": {
+      "type": "boolean",
+      "description": "Generate dummy values",
+      "default": false
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "name"
+  ]
+}

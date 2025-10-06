@@ -1,0 +1,49 @@
+{
+  "name": "training-showcase-sdk",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@o3r-training/showcase-sdk/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:noop",
+      "dependsOn": [
+        "compile",
+        "extract-folder-structure"
+      ]
+    },
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      },
+      "inputs": [
+        "source",
+        "^cli"
+      ]
+    },
+    "regen": {},
+    "lint": {},
+    "extract-folder-structure": {
+      "cache": true,
+      "executor": "nx:run-script",
+      "options": {
+        "script": "extract"
+      },
+      "inputs": [
+        "source",
+        "^cli",
+        "{projectRoot}/package.json",
+        "{projectRoot}/openapi.yml",
+        "{projectRoot}/openapitools.json"
+      ],
+      "outputs": ["{projectRoot}/dist/structure"],
+      "dependsOn": ["^build", "compile"]
+    },
+    "publish": {}
+  },
+  "tags": [
+    "private",
+    "showcase"
+  ]
+}

@@ -1,0 +1,4 @@
+**/src/package.json
+**/*.ejs
+packages/@*/*/build/**
+!**/schematics/**/target

@@ -1,0 +1,24 @@
+/* For IDE and EsLint usage */
+{
+  "extends": "../../../tsconfig.base",
+  "references": [
+    {
+      "path": "./tsconfig.build.composite.json"
+    },
+    {
+      "path": "./tsconfig.builders.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.fixture.jasmine.json"
+    },
+    {
+      "path": "./tsconfig.fixture.jest.json"
+    },
+    {
+      "path": "./tsconfig.eslint.json"
+    }
+  ]
+}

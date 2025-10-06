@@ -1,0 +1,14 @@
+{
+  "extends": "../../../tsconfig.base",
+  "references": [
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.build.composite.json"
+    },
+    {
+      "path": "./tsconfig.eslint.json"
+    }
+  ]
+}

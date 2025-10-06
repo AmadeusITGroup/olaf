@@ -1,0 +1,5 @@
+@use '../styling/shared-mixin' as shared-mixin;
+
+o3r-rule-actions-pres {
+  @include shared-mixin.rule-debug-structure;
+}

@@ -1,0 +1,13 @@
+# Build
+/*.metadata.json
+/dev-resources
+
+# Playwright
+dist-e2e-playwright
+playwright-reports
+test-results
+
+# Training
+training-assets
+src/assets/trainings/**/exercise.json
+src/assets/trainings/**/solution.json

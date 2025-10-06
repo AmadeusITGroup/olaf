@@ -1,0 +1,24 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "types": ["node"],
+    "incremental": true,
+    "composite": true,
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "rootDir": ".",
+    "tsBuildInfoFile": "build/.tsbuildinfo.cli"
+  },
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ],
+  "include": [
+    "cli/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

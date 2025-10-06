@@ -1,0 +1,63 @@
+name: Check release
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        required: true
+        description: The branch, tag or SHA to checkout.
+      performAudit:
+        type: boolean
+        default: true
+        description: Run Audit
+      performITTests:
+        type: boolean
+        default: false
+        description: Run IT Tests
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ''
+        description: The branch, tag or SHA to checkout.
+      performAudit:
+        type: boolean
+        default: true
+        description: Run Audit
+      performITTests:
+        type: boolean
+        default: false
+        description: Run IT Tests
+
+jobs:
+  auditRelease:
+    if: inputs.performAudit
+    uses: ./.github/workflows/audit.yml
+    with:
+      ref: ${{ inputs.ref }}
+
+  buildRelease:
+    if: inputs.performITTests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: ./tools/github-actions/setup
+      - uses: ./.github/actions/setup-java
+        with:
+          install-jdk: 'true'
+      - run: yarn build:swagger-gen
+      - run: yarn build
+      - uses: ./tools/github-actions/upload-build-output
+        with:
+          artifactName: 'dist-${{ inputs.ref }}'
+
+  testRelease:
+    if: inputs.performITTests
+    needs: [buildRelease]
+    uses: ./.github/workflows/it-tests.yml
+    with:
+      ref: ${{ inputs.ref }}
+      skipNxCache: true

@@ -1,0 +1,33 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^(?!http(s)?:\/\/).*"
+    },
+    {
+      "pattern": "https://pkgs.dev.azure.com/AmadeusDigitalAirline/Otter/_packaging/otter-pr/npm/registry/"
+    },
+    {
+      "pattern": "https://img.shields.io/bundlephobia/*"
+    },
+    {
+      "pattern": "^https?://(127.0.0.1|localhost)[:/].*"
+    },
+    {
+      "pattern": "^https://cloud.nx.app/*"
+    },
+    {
+      "pattern": "https://petstore3.swagger.io/api/v3"
+    },
+    {
+      "pattern": "^https://(?:www.)?figma.com/community/*"
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "/%40",
+      "replacement": "/@"
+    }
+  ],
+  "aliveStatusCodes": [200, 203],
+  "retryOn429": true
+}

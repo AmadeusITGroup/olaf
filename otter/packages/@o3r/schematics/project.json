@@ -1,0 +1,41 @@
+{
+  "name": "schematics",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@o3r/schematics/src",
+  "prefix": "o3r",
+  "implicitDependencies": [
+    "!core"
+  ],
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "outputs": ["{projectRoot}/dist/package.json"],
+      "options": {
+        "script": "postbuild",
+        "tsConfig": "{projectRoot}/tsconfig.build.json"
+      },
+      "dependsOn": [
+        "^build",
+        "compile",
+        "build-builders",
+        "build-cli"
+      ]
+    },
+    "prepare-build-builders": {},
+    "build-builders": {},
+    "build-cli": {},
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:source"
+      }
+    },
+    "lint": {},
+    "test": {},
+    "prepare-publish": {},
+    "publish": {},
+    "documentation": {}
+  },
+  "tags": []
+}

@@ -1,0 +1,56 @@
+{
+  "name": "@o3r/workspace-helpers",
+  "version": "0.0.0-placeholder",
+  "description": "Workspace helpers",
+  "type": "module",
+  "private": true,
+  "keywords": [
+    "otter",
+    "amadeus",
+    "typescript"
+  ],
+  "files": [
+    "scripts/*.mjs"
+  ],
+  "bin": {
+    "create-monorepo-scope": "./scripts/create-monorepo-scope.mjs",
+    "doc-links": "./scripts/doc-links.mjs",
+    "get-build-targets": "./scripts/get-build-targets.mjs",
+    "pr-labels": "./scripts/pr-labels.mjs",
+    "prepare-doc-root-menu-template": "./scripts/prepare-doc-root-menu-template.mjs",
+    "report-deprecates": "./scripts/report-deprecates.mjs",
+    "update-doc-summary": "./scripts/update-doc-summary.mjs",
+    "update-package": "./scripts/update-package.mjs"
+  },
+  "dependencies": {
+    "globby": "^14.0.0",
+    "minimist": "^1.2.6",
+    "semver": "^7.5.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.0"
+  },
+  "devDependencies": {
+    "@nx/eslint-plugin": "~21.5.0",
+    "@o3r/eslint-plugin": "workspace:^",
+    "@stylistic/eslint-plugin": "~5.3.0",
+    "@types/node": "~22.0.0",
+    "@typescript-eslint/eslint-plugin": "~8.43.0",
+    "@typescript-eslint/parser": "~8.43.0",
+    "@typescript-eslint/utils": "~8.43.0",
+    "eslint": "~9.35.0",
+    "eslint-import-resolver-node": "~0.3.9",
+    "eslint-import-resolver-typescript": "~4.4.0",
+    "eslint-plugin-import": "~2.32.0",
+    "eslint-plugin-import-newlines": "~1.4.0",
+    "eslint-plugin-jest": "~29.0.0",
+    "eslint-plugin-jsdoc": "~54.7.0",
+    "eslint-plugin-prefer-arrow": "~1.2.3",
+    "eslint-plugin-unicorn": "~60.0.0",
+    "eslint-plugin-unused-imports": "~4.2.0",
+    "globals": "^16.0.0",
+    "jsonc-eslint-parser": "~2.4.0",
+    "nx": "~21.5.0",
+    "typescript": "~5.9.2"
+  }
+}

@@ -76,6 +76,7 @@ export class GitHubService {
             if (this.useGitHubCli && !token) {
                 try {
                     token = await this.getGitHubCliToken();
+                    this.token = token;
                 } catch (error) {
                     this.logger.error('Failed to get token from GitHub CLI', error as Error);
                     // Only throw if private repo is explicitly enabled, otherwise continue without auth
@@ -545,7 +546,7 @@ export class GitHubService {
     private getPlatformPrefix(platform: Platform): string {
         const prefixMap: Record<Platform, string> = {
             [Platform.VSCODE]: 'vscode',
-            [Platform.WINDSURF]: 'windsurf',
+            [Platform.WINDSURF]: 'Windsurf',
             [Platform.KIRO]: 'kiro',
             [Platform.CURSOR]: 'cursor',
             [Platform.UNKNOWN]: 'vscode' // fallback

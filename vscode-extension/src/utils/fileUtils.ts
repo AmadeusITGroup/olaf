@@ -146,7 +146,7 @@ export class FileUtils {
         const i = Math.floor(Math.log(bytes) / Math.log(1024));
         const size = bytes / Math.pow(1024, i);
         
-        return `${Math.round(size * 100) / 100} ${sizes[i]}`;
+        return `${Math.round(size * 100) / 100} ${sizes[i - 1]}`;
     }
 
     /**

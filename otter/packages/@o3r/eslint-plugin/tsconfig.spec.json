@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.jest",
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    }
+  ],
+  "include": [
+    "**/*.spec.ts"
+  ],
+  "exclude": []
+}

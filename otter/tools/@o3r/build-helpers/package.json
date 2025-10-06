@@ -1,0 +1,62 @@
+{
+  "name": "@o3r/build-helpers",
+  "version": "0.0.0-placeholder",
+  "description": "Build helpers",
+  "type": "module",
+  "private": true,
+  "keywords": [
+    "otter",
+    "amadeus",
+    "typescript"
+  ],
+  "files": [
+    "scripts/*.mjs"
+  ],
+  "bin": {
+    "clear-package-json-dev-dependencies": "./scripts/clear-package-json-dev-dependencies.mjs",
+    "cp-assets": "./scripts/cp-assets.mjs",
+    "cp-build": "./scripts/cp-build.mjs",
+    "cp-package-json": "./scripts/cp-package-json.mjs",
+    "create-monorepo-scope": "./scripts/create-monorepo-scope.mjs",
+    "doc-links": "./scripts/doc-links.mjs",
+    "generate-cjs-manifest": "./scripts/generate-cjs-manifest.mjs",
+    "patch-package-json-exports": "./scripts/patch-package-json-exports.mjs",
+    "patch-package-json-main": "./scripts/patch-package-json-main.mjs",
+    "pr-labels": "./scripts/pr-labels.mjs",
+    "prepare-doc-root-menu-template": "./scripts/prepare-doc-root-menu-template.mjs",
+    "prepare-publish": "./scripts/prepare-publish.mjs",
+    "update-doc-summary": "./scripts/update-doc-summary.mjs",
+    "write-git-hash": "./scripts/write-git-hash.mjs"
+  },
+  "dependencies": {
+    "globby": "^14.0.0",
+    "minimist": "^1.2.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.0"
+  },
+  "devDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
+    "@nx/eslint-plugin": "~21.5.0",
+    "@o3r/eslint-plugin": "workspace:^",
+    "@stylistic/eslint-plugin": "~5.3.0",
+    "@types/node": "~22.0.0",
+    "@typescript-eslint/parser": "~8.43.0",
+    "angular-eslint": "~20.2.0",
+    "eslint": "~9.35.0",
+    "eslint-import-resolver-node": "~0.3.9",
+    "eslint-import-resolver-typescript": "~4.4.0",
+    "eslint-plugin-import": "~2.32.0",
+    "eslint-plugin-import-newlines": "~1.4.0",
+    "eslint-plugin-jest": "~29.0.0",
+    "eslint-plugin-jsdoc": "~54.7.0",
+    "eslint-plugin-prefer-arrow": "~1.2.3",
+    "eslint-plugin-unicorn": "~60.0.0",
+    "eslint-plugin-unused-imports": "~4.2.0",
+    "globals": "^16.0.0",
+    "jsonc-eslint-parser": "~2.4.0",
+    "nx": "~21.5.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "~8.43.0"
+  }
+}

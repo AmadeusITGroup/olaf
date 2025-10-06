@@ -1,0 +1,44 @@
+import { chain, noop, Rule } from '@angular-devkit/schematics';
+import type { NgAddSchematicsSchema } from './schema';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import {
+  createOtterSchematic,
+  applyEsLintFix,
+  ngAddDependenciesRule
+} from '@o3r/schematics';
+
+const packageJsonPath = path.resolve(__dirname, '..', '..', 'package.json');
+
+const doCustomAction = (options: NgAddSchematicsSchema): Rule => (tree) => {
+  // your custom code here
+  return tree;
+};
+
+const dependenciesToInstall: string[] = [
+  // Add the dependencies to install here
+];
+
+const devDependenciesToInstall: string[] = [
+  // Add the devDependencies to install here
+];
+
+/**
+ * Add Otter <%= featureName %> to an Otter Project
+ *
+ * @param options
+ */
+function ngAddFn(options: NgAddSchematicsSchema): Rule {
+  return chain([
+    // optional custom action dedicated to this module
+    doCustomAction(options),
+    options.skipLinter ? noop() : applyEsLintFix(),
+    ngAddDependenciesRule(options, packageJsonPath, { dependenciesToInstall, devDependenciesToInstall })
+  ]);
+}
+
+/**
+ * Add module to an Angular Project
+ * @param options ng add options
+ */
+export const ngAdd = (options: NgAddSchematicsSchema) => createOtterSchematic(ngAddFn)(options);

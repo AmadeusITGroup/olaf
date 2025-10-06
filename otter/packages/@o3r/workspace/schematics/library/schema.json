@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngGenerateModuleSchematicsSchema",
+  "title": "Generate a new Otter compatible module",
+  "description": "Generate a new Otter module",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Package name",
+      "pattern": "^(?:@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*/)?[a-zA-Z0-9-~][a-zA-Z0-9-._~]*$",
+      "x-prompt": "Name of the package of the new module?",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the new module",
+      "default": ""
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix use to package future generation"
+    },
+    "path": {
+      "type": "string",
+      "description": "Target directory to generate the module"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "skipInstall": {
+      "description": "Do not install dependency packages.",
+      "type": "boolean",
+      "default": false
+    },
+    "exactO3rVersion": {
+      "type": "boolean",
+      "description": "Use a pinned version for otter packages"
+    }
+  },
+  "required": ["name"],
+  "additionalProperties": true
+}

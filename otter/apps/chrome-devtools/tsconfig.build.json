@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.build",
+  "compilerOptions": {
+    "lib": [
+      "es2023",
+      "dom"
+    ],
+    "types": [
+      "chrome"
+    ],
+    "outDir": "dist/",
+    "module": "es2022",
+    "incremental": true,
+    "composite": true,
+    "tsBuildInfoFile": "build/.tsbuildinfo"
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "full"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "src/extension/**/*.ts"
+  ]
+}

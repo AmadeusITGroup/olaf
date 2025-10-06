@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": false,
+    "incremental": true,
+    "composite": true,
+    "lib": ["es5", "es6", "scripthost"],
+    "sourceMap": false,
+    "types": ["node"],
+    "baseUrl": ".",
+    "outDir": "dist",
+    "module": "CommonJS",
+    "moduleResolution": "node10"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

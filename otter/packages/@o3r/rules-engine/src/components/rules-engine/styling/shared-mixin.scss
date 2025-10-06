@@ -1,0 +1,64 @@
+@use './variables' as variables;
+
+@mixin rule-debug-structure() {
+  .ruleset-panel-title,
+  .ruleset-panel-category-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ruleset-panel-title {
+    font-size: variables.$ruleset-font-title;
+    padding: .5rem 0 .1rem;
+  }
+
+  .ruleset-expansion-action,
+  .icon-caret-down,
+  .icon-caret-up {
+    cursor: pointer;
+  }
+
+  .ruleset-panel-subtitle {
+    font-size: .75rem;
+  }
+
+  .ruleset-panel-title-aside {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: fit-content;
+  }
+
+  .ruleset-panel-category-title {
+    font-size: variables.$ruleset-font-category;
+    background: #eeeeee;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .rule-description {
+    .ruleset-panel-category-title {
+      font-size: calc(#{variables.$ruleset-font-category * variables.$ruleset-rule-ratio});
+      cursor: default;
+    }
+
+    .ruleset-panel-title {
+      font-size: calc(#{variables.$ruleset-font-title * variables.$ruleset-rule-ratio});
+    }
+
+    .ruleset-panel-category-body {
+      padding-bottom: .5rem;
+      padding-left: 1.5rem;
+
+      &:empty {
+        margin: 0;
+        padding: 0 0 0 1.5rem;
+      }
+    }
+  }
+}
+
+

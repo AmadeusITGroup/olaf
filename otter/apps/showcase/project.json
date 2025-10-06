@@ -1,0 +1,404 @@
+{
+  "name": "showcase",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/showcase/src",
+  "root": "apps/showcase",
+  "prefix": "app",
+  "tags": [
+    "showcase"
+  ],
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    },
+    "@o3r/core:page": {
+      "path": "apps/showcase/src/app",
+      "appRoutingModulePath": "apps/showcase/src/app/app-routing-module.ts",
+      "scope": "",
+      "standalone": true
+    },
+    "@o3r/core:component": {
+      "path": "apps/showcase/src/components",
+      "standalone": true,
+      "useContext": false
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "outputs": [
+        "{projectRoot}/dist/package.json"
+      ],
+      "options": {
+        "script": "postbuild:patch",
+        "tsConfig": "{projectRoot}/tsconfig.app.json"
+      },
+      "dependsOn": [
+        "extract-translations",
+        "extract-components",
+        "generate-translations",
+        "generate-theme",
+        "compile"
+      ]
+    },
+    "lint": {},
+    "compile": {
+      "executor": "@angular-devkit/build-angular:application",
+      "inputs": [
+        "source",
+        "^structure",
+        "{projectRoot}/dev-resources",
+        "{projectRoot}/training-assets",
+        "{projectRoot}/*.metadata.json"
+      ],
+      "options": {
+        "outputPath": "apps/showcase/dist",
+        "index": "apps/showcase/src/index.html",
+        "browser": "apps/showcase/src/main.ts",
+        "polyfills": [
+          "zone.js",
+          "@angular/localize/init"
+        ],
+        "tsConfig": "apps/showcase/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/showcase/src/favicon.ico",
+          "apps/showcase/src/favicon.svg",
+          "apps/showcase/src/coi-serviceworker.js",
+          "apps/showcase/src/assets",
+          "apps/showcase/src/custom-assets",
+          {
+            "glob": "**/*.json",
+            "input": "apps/showcase/dev-resources/localizations",
+            "output": "/localizations"
+          },
+          {
+            "glob": "*.metadata.json",
+            "input": "apps/showcase",
+            "output": "/metadata"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/showcase/training-assets/monaco-editor",
+            "output": "/assets/monaco/"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/showcase/training-assets/ngx-monaco-tree/assets",
+            "output": "/assets/"
+          },
+          {
+            "glob": "*.json",
+            "input": "packages/@o3r-training/training-sdk/dist/structure",
+            "output": "/assets/@o3r-training/training-sdk/structure"
+          },
+          {
+            "glob": "*.json",
+            "input": "packages/@o3r-training/showcase-sdk/dist/structure",
+            "output": "/assets/@o3r-training/showcase-sdk/structure"
+          }
+        ],
+        "styles": [
+          "apps/showcase/src/styles.scss",
+          "prism-themes/themes/prism-vsc-dark-plus.css",
+          "apps/showcase/training-assets/@vscode/codicons/dist/codicon.css",
+          "apps/showcase/training-assets/@xterm/xterm/css/xterm.css",
+          {
+            "inject": false,
+            "input": "apps/showcase/src/style/dark-theme/dark-theme.scss",
+            "bundleName": "dark-theme"
+          },
+          {
+            "inject": false,
+            "input": "apps/showcase/src/style/horizon-theme/horizon-theme.scss",
+            "bundleName": "horizon-theme"
+          }
+        ],
+        "scripts": [
+          "clipboard",
+          "prismjs",
+          "prismjs/components/prism-bash",
+          "prismjs/components/prism-css",
+          "prismjs/components/prism-json",
+          "prismjs/components/prism-markdown",
+          "prismjs/components/prism-markup",
+          "prismjs/components/prism-regex",
+          "prismjs/components/prism-typescript",
+          "prismjs/components/prism-yaml",
+          "apps/showcase/src/coi-serviceworker.js"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2.5mb",
+              "maximumError": "3.1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production",
+      "dependsOn": [
+        "^build",
+        "^extract-folder-structure",
+        "generate-translations",
+        "generate-theme",
+        "copy-training-assets",
+        "prepare-training"
+      ]
+    },
+    "serve": {
+      "executor": "@o3r/core:multi-watcher",
+      "options": {
+        "targets": [
+          "showcase:generate-translations:development",
+          "showcase:serve-app"
+        ]
+      },
+      "dependsOn": [
+        "^build-builders",
+        "^build",
+        "^extract-folder-structure",
+        "copy-training-assets",
+        "prepare-training"
+      ]
+    },
+    "serve-app": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "headers": {
+          "Cross-Origin-Opener-Policy": "same-origin",
+          "Cross-Origin-Embedder-Policy": "require-corp"
+        }
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "showcase:compile:production"
+        },
+        "development": {
+          "buildTarget": "showcase:compile:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "continuous": true
+    },
+    "extract-components": {
+      "executor": "@o3r/components:extractor",
+      "outputs": [
+        "{options.componentOutputFile}",
+        "{options.configOutputFile}"
+      ],
+      "inputs": [
+        "source",
+        "^builders"
+      ],
+      "options": {
+        "tsConfig": "apps/showcase/tsconfig.cms.json",
+        "configOutputFile": "apps/showcase/component.config.metadata.json",
+        "componentOutputFile": "apps/showcase/component.class.metadata.json",
+        "name": "showcase",
+        "libraries": [],
+        "placeholdersMetadataFilePath": "apps/showcase/placeholders.metadata.manual.json",
+        "exposedComponentSupport": true,
+        "globalConfigCategories": [
+          {
+            "name": "globalCategory",
+            "label": "Global category"
+          }
+        ]
+      },
+      "dependsOn": [
+        "compile"
+      ]
+    },
+    "extract-rules-engine": {
+      "executor": "@o3r/rules-engine:extractor",
+      "options": {
+        "tsConfig": "apps/showcase/tsconfig.cms.json",
+        "libraries": [
+          "packages/@o3r/rules-engine"
+        ],
+        "factFilePatterns": [
+          "apps/showcase/src/facts/**/*.facts.ts"
+        ],
+        "operatorFilePatterns": [
+          "apps/showcase/src/operators/**/*.ts"
+        ],
+        "outputFactsDirectory": "apps/showcase",
+        "outputOperatorsDirectory": "apps/showcase"
+      },
+      "dependsOn": [
+        "^build",
+        "^build-builders"
+      ]
+    },
+    "test": {},
+    "generate-theme": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{options.defaultStyleFile}",
+        "{options.metadataOutput}",
+        "{projectRoot}/src/**/*.vars.scss",
+        "{projectRoot}/src/style/**/*.scss",
+        "{projectRoot}/scripts/styling/*.mjs"
+      ],
+      "inputs": [
+        "{projectRoot}/src/style/**/*.json",
+        "^builders"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "yarn generate:style"
+      },
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test-e2e": {},
+    "generate-translations": {
+      "executor": "@o3r/localization:localization",
+      "inputs": [
+        "{projectRoot}/src/assets/locales",
+        "{projectRoot}/src/assets/locales/*",
+        "{projectRoot}/src/components/**/i18n",
+        "{projectRoot}/src/components/**/*.localization.json",
+        "^builders"
+      ],
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "browserTarget": "showcase:compile",
+        "localizationExtracterTarget": "showcase:extract-translations",
+        "locales": [
+          "en-GB",
+          "fr-FR"
+        ],
+        "assets": [
+          "apps/showcase/src/assets/locales",
+          "apps/showcase/src/assets/locales/*",
+          "apps/showcase/src/components/**/i18n"
+        ],
+        "outputPath": "apps/showcase/dev-resources/localizations"
+      },
+      "configurations": {
+        "production": {
+          "outputPath": "apps/showcase/dist/localizations"
+        },
+        "development": {
+          "browserTarget": "showcase:compile:development"
+        }
+      },
+      "dependsOn": [
+        "i18n",
+        "extract-translations",
+        "^build-builders"
+      ]
+    },
+    "extract-translations": {
+      "executor": "@o3r/localization:extractor",
+      "inputs": [
+        "source",
+        "^builders"
+      ],
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "tsConfig": "apps/showcase/tsconfig.cms.json",
+        "outputFile": "apps/showcase/localisation.metadata.json",
+        "libraries": [],
+        "extraFilePatterns": [
+          "src/i18n/*.localization.json"
+        ],
+        "strictMode": true
+      },
+      "dependsOn": [
+        "^build",
+        "^build-builders"
+      ]
+    },
+    "run": {
+      "executor": "@o3r/core:multi-watcher",
+      "options": {
+        "targets": [
+          "showcase:generate-translations",
+          "showcase:serve-app"
+        ]
+      }
+    },
+    "i18n": {
+      "executor": "@o3r/localization:i18n",
+      "inputs": [
+        "{projectRoot}/src/!(i18n)/**/*.localization.json",
+        "^builders"
+      ],
+      "outputs": [
+        "{projectRoot}/src/!(i18n)/**/i18n/*.json"
+      ],
+      "options": {
+        "localizationConfigs": [
+          {
+            "localizationFiles": [
+              "apps/showcase/src/!(i18n)/**/*.localization.json"
+            ]
+          }
+        ]
+      },
+      "dependsOn": [
+        "^build-builders"
+      ]
+    },
+    "prepare-training": {
+      "cache": true,
+      "executor": "nx:run-script",
+      "inputs": [
+        "{projectRoot}/package.json",
+        "{projectRoot}/src/assets/**/exercise/**",
+        "{projectRoot}/src/assets/**/solution/**",
+        "{projectRoot}/scripts/prepare-training-exercises/*.cjs"
+      ],
+      "outputs": [
+        "{projectRoot}/src/assets/**/solution.json",
+        "{projectRoot}/src/assets/**/exercise.json"
+      ],
+      "options": {
+        "script": "prepare-training"
+      },
+      "dependsOn": [
+        "^build",
+        "^build-cli"
+      ]
+    },
+    "copy-training-assets": {
+      "cache": true,
+      "executor": "nx:run-script",
+      "inputs": [
+        "base",
+        "{projectRoot}/package.json",
+        "{projectRoot}/scripts/copy-training-assets/*.cjs"
+      ],
+      "outputs": [
+        "{projectRoot}/training-assets"
+      ],
+      "options": {
+        "script": "copy-training-assets"
+      }
+    }
+  }
+}

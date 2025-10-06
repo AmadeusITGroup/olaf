@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "name": "ama-figma-sdk",
+  "projectType": "library",
+  "root": "packages/@ama-styling/figma-sdk",
+  "sourceRoot": "packages/@ama-styling/figma-sdk/src",
+  "prefix": "ama-styling",
+  "targets": {
+    "build": {
+      "executor": "nx:noop",
+      "dependsOn": [
+        "compile"
+      ]
+    },
+    "regen": {},
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      },
+      "inputs": [
+        "source",
+        "^cli"
+      ]
+    },
+    "lint": {},
+    "test": {},
+    "prepare-publish": {},
+    "publish": {},
+    "documentation": {}
+  }
+}

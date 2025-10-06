@@ -1,8 +1,6 @@
 import * as vscode from 'vscode';
 import { selectVersionCommand } from './commands/selectVersionCommand';
 import { UpdateCommand } from './commands/updateCommand';
-import { StatusCommand } from './commands/statusCommand';
-import { ValidateAccessCommand } from './commands/validateAccessCommand';
 import { UninstallCommand } from './commands/uninstallCommand';
 import { RefactoredUninstallCommand } from './commands/refactoredUninstallCommand';
 import { EnhancedInstallCommand } from './commands/enhancedInstallCommand';
@@ -93,8 +91,6 @@ export class OlafExtension {
     private registerCommands(): void {
 
         const updateCommand = new UpdateCommand();
-        const statusCommand = new StatusCommand();
-        const validateAccessCommand = new ValidateAccessCommand();
         const uninstallCommand = new UninstallCommand(this.installationManager, this.logger);
         const enhancedInstallCommand = new EnhancedInstallCommand();
         const refactoredUninstallCommand = new RefactoredUninstallCommand();
@@ -103,11 +99,6 @@ export class OlafExtension {
         const commands = [
             vscode.commands.registerCommand('olaf.selectVersion', () => selectVersionCommand()),
             vscode.commands.registerCommand('olaf.update', () => updateCommand.execute()),
-            vscode.commands.registerCommand('olaf.checkUpdates', () => statusCommand.checkUpdates()),
-            vscode.commands.registerCommand('olaf.showVersion', () => statusCommand.showVersion()),
-            vscode.commands.registerCommand('olaf.uninstall', () => statusCommand.uninstall()),
-            vscode.commands.registerCommand('olaf.showHelp', () => statusCommand.showHelp()),
-            vscode.commands.registerCommand('olaf.validateAccess', () => validateAccessCommand.execute()),
             vscode.commands.registerCommand('olaf.uninstallAll', () => uninstallCommand.executeUninstallAll()),
             vscode.commands.registerCommand('olaf.enhancedInstall', () => enhancedInstallCommand.execute()),
             vscode.commands.registerCommand('olaf.enhancedUninstall', () => refactoredUninstallCommand.execute()),

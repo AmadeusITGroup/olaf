@@ -1,0 +1,13 @@
+<app-connection>
+  @if (selectedComponentInfo$ | async; as info) {
+    <app-otter-component
+      [config]="config$ | async"
+      [rulesetExecutions]="rulesetExecutions$ | async"
+      [componentName]="info.componentName"
+      [translations]="info.translations"
+      [analytics]="info.analytics">
+    </app-otter-component>
+  } @else {
+    <h3>No selected component</h3>
+  }
+</app-connection>

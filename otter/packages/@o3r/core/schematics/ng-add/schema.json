@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngAddSchematicsSchema",
+  "title": "Add Otter Framework to an Angular project",
+  "description": "ngAdd Otter Framework to the Angular project",
+  "properties": {
+    "preset": {
+      "description": "Preset of module list to automatically install",
+      "type": "string",
+      "default": "recommended",
+      "enum": [
+        "basic",
+        "recommended",
+        "cms",
+        "all"
+      ],
+      "x-prompt": {
+        "message": "Which preset to use to start your application?",
+        "type": "list",
+        "items": [
+          { "value": "basic", "label": "BASIC - Minimum plugin list to install for a basic Otter application. (details on https://www.npmjs.com/package/@o3r/core#preset-basic)" },
+          { "value": "recommended", "label": "RECOMMENDED - Add the recommended Otter modules. (details on https://www.npmjs.com/package/@o3r/core#preset-recommended)" },
+          { "value": "cms", "label": "CMS - Add the Otter modules allowing the full administration of the application via the CMS. (details on https://www.npmjs.com/package/@o3r/core#preset-cms)" },
+          { "value": "all", "label": "ALL - Add all the available Otter modules. (details on https://www.npmjs.com/package/@o3r/core#preset-all)" }
+        ]
+      }
+    },
+    "externalPresets": {
+      "description": "Preset of non-official module list to automatically install",
+      "type": "string"
+    },
+    "projectName": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "project"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip the install process",
+      "default": true
+    },
+    "withDevtool": {
+      "description": "Add option to automatically register the devtool module",
+      "type": "boolean",
+      "default": true
+    },
+    "forceInstall": {
+      "description": "Force package installation (in case of unmet peer dependencies)",
+      "type": "boolean",
+      "default": true
+    },
+    "exactO3rVersion": {
+      "type": "boolean",
+      "description": "Use a pinned version for otter packages"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+  ]
+}

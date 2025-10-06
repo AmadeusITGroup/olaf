@@ -1,0 +1,18 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "allowSyntheticDefaultImports": true,
+    "incremental": true,
+    "outDir": "./dist",
+    "rootDir": "src",
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "tsBuildInfoFile": "build/.tsbuildinfo",
+    "skipLibCheck": true // due to ts-jest which contains non-exposed "babel__core" reference
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

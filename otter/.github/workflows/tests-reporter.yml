@@ -1,0 +1,36 @@
+name: Tests reports
+
+on:
+  workflow_run:
+    workflows: ['Main CI']
+    types:
+      - completed
+
+permissions: read-all
+
+jobs:
+  publish-ut-reports:
+    runs-on: ubuntu-latest
+    permissions:
+      # Required to publish Unit Test Report to the pipeline execution result
+      checks: write
+    steps:
+      - uses: dorny/test-reporter@dc3a92680fcc15842eef52e8c4606ea7ce6bd3f3 # v2.1.1
+        with:
+          artifact: /ut-reports(.*)/
+          name: UT Tests report$1
+          path: '**/*.xml'
+          reporter: jest-junit
+
+  publish-it-reports:
+    runs-on: ubuntu-latest
+    permissions:
+      # Required to publish Integration Test Report to the pipeline execution result
+      checks: write
+    steps:
+      - uses: dorny/test-reporter@dc3a92680fcc15842eef52e8c4606ea7ce6bd3f3 # v2.1.1
+        with:
+          artifact: /it-reports(.*)/
+          name: IT Tests report$1
+          path: '**/*.xml'
+          reporter: jest-junit

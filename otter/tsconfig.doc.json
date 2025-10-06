@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base",
+  "exclude": [
+    "**/*reducer.ts",
+    "**/*.fixture.ts",
+    "**/*.fixture.jasmine.ts",
+    "**/*.fixture.jest.ts"
+  ],
+  "include": [
+    "./tsconfig.doc.json"
+  ]
+}

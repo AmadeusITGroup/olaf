@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/master/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "migration-v8_2": {
+      "version": "8.2.0-rc.3",
+      "description": "Updates of the Otter Library to v8.2.*",
+      "factory": "./schematics/ng-update/index#updateV8_2"
+    },
+    "migration-v10_0": {
+      "version": "10.0.0-alpha.0",
+      "description": "Updates of @o3r/core to v10.0.*",
+      "factory": "./schematics/ng-update/index#updateV10_0"
+    },
+    "migration-v12_0": {
+      "version": "12.0.0-next.0",
+      "description": "Updates of @o3r/core to v12.0.*",
+      "factory": "./schematics/ng-update/index#updateV12_0"
+    },
+    "migration-v12_1": {
+      "version": "12.1.0-prerelease.0",
+      "description": "Updates of @o3r/core to v12.1.*",
+      "factory": "./schematics/ng-update/index#updateV12_1"
+    }
+  }
+}

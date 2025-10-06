@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Group all Typescript dependencies",
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "/typescript/",
+        "/tslib/",
+        "!/eslint/"
+      ],
+      "groupName": "Typescript dependencies",
+      "groupSlug": "typescript-dependencies"
+    }
+  ]
+}

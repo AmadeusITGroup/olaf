@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "types": ["node"],
+    "incremental": true,
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": "build/.tsbuildinfo"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/cli/**/*.cts"
+  ],
+  "exclude": ["**/*.spec.ts"]
+}

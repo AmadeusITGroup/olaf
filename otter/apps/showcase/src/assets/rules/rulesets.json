@@ -1,0 +1,267 @@
+{
+  "$schema": "https://raw.githubusercontent.com/AmadeusITGroup/otter/main/packages/%40o3r/rules-engine/schemas/rulesets.schema.json",
+  "rulesets": [
+    {
+      "id": "6194b61a-1bf3-4c02-8b7c-20f782d68324",
+      "name": "rules-engine",
+      "disabled": false,
+      "validityRange": {
+        "from": "09/01/2021",
+        "to": "11/01/2025"
+      },
+
+      "linkedComponents": {
+        "or": [{
+          "library": "showcase",
+          "name": "RulesEnginePresConfig"
+        }]
+      },
+      "rules": [
+        {
+          "id": "5467e501-b9ff-414f-8026-56885d0d7a4b",
+          "name": "New-York availability",
+          "disabled": false,
+          "outputRuntimeFacts": [],
+          "inputRuntimeFacts": [],
+          "rootElement": {
+            "elementType": "RULE_BLOCK",
+            "blockType": "IF_ELSE",
+            "condition": {
+              "all": [
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "operator": "isDefined"
+                },
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "operator": "duringSummer"
+                }
+              ]
+            },
+            "successElements": [
+              {
+                "elementType": "ACTION",
+                "actionType": "UPDATE_CONFIG",
+                "component": "RulesEnginePresConfig",
+                "library": "showcase",
+                "property": "destinations",
+                "value": [
+                  {
+                    "cityCode": "LON",
+                    "available": true
+                  },
+                  {
+                    "cityCode": "PAR",
+                    "available": true
+                  },
+                  {
+                    "cityCode": "NYC",
+                    "available": true
+                  }
+                ]
+              }
+            ],
+            "failureElements": []
+          }
+        },
+        {
+          "id": "1467e501-b9ff-414f-8026-56885d0d7a4e",
+          "name": "Destination selected",
+          "disabled": false,
+          "outputRuntimeFacts": [],
+          "inputRuntimeFacts": [],
+          "rootElement": {
+            "elementType": "RULE_BLOCK",
+            "blockType": "IF_ELSE",
+            "condition": {
+              "all": [
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "destination"
+                  },
+                  "operator": "isDefined"
+                }
+              ]
+            },
+            "successElements": [
+              {
+                "elementType": "ACTION",
+                "actionType": "UPDATE_LOCALISATION",
+                "key": "o3r-rules-engine-pres.question",
+                "value": "o3r-rules-engine-pres.whenQuestion"
+              }
+            ],
+            "failureElements": [
+              {
+                "elementType": "RULE_BLOCK",
+                "blockType": "IF_ELSE",
+                "condition": {
+                  "any": [
+                    {
+                      "lhs": {
+                        "type": "FACT",
+                        "value": "outboundDate"
+                      },
+                      "rhs": {
+                        "type": "LITERAL",
+                        "value": "2880"
+                      },
+                      "operator": "dateInNextMinutes"
+                    }
+                  ]
+                },
+                "successElements": [
+                  {
+                    "elementType": "ACTION",
+                    "actionType": "UPDATE_LOCALISATION",
+                    "key": "o3r-rules-engine-pres.question",
+                    "value": "o3r-rules-engine-pres.hurry-up-question"
+                  }
+                ],
+                "failureElements": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "5467e501-b9ff-414f-8026-56885d0d7a4d",
+          "name": "The otter is on vacation",
+          "disabled": false,
+          "outputRuntimeFacts": [],
+          "inputRuntimeFacts": [],
+          "rootElement": {
+            "elementType": "RULE_BLOCK",
+            "blockType": "IF_ELSE",
+            "condition": {
+              "all": [
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "operator": "isDefined"
+                },
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "operator": "duringSummer"
+                }
+              ]
+            },
+            "successElements": [
+              {
+                "elementType": "ACTION",
+                "actionType": "UPDATE_ASSET",
+                "asset": "otter.svg",
+                "value": "otter-summer.svg"
+              }
+            ],
+            "failureElements": []
+          }
+        },
+        {
+          "id": "5467e501-b9ff-414f-8026-56885d0d7a4d",
+          "name": "The otter is on vacation 2",
+          "disabled": false,
+          "outputRuntimeFacts": [],
+          "inputRuntimeFacts": [],
+          "rootElement": {
+            "elementType": "RULE_BLOCK",
+            "blockType": "IF_ELSE",
+            "condition": {
+              "all": [
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "operator": "isDefined"
+                },
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "operator": "duringSummer"
+                }
+              ]
+            },
+            "successElements": [
+              {
+                "elementType": "ACTION",
+                "actionType": "UPDATE_ASSET",
+                "asset": "otter.svg",
+                "value": "otter-summer.svg"
+              }
+
+            ],
+            "failureElements": []
+          }
+        },
+        {
+          "id": "5467e501-b9ff-414f-8026-56885d0d7a4c",
+          "name": "The otter is late",
+          "disabled": false,
+          "outputRuntimeFacts": [],
+          "inputRuntimeFacts": [],
+          "rootElement": {
+            "elementType": "RULE_BLOCK",
+            "blockType": "IF_ELSE",
+            "condition": {
+              "all": [
+                {
+                  "lhs": {
+                    "type": "FACT",
+                    "value": "outboundDate"
+                  },
+                  "rhs": {
+                    "type": "LITERAL",
+                    "value": "2880"
+                  },
+                  "operator": "dateInNextMinutes"
+                }
+              ]
+            },
+            "successElements": [
+              {
+                "elementType": "ACTION",
+                "actionType": "UPDATE_ASSET",
+                "asset": "otter.svg",
+                "value": "otter-summer.svg"
+              }
+            ],
+            "failureElements": []
+          }
+        }
+      ],
+      "description": ""
+    },
+    {
+      "id": "5945e501-b9ff-414f-8025-56885d0d7a4b-5945e501-b9ff-414f-8025-56885d0d7a4b",
+      "name": "placeholder",
+      "rules": [
+        {
+          "id": "5945e501-b9ff-414f-8025-56885d0d7a4b",
+          "name": "Placeholder showcase",
+          "outputRuntimeFacts": [],
+          "inputRuntimeFacts": [],
+          "rootElement": {
+            "elementType": "ACTION",
+            "actionType": "UPDATE_PLACEHOLDER",
+            "value": "assets/placeholders/placeholder-showcase.json",
+            "placeholderId": "placeholder-showcase"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "types": ["node"],
+    "skipLibCheck": true, // Due to Jasmine / Jest fixture compilation conflicting on types
+    "incremental": true,
+    "composite": true,
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "outDir": "./dist/plugins",
+    "rootDir": "plugins",
+    "tsBuildInfoFile": "build/plugins/.tsbuildinfo"
+  },
+  "include": [
+    "plugins/**/*.ts"
+  ]
+}

@@ -1,0 +1,12 @@
+/index.*
+
+/common
+/component
+/configuration
+/dist*
+/errors
+/src/package.json
+/store
+/types
+/validation
+/utils

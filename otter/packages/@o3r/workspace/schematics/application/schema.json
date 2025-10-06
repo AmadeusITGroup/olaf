@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngGenerateApplicationSchematicsSchema",
+  "title": "Generate a new Otter application",
+  "description": "Generate a new Otter application",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Application name",
+      "pattern": "^(?:@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*/)?[a-zA-Z0-9-~][a-zA-Z0-9-._~]*$",
+      "x-prompt": "Name of the new application?",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the new application",
+      "default": ""
+    },
+    "path": {
+      "type": "string",
+      "description": "Target directory to generate the application"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "skipInstall": {
+      "description": "Do not install dependency packages.",
+      "type": "boolean",
+      "default": false
+    },
+    "strict": {
+      "description": "Creates an application with stricter bundle budgets settings.",
+      "type": "boolean",
+      "default": true
+    },
+    "standalone": {
+      "description": "Creates an application based upon the standalone API, without NgModules.",
+      "type": "boolean",
+      "default": true
+    },
+    "ssr": {
+      "description": "Creates an application with Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering) enabled.",
+      "type": "boolean",
+      "default": false
+    },
+    "exactO3rVersion": {
+      "type": "boolean",
+      "description": "Use a pinned version for otter packages"
+    }
+  },
+  "required": ["name"],
+  "additionalProperties": true
+}

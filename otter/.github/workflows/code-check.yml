@@ -1,0 +1,140 @@
+name: Code check
+
+on:
+  workflow_call:
+    inputs:
+      affected:
+        type: boolean
+        required: false
+        default: false
+        description: Run test only on affective packages if true
+      skipNxCache:
+        type: boolean
+        default: false
+        required: false
+        description: Skip the nx cache
+      skipNxRemoteCache:
+        type: boolean
+        default: false
+        required: false
+        description: Skip the nx remote cache
+    secrets:
+      CODECOV_TOKEN:
+        required: false
+        description: Token Report to Codecov
+
+env:
+  NX_PARALLEL: ${{ vars.NX_PARALLEL }}
+  NX_TASK_TARGET_CONFIGURATION: ci
+  NX_SKIP_NX_CACHE: ${{ inputs.skipNxCache }}
+  NX_SKIP_REMOTE_CACHE: ${{inputs.skipNxRemoteCache}}
+  YARN_ENABLE_HARDENED_MODE: 0
+  NODE_COMPILE_CACHE: ~/.cache/node-compile-cache
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+    - uses: gaurav-nelson/github-action-markdown-link-check@d53a906aa6b22b8979d33bc86170567e619495ec # v1.0.15
+      with:
+        base-branch: 'main'
+        config-file: '.github/markdown-links.config.json'
+        folder-path: 'packages/,apps/,tools/'
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJson(github.event_name != 'push' && '["ubuntu-latest", "windows-latest"]' || '["ubuntu-latest"]') }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: ${{ inputs.affected && '0' || '1' }}
+      - name: Setup
+        uses: ./tools/github-actions/setup
+      - uses: ./.github/actions/setup-java
+        with:
+          install-jdk: 'true'
+      - name: Cache Jest
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        env:
+          hash: ${{ hashFiles('package.json', 'tsconfig.base.json', 'tsconfig.build.json', 'nx.json') }}
+        with:
+          path: .cache/jest
+          key: ${{ runner.os }}-jest-${{ env.hash }}
+          restore-keys: |
+            ${{ runner.os }}-jest-${{ env.hash }}
+            ${{ runner.os }}-jest
+            ${{ runner.os }}
+      - name: Build swagger generator
+        run: yarn nx run ama-sdk-schematics:build-swagger
+      - name: Test
+        env:
+          NX_BASE: ${{ format('remotes/origin/{0}', github.base_ref || github.ref_name) }}
+          testCmd: ${{ inputs.affected && 'test:affected' || 'test'}}
+          NODE_OPTIONS: ${{ runner.os == 'Windows' && '--max_old_space_size=4096' || '' }}
+        run: yarn ${{ env.testCmd }} --collectCoverage --configuration=ci
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+        with:
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f # v1.1.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Publish tests reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ut-reports-${{ matrix.os }}
+          path: |
+            apps/**/dist-test/junit.xml
+            packages/**/dist-test/junit.xml
+            tools/**/dist-test/junit.xml
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: ${{ inputs.affected && '0' || '1' }}
+      - name: Setup
+        uses: ./tools/github-actions/setup
+      - name: Cache Eslint
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        env:
+          hash: ${{ hashFiles('yarn.lock') }}
+        with:
+          path: '**/.cache/eslint'
+          key: ${{ runner.os }}-eslint-${{ env.hash }}
+          restore-keys: |
+            ${{ runner.os }}-eslint-${{ env.hash }}
+            ${{ runner.os }}-eslint
+            ${{ runner.os }}
+      - name: Lint
+        env:
+          NX_BASE: ${{ format('remotes/origin/{0}', github.base_ref || github.ref_name) }}
+          lintCmd: ${{ inputs.affected && 'lint:affected' || 'lint'}}
+        run: yarn ${{ env.lintCmd }} --configuration ci
+
+  # Check that the packaging of github-actions is still working
+  github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: ${{ inputs.affected && '0' || '1' }}
+      - name: Setup
+        uses: ./tools/github-actions/setup
+      - name: Package github actions
+        env:
+          NX_BASE: ${{ format('remotes/origin/{0}', github.base_ref || github.ref_name) }}
+          nxCmd: ${{ inputs.affected && 'nx affected' || 'nx run-many'}}
+        run: yarn ${{ env.nxCmd }} --target=package-github-action
+

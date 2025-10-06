@@ -1,0 +1,24 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "incremental": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "noEmitHelpers": true,
+    "noUnusedLocals": true,
+    "outDir": "./dist/pcloudy",
+    "removeComments": false,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2015",
+    "noUnusedParameters": true
+  },
+  "include": [
+    "pcloudy/**/*.ts"
+  ],
+  "exclude": ["**/*.spec.ts"]
+}

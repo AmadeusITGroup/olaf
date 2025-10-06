@@ -1,0 +1,20 @@
+{
+  "extends": "../../../tsconfig.build",
+  "compilerOptions": {
+    "skipLibCheck": true, // because of @gerrit0/mini-shiki from typedoc
+    "incremental": true,
+    "composite": true,
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "tsBuildInfoFile": "build/.tsbuildinfo"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/templates/**"
+  ],
+}

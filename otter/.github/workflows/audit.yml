@@ -1,0 +1,45 @@
+name: NPM Audit
+
+concurrency:
+  group: ci-${{ github.ref }}-${{ inputs.ref }}-audit
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ''
+        description: The branch, tag or SHA to checkout.
+  push:
+    branches:
+      - main
+      - 'release/*'
+  pull_request:
+  merge_group:
+    types: [checks_requested]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ inputs.ref }}
+      - name: Setup
+        uses: ./tools/github-actions/setup
+      - name: Audit
+        id: audit
+        uses: ./tools/github-actions/audit
+        with:
+          severity: critical
+          allWorkspaces: true
+          recursive: true
+          environment: all
+      - name: Summary
+        if: success() || failure()
+        run: echo "${{ steps.audit.outputs.reportMarkdown }}" >> $GITHUB_STEP_SUMMARY
+

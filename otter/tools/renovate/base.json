@@ -1,0 +1,52 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommitTypeAll(chore)",
+    "group:allNonMajor",
+    "group:monorepos",
+    "group:recommended",
+    "group:test",
+    "group:linters",
+    "helpers:pinGitHubActionDigestsToSemver",
+    ":automergeMinor",
+    "github>AmadeusITGroup/otter//tools/renovate/group/angular",
+    "github>AmadeusITGroup/otter//tools/renovate/group/typescript",
+    "github>AmadeusITGroup/otter//tools/renovate/managers/github-node-version.json5"
+  ],
+  "hostRules": [
+    {
+      "timeout": 240000
+    }
+  ],
+  "baseBranches": [
+    "main",
+    "master",
+    "/^release\\/.*-next$/"
+  ],
+  "minimumReleaseAge": "3 days",
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "enabledManagers": [
+    "npm",
+    "github-actions"
+  ],
+  "updateInternalDeps": true,
+  "postUpdateOptions": [
+    "yarnDedupeHighest",
+    "npmDedupe"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "automerge": true,
+  "platformAutomerge": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 4am on monday"
+    ]
+  },
+  "packageRules": []
+}

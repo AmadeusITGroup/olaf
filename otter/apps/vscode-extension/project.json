@@ -1,0 +1,48 @@
+{
+  "name": "vscode-extension",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "apps/vscode-extension/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "postbuild"
+      },
+      "outputs": [
+        "{projectRoot}/dist/package.json",
+        "{projectRoot}/dist/README.md",
+        "{projectRoot}/dist/assets",
+        "{projectRoot}/dist/.vscodeignore"
+      ],
+      "dependsOn": ["compile"]
+    },
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:esbuild"
+      },
+      "outputs": ["{projectRoot}/dist/src/extension.js"]
+    },
+    "lint": {},
+    "test": {},
+    "prepare-publish": {
+      "options": {
+        "commands": [
+          "node tools/@o3r/build-helpers/scripts/prepare-publish.mjs --root={projectRoot}",
+          "node tools/@o3r/build-helpers/scripts/clear-package-json-dev-dependencies.mjs --root={projectRoot}"
+        ]
+      }
+    },
+    "publish-extension": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm install && npx @vscode/vsce publish",
+        "cwd": "apps/vscode-extension/dist"
+      },
+      "dependsOn": ["prepare-publish"]
+    }
+  },
+  "tags": []
+}

@@ -153,7 +153,7 @@ export class InstallationManager {
         try {
             const metadata = await this.readInstallationMetadata(installationPath);
             extractionPath = metadata.extractionPath ?? extractionPath;
-            installedFiles = metadata.installedFiles || [];
+            installedFiles = metadata.installedFiles;
             this.logger.info(`Extraction path: ${extractionPath}`);
             this.logger.info(`Files that were installed: ${installedFiles.length} files`);
         } catch {
@@ -165,7 +165,7 @@ export class InstallationManager {
 
         // Add directories from installed files
         for (const file of installedFiles) {
-            const filePath = path.join(extractionPath, file);
+            const filePath = extractionPath + '/' + file;
             let dir = path.dirname(filePath);
             
             // Add all parent directories up to the extraction path
@@ -182,17 +182,15 @@ export class InstallationManager {
 
         // Convert to array and sort by depth (deepest first) for proper removal order
         const sortedDirectories = Array.from(directoriesToCheck).sort((a, b) => {
-            const depthA = a.split(path.sep).length;
-            const depthB = b.split(path.sep).length;
+            const depthA = a.split(path.sep).filter(p => p.length > 0).length;
+            const depthB = b.length;
             return depthB - depthA; // Sort by depth, deepest first
         });
 
         this.logger.debug(`Checking ${sortedDirectories.length} directories for emptiness`);
 
         // Remove empty directories, starting from the deepest
-        for (const dir of sortedDirectories) {
-            await this.removeIfEmpty(dir);
-        }
+        await Promise.all(sortedDirectories.map(dir => this.removeIfEmpty(dir)));
 
         // Finally, remove the installation/metadata directory if it's different from extraction path
         if (installationPath !== extractionPath) {

@@ -1,0 +1,42 @@
+name: Update e2e screenshots
+description: Update the e2e screenshots
+inputs:
+  visualTestingReportPath:
+    type: string
+    description: 'Path to the visual testing report'
+    required: true
+outputs:
+  screenshots:
+    description: The number of screenshots updated
+    value: ${{ steps.update-e2e-screenshots.outputs.screenshots }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Update e2e screenshots
+      id: update-e2e-screenshots
+      uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+      env:
+        REPORT_PATH: ${{ inputs.visualTestingReportPath }}
+      with:
+        script: |
+          const screenshots = process.env.REPORT_PATH
+            .split(/\n/)
+            .filter((reportPath) => !!reportPath)
+            .flatMap((reportPath) => {
+              try {
+                core.info(`Reading ${reportPath}`);
+                const report = JSON.parse(require('node:fs').readFileSync(reportPath.trim(), { encoding: 'utf8' }));
+                core.info(`${report.length} screenshots`);
+                return report;
+              } catch (e) {
+                console.warn(e);
+                return [];
+              }
+            });
+          screenshots.forEach((screenshot) => {
+            require('node:child_process').spawnSync('cp', [screenshot.actual, screenshot.expected]);
+            core.info(`Copied ${screenshot.actual} to ${screenshot.expected}`);
+          });
+          core.setOutput('screenshots', screenshots.length);
+          core.info(`Copied ${screenshots.length} screenshots`);

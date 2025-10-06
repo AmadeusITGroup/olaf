@@ -1,0 +1,14 @@
+/* For IDE and EsLint usage */
+{
+  "references": [
+    {
+      "path": "./testing/tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfigs/tsconfig.source.json"
+    },
+    {
+      "path": "./tsconfigs/tsconfig.jest.json"
+    }
+  ]
+}

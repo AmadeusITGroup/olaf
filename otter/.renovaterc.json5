@@ -1,0 +1,130 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>AmadeusITGroup/otter//tools/renovate/base",
+    "github>AmadeusITGroup/otter//tools/renovate/group/mfe",
+    "github>AmadeusITGroup/otter//tools/renovate/group/design-factory",
+    "github>AmadeusITGroup/otter//tools/renovate/branching-strategy/release-branches",
+    ":labels(dependencies)"
+  ],
+  "timezone": "Europe/Paris",
+  "ignorePaths": [
+    "**/node_modules/**"
+  ],
+  "enabledManagers": [
+    "npm",
+    "github-actions",
+    "gradle",
+    "maven",
+    "regex"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "baseBranches": [
+    "main",
+    "/^release\\/.*-next$/"
+  ],
+  "minimumReleaseAge": "5 days",
+  "internalChecksFilter": "strict",
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "typescript",
+        "eslint",
+        "@yarnpkg/sdks"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "yarn install",
+          "yarn sdks"
+        ],
+        "executionMode": "branch",
+        "fileFilters": [
+          ".yarn/sdks/**"
+        ]
+      }
+    },
+    {
+      //Major update of chalk disabled as it drops support on CommonJS
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchCurrentVersion": "<5",
+      "matchPackageNames": [
+        "chalk"
+      ],
+      "enabled": false
+    },
+    {
+      //Major update of globby disabled as it drops support on CommonJS
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchCurrentVersion": "<14",
+      "matchPackageNames": [
+        "globby"
+      ],
+      "enabled": false
+    },
+    {
+      // Reduce the updates on Next to let them handle by the Main branch
+      "matchUpdateTypes": [
+        "bump",
+        "digest",
+        "lockFileMaintenance",
+        "minor",
+        "patch",
+        "pinDigest"
+      ],
+      "matchBaseBranches": [
+        "/.*-next$/"
+      ],
+      "enabled": false
+    },
+
+    {
+      // This rule disable the upgrade of the gaurav-nelson/github-action-markdown-link-check
+      // TODO: re-activate the upgrade when the following issue is fixed: gaurav-nelson/github-action-markdown-link-check#200
+      "matchPackageNames": [
+        "/.*markdown-link-check/"
+      ],
+      "enabled": false
+    },
+
+    // OpenAPI updates
+    {
+      "matchManagers": ["maven"],
+      "groupName": "Open API updates",
+      "groupSlug": "openapi",
+      "includePaths": [
+        "packages/@ama-sdk/schematics"
+      ]
+    },
+    {
+      // We don't want to update this dep as we are still targeting a fork
+      "matchPackageNames": [
+        "io.swagger:swagger-codegen-cli"
+      ],
+      "enabled": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "maven",
+      "depNameTemplate": "org.openapitools:openapi-generator",
+      "fileMatch": [
+        "packages/@ama-sdk/schematics/package\\.json"
+      ],
+      "matchStrings": [
+        "\"openApiSupportedVersion\": \"~(?<currentValue>[^\"]+)\""
+      ]
+    }
+  ],
+  "github-actions": {
+    "fileMatch": [
+      "/(?:__dot__|__empty__\\.)github/.*/.+\\.ya?ml$"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https?:\/\/.*"
+    },
+    {
+      "pattern": "^https?://(127.0.0.1|localhost)[:/].*"
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "/%40",
+      "replacement": "/@"
+    }
+  ]
+}

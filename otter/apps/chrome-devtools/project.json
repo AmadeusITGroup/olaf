@@ -1,0 +1,172 @@
+{
+  "name": "chrome-devtools",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "root": "apps/chrome-devtools",
+  "sourceRoot": "apps/chrome-devtools/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "outputs": [
+        "{projectRoot}/dist/manifest.json",
+        "{projectRoot}/dist/extension",
+        "{projectRoot}/dist/package.json",
+        "{projectRoot}/dist/devtools.html"
+      ],
+      "options": {
+        "script": "postbuild:patch",
+        "tsConfig": "{projectRoot}/tsconfig.build.json"
+      },
+      "dependsOn": [
+        "^build",
+        "build-panel",
+        "build-components",
+        "build-extension",
+        "copy-assets"
+      ]
+    },
+    "build-components": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{projectRoot}/dist/components"],
+      "options": {
+        "baseHref": "components",
+        "outputPath": "apps/chrome-devtools/dist/components",
+        "index": "apps/chrome-devtools/src/app-components.html",
+        "browser": "apps/chrome-devtools/src/app-components.main.ts",
+        "tsConfig": "apps/chrome-devtools/tsconfig.build.components.json",
+        "optimization": {
+          "scripts": true,
+          "styles": {
+            "minify": true,
+            "inlineCritical": false
+          },
+          "fonts": true
+        },
+        "polyfills": [
+          "zone.js",
+          "@angular/localize/init"
+        ],
+        "styles": [
+          {
+            "inject": true,
+            "input": "apps/chrome-devtools/src/styles/index.scss"
+          }
+        ],
+        "sourceMap": {
+          "styles": true,
+          "scripts": true,
+          "vendor": true
+        },
+        "preserveSymlinks": true,
+        "serviceWorker": false,
+        "extractLicenses": false,
+        "aot": true
+      },
+      "configurations": {
+        "dev": {
+          "baseHref": "components",
+          "outputPath": "apps/chrome-devtools/dist/components",
+          "index": "apps/chrome-devtools/src/app-components.html",
+          "browser": "apps/chrome-devtools/src/app-components.main.ts",
+          "tsConfig": "apps/chrome-devtools/tsconfig.build.components.json",
+          "aot": false,
+          "optimization": false
+        }
+      },
+      "dependsOn": ["^build"]
+    },
+    "build-panel": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{projectRoot}/dist/panel"],
+      "options": {
+        "baseHref": "panel",
+        "outputPath": "apps/chrome-devtools/dist/panel",
+        "index": "apps/chrome-devtools/src/app-devtools.html",
+        "browser": "apps/chrome-devtools/src/app-devtools.main.ts",
+        "tsConfig": "apps/chrome-devtools/tsconfig.build.devtools.json",
+        "optimization": {
+          "scripts": true,
+          "styles": {
+            "minify": true,
+            "inlineCritical": false
+          },
+          "fonts": true
+        },
+        "polyfills": [
+          "zone.js",
+          "@angular/localize/init"
+        ],
+        "styles": [
+          {
+            "inject": true,
+            "input": "apps/chrome-devtools/src/styles/index.scss"
+          }
+        ],
+        "sourceMap": {
+          "styles": true,
+          "scripts": true,
+          "vendor": true
+        },
+        "preserveSymlinks": true,
+        "serviceWorker": false,
+        "extractLicenses": false,
+        "aot": true
+      },
+      "configurations": {
+        "dev": {
+          "baseHref": "panel",
+          "outputPath": "apps/chrome-devtools/dist/panel",
+          "index": "apps/chrome-devtools/src/app-devtools.html",
+          "browser": "apps/chrome-devtools/src/app-devtools.main.ts",
+          "tsConfig": "apps/chrome-devtools/tsconfig.build.devtools.json",
+          "aot": false,
+          "optimization": false
+        }
+      },
+      "dependsOn": ["^build"]
+    },
+    "build-extension": {
+      "executor": "nx:run-script",
+      "outputs": [
+        "{projectRoot}/dist/extension/**/*.js",
+        "{projectRoot}/dist/extension/**/*.ts",
+        "{projectRoot}/dist/extension/**/*.map"
+      ],
+      "options": {
+        "script": "build:extension"
+      },
+      "dependsOn": ["^build"]
+    },
+    "lint": {},
+    "test": {},
+    "test-e2e": {},
+    "copy-assets": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "copy:assets"
+      },
+      "outputs": [
+        "{projectRoot}/dist/extension/icons/**",
+        "{projectRoot}/dist/manifest.json",
+        "{projectRoot}/dist/devtools.html",
+        "{projectRoot}/dist/options.html"
+      ],
+      "inputs": [
+        "base",
+        "!{workspaceRoot}/tsconfig.base.json",
+        "{projectRoot}/src/assets/**",
+        "{projectRoot}/src/manifest.json",
+        "{projectRoot}/src/devtools.html",
+        "{projectRoot}/src/options.html"
+      ]
+    },
+    "publish-extension": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "publish-to-market"
+      }
+    }
+  },
+  "tags": []
+}

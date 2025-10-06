@@ -1,0 +1,49 @@
+{
+  "name": "pipeline",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@o3r/pipeline/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "outputs": [
+        "{projectRoot}/dist/package.json"
+      ],
+      "options": {
+        "script": "postbuild"
+      },
+      "dependsOn": [
+        "^build",
+        "build-builders",
+        "compile"
+      ]
+    },
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:source"
+      },
+      "inputs": [
+        "source",
+        "^source"
+      ]
+    },
+    "prepare-build-builders": {},
+    "build-builders": {},
+    "lint": {},
+    "test": {},
+    "test-int": {},
+    "prepare-publish": {
+      "options": {
+        "commands": [
+          "node tools/@o3r/build-helpers/scripts/prepare-publish.mjs --root={projectRoot}",
+          "node tools/@o3r/build-helpers/scripts/write-git-hash.mjs --root={projectRoot}"
+        ]
+      }
+    },
+    "publish": {},
+    "documentation": {}
+  },
+  "tags": []
+}

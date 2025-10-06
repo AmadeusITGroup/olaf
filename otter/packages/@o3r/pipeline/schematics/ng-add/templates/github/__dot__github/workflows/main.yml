@@ -1,0 +1,64 @@
+name: Main CI
+
+env:
+  DEFAULT_BRANCH: <%= defaultBranchName %>
+  DEFAULT_BRANCH_PRERELEASE_NAME: prerelease
+  RELEASE_BRANCH_REGEX: 'release\/(0|[1-9]\d*)\.(0|[1-9]\d*)(\.0-(?:next|prerelease|rc))?$'
+
+on:
+  push:
+    branches:
+      - <%= defaultBranchName %>
+      - 'release/*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: <%= runner %>
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: ./.github/actions/setup
+      - name: Build
+        run: <%= packageManager %> run build
+
+  unit-tests:
+    runs-on: <%= runner %>
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: ./.github/actions/setup
+      - name: Unit tests
+        run: <%= packageManager %> run test
+
+  lint:
+    runs-on: <%= runner %>
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: ./.github/actions/setup
+      - name: Lint
+        run: <%= packageManager %> run lint
+
+  release:
+    needs: [build, unit-tests, lint]
+    permissions:
+      contents: write
+    runs-on: <%= runner %>
+    outputs:
+      nextVersionTag: ${{ steps.newVersion.outputs.nextVersionTag }}
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: New version
+        if: github.event_name != 'merge_group'
+        id: newVersion
+        uses: AmadeusITGroup/otter/tools/github-actions/new-version@<%= actionVersionString %>
+        with:
+          defaultBranch: ${{ env.DEFAULT_BRANCH }}
+          defaultBranchPrereleaseName: ${{ env.DEFAULT_BRANCH_PRERELEASE_NAME }}
+          releaseBranchRegExp: ${{ env.RELEASE_BRANCH_REGEX }}
+      - name: Create release
+        if: github.event_name != 'pull_request'
+        uses: AmadeusITGroup/otter/tools/github-actions/release@<%= actionVersionString %>
+        with:
+          version: ${{ steps.newVersion.outputs.nextVersionTag }}
+          target: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

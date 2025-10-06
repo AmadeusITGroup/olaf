@@ -1,0 +1,179 @@
+name: IT Tests
+
+on:
+  workflow_call:
+    inputs:
+      skipNxCache:
+        type: boolean
+        default: false
+        required: false
+        description: Skip the nx cache
+      skipNxRemoteCache:
+        type: boolean
+        default: false
+        required: false
+        description: Skip the nx remote cache
+      ref:
+        type: string
+        default: ''
+        description: The branch, tag or SHA to checkout.
+    secrets:
+      CODECOV_TOKEN:
+        required: false
+        description: Token Report to Codecov
+
+env:
+  NX_PARALLEL: ${{ vars.NX_PARALLEL }}
+  NX_TASK_TARGET_CONFIGURATION: ci
+  NX_SKIP_NX_CACHE: ${{ inputs.skipNxCache }}
+  NX_SKIP_REMOTE_CACHE: ${{inputs.skipNxRemoteCache}}
+  YARN_ENABLE_HARDENED_MODE: 0
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-verdaccio:
+    runs-on: ubuntu-latest
+    env:
+      NODE_COMPILE_CACHE: ~/.cache/node-compile-cache
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: ./tools/github-actions/download-build-output
+        with:
+          artifactName: ${{ inputs.ref && format('dist-{0}', inputs.ref) || 'dist' }}
+      - uses: ./tools/github-actions/setup
+      - name: Setup verdaccio once for all tests
+        id: setup-verdaccio
+        run: |
+          mkdir ./.verdaccio/storage
+          chmod a+rwx -R ./.verdaccio/storage
+          yarn verdaccio:start-persistent
+          yarn verdaccio:publish
+        shell: bash
+      - name: Zip verdaccio storage
+        run: zip -r verdaccio.zip ./.verdaccio
+        shell: bash
+      - name: Publish verdaccio storage
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ inputs.ref && format('verdaccio-{0}', inputs.ref) || 'verdaccio' }}
+          path: verdaccio.zip
+      - name: Stop verdaccio
+        if: always()
+        run: yarn verdaccio:stop
+
+  it-tests:
+    needs: [prepare-verdaccio]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        packageManager: [yarn, npm]
+        testEnvironment: [o3r-project-with-app]
+        fastRun:
+          - ${{ github.event_name == 'pull_request' && github.base_ref == 'main' && !contains(github.event.pull_request.labels.*.name, 'runAllTests')}}
+        exclude:
+          - fastRun: true
+            os: windows-latest
+          - fastRun: true
+            packageManager: yarn
+    name: it-tests (${{ matrix.os }}, ${{ matrix.packageManager }}, ${{ matrix.testEnvironment }})
+    runs-on: ${{ matrix.os }}
+    env:
+      ENFORCED_PACKAGE_MANAGER: ${{ matrix.packageManager }}
+      PREPARE_TEST_ENV_TYPE: ${{ matrix.testEnvironment }}
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: ./tools/github-actions/download-build-output
+        with:
+          artifactName: ${{ inputs.ref && format('dist-{0}', inputs.ref) || 'dist' }}
+      - uses: ./tools/github-actions/setup
+      - shell: bash
+        run: |
+          git config --global  user.name "GitHub Actions"
+          git config --global  user.email "AmadeusITGroup-otter@users.noreply.github.com"
+      - uses: ./.github/actions/setup-java
+        with:
+          install-jdk: 'true'
+      - name: Get current month to build the cache key
+        run: echo "currentMonth=$(date +'%Y-%m')" >> $GITHUB_ENV
+        shell: bash
+      - name: Cache test-app yarn
+        if: inputs.ref == ''
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          lookup-only: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
+          path: |
+            .cache/test-app
+            !.cache/test-app/cache/@ama-sdk*
+            !.cache/test-app/cache/@ama-terasu*
+            !.cache/test-app/cache/@o3r*
+            !.cache/test-app/npm-cache/_npx/**
+          key: ${{ runner.os }}-test-app-${{ matrix.packageManager }}-${{ env.currentMonth }}
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        name: Download verdaccio storage prepared in the previous job
+        with:
+          name: ${{ inputs.ref && format('verdaccio-{0}', inputs.ref) || 'verdaccio' }}
+          path: '.'
+      - name: Setup verdaccio once for all tests
+        id: setup-verdaccio
+        run: |
+          unzip -q -n verdaccio.zip
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            chmod a+rwx -R ./.verdaccio/storage
+            yarn verdaccio:start-persistent
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+            npx --yes verdaccio --config $GITHUB_WORKSPACE\\.verdaccio\\conf\\config-without-docker.yaml --listen http://127.0.0.1:4873 &
+            npx --yes wait-on http://127.0.0.1:4873 -t 180000
+          fi
+          yarn verdaccio:login
+        shell: bash
+      - name: Test
+        id: it-tests
+        run: yarn test-int
+      - name: Zip generated app on failure
+        if: failure() && steps.it-tests.conclusion == 'failure'
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            mkdir -p ./otter
+            cp -R ./.cache ./otter/.cache
+            zip -r it-tests.zip ../it-tests ./otter/.cache -x "./otter/.cache/nx/*" -x "../it-tests/*/node_modules/*"
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+            tar -acf it-tests.zip -C ../ --exclude="it-tests/*/node_modules/*" it-tests
+          fi
+        shell: bash
+      - name: Publish generated tests environment on failure
+        if: failure() && steps.it-tests.conclusion == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: it-tests-${{ matrix.os }}-${{ matrix.packageManager }}-${{ inputs.ref }}
+          path: it-tests.zip
+      - name: Publish tests reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: it-reports-${{ matrix.os }}-${{ matrix.packageManager }}-${{ inputs.ref }}
+          path: 'packages/**/dist-test/it-report.xml'
+      - name: Stop verdaccio
+        if: always() && runner.os == 'Linux'
+        run: yarn verdaccio:stop
+
+  # This job is used to give the final status of the matrix. It can be used as required job for branch security.
+  conclusion:
+    runs-on: ubuntu-latest
+    needs: [it-tests]
+    if: success() || failure()
+    steps:
+      - run: |
+          if [[ $OUTPUT == "success" ]]; then
+            exit 0
+          else
+            exit 1
+          fi
+        env:
+          OUTPUT: ${{ needs.it-tests.result }}

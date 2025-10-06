@@ -1,0 +1,124 @@
+# Verify that the dependencies are aligned in the monorepos sub packages
+
+This rule checks each `package.json` to ensure that its dependencies are consistent with those defined in other `package.json` files within the workspace.
+
+## Prerequisite
+
+The linter is dedicated to JSON files and requires the setup of the [jsonc-eslint-parser](https://www.npmjs.com/package/jsonc-eslint-parser).
+
+Example of an ESLint flat configuration:
+
+```javascript
+import jsonParser from 'jsonc-eslint-parser';
+import o3rPlugin from '@o3r/eslint-plugin';
+
+export default [
+  {
+    files: ['**/package.json'],
+    languageOptions: {
+      parser: jsonParser
+    },
+    plugins: {
+      '@o3r': o3rPlugin
+    }
+    rules: {
+      '@o3r/json-dependency-versions-harmonize': 'error'
+    }
+  }
+]
+```
+
+Example of an ESLint legacy configuration:
+
+```json
+{
+  "parser": "jsonc-eslint-parser",
+  "plugins": [
+    "@o3r"
+  ],
+  "files": [
+    "**/package.json"
+  ],
+  "extends": [
+    "@o3r:json-recommended"
+  ]
+}
+```
+
+## Options
+
+### alignPeerDependencies
+
+Enforce to align the version of the dependencies with the latest range.
+
+**Default**: *false*
+
+**Usage**:
+
+```json
+{
+  "@o3r/json-dependency-versions-harmonize": [
+    "error",
+    {
+      "alignPeerDependencies": true
+    }
+  ]
+}
+```
+
+### dependencyTypes
+
+List of dependency types to update
+
+**Default**: ['optionalDependencies', 'dependencies', 'devDependencies', 'peerDependencies', 'generatorDependencies']*
+
+**Usage**:
+
+```json
+{
+  "@o3r/json-dependency-versions-harmonize": [
+    "error",
+    {
+      "dependencyTypes": ["dependencies", "peerDependencies"]
+    }
+  ]
+}
+```
+
+### ignoredDependencies
+
+List of dependencies to ignore.
+
+**Default**: *[]*
+
+**Usage**:
+
+```json
+{
+  "@o3r/json-dependency-versions-harmonize": [
+    "error",
+    {
+      "ignoredDependencies": ["rxjs", "@angular/*"]
+    }
+  ]
+}
+```
+
+### ignoredPackages
+
+List of package name to ignore when determining the dependencies versions.
+
+**Default**: *[]*
+
+**Usage**:
+
+```json
+{
+  "@o3r/json-dependency-versions-harmonize": [
+    "error",
+    {
+      "ignoredPackages": ["@o3r/core"]
+    }
+  ]
+}
+```

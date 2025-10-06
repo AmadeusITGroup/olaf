@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NgGenerateComponentSchematicsSchema",
+  "title": "Generate Otter Component",
+  "description": "ng generate Otter Component",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "project"
+    },
+    "componentName": {
+      "type": "string",
+      "description": "Component name",
+      "x-prompt": "Your component name",
+      "minLength": 1,
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "description": "Directory containing the components"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of your component selector"
+    },
+    "componentStructure": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "full",
+        "container",
+        "presenter"
+      ],
+      "description": "Structure of the component you want to generate ('simple' | 'full' | 'container' | 'presenter')",
+      "default": "simple"
+    },
+    "useComponentFixtures": {
+      "type": "boolean",
+      "description": "Generate component fixtures for tests"
+    },
+    "useOtterTheming": {
+      "type": "boolean",
+      "description": "Generate component with Otter theming architecture"
+    },
+    "useOtterConfig": {
+      "type": "boolean",
+      "description": "Generate component with Otter configuration"
+    },
+    "useRulesEngine": {
+      "type": "boolean",
+      "description": "Generate component with rules-engine"
+    },
+    "useLocalization": {
+      "type": "boolean",
+      "description": "Generate component with localization"
+    },
+    "useContext": {
+      "type": "boolean",
+      "description": "Generate component context"
+    },
+    "description": {
+      "type": "string",
+      "description": "Component description",
+      "x-prompt": "Specify your component description"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false
+    },
+    "activateDummy": {
+      "type": "boolean",
+      "description": "Generate dummy values",
+      "default": false
+    },
+    "useOtterAnalytics": {
+      "type": "boolean",
+      "description": "Generate component with Otter analytics architecture"
+    },
+    "standalone": {
+      "type": "boolean",
+      "description": "Whether the generated component is standalone.",
+      "default": true
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "componentName"
+  ]
+}

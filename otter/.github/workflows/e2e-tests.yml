@@ -1,0 +1,87 @@
+name: E2E Tests
+
+on:
+  workflow_call:
+    inputs:
+      skipNxCache:
+        type: boolean
+        default: false
+        required: false
+        description: Skip the nx cache
+      skipNxRemoteCache:
+        type: boolean
+        default: false
+        required: false
+        description: Skip the nx remote cache
+
+env:
+  NX_PARALLEL: ${{ vars.NX_PARALLEL }}
+  NX_TASK_TARGET_CONFIGURATION: ci
+  NX_SKIP_NX_CACHE: ${{ inputs.skipNxCache }}
+  NX_SKIP_REMOTE_CACHE: ${{inputs.skipNxRemoteCache}}
+  YARN_ENABLE_HARDENED_MODE: 0
+  E2E_REPORT: e2e-report
+
+permissions:
+  contents: write # Needed to create a commit in case of visual testing failure
+  issues: write # Needed to add a comment to a pull request
+  pull-requests: write # Needed to add a comment to a pull request
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-24.04
+    env:
+      NODE_COMPILE_CACHE: ~/.cache/node-compile-cache
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: ./tools/github-actions/download-build-output
+      - uses: ./tools/github-actions/setup
+      - run: yarn playwright install
+      - name: Run e2e tests
+        run: |
+          npx --yes http-server apps/showcase/dist/browser -p 8080 -s &
+          npx --yes wait-on $PLAYWRIGHT_TARGET_URL -t 5000
+          yarn test-e2e
+        shell: bash
+        env:
+          PLAYWRIGHT_TARGET_URL: http://127.0.0.1:8080
+
+      - name: Publish tests reports
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ env.E2E_REPORT }}
+          path: |
+            apps/chrome-devtools/playwright-reports
+            apps/showcase/playwright-reports
+            apps/showcase/test-results
+
+  e2e-screenshots:
+    runs-on: ubuntu-24.04
+    # To work correctly this workflow must be run only on pull_request trigger and not coming from a fork
+    if: ${{ failure() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name }}
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    needs: [e2e-tests]
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: ${{ env.E2E_REPORT }}
+          # Needed because the least common ancestor of all the paths will be used as the root directory of the artifact
+          # https://github.com/actions/upload-artifact?tab=readme-ov-file#upload-using-multiple-paths-and-exclusions
+          path: 'apps'
+      - name: Update e2e screenshots
+        id: update-e2e-screenshots
+        uses: ./tools/github-actions/update-e2e-screenshots
+        with:
+          visualTestingReportPath: apps/showcase/playwright-reports/visual-testing/report.json
+      - uses: ./tools/github-actions/setup
+        if: ${{ steps.update-e2e-screenshots.outputs.screenshots != '0' }}
+      - name: Create branch for e2e screenshots
+        if: ${{ steps.update-e2e-screenshots.outputs.screenshots != '0' }}
+        uses: ./tools/github-actions/create-branch-e2e-screenshots
+        with:
+          screenshotsPattern: apps/showcase/e2e-playwright/screenshots/sanity/**

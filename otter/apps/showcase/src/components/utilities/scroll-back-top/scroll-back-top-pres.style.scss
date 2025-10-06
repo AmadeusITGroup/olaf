@@ -1,0 +1,13 @@
+o3r-scroll-back-top-pres {
+	position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: .5;
+  z-index: var(--o3r-header-zindex);
+
+  .btn {
+    color: #000;
+    font-size: 3rem;
+    background: transparent;
+  }
+}

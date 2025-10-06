@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ngGenerateUpdateSchematicsSchema",
+  "title": "Generate Otter NgUpdate rule",
+  "description": "ng generate Otter ngUpdate rule",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "project"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version to apply the ngUpdate",
+      "x-prompt": "Version to apply the ngUpdate (X(.Y))?",
+      "pattern": "[0-9]+(\\.[0-9]+)?",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "description": "Source directory containing the schematics"
+    },
+    "skipLinter": {
+      "type": "boolean",
+      "description": "Skip the linter process which includes EsLint and EditorConfig rules applying",
+      "default": false,
+      "x-prompt": "Skip linter process on generated files?"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "version"
+  ]
+}
