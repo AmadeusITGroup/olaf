@@ -107,19 +107,19 @@ You MUST execute ONLY the tasks for the selected persona. Do NOT execute tasks f
 - **Deliverable**: `BUILD-TEST-RELEASE.md`
 
 **Task C2: Bug Fixes**
-- Read and analyze `task-instructions-bug.md`
+- Read and analyze `REALISTIC-BUG-INSTRUCTIONS.md`
 - Implement fixes for all documented issues
 - Test fixes and document resolution status
 - **Deliverable**: `BUG-FIXES-REPORT.md` + code changes
 
 **Task C3: Feature Implementation**
-- Read and analyze `task-instructions-features.md`
+- Read and analyze `REALISTIC-FEATURE-INSTRUCTIONS.md`
 - Implement requested features
 - Document implementation approach and status
 - **Deliverable**: `FEATURES-IMPLEMENTATION-REPORT.md` + code changes
 
 **Task C4: Unit Test Implementation**
-- Read and analyze `task-instructions-test.md`
+- Read and analyze `REALISTIC-TESTING-INSTRUCTIONS.md`
 - Implement comprehensive unit tests
 - Document test coverage and approach
 - **Deliverable**: `UNIT-TESTS-REPORT.md` + test files
