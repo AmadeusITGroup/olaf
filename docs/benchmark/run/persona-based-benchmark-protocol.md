@@ -37,15 +37,30 @@ This protocol enables comprehensive benchmarking of AI agents and models across 
 ## Benchmark Structure
 
 ### Directory Structure
-```
+
+**Git Branch Strategy** (Replaces expensive folder copying):
+
+- **Branch Name**: `benchmark-otter-[agent]-[model]-[persona]-YYYYMMDD-HHmm`
+- **Working Directory**: `otter/` (existing repository)
+- **Results Directory**: `olaf-data/benchmarks/otter-[YYYYMMDD-HHmm]-[persona]-[agent]-[model]/`
+
+```text
 olaf-data/benchmarks/otter-[YYYYMMDD-HHmm]-[persona]-[agent]-[model]/
-├── workspace/                    # Otter codebase with modifications
-├── session-info.json            # Benchmark configuration
+├── session-info.json            # Benchmark configuration + branch reference
 ├── persona-tasks.json           # Task definitions and status
 ├── interventions.json           # User intervention log
 ├── PERSONA-BENCHMARK-REPORT.md  # Results and analysis
-└── README.md                    # Summary and instructions
+├── README.md                    # Summary and instructions
+└── git-branch-info.json         # Branch metadata and commit references
 ```
+
+**Git Workflow**:
+
+1. Create benchmark branch from `main` or specified base branch
+2. Switch to benchmark branch for all work
+3. Commit deliverables and modifications to branch
+4. Store branch reference and final commit hash in results
+5. Branch can be deleted after benchmark analysis (optional)
 
 ### Task Execution Model
 - Each persona has 3-5 specific tasks

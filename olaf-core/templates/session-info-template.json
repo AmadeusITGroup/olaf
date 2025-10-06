@@ -1,0 +1,14 @@
+{
+  "timestamp": "YYYYMMDD-HHmm",
+  "agent": "windsurf-cascade",
+  "model": "cascade",
+  "persona": "coder",
+  "branch_name": "benchmark-otter-windsurf-cascade-cascade-coder-YYYYMMDD-HHmm",
+  "working_directory": "otter",
+  "results_directory": "olaf-data/benchmarks/otter-YYYYMMDD-HHmm-coder-windsurf-cascade-cascade",
+  "created_at": "2025-10-06T15:10:43Z",
+  "benchmark_protocol_version": "1.0",
+  "git_strategy": true,
+  "original_strategy": "folder_copying",
+  "efficiency_improvement": "Eliminates expensive folder copying by using Git branches"
+}

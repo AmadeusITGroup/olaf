@@ -56,20 +56,33 @@ You WILL verify all requirements:
 <!-- <persona_benchmark_initialization> -->
 **Step 1: Initialize Persona Benchmark Environment**
 
-You WILL set up the persona benchmark environment:
+You WILL set up the persona benchmark environment using **Git branching strategy** (no expensive copying):
 
-1. Create directory: `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/`
-2. Copy Otter codebase to: `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/workspace/`
-3. Create session info file with persona-specific configuration
-4. Initialize persona-specific task structure
+**CRITICAL**: The `otter/` directory is NOT a Git repository - it's a folder within the main workspace repository. You must create branches in the main workspace repository, not in the otter folder.
+
+1. Switch to the `research-benchmark` branch in the main workspace repository
+2. Create Git branch: `benchmark-otter-[agent]-[model]-[persona]-[timestamp]` from research-benchmark
+3. Create results directory: `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/`
+4. Create session info file with persona-specific configuration and branch reference
+5. Initialize persona-specific task structure
+
+**Git Commands to Execute**:
+```bash
+# IMPORTANT: Work in main repository root, NOT in otter/ subdirectory
+git checkout research-benchmark
+git checkout -b benchmark-otter-[agent]-[model]-[persona]-[timestamp]
+mkdir -p olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/
+```
 
 You MUST verify the setup creates:
 
+- Git branch: `benchmark-otter-[agent]-[model]-[persona]-[timestamp]`
+- Current working branch switched to benchmark branch
 - `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/` directory structure
-- `session-info.json` with persona configuration
+- `session-info.json` with persona configuration and branch reference
 - `persona-tasks.json` with persona-specific task definitions
 - `interventions.json` for logging
-- `workspace/` with Otter codebase copy
+- `git-branch-info.json` with branch metadata
 
 You WILL present the setup summary to the user for confirmation before proceeding.
 <!-- </persona_benchmark_initialization> -->
@@ -79,7 +92,11 @@ You WILL present the setup summary to the user for confirmation before proceedin
 
 You MUST execute ONLY the tasks for the selected persona. Do NOT execute tasks from other personas.
 
-**IMPORTANT**: The sections below show all possible persona tasks for reference, but you ONLY execute the tasks for your selected persona.
+**IMPORTANT**: 
+- The sections below show all possible persona tasks for reference, but you ONLY execute the tasks for your selected persona
+- All work MUST be done in the `otter/` directory while on the benchmark branch
+- Commit your work regularly with descriptive commit messages
+- All deliverables should be created in the `otter/` directory and committed to the benchmark branch
 
 ## Coder Persona Tasks
 
@@ -261,17 +278,19 @@ You WILL generate outputs following this structure:
 
 **Primary Deliverable**: Persona benchmark results directory
 
-```
+```text
 olaf-data/benchmarks/otter-[YYYYMMDD-HHmm]-[persona]-[agent]-[model]/
-├── workspace/                    # Otter codebase with your work
-│   ├── [original Otter files]
-│   ├── [your modifications/additions]
-│   └── [persona-specific deliverables]
-├── session-info.json            # Benchmark configuration
+├── session-info.json            # Benchmark configuration + Git branch reference
 ├── persona-tasks.json           # Persona task definitions and status
 ├── interventions.json           # User intervention log
+├── git-branch-info.json         # Branch metadata and commit references
 ├── PERSONA-BENCHMARK-REPORT.md  # Comprehensive results
 └── README.md                    # Setup and results summary
+
+otter/                               # Working directory (Git repository)
+├── [original Otter files]           # Base codebase
+├── [your modifications/additions]   # Changes made during benchmark
+└── [persona-specific deliverables]  # All committed to benchmark branch
 ```
 
 **Supporting Documentation**:
@@ -308,13 +327,13 @@ You MUST follow these constraints:
 
 - Rule 1: You are the agent being tested - work autonomously without asking user for task solutions
 - Rule 2: Log interventions ONLY when user explicitly provides help (not for clarifications about benchmark process)
-- Rule 3: All benchmark work MUST happen in the workspace directory
+- Rule 3: All benchmark work MUST happen in the `otter/` directory on the benchmark branch
 - Rule 4: You MUST complete ALL tasks for the selected persona (and ONLY those tasks - do not execute tasks from other personas)
 - Rule 5: Directory naming MUST follow pattern: `otter-[YYYYMMDD-HHmm]-[persona]-[agent]-[model]`
 - Rule 6: You MUST update `persona-tasks.json` status after completing each task
-- Rule 7: Never modify original Otter codebase outside workspace
+- Rule 7: Never modify Otter codebase on `main` branch - only work on benchmark branch
 - Rule 8: If a task is impossible, log it as failed and continue to next task
-- Rule 9: Results directory location is ALWAYS `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/`
+- Rule 9: Results directory location is ALWAYS `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/` with Git branch reference
 - **Rule 10: COMPLETE ALL PERSONA TASKS - Do not stop early or skip tasks**
 - **Rule 11: All Mermaid diagrams must be properly formatted and embedded in markdown**
 
@@ -360,6 +379,6 @@ You WILL handle these scenarios:
 
 - MANDATORY: You are the AI agent being tested - perform persona tasks autonomously
 - MANDATORY: Log interventions ONLY when user provides task-specific help
-- MANDATORY: All work MUST be in `olaf-data/benchmarks/otter-[timestamp]-[persona]-[agent]-[model]/workspace/`
+- MANDATORY: All work MUST be in `otter/` directory on benchmark branch `benchmark-otter-[agent]-[model]-[persona]-[timestamp]`
 - MANDATORY: Complete ALL tasks for the selected persona
 - MANDATORY: Generate high-quality, professional deliverables appropriate for the persona

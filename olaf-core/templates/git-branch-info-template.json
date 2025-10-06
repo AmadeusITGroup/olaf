@@ -1,0 +1,14 @@
+{
+  "branch_name": "benchmark-otter-windsurf-cascade-cascade-coder-YYYYMMDD-HHmm",
+  "base_branch": "main",
+  "initial_commit": "abc123def456...",
+  "final_commit": "def456abc123...",
+  "created_timestamp": "YYYYMMDD-HHmm",
+  "completed_timestamp": "YYYYMMDD-HHmm",
+  "repository_path": "otter",
+  "commits_made": [],
+  "deliverables_committed": [],
+  "branch_status": "active",
+  "cleanup_eligible": false,
+  "notes": "Git branch created to replace expensive folder copying strategy"
+}
