@@ -1,79 +1,108 @@
+# Prompt 0-3-2: Routing Documentation
+
+## Purpose
+
+Generate CONCISE routing summary with copy-paste prompt for user to continue work in next orchestrator.
+
+**Key Principle**: Keep it SHORT - user just needs to know which orchestrator and a ready-to-use prompt.
+
 ---
-name: convert-routing-documentation
-description: Convert the Routing Documentation prompt to standardized template, preserving concise routing summary and copy-paste prompt generation
-tags: [prompt, conversion, routing, summary]
+
+## Input
+
+- **6-context-package.yaml** (from Prompt 0-3-1)
+- **All artifacts 1-5** (from Workflows 0-1 and 0-2)
+
 ---
 
-## Framework Validation
-You MUST apply the <olaf-work-instructions> framework.
-You MUST pay special attention to**:
-- <olaf-general-role-and-behavior> - Expert domain approach
-- <olaf-interaction-protocols> - Appropriate interaction protocol
-You MUST strictly apply <olaf-framework-validation>.
+## Task Instructions
 
-## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **context_yaml_path**: path - Path to `6-context-package.yaml` (REQUIRED)
+### Step 1: Extract Key Information
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Propose-Act for conversion and documentation
+From `6-context-package.yaml`, extract:
+- **Change Request ID**: [SACP-XXXXXX]
+- **Size Classification**: [XS/S/M/L/XL]
+- **Score**: [XX/25]
+- **Confidence Score**: [XX%]
+- **Target Orchestrator**: `orchestrator-[SIZE]-[name].md`
+- **Effort Estimate**: [XX-YY person-days]
+- **Duration**: [X-Y weeks]
+- **Team Size**: [X-Y developers]
+- **Risk Level**: [Low/Medium/High]
+- **Modules**: [X]
+- **Files**: [XX-YY]
+- **LOC**: [X,XXX-Y,YYY]
+- **Critical Pre-Actions**: (any blocking items from context package)
 
-## Process
+### Step 2: Create Copy-Paste Prompt for User
 
-### 1. Validation Phase
-You WILL verify all requirements:
-- Confirm `context_yaml_path` exists and includes required fields
+Generate a CONCISE prompt the user can copy-paste to continue in next orchestrator:
 
-### 2. Execution Phase
-You WILL execute these operations as needed:
+**Template**:
+```
+Execute Orchestrator-[SIZE] for change request [SACP-XXXXXX]:
 
-**Core Logic**:
-- Extract key stats from context package (ID, Size, Score, Confidence, Target Orchestrator, Effort, Duration, Team, Risk, Modules/Files/LOC)
-- Generate a concise routing summary
-- Create a ready-to-copy prompt that references the context package and orchestrator
-- Keep output to one page or less
+- Change Request: [One-line description from prerequisite-3]
+- Analysis Directory: olaf-works/demand/[SACP-XXXXXX]-analysis/
+- Context Package: 6-context-package.yaml
+- Size: [SIZE] ([XX]/25 points, [XX]% confidence)
+- Effort: [XX-YY] person-days, [X-Y] weeks, [X-Y] developers
 
-### 3. Validation Phase
-You WILL validate results:
-- Ensure copy-paste prompt has no placeholders
-- Ensure summary is concise and contains key stats
+Critical Pre-Actions (if any):
+[List ONLY blocking items from critical_highlights.blocking_items in context package - max 3 items]
+[If none, write: "None - proceed directly to orchestrator"]
+
+Read the context package (6-context-package.yaml) and begin specification workflow.
+```
+
+**Important**: This prompt should be SHORT and actionable. User should be able to copy-paste it into next session.
+
+### Step 3: SKIP Verbose Documentation
+
+**ELIMINATED** - All verbose documentation is already in artifacts 1-6. User just needs the prompt and basic stats.
+
+---
+
+---
 
 ## Output Format
-You WILL generate outputs following this structure:
-- Primary deliverable: Routing summary following `../templates/template-routing-summary.md`
-- Output file name: `7-routing-summary.md`
 
-## User Communication
+Use **../templates/template-routing-summary.md** to structure the output.
 
-### Progress Updates
-- Confirmation of YAML parsing
-- Status of summary and prompt generation
+**Output File**: `7-routing-summary.md`
 
-### Completion Summary
-- Location of `7-routing-summary.md`
-
-## Domain-Specific Rules
-You MUST follow these constraints:
-- Rule 1: Be concise; avoid verbose documentation
-- Rule 2: Ensure prompt is actionable without edits
+---
 
 ## Success Criteria
-You WILL consider the task complete when:
-- [ ] Summary ≤ 1 page
-- [ ] Copy-paste prompt is ready with no placeholders
-- [ ] Key stats visible at a glance
-- [ ] Output saved as `7-routing-summary.md`
 
-## Required Actions
-1. Validate input YAML
-2. Generate concise summary and prompt
-3. Provide user communication and confirmations
+- [ ] Summary is 1 page or less (CONCISE!)
+- [ ] Copy-paste prompt is ready to use (no placeholders)
+- [ ] Key stats visible at a glance (effort, duration, team, risk, modules, files, LOC)
+- [ ] Reference files listed (so user knows what exists)
+- [ ] Output follows template exactly
+- [ ] Output file created: `7-routing-summary.md`
+- [ ] User can immediately copy the prompt and continue work
 
-## Error Handling
-You WILL handle these scenarios:
-- **Missing Fields in YAML**: Request corrections or provide minimal viable summary
+---
 
-⚠️ **Critical Requirements**
-- MANDATORY: Short, actionable output
-- NEVER include verbose documentation duplicated from artifacts
+## Tools to Use
+
+- `read_file`: Read `6-context-package.yaml` and artifacts 1-5
+- `create_file`: Generate `7-routing-summary.md`
+
+---
+
+## Exit Criteria
+
+Declare: **"✅ Routing summary complete. File `7-routing-summary.md` created. User can copy the prompt to continue with Orchestrator-[SIZE]."**
+
+---
+
+## Version History
+
+- **v1.0** (2025-01-08): Initial prompt creation from orchestrator-0-router.md v1.0
+- **v2.0** (2025-10-08): Simplified to concise format - just routing decision + copy-paste prompt
+
+---
+
+**Key Change v2.0**: Eliminated verbose documentation. User gets: (1) which orchestrator, (2) key stats, (3) copy-paste prompt to continue. All details are in artifacts 1-6.

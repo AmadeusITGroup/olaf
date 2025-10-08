@@ -1,79 +1,151 @@
+# Prompt 0-2-2: Size Calculation
+
+## Purpose
+
+Convert the matrix score to a final size classification with confidence level and effort estimate.
+
 ---
-name: convert-size-calculation
-description: Convert the Size Calculation prompt to standardized template with confidence and effort estimation, preserving original mapping rules
-tags: [prompt, conversion, sizing, effort, confidence]
+
+## Input
+
+- **4-size-evaluation-matrix.md** (from Prompt 0-2-1)
+- **../olaf-templates/change-evaluation-matrix.md** (size mapping rules)
+
 ---
 
-## Framework Validation
-You MUST apply the <olaf-work-instructions> framework.
-You MUST pay special attention to**:
-- <olaf-general-role-and-behavior> - Expert domain approach
-- <olaf-interaction-protocols> - Appropriate interaction protocol
-You MUST strictly apply <olaf-framework-validation>.
-You MUST follow the established interaction protocol strictly:
-- Propose-Act for conversion and calculation steps
+## Task Instructions
 
-## Process
+### Step 1: Extract Total Score
 
-### 1. Validation Phase
-You WILL verify all requirements:
-- Confirm both input files exist
-- Validate matrix result contains total score and preliminary size
+From `4-size-evaluation-matrix.md`, extract:
+- **Total Score**: [0-25]
+- **Preliminary Size Classification**: [XS/S/M/L/XL]
 
-### 2. Execution Phase
-You WILL execute these operations as needed:
+### Step 2: Confirm Size Classification
 
-**Core Logic**:
-- Extract total score and preliminary size from matrix results
-- Confirm size against matrix bands and determine final size
-- Calculate confidence score and level (High/Medium/Low) using stated factors
-- Compute adjusted effort estimate with risk/unknowns/coordination adjustments
-- Identify positive/negative confidence factors
+Use the size bands from `change-evaluation-matrix.md`:
 
-### 3. Validation Phase
-You WILL validate results:
-- Ensure size classification matches matrix bands
-- Ensure confidence and effort have clear justifications
+| Size | Score Range | Effort Range | Characteristics |
+|------|-------------|--------------|-----------------|
+| **XS** | 0-5 | 1-3 days | Single file, low complexity, no risk |
+| **S** | 6-10 | 3-7 days | Few files, simple changes, low-medium risk |
+| **M** | 11-15 | 7-15 days | Multiple modules, moderate complexity |
+| **L** | 16-20 | 15-30 days | Cross-module, architecture impact |
+| **XL** | 21-25 | 30+ days | System-wide, major refactoring |
+
+**Confirmed Size Classification**: [XS / S / M / L / XL]
+
+### Step 3: Calculate Confidence Score
+
+Assess confidence level based on evidence quality:
+
+**High Confidence (80-100%)**:
+- All estimates based on codebase search results
+- Similar past changes available for comparison
+- All modules clearly identified
+- Risks are specific and well-understood
+- No significant unknowns
+
+**Medium Confidence (60-79%)**:
+- Most estimates evidence-based, some assumptions
+- Some similar past changes available
+- Most modules identified, some uncertainty
+- Risks mostly specific, some generic
+- Few unknowns with manageable impact
+
+**Low Confidence (<60%)**:
+- Estimates largely assumed (no codebase search)
+- No similar past changes
+- Module identification uncertain
+- Risks are generic
+- Significant unknowns
+
+**Confidence Assessment Factors**:
+1. **Evidence Quality**: Were codebase searches used? (semantic_search, grep_search)
+2. **Estimation Method**: Are file/LOC counts based on data or guesses?
+3. **Risk Specificity**: Are risks concrete or generic?
+4. **Unknown Factors**: Are there unknowns that could change the size significantly?
+5. **Assumptions**: How many critical assumptions were made?
+
+**Confidence Score**: [XX%]
+
+**Confidence Level**: [High / Medium / Low]
+
+### Step 4: Calculate Effort Estimate
+
+Based on size classification and complexity:
+
+**Base Effort** (from size band):
+- XS: 1-3 days
+- S: 3-7 days
+- M: 7-15 days
+- L: 15-30 days
+- XL: 30+ days
+
+**Adjustments**:
+- **High Risk**: Add 20% buffer
+- **Many Unknowns**: Add 15% buffer
+- **Cross-team Coordination**: Add 10% buffer
+- **Complex Integrations**: Add 10% buffer
+
+**Adjusted Effort Estimate**: [XX-YY person-days]
+
+### Step 5: Identify Confidence Factors
+
+List key factors affecting confidence:
+
+**Positive Factors** (increase confidence):
+- Evidence-based estimates
+- Similar past changes
+- Clear module identification
+- Specific risk assessment
+- Team familiarity
+
+**Negative Factors** (decrease confidence):
+- Assumptions without evidence
+- No historical comparisons
+- Uncertain scope
+- Generic risk assessment
+- Technology unknowns
+
+---
 
 ## Output Format
-You WILL generate outputs following this structure:
-- Primary deliverable: Final size decision following `../templates/template-final-size-decision.md`
 
-## User Communication
+Use **../templates/template-final-size-decision.md** to structure the output.
 
-### Progress Updates
-- Confirmation of total score extraction
-- Status of confidence calculation and effort adjustments
-
-### Completion Summary
-- Final size classification, confidence, and effort range
-
-### Next Steps (if part of workflow)
-You WILL clearly define:
-- Proceed to `prompt-0-2-3-confidence-validation.md`
-
-## Domain-Specific Rules
-You MUST follow these constraints:
-- Rule 1: Use only matrix-defined size bands
-- Rule 2: Document factors affecting confidence and effort
+---
 
 ## Success Criteria
-You WILL consider the task complete when:
-- [ ] Final size classification confirmed
-- [ ] Confidence score and level justified
-- [ ] Effort estimate adjusted and justified
+
+- [ ] Size classification confirmed from matrix score
+- [ ] Confidence score calculated with justification
+- [ ] Confidence factors documented (positive and negative)
+- [ ] Effort estimate calculated with adjustments
+- [ ] Key assumptions identified
+- [ ] Unknown factors documented
 - [ ] Output follows template exactly
 
-## Required Actions
-1. Validate inputs
-2. Perform calculation and adjustments
-3. Provide user communication and confirmations
+---
 
-## Error Handling
-You WILL handle these scenarios:
-- **Missing Matrix Result**: Request `matrix_result_path`
-- **Invalid Score**: Flag and request corrected matrix file
+## Tools to Use
 
-⚠️ **Critical Requirements**
-- MANDATORY: Evidence-based confidence assessment
-- NEVER override matrix bands arbitrarily
+- `read_file`: Read 4-size-evaluation-matrix.md
+- `read_file`: Read change-evaluation-matrix.md for size mapping
+- Analytical reasoning for confidence assessment
+
+---
+
+## Exit Criteria
+
+Declare: **"Step 2.2 complete. Proceeding to Step 2.3 (Confidence Validation)."**
+
+---
+
+## Version History
+
+- **v1.0** (2025-01-08): Initial prompt creation from orchestrator-0-router.md v1.0
+
+---
+
+**Next Prompt**: `prompt-0-2-3-confidence-validation.md`

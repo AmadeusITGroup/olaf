@@ -1,108 +1,180 @@
+# Prompt 0-1-1: Change Request Analysis
+
+## Purpose
+
+Extract and document all business context, requirements, and stakeholder information from the change request source (JIRA ticket, issue, or requirement document).
+
 ---
-name: convert-change-request-analysis
-description: Convert the Change Request Analysis prompt to enforce standardized template, protocols, and validations while preserving intent
-tags: [prompt, conversion, change-request, analysis]
+
+## Input
+
+- **Source Document**: JIRA ticket ID (e.g., SACP-172207) OR business requirement document
+- **Access Methods**: 
+  - Direct JIRA or Github Issue or else content (if provided by user)
+  - Issue specification markdown file
+  - Business requirement doc
+
 ---
 
-## Framework Validation
-You MUST apply the <olaf-work-instructions> framework.
-You MUST pay special attention to**:
-- <olaf-general-role-and-behavior> - Expert domain approach
-- <olaf-interaction-protocols> - Appropriate execution protocol
-You MUST strictly apply <olaf-framework-validation>.
+## Task Instructions
 
-## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **source_document_ref**: string - JIRA ID (e.g., SACP-172207) or path to requirement/issue content (REQUIRED)
-- **access_methods**: string[] - Allowed access methods (e.g., direct JIRA/Issue content, markdown file, business doc) (OPTIONAL)
-- **output_dir**: path - Target output directory for generated summary (OPTIONAL, default: `olaf-works/demand/<DEMAND-ID>-analysis/`)
+### Step 0: Check for Prerequisite Change Request (MANDATORY)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Propose-Act for conversion and output generation steps
+**BEFORE doing any analysis, check if prerequisites already created a change request:**
 
-## Prerequisites (if applicable)
-1. You MUST verify whether a prerequisite change request already exists:
-   - Check for file: `olaf-works/demand/<DEMAND-ID>-analysis/prerequisite-3-change-request.md`
-2. You WILL validate expected contents of the prerequisite file:
-   - Epic, Features, MVP Scope, Open Questions
+1. **Check for file**: `olaf-works/demand/<DEMAND-ID>-analysis/prerequisite-3-change-request.md`
+   
+2. **If file EXISTS and is complete** (contains Epic, Features, MVP Scope, Open Questions):
+   - ✅ **SKIP creating `1-change-request-summary.md`** (avoid duplication!)
+   - ✅ **Log validation**: "Prerequisite change request found: prerequisite-3-change-request.md (complete)"
+   - ✅ **Proceed directly to Step 1.2**: Go to `prompt-0-1-2-technical-scope-analysis.md`
+   - ✅ **Exit this prompt**: No need to recreate 90% duplicate content
+   
+3. **If file DOES NOT EXIST or is incomplete**:
+   - ❌ **STOP ROUTER EXECUTION**
+   - ❌ **Return error message**: "Prerequisites not complete. Please run prerequisite phase first to create change request (prerequisite-3-change-request.md)."
+   - ❌ **Provide guidance**: "Run: `olaf-works/orchestrators/orchestrator-prerequisites.md` before invoking Router."
+   - ❌ **Do NOT proceed** to Step 1
 
-## Process
+**Rationale**: Prerequisites already extract comprehensive change request from JIRA/Issues. Router should not duplicate this work (90% overlap). Router's value is in **technical scope analysis** and **risk assessment**, not business requirements extraction.
 
-### 1. Validation Phase
-You WILL verify all requirements:
-- Confirm `source_document_ref` is provided
-- Validate prerequisite file existence and completeness
-- Check access to any referenced templates
+---
 
-### 2. Execution Phase
-You WILL execute these operations as needed:
+### Step 1: Extract Business Context (DEPRECATED - Skip if Prerequisites Complete)
 
-**File Operations**:
-- Read prerequisite file if it exists to validate completeness
-- If prerequisite file is COMPLETE:
-  - You WILL SKIP creating `1-change-request-summary.md`
-  - You WILL log validation that prerequisite is complete
-  - You WILL proceed directly to technical scope analysis (see Next Steps)
-- If prerequisite file is MISSING or INCOMPLETE:
-  - You MUST STOP and return an error instructing to run the prerequisite phase
+**⚠️ WARNING: This step should only execute if Step 0 determined prerequisite-3 does not exist (rare case).**
 
-**Core Logic**:
-- Apply Propose-Act protocol
-- Enforce non-duplication of change request content when prerequisites are complete
+Analyze the source document and extract:
 
-### 3. Validation Phase
-You WILL validate results:
-- Confirm duplication was avoided when prerequisite exists and is complete
-- Confirm proper error returned when prerequisites are missing/incomplete
+1. **Problem Statement**
+   - What business problem is being solved?
+   - What is the current situation?
+   - What is the desired future state?
+
+2. **Business Objectives**
+   - Why is this change needed?
+   - What business value does it provide?
+   - What are the success criteria?
+
+3. **User Impact**
+   - Who are the end users affected?
+   - How many users/teams are impacted?
+   - What is the user experience change?
+
+### Step 2: Identify Stakeholders
+
+Document:
+
+1. **Requestor**
+   - Who requested this change?
+   - Which team/department?
+
+2. **Product Owner**
+   - Who owns this feature/product area?
+
+3. **Affected Teams**
+   - Which development teams are involved?
+   - Which operations teams need to be consulted?
+
+4. **External Dependencies**
+   - Are external teams or systems involved?
+
+### Step 3: Analyze Requirements
+
+Extract and categorize:
+
+1. **Functional Requirements**
+   - What features/capabilities must be delivered?
+   - What are the user stories?
+   - What is in scope for MVP?
+
+2. **Non-Functional Requirements**
+   - Performance requirements
+   - Security requirements
+   - Compliance requirements
+   - Scalability needs
+
+3. **Acceptance Criteria**
+   - How will we know this is complete?
+   - What are the testable conditions?
+
+### Step 4: Identify Dependencies
+
+Document:
+
+1. **Blocking Issues**
+   - What must be completed before this starts?
+
+2. **Related Issues**
+   - What other changes are related?
+   - Are there linked JIRA tickets?
+
+3. **External Dependencies**
+   - Are there third-party systems involved?
+   - Are there external data sources?
+
+### Step 5: Extract Timeline Information
+
+Capture:
+
+1. **Due Date**: When is this needed?
+2. **Priority**: Critical / High / Medium / Low
+3. **Sprint/Release Target**: Which sprint or release?
+4. **Business Deadlines**: Are there regulatory or contractual deadlines?
+
+---
 
 ## Output Format
-You WILL generate outputs following this structure:
-- Primary deliverable:
-  - If prerequisite exists and complete: Validation message confirming skip and next step
-  - If prerequisite missing/incomplete: Clear error message and guidance to run prerequisites
-- Documentation: Reference to next prompt `prompt-0-1-2-technical-scope-analysis.md`
 
-## User Communication
+Generate file: `1-change-request-summary.md`
 
-### Progress Updates
-- Confirmation when prerequisite file check completes
-- Declaration of skip vs stop path
+Use **../templates/template-change-request-summary.md** to structure the output.
 
-### Completion Summary
-- Summary of validation outcome (skip or stop)
-- Next prompt reference
-
-### Next Steps (if part of workflow)
-You WILL clearly define:
-- If prerequisites complete: Proceed to `prompt-0-1-2-technical-scope-analysis.md`
-- If not complete: Run `orchestrator-prerequisites.md` to generate prerequisite change request
-
-## Domain-Specific Rules
-You MUST follow these constraints:
-- Rule 1: NEVER duplicate change request content when prerequisites provide it
-- Rule 2: ALWAYS validate Epic, Features, MVP, Open Questions before proceeding
-- Rule 3: Use Propose-Act protocol for user confirmation
+---
 
 ## Success Criteria
-You WILL consider the task complete when:
-- [ ] Prerequisite file existence and completeness validated
-- [ ] Duplication avoided when prerequisites are complete
-- [ ] Clear stop/error issued when prerequisites are missing/incomplete
-- [ ] Next prompt guidance provided
 
-## Required Actions
-1. Validate all required input parameters and prerequisites
-2. Execute operations following Propose-Act protocol
-3. Provide user communication and confirmations
+**If prerequisite-3-change-request.md EXISTS:**
+- [x] Prerequisite change request validated (complete with Epic, Features, MVP, Open Questions)
+- [x] Duplication avoided (did NOT create redundant 1-change-request-summary.md)
+- [x] Logged validation message confirming prerequisite found
+- [x] Ready to proceed to Step 1.2 (Technical Scope Analysis)
 
-## Error Handling
-You WILL handle these scenarios:
-- **Prerequisite File Missing**: Stop and instruct to run prerequisites
-- **Prerequisite Incomplete**: Stop and instruct to complete prerequisites
-- **Source Access Issues**: Request a valid `source_document_ref`
+**If prerequisite-3-change-request.md DOES NOT EXIST (rare fallback):**
+- [ ] All business context extracted from source
+- [ ] Problem statement is clear and specific
+- [ ] All stakeholders identified
+- [ ] Requirements categorized (functional vs non-functional)
+- [ ] MVP scope clearly defined
+- [ ] Acceptance criteria are testable
+- [ ] Dependencies documented
+- [ ] Timeline information captured
+- [ ] Output follows template exactly
 
-⚠️ **Critical Requirements**
-- MANDATORY: Follow Propose-Act protocol
-- NEVER recreate `1-change-request-summary.md` when prerequisites are complete
-- ALWAYS preserve original intent: avoid duplication, route to technical scope analysis
+---
+
+## Tools to Use
+
+- **read_file**: Read JIRA specification or requirement document
+- **grep_search**: Search for related issues or dependencies in codebase
+- **semantic_search**: Find related features or similar past changes
+
+---
+
+## Exit Criteria
+
+**If prerequisite-3 exists:**
+Declare: **"✅ Prerequisite change request validated: prerequisite-3-change-request.md (complete). Skipping 1-change-request-summary.md creation to avoid duplication. Proceeding to Step 1.2 (Technical Scope Analysis)."**
+
+**If prerequisite-3 does NOT exist:**
+STOP and declare: **"❌ Prerequisites incomplete. prerequisite-3-change-request.md not found. Please run prerequisite phase first. Router cannot proceed without complete change request."**
+
+---
+
+## Version History
+
+- **v1.0** (2025-01-08): Initial prompt creation from orchestrator-0-router.md v1.0
+
+---
+
+**Next Prompt**: `prompt-0-1-2-technical-scope-analysis.md`

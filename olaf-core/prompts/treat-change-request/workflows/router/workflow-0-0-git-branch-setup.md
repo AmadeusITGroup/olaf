@@ -1,26 +1,6 @@
----
-name: workflow-0-0-git-branch-setup
-description: Validate current branch and create a compliant feature branch before starting workflows
-tags: [workflow, sequential, treat-change-request]
----
-
 # Workflow 0-0: Git Branch Setup
 
-## Framework Validation
-You MUST apply the <olaf-work-instructions> framework.
-You MUST pay special attention to:
-- <olaf-general-role-and-behavior> - Expert domain approach
-- <olaf-interaction-protocols> - Appropriate execution protocol
-You MUST strictly apply <olaf-framework-validation>.
-
-## Time Retrieval
-You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
-- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
-- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
-
-Use terminal commands, not training data.
-
-## Workflow Overview
+## Overview
 
 **Purpose**: Ensure all work is performed in an appropriate feature branch, not on main/master branches.
 
@@ -30,19 +10,9 @@ Use terminal commands, not training data.
 
 ---
 
-## Input Requirements
-- **Primary Input**: Current git repository state
-- **Secondary Inputs**: N/A
-- **Input Format**: Local git repository
+## Prompt Execution
 
-## Output Specifications
-- **Primary Output**: `0-branch-setup.md`
-- **Secondary Outputs**: N/A
-- **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
-
-## Workflow Steps
-
-Execute this step first - no skipping
+**Execute this prompt first - no skipping**
 
 ### Prompt 0-0-1: Git Branch Validation and Creation
 
@@ -52,9 +22,7 @@ Execute this step first - no skipping
 
 **Output**: `0-branch-setup.md`
 
-**Description**: Validate the current branch and create a new feature branch if necessary, following naming conventions.
-
-**Validation**:
+**Validation**: 
 - Current branch identified
 - If on main/master, new branch created
 - Branch name follows convention: `olaf-work-YYMMDD-HHMM` or user-provided name
@@ -62,24 +30,16 @@ Execute this step first - no skipping
 
 ---
 
-## Data Flow Diagram
-```text
-[Local git repo state] → [Step 0-0-1: Branch Validation & Creation] → 0-branch-setup.md
-```
-
-## Error Handling
-- **Step Failure**: If git repository not found or branch creation fails, document error and stop
-- **Recovery**: Initialize repository or fix permissions; retry step
-- **Rollback**: If wrong branch created, delete branch and recreate with correct name
-
 ## Completion Criteria
-- [ ] Current git branch has been checked
-- [ ] If on main/master, new branch has been created and checked out
-- [ ] Branch name documented in `0-branch-setup.md`
-- [ ] Ready to proceed with information gathering
 
-## Next Steps
-- Proceed to `workflow-0-1-information-gathering.md`
+✅ **Workflow complete when**:
+
+1. Current git branch has been checked
+2. If on main/master, new branch has been created and checked out
+3. Branch name documented
+4. Ready to proceed with information gathering
+
+---
 
 ## Handoff
 
