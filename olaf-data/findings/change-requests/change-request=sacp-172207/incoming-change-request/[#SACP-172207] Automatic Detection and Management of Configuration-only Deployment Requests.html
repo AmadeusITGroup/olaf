@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[#SACP-172207] Automatic Detection and Management of Configuration-only Deployment Requests</title>
+    <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+            
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};window.WRM._unparsedErrors=window.WRM._unparsedErrors||{};
+WRM._unparsedData["tzdetect.pref.tzname"]="\u0022(GMT+01:00) Berlin\u0022";
+WRM._unparsedData["tzdetect.pref.auto.detect"]="true";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\u0022/agile\u0022";
+WRM._unparsedData["tzdetect.pref.janOffset"]="3600000";
+WRM._unparsedData["tzdetect.pref.julyOffset"]="7200000";
+WRM._unparsedData["jira.core:default-comment-security-level-data.DefaultCommentSecurityLevelHelpLink"]="{\u0022extraClasses\u0022:\u0022default-comment-level-help\u0022,\u0022title\u0022:\u0022Commenting on an Issue\u0022,\u0022url\u0022:\u0022https://docs.atlassian.com/jira/jsw-docs-103/Editing+and+collaborating+on+issues#Editingandcollaboratingonissues-restrictacomment\u0022,\u0022isLocal\u0022:false}";
+WRM._unparsedData["jira.core:feature-flags-data.feature-flag-data"]="{\u0022enabled-feature-keys\u0022:[\u0022com.atlassian.jira.agile.darkfeature.editable.detailsview\u0022,\u0022com.atlassian.jira.description.bulkedit.enabled\u0022,\u0022nps.survey.inline.dialog\u0022,\u0022com.atlassian.jira.agile.darkfeature.edit.closed.sprint.enabled\u0022,\u0022jira.plugin.devstatus.phasetwo\u0022,\u0022jira.frother.reporter.field\u0022,\u0022atlassian.rest.xsrf.legacy.enabled\u0022,\u0022jira.issue.status.lozenge\u0022,\u0022public.access.disabled\u0022,\u0022com.atlassian.jira.projects.issuenavigator\u0022,\u0022jira.plugin.devstatus.phasetwo.enabled\u0022,\u0022com.atlassian.jira.config.PDL\u0022,\u0022atlassian.aui.raphael.disabled\u0022,\u0022crowd.sync.nested.groups.group.membership.changes.batching.enabled\u0022,\u0022app-switcher.new\u0022,\u0022frother.assignee.field\u0022,\u0022com.atlassian.jira.projects.ProjectCentricNavigation.Switch\u0022,\u0022jira.onboarding.cyoa\u0022,\u0022atlassian.webresource.performance.tracking.disable\u0022,\u0022com.atlassian.jira.agile.darkfeature.kanplan.enabled\u0022,\u0022com.atlassian.jira.projects.sidebar.DEFER_RESOURCES\u0022,\u0022com.atlassian.jira.config.ProjectConfig.MENU\u0022,\u0022com.atlassian.jira.agile.darkfeature.kanplan.epics.and.versions.enabled\u0022,\u0022com.atlassian.jira.agile.darkfeature.sprint.goal.enabled\u0022,\u0022jira.zdu.admin-updates-ui\u0022,\u0022jira.zdu.jmx-monitoring\u0022,\u0022com.atlassian.portfolio.limits.LoadingLimitsConfigurability\u0022,\u0022com.atlassian.portfolio.simpleplans.dependencytab\u0022,\u0022atlassian.rest.default.to.licensed.access.enabled\u0022,\u0022mail.batching.enabled\u0022,\u0022sd.new.settings.sidebar.location.disabled\u0022,\u0022crowd.event.transformer.directory.manager.cache\u0022,\u0022jira.zdu.cluster-upgrade-state\u0022,\u0022com.atlassian.jira.email.templates.readFromJiraHome\u0022,\u0022com.atlassian.jira.agile.darkfeature.splitissue\u0022,\u0022crowd.sync.delete.user.memberships.batching.enabled\u0022,\u0022com.atlassian.jira.config.CoreFeatures.LICENSE_ROLES_ENABLED\u0022,\u0022dvcs.connector.github.user.validation.disabled\u0022,\u0022jira.export.csv.enabled\u0022],\u0022feature-flag-states\u0022:{\u0022com.atlassian.jira.use.same.site.none.for.xsrf.token.cookie\u0022:true,\u0022com.atlassian.jira.leaked.all.anonymous.access\u0022:true,\u0022com.atlassian.jira.in.product.diagnostics.extended.logging\u0022:false,\u0022com.atlassian.jira.agile.darkfeature.handle.ug.usernames\u0022:true,\u0022com.atlassian.jira.security.rest.menu.anonymous.access.denied\u0022:true,\u0022com.atlassian.jira.mailHandlerImapMessageQueryLegacy\u0022:false,\u0022com.atlassian.diagnostics.scheduler.monitor\u0022:true,\u0022com.atlassian.jira.webhookEventsAsyncProcessing\u0022:false,\u0022jira.customfields.dual.list.box\u0022:true,\u0022com.atlassian.jira.serAllowShareWithNonMember\u0022:true,\u0022com.atlassian.jira.diagnostics.perflog\u0022:true,\u0022com.atlassian.jira.dbr\u0022:true,\u0022com.atlassian.jira.bc.user.search.MeasuringUserPickerSearchService\u0022:false,\u0022com.atlassian.jira.agile.darkfeature.legacy.epic.picker\u0022:false,\u0022a4j.automation.archive.issue\u0022:true,\u0022a4j.automation.secrets.encryption\u0022:true,\u0022com.atlassian.jira.issuetable.move.links.hidden\u0022:true,\u0022jira.renderer.consider.variable.format\u0022:true,\u0022jira.no.frother.multiuserpicker.field\u0022:false,\u0022com.atlassian.jira.plugin.issuenavigator.jql.autocomplete.eagerlyLoaded\u0022:false,\u0022com.atlassian.jira.user.dbIdBasedKeyGenerationStrategy\u0022:true,\u0022com.atlassian.portfolio.dcBundling\u0022:true,\u0022com.atlassian.jira.rest.enable.new.session.creation.endpoint\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.lexorank.local.repair.feature\u0022:true,\u0022com.atlassian.jira.description.bulkedit\u0022:true,\u0022com.atlassian.jira.async.webhooks.user.context.propagation\u0022:true,\u0022com.atlassian.jira.sharedEntityEditRights\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.sprint.goal\u0022:true,\u0022com.atlassian.jira.thumbnailsDeferredGeneration\u0022:true,\u0022jira.cluster.monitoring.show.offline.nodes\u0022:true,\u0022com.atlassian.jira.projects.ProjectCentricNavigation.ProjectShortcutOrder\u0022:true,\u0022com.atlassian.jira.commentReactions\u0022:true,\u0022data.pipeline.feature.jira.issue.links.export\u0022:true,\u0022com.atlassian.jira.web.action.admin.integrity.checker.task.cleanup\u0022:true,\u0022com.atlassian.jira.fixedCommentDeletionNotifications\u0022:true,\u0022com.atlassian.jira.allThumbnailsDeferred\u0022:false,\u0022com.atlassian.jira.plugin.issuenavigator.filtersUxImprovment\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.kanplan.epics.and.versions\u0022:true,\u0022com.atlassian.jira.jsd.mobile\u0022:true,\u0022jira.customfields.cleanup.identification\u0022:true,\u0022data.pipeline.feature.jira.all.exportable.custom.fields\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.boards.find.on.board.sprint.optimized\u0022:true,\u0022com.atlassian.jira.in.product.diagnostics.wip\u0022:false,\u0022com.atlassian.jira.defaultValuesForSystemFields\u0022:true,\u0022jira.dc.cleanup.cluser.tasks\u0022:true,\u0022jira.customfields.bulk.delete\u0022:true,\u0022mail.batching.override.core\u0022:true,\u0022com.atlassian.jira.issues.archiving.filters\u0022:false,\u0022com.atlassian.jira.security.project.type.endpoint.block.anonymous.access\u0022:false,\u0022com.atlassian.jira.agile.darkfeature.lexorank.local.repair.process.sync\u0022:false,\u0022jira.security.csp.sandbox\u0022:true,\u0022a4j.automation.app.role.check\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.synced.sprints\u0022:false,\u0022com.atlassian.jira.initialwatchers\u0022:false,\u0022com.atlassian.jira.returnDefaultAvatarsForBrokenAvatars\u0022:true,\u0022com.atlassian.jira.theme.switcher\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.sprint.auto.management\u0022:true,\u0022jira.jql.suggestrecentfields\u0022:false,\u0022com.atlassian.jira.gdpr.rtbf\u0022:true,\u0022com.atlassian.jira.ignoreBrowseUsersPermissionsInUserPickers\u0022:true,\u0022com.atlassian.jira.issue.comments.updateIssueObjectBeforeEventTrigger\u0022:true,\u0022com.atlassian.jira.security.xsrf.session.token\u0022:true,\u0022a4j.automation.assets.cf.scoped.search\u0022:true,\u0022com.atlassian.jira.rest.search.filter.user.input.preserve\u0022:true,\u0022com.atlassian.jira.security.project.admin.revoke.with.application.access\u0022:true,\u0022com.atlassian.jiranomenclature\u0022:true,\u0022a4j.automation.permissions.check\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.kanplan\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.boards.find.on.board\u0022:true,\u0022com.atlassian.diagnostics.http.monitor\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.future.sprint.dates\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.complete.sprint.in.backlog\u0022:true,\u0022jira.customfields.paginated.ui\u0022:true,\u0022com.atlassian.jira.filtersAndDashboardsShareableWithAllGroupsAndRoles\u0022:true,\u0022com.atlassian.jira.in.product.diagnostics\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.edit.closed.sprint\u0022:true,\u0022a4j.automation.strict.permission.check\u0022:true,\u0022jira.create.linked.issue\u0022:true,\u0022jira.customfields.configure.modern.ui\u0022:false,\u0022com.atlassian.jira.send.email.notifications.with.images.attached\u0022:true,\u0022com.atlassian.jira.backups.storage.configurable\u0022:true,\u0022jira.sal.host.connect.accessor.existing.transaction.will.create.transactions\u0022:true,\u0022com.atlassian.jira.security.csv.export.injection.protection\u0022:true,\u0022a4j.audit.log.export.optimization\u0022:true,\u0022a4j.automation.sla.threshold.breach\u0022:true,\u0022external.links.new.window\u0022:true,\u0022jira.jql.smartautoselectfirst\u0022:false,\u0022jira.jql.membersof.ignoreGlobalPermissionsForAnonymous\u0022:false,\u0022jira.create.linked.issue.show.all.fields\u0022:true,\u0022data.pipeline.feature.jira.issue.history.export\u0022:true,\u0022jira.webactions.request.method.recognition\u0022:true,\u0022jira.richeditor.bidi.warning\u0022:true,\u0022jira.mandatory.quick.edit.setup.fields.override\u0022:true,\u0022com.atlassian.jira.lazyload.activity.tabs\u0022:true,\u0022mail.batching\u0022:true,\u0022com.atlassian.jira.safeguards\u0022:true,\u0022com.atlassian.jira.issue.index.db.filter.out.archive.issues\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.lexorank.local.repair.process\u0022:true,\u0022com.atlassian.jira.xml.deserializerAllowlist\u0022:true,\u0022com.atlassian.jira.privateEntitiesEditable\u0022:true,\u0022com.atlassian.jira.cfoIncludeArchivedIssuesAndAlwaysKeepContext\u0022:true,\u0022a4j.automation.fields.fallback.to.default.locale\u0022:true,\u0022jira.priorities.per.project.edit.default\u0022:false,\u0022com.atlassian.jira.projectArchivedIssuesAreMarkedInIssueTable\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.issues.in.epic.details.view\u0022:true,\u0022a4j.automation.stale.entry.update\u0022:true,\u0022com.atlassian.jira.attachments.storage.configurable\u0022:true,\u0022com.atlassian.jira.plugin.issuenavigator.anonymousPreventCfData\u0022:false,\u0022jira.priorities.per.project.jsd\u0022:true,\u0022com.atlassian.jira.safeguards.email.notifications\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.rapid.boards.bands\u0022:true,\u0022com.atlassian.jira.search.api\u0022:false,\u0022com.atlassian.jira.agile.darkfeature.flexible.boards\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.sprint.picker.allsprints.suggestion\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.epic.validate.visibility\u0022:true,\u0022a4j.automation.telemetry\u0022:true,\u0022data.pipeline.feature.jira.issue.rank.export\u0022:true,\u0022data.pipeline.feature.jira.jsm.approvals.export\u0022:true,\u0022com.atlassian.jira.accessibility.personal.settings\u0022:true,\u0022mail.batching.create.section.cf\u0022:true,\u0022com.atlassian.jira.send.email.notifications.to.user.without.application.access\u0022:false,\u0022com.atlassian.mail.server.managers.hostname.verification\u0022:true,\u0022com.atlassian.diagnostics.monitors\u0022:true,\u0022com.atlassian.jira.upgrade.startup.fix.index\u0022:true,\u0022com.atlassian.jira.cacheResource\u0022:false,\u0022com.atlassian.jira.pin.comments\u0022:true,\u0022a4j.automation.rule.insights\u0022:true,\u0022jira.redirect.anonymous.404.errors\u0022:true,\u0022com.atlassian.jira.security.resolution.page.endpoint.block.anonymous.access\u0022:false,\u0022com.atlassian.jira.issuetable.draggable\u0022:true,\u0022data.pipeline.feature.jira.jsm.canned.responses.export\u0022:true,\u0022com.atlassian.diagnostics.operating.system.monitor\u0022:false,\u0022a4j.automation.secret.upgrade.ao.prerequisites\u0022:true,\u0022com.atlassian.analytics.essential.supported\u0022:true,\u0022com.atlassian.jira.attachments.generate.unique.suffix\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.kanban.hide.old.done.issues\u0022:true,\u0022jira.version.based.node.reindex.service\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.backlog.showmore\u0022:true,\u0022com.atlassian.diagnostics.database.monitor\u0022:true,\u0022com.atlassian.jira.quick.search.mode.settable\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.sprint.plan\u0022:false,\u0022com.atlassian.diagnostics.garbage.collection.monitor\u0022:true,\u0022a4j.automation.lookupissue\u0022:true,\u0022com.atlassian.gadgets.dark.theme.support\u0022:true,\u0022jira.jql.membersof.ignoreGlobalPermissionsForLoggedUsers\u0022:false,\u0022com.atlassian.jira.safeguards.work.in.progress\u0022:false,\u0022com.atlassian.jira.commentStickyFooter\u0022:true,\u0022com.atlassian.diagnostics.automationqueue.monitor\u0022:true,\u0022a4j.automation.disabled.rule.component.validation\u0022:true,\u0022com.atlassian.jira.security.LegacyJiraTypeResolver.WARN_ONLY\u0022:false,\u0022data.pipeline.feature.jira.schema.version.2\u0022:true,\u0022com.atlassian.jira.issues.archiving.browse\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.velocity.sprint.picker\u0022:false,\u0022jira.instrumentation.laas\u0022:false,\u0022com.atlassian.jira.security.ChartUtils.browse.projects.permission.check\u0022:false,\u0022com.atlassian.jira.security.text.gadget.output.sanitization\u0022:true,\u0022data.pipeline.feature.jira.jsm.kb.stats.events.export\u0022:true,\u0022mail.batching.user.notification\u0022:true,\u0022com.atlassian.diagnostics.jql.monitor\u0022:true,\u0022com.atlassian.portfolio.permission.check.for.permissions\u0022:true,\u0022com.atlassian.jira.agile.darkfeature.dataonpageload\u0022:true,\u0022com.atlassian.jira.issue.watchers.filterUsersWithoutProjectAccess\u0022:true,\u0022jira.webactions.request.method.dependent.xsrf.checks\u0022:true,\u0022data.pipeline.feature.jira.archived.issue.export\u0022:false,\u0022com.atlassian.jira.projects.per.project.permission.query\u0022:true,\u0022com.atlassian.jira.issues.archiving\u0022:true,\u0022jira.priorities.per.project\u0022:true,\u0022index.use.snappy\u0022:true}}";
+WRM._unparsedData["jira.request.correlation-id"]="\u0022ca95d5a907f3cd\u0022";
+WRM._unparsedData["tzdetect.pref.tzid"]="\u0022Europe/Berlin\u0022";
+if(window.WRM._dataArrived)window.WRM._dataArrived();</script>
+<link rel="stylesheet" href="https://jira.amadeus.com/agile/s/456b9f95a90d477768d8edbbcbdc2cc1-CDN/jorsb1/10030005/13l3mwp/fa33459d99ae5621966f8803dc0e764d/_/download/contextbatch/css/_super/batch.css?plugins.jquery.migrate.load.disabled=false" data-wrm-key="_super" data-wrm-batch-type="context" media="all">
+<link rel="stylesheet" href="https://jira.amadeus.com/agile/s/d41d8cd98f00b204e9800998ecf8427e-CDN/jorsb1/10030005/13l3mwp/9.12.6/_/download/batch/com.atlassian.auiplugin:split_aui.pattern.label/com.atlassian.auiplugin:split_aui.pattern.label.css" data-wrm-key="com.atlassian.auiplugin:split_aui.pattern.label" data-wrm-batch-type="resource" media="all">
+<link rel="stylesheet" href="https://jira.amadeus.com/agile/s/d41d8cd98f00b204e9800998ecf8427e-CDN/jorsb1/10030005/13l3mwp/9.12.6/_/download/batch/com.atlassian.auiplugin:split_aui.splitchunk.b31d61f755/com.atlassian.auiplugin:split_aui.splitchunk.b31d61f755.css" data-wrm-key="com.atlassian.auiplugin:split_aui.splitchunk.b31d61f755" data-wrm-batch-type="resource" media="all">
+<link rel="stylesheet" href="https://jira.amadeus.com/agile/s/0b0f4c70be51ad347460ad93ebb00720-CDN/jorsb1/10030005/13l3mwp/1.0/_/download/batch/jira.webresources:a11y-overrides/jira.webresources:a11y-overrides.css" data-wrm-key="jira.webresources:a11y-overrides" data-wrm-batch-type="resource" media="all">
+<link rel="stylesheet" href="https://jira.amadeus.com/agile/s/300acf1a6d2835306dfaf2df0b6ea3b1-CDN/jorsb1/10030005/13l3mwp/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css" data-wrm-key="jira.webresources:global-static" data-wrm-batch-type="resource" media="all">
+<script src="https://jira.amadeus.com/agile/s/7c0f0358049017641f472cda0c32de93-CDN/jorsb1/10030005/13l3mwp/fa33459d99ae5621966f8803dc0e764d/_/download/contextbatch/js/_super/batch.js?locale=en-US&amp;plugins.jquery.migrate.load.disabled=false" data-wrm-key="_super" data-wrm-batch-type="context" data-initially-rendered></script>
+<script src="https://jira.amadeus.com/agile/s/387c6220baedd55210bf01fb488da678-CDN/jorsb1/10030005/13l3mwp/9.12.6/_/download/batch/com.atlassian.auiplugin:split_aui.pattern.label/com.atlassian.auiplugin:split_aui.pattern.label.js?locale=en-US" data-wrm-key="com.atlassian.auiplugin:split_aui.pattern.label" data-wrm-batch-type="resource" data-initially-rendered></script>
+<script src="https://jira.amadeus.com/agile/s/387c6220baedd55210bf01fb488da678-CDN/jorsb1/10030005/13l3mwp/9.12.6/_/download/batch/com.atlassian.auiplugin:split_aui.pattern.table/com.atlassian.auiplugin:split_aui.pattern.table.js?locale=en-US" data-wrm-key="com.atlassian.auiplugin:split_aui.pattern.table" data-wrm-batch-type="resource" data-initially-rendered></script>
+<script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};window.WRM._unparsedErrors=window.WRM._unparsedErrors||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\u0022/agile\u0022";
+if(window.WRM._dataArrived)window.WRM._dataArrived();</script>
+<script type="module">WRM.requireLazily(["wr!com.atlassian.auiplugin:split_aui.splitchunk.44a664103a","wr!com.atlassian.auiplugin:split_aui.splitchunk.1f82c35ea5","wr!com.atlassian.auiplugin:split_aui.splitchunk.49995219e2","wr!com.atlassian.auiplugin:split_aui.splitchunk.47718634a4","wr!com.atlassian.auiplugin:split_aui.splitchunk.51ee36ecdd","wr!com.atlassian.auiplugin:split_aui.splitchunk.fe1bcd26f2","wr!com.atlassian.auiplugin:split_aui.splitchunk.a092119004","wr!com.atlassian.auiplugin:split_aui.component.flag","wr!com.atlassian.auiplugin:split_aui.splitchunk.caeac40c12","wr!com.atlassian.auiplugin:split_aui.splitchunk.3c42e7d257","wr!com.atlassian.auiplugin:split_aui.splitchunk.a61395d23c","wr!com.atlassian.auiplugin:split_aui.splitchunk.b3f8cd7728","wr!com.atlassian.auiplugin:split_aui.splitchunk.11fa269f31","wr!com.atlassian.auiplugin:split_aui.splitchunk.5e80a25b41","wr!com.atlassian.auiplugin:split_aui.splitchunk.bb9d7904fa","wr!com.atlassian.auiplugin:split_aui.splitchunk.361829ca76","wr!com.atlassian.auiplugin:split_aui.splitchunk.7a6058a025","wr!com.atlassian.auiplugin:split_aui.splitchunk.ae2ebdffe7","wr!com.atlassian.auiplugin:split_aui.splitchunk.02143d3841","wr!com.atlassian.auiplugin:split_aui.splitchunk.778837af2c","wr!com.atlassian.auiplugin:split_aui.splitchunk.02009f6265","wr!com.atlassian.auiplugin:split_aui.component.async-header","wr!com.atlassian.auiplugin:split_aui.splitchunk.5fe669cbc9","wr!com.atlassian.auiplugin:split_aui.deprecated.component.dropdown1","wr!com.atlassian.auiplugin:split_aui.deprecated.component.dialog1","wr!com.atlassian.auiplugin:split_aui.component.tabs","wr!jira.webresources:icons","wr!com.atlassian.jira.jira-tzdetect-plugin:tzdetect-banner-component","wr!jira.webresources:almond","wr!com.atlassian.plugins.jquery:jquery-lib","wr!com.atlassian.plugins.jquery:jquery-browser","wr!com.atlassian.plugins.jquery:jquery-migrate","wr!jira.webresources:jira-logger","wr!jira-frontend-api:jquery","wr!jira.webresources:jquery","wr!jira.webresources:jira-data-stores","wr!com.atlassian.plugins.atlassian-plugins-webresource-plugin:root","wr!com.atlassian.plugins.atlassian-plugins-webresource-plugin:data","wr!com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path","wr!com.atlassian.auiplugin:common-runtime","wr!com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager","wr!com.atlassian.auiplugin:split_aui.splitchunk.1d5e938604","wr!com.atlassian.auiplugin:split_aui.splitchunk.b1e13b7559","wr!com.atlassian.auiplugin:split_aui.splitchunk.6be109ac60","wr!com.atlassian.auiplugin:split_aui.splitchunk.238de622f7","wr!com.atlassian.auiplugin:split_aui.splitchunk.e1516f437c","wr!com.atlassian.auiplugin:split_aui.splitchunk.e5cac58685","wr!com.atlassian.auiplugin:split_aui.splitchunk.bf8135db29","wr!com.atlassian.auiplugin:split_aui.splitchunk.f7ba736494","wr!com.atlassian.auiplugin:split_aui.splitchunk.4717e31b0f","wr!com.atlassian.auiplugin:split_aui.splitchunk.175d337e8b","wr!com.atlassian.auiplugin:split_aui.core","wr!jira.webresources:jira-util-strings","wr!jira.webresources:jira-metadata","wr!com.atlassian.plugins.atlassian-plugins-webresource-plugin:format","wr!jira.webresources:jira-formatter","wr!jira.webresources:deprecator","wr!jira.webresources:legacy-namespacing","wr!jira.webresources:jira-smart-ajax","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--51bd201801","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--4f601bad99","wr!com.atlassian.auiplugin:split_aui.splitchunk.8fd6a41d13","wr!com.atlassian.auiplugin:split_aui.splitchunk.71f913d481","wr!com.atlassian.auiplugin:split_aui.splitchunk.2e87193100","wr!com.atlassian.auiplugin:split_aui.splitchunk.ae218db3f9","wr!com.atlassian.auiplugin:split_aui.splitchunk.6baeae3f03","wr!com.atlassian.auiplugin:split_aui.splitchunk.4f601bad99","wr!com.atlassian.auiplugin:split_aui.splitchunk.f07f5b4ca0","wr!com.atlassian.auiplugin:split_aui.splitchunk.b3732fff33","wr!com.atlassian.auiplugin:split_aui.splitchunk.5c751fd12b","wr!com.atlassian.auiplugin:split_aui.splitchunk.6cf0c96ecb","wr!com.atlassian.auiplugin:split_aui.splitchunk.08ea57a952","wr!jira.webresources:wrm-data","wr!jira.webresources:wrm-context-path","wr!jira.webresources:messages","wr!com.atlassian.auiplugin:split_aui.splitchunk.73d16a88c7","wr!com.atlassian.auiplugin:split_aui.splitchunk.fbff6178a8","wr!com.atlassian.auiplugin:split_aui.splitchunk.ff6a1e4013","wr!com.atlassian.auiplugin:split_aui.splitchunk.eb92b2ea3e","wr!com.atlassian.auiplugin:split_aui.splitchunk.4e3616a7eb","wr!com.atlassian.auiplugin:split_aui.side-effects","wr!jira.webresources:jira-layer-interactions","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--5393460ace","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--7ee5af41f1","wr!com.atlassian.auiplugin:split_aui.splitchunk.00e959c498","wr!com.atlassian.auiplugin:split_aui.splitchunk.cc38daf88a","wr!com.atlassian.auiplugin:split_aui.splitchunk.19472d705a","wr!com.atlassian.auiplugin:split_aui.splitchunk.b1c3361e2a","wr!com.atlassian.auiplugin:split_aui.splitchunk.86545eac2d","wr!com.atlassian.auiplugin:split_aui.splitchunk.2b8638947e","wr!com.atlassian.auiplugin:split_aui.splitchunk.d0d7f0c206","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--bd42b7a168","wr!com.atlassian.auiplugin:split_aui.deprecated.component.inline-dialog1","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--d2f414644b","wr!com.atlassian.auiplugin:split_aui.splitchunk.1d4ad5f4b8","wr!com.atlassian.auiplugin:split_aui.splitchunk.a07d2669ba","wr!com.atlassian.auiplugin:split_aui.splitchunk.vendors--a94d4220ac","wr!com.atlassian.auiplugin:split_aui.splitchunk.a94d4220ac","wr!com.atlassian.auiplugin:split_aui.splitchunk.766101891a","wr!com.atlassian.auiplugin:split_aui.behaviour.progressive-data-set","wr!jira.webresources:aui-core-amd-shim","wr!jira.webresources:aui-extensions","wr!jira-frontend-api:jira-events","wr!jira.webresources:jira-events","wr!com.atlassian.auiplugin:split_aui.behaviour.key-code","wr!jira.webresources:jira-key-code","wr!jira.webresources:jira-urlhelpers","wr!jira.webresources:jira-objects","wr!jira.webresources:keyboard-event-extensions","wr!jira.webresources:jira-base-control","wr!com.atlassian.plugin.jslibs:underscore-1.5.2","wr!jira.webresources:underscore-1.5.2","wr!jira.webresources:browser-properties","wr!jira.webresources:top-same-origin-window","wr!jira.webresources:jquery-escape-selector-polyfill","wr!jira.webresources:legacy-table-utils","wr!com.atlassian.plugin.jslibs:cookie-1.0.0","wr!jira.webresources:cookie","wr!jira.webresources:jquery-tooltip-proxy","wr!jira.webresources:assistive","wr!jira.webresources:util-lite","wr!com.atlassian.auiplugin:split_aui.vendor.backbone","wr!com.atlassian.plugin.jslibs:underscore-1.8.3","wr!com.atlassian.plugin.jslibs:backbone-1.3.3-factory","wr!jira.webresources:backbone-1.3.3","wr!com.atlassian.soy.soy-template-plugin:soy-deps","wr!jira.webresources:parse-uri","wr!jira-frontend-api:version","wr!jira.webresources:jira-version","wr!jira.webresources:number-formatter","wr!jira.webresources:util","wr!jira.webresources:jira-analytics-amd","wr!com.atlassian.jira.jira-tzdetect-plugin:tzdetect-lib"])</script>
+        <style type="text/css">
+
+.tableBorder, .grid
+{
+    background-color: #fff;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableBorder td, .grid td
+{
+    vertical-align: top;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+.noPadding
+{
+    padding: 0 !important;
+}
+
+h3 .subText
+{
+    font-size: 60%;
+    font-weight: normal;
+}
+
+.tabLabel
+{
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom:none;
+    padding: 2px;
+    display: inline;
+}
+
+td.blank
+{
+    padding: 0;
+    margin: 0;
+}
+
+.blank td
+{
+    border: none;
+}
+
+#descriptionArea
+{
+    margin: 0;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+hr
+{
+    border-top:1px solid #aaa;
+}
+
+hr.fullcontent
+{
+  height: 15px;
+  padding: 10px 0;
+  background: #fff url('https://jira.amadeus.com/agile/images/icons/hr.gif') no-repeat scroll center;
+}
+
+</style>
+
+</head>
+<body>
+<header id="previous-view">
+    <nav class="aui-toolbar">
+        <div class="toolbar-split toolbar-split-right">
+            <ul class="toolbar-group">
+                <li class="toolbar-item">
+                    <a href="https://jira.amadeus.com/agile/browse/SACP-172207" class="toolbar-trigger">Back to previous view</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" width="100%" colspan="2" valign="top">
+                            <h3 class="formtitle">
+                        [SACP-172207]&nbsp;<a href="https://jira.amadeus.com/agile/browse/SACP-172207">Automatic Detection and Management of Configuration-only Deployment Requests</a>
+            <span class="subText">
+               Created: 2024-10-24                   &nbsp;Updated: 2025-09-26
+
+                                            </span>
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><b>Status:</b></td>
+        <td width="80%">Backlog</td>
+    </tr>
+    <tr>
+        <td width="20%"><b>Project:</b></td>
+        <td width="80%"><a href="https://jira.amadeus.com/agile/secure/BrowseProject.jspa?id=24822">Amadeus Cloud Platform</a></td>
+    </tr>
+
+        <tr>
+            <td><b>Component/s:</b></td>
+            <td>
+                                        <a title="Continuous Deployment"
+                href="https://jira.amadeus.com/agile/issues/?jql=project%3D24822%20AND%20%22component%22%3D42206%20ORDER%20BY%20priority%20ASC"
+            >Continuous Deployment</a>                        </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>Affects Version/s:</b></td>
+            <td>
+                            None
+                </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>Fix Version/s:</b></td>
+            <td>
+                                        <a title="PI25.4 - PI 2025-Q4"
+                href="https://jira.amadeus.com/agile/issues/?jql=project%3D24822%20AND%20%22fixVersion%22%3D82309%20ORDER%20BY%20priority%20ASC"
+            >PI25.4</a>                        </td>
+    </tr>
+    
+    </table>
+
+<br />
+<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" valign="top" width="20%">
+            <b>Type:</b>
+        </td>
+        <td bgcolor="#ffffff" valign="top"  width="30%" >
+            Epic
+        </td>
+
+                    <td bgcolor="#f0f0f0">
+                <b>Priority:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap>
+                Major
+            </td>
+            </tr>
+    <tr>
+                        <td bgcolor="#f0f0f0" valign="top" width="20%">
+                <b>Reporter:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top"  width="30%" >
+                                            <a class="user-hover" rel="abenza" id="word_reporter_abenza" href="https://jira.amadeus.com/agile/secure/ViewProfile.jspa?name=abenza">Amandine BENZA</a>
+                            </td>
+        
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>Assignee:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap  width="30%" >
+                                    Unassigned
+                            </td>
+            </tr>
+    	<tr>
+		<td bgcolor="#f0f0f0" width="20%">
+			<b>Resolution:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+            				Unresolved
+                    </td>
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>Votes:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                1
+            </td>
+        
+    </tr>
+    
+        <tr>
+        <td bgcolor="#f0f0f0" width="20%">
+            <b>Labels:</b>
+        </td>
+        <td id="labels-9509105-value" class="value" bgcolor="#ffffff" valign="top" colspan="3" nowrap>
+                            Bird, SACP_PI25.1_CANDIDATE, SACP_PI25.1_DESCOPED, SACP_PI25.2_CANDIDATE, SACP_PI25.4_CANDIDATE, xDLC                    </td>
+    </tr>
+    
+    	<tr>
+        		<td bgcolor="#f0f0f0" width="20%"><b>Remaining Estimate:</b></td>
+        <td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            60d
+            		</td>
+    </tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>Time Spent:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+	</tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>Original Estimate:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            60d
+            		</td>
+    </tr>
+    
+    </table>
+
+
+
+    <br />
+
+    	<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+            
+
+                <tr>
+            <td bgcolor="#f0f0f0" width=20% valign=top>
+                <b>Attachments:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top">
+                                    <img src="https://jira.amadeus.com/agile/images/icons/attach/image.gif" height="16" width="16" border="0" alt="PNG File" role="presentation">
+                    As_Is.png &nbsp;&nbsp;&nbsp;
+                                    <img src="https://jira.amadeus.com/agile/images/icons/attach/image.gif" height="16" width="16" border="0" alt="PNG File" role="presentation">
+                    image-2024-10-24-18-24-44-581.png &nbsp;&nbsp;&nbsp;
+                                    <img src="https://jira.amadeus.com/agile/images/icons/attach/image.gif" height="16" width="16" border="0" alt="PNG File" role="presentation">
+                    image-2024-10-24-18-24-44-598.png &nbsp;&nbsp;&nbsp;
+                                    <img src="https://jira.amadeus.com/agile/images/icons/attach/image.gif" height="16" width="16" border="0" alt="PNG File" role="presentation">
+                    image-2025-04-03-17-39-10-317.png &nbsp;&nbsp;&nbsp;
+                                    <img src="https://jira.amadeus.com/agile/images/icons/attach/image.gif" height="16" width="16" border="0" alt="PNG File" role="presentation">
+                    image-2025-05-20-18-07-09-045.png &nbsp;&nbsp;&nbsp;
+                            </td>
+        </tr>
+        
+            <tr>
+            <td bgcolor="#f0f0f0" width="20%" valign="top">
+                <b>Issue Links:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" class="noPadding">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="blank">
+                                            <tr>
+                            <td colspan="4" bgcolor="#f0f0f0">
+                                <b>Hierarchy</b><br/>
+                            </td>
+                        </tr>
+                                                                <tr>
+            <td>
+                is child of
+            </td>
+            <td>
+                <a href="https://jira.amadeus.com/agile/browse/SACP-193522">
+                     SACP-193522                 </a>
+            </td>
+            <td>
+                Hybrid Toolchain - Curiosity gaps and...
+            </td>
+            <td>
+                Implementing
+            </td>
+        </tr>
+                                                <tr>
+                            <td colspan="4" bgcolor="#f0f0f0">
+                                <b>Parts</b><br/>
+                            </td>
+                        </tr>
+                                                                <tr>
+            <td>
+                is part of
+            </td>
+            <td>
+                <a href="https://jira.amadeus.com/agile/browse/SACP-185498">
+                     SACP-185498                 </a>
+            </td>
+            <td>
+                Incorporate any PR (e.g. Manual PRs) ...
+            </td>
+            <td>
+                Open
+            </td>
+        </tr>
+                                                <tr>
+                            <td colspan="4" bgcolor="#f0f0f0">
+                                <b>Relates</b><br/>
+                            </td>
+                        </tr>
+                                                                <tr>
+            <td>
+                relates to
+            </td>
+            <td>
+                <a href="https://jira.amadeus.com/agile/browse/AOFD-32585">
+                     <strike>AOFD-32585</strike>                 </a>
+            </td>
+            <td>
+                Define Fast-track flow  
+            </td>
+            <td>
+                Abandoned
+            </td>
+        </tr>
+                                        </table>
+            </td>
+        </tr>
+    
+
+
+
+                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Epic Name:</b></td>
+                <td id="customfield_10007-9509105-value" class="value" bgcolor="#ffffff" width="80%">      Automatic Detection and Management of Configuration-only Deployment Requests
+  </td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Acceptance criteria:</b></td>
+                <td id="customfield_10212-9509105-value" class="value" bgcolor="#ffffff" width="80%">      <ol>
+	<li>PRs with only configuration changes (no component updates) are detected and flagged as Configuration-only Deployment Requests.</li>
+	<li>Such Deployment Requests are subject to existing scheduling, aggregation, and submission rules.</li>
+	<li>Configuration changes are deployed by the toolchain and logged with deployment observability (builds, deployment jobs).</li>
+	<li>These requests appear in the orchestration UI alongside other Deployment Requests.</li>
+	<li>Fallbacks include configuration changes applied by these requests.</li>
+</ol>
+
+  </td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Acceptance Criteria Details:</b></td>
+                <td id="customfield_21800-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+
+
+
+
+
+
+
+
+
+
+
+
+                                    
+        
+        <div id="customfield_21800-view"
+            class="o-checklist"
+            data-checklist="[]"
+            data-app-properties="{&quot;projectKeyPattern&quot;:&quot;([A-Z][A-Z0-9]+)&quot;,&quot;javascriptDateFormat&quot;:&quot;%e/%b/%y&quot;,&quot;javascriptDateTimeFormat&quot;:&quot;%e/%b/%y %I:%M %p&quot;,&quot;timePickerUseISO8601&quot;:true}"
+            data-checklist-mode="preview"
+            data-checklist-context="{&quot;permissionScheme&quot;:{&quot;ALL&quot;:{&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;CHANGE_DUE_DATE&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHECK_ITEM&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;INTERACT_WITH_TEMPLATE&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;CHANGE_PRIORITY&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHANGE_STATUS&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CREATE_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;DELETE_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CONVERT_TO_ISSUE&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;EDIT_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHANGE_ASSIGNEE&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;TOGGLE_MANDATORY&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;EDIT_CHECKLIST&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;WORK_ON_ITEM&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;REORDER_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;MANAGE_OWNED_TEMPLATES&quot;:{&quot;parent&quot;:&quot;INTERACT_WITH_TEMPLATE&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;IMPORT_TEMPLATE&quot;:{&quot;parent&quot;:&quot;INTERACT_WITH_TEMPLATE&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]}},&quot;appParameters&quot;:{&quot;historyDateFormat&quot;:&quot;yyyy-MM-dd HH:mm Z&quot;,&quot;allowProjectAdminsToConfigure&quot;:false,&quot;cleverChangelog&quot;:true,&quot;validateGlobalItems&quot;:true,&quot;showContactSupport&quot;:false,&quot;allowIssueConversion&quot;:true,&quot;showChecklistsInAgileDetailsView&quot;:true,&quot;showProvideFeedback&quot;:true,&quot;issuePanelViewWeight&quot;:250,&quot;issueSidePanelViewWeight&quot;:50,&quot;agileSidePanelViewWeight&quot;:1000},&quot;canConvertToSubtask&quot;:true,&quot;canLinkIssues&quot;:true,&quot;loggedInUser&quot;:&quot;ppaccaud&quot;,&quot;viewLocation&quot;:&quot;DEFAULT&quot;,&quot;fieldType&quot;:&quot;CHECKLIST&quot;,&quot;savesOnEdit&quot;:false,&quot;isTemplateViewLocation&quot;:false,&quot;isGlobalItemsViewLocation&quot;:false,&quot;isDefaultItemsViewLocation&quot;:false,&quot;isCustomerPortalViewLocation&quot;:false,&quot;issueKey&quot;:&quot;SACP-172207&quot;,&quot;projectId&quot;:24822,&quot;projectKey&quot;:&quot;SACP&quot;,&quot;issueId&quot;:9509105,&quot;customFieldId&quot;:&quot;customfield_21800&quot;,&quot;fieldConfigId&quot;:29005,&quot;id&quot;:21800,&quot;parameters&quot;:{&quot;version&quot;:7,&quot;discretionaryOptionIds&quot;:[],&quot;statusCsv&quot;:&quot;notApplicable, N/A, DEFAULT, COMPLETE, KEEP\r\ninProgress, In Progress, CURRENT, INCOMPLETE, REMOVE\r\nblocked, Blocked, ERROR, INCOMPLETE, REMOVE&quot;,&quot;showStatusMenu&quot;:false,&quot;statusesAreMandatory&quot;:false,&quot;defaultStatusId&quot;:null,&quot;allowLocalItems&quot;:true,&quot;allowMandatory&quot;:true,&quot;lockOnResolution&quot;:true,&quot;canConvertToIssue&quot;:true,&quot;canBulkEdit&quot;:true,&quot;canBulkComplete&quot;:true,&quot;issueLinkType&quot;:null,&quot;canAssignUsers&quot;:false,&quot;canSetDueDate&quot;:false,&quot;canSetPriority&quot;:false,&quot;enableAdvancedMarkdown&quot;:false,&quot;enableExternalAssetLinking&quot;:false,&quot;enableHeaderItems&quot;:true,&quot;enableHeaderItemCollapsing&quot;:true,&quot;showHeaderItemSummaries&quot;:true,&quot;defaultHeaderCollapsedState&quot;:&quot;Expanded&quot;,&quot;defaultMandatoryState&quot;:true,&quot;limitChecklistWidth&quot;:true,&quot;showProgressHeaderInReadOnlyView&quot;:true,&quot;showProgressHeaderInEditView&quot;:true,&quot;strikeThrough&quot;:true,&quot;showMore&quot;:false,&quot;showMoreCount&quot;:0,&quot;alwaysShowEmptyChecklist&quot;:true,&quot;alwaysShowUncheckedChecklist&quot;:true,&quot;hideUncheckedInReadonlyView&quot;:false,&quot;issueViewDisplayMode&quot;:&quot;CustomField&quot;,&quot;summarySource&quot;:&quot;AllItems&quot;,&quot;bannerParameters&quot;:{&quot;completedLabel&quot;:&quot;&quot;,&quot;allMandatoryLabel&quot;:&quot;&quot;,&quot;incompleteLabel&quot;:&quot;&quot;,&quot;emptyLabel&quot;:&quot;&quot;,&quot;type&quot;:&quot;Progression&quot;,&quot;appearance&quot;:&quot;Normal&quot;},&quot;assigneeDisplay&quot;:&quot;Avatar&quot;,&quot;descriptionDisplay&quot;:&quot;LinkUnderItem&quot;,&quot;compactView&quot;:false,&quot;checklistPermissionSchemeId&quot;:null,&quot;reporterCanEdit&quot;:true,&quot;allCanComplete&quot;:true,&quot;limitEditionWithRoles&quot;:false,&quot;editRoleIds&quot;:[],&quot;canImportTemplateIntoChecklist&quot;:true,&quot;canCreateTemplateFromChecklist&quot;:true,&quot;createTemplateFromChecklistRoleIds&quot;:[],&quot;useConfluenceRenderer&quot;:true},&quot;statuses&quot;:[]}"
+            data-checklist-userstore="[{&quot;userName&quot;:&quot;ppaccaud&quot;,&quot;displayName&quot;:&quot;Pascal PACCAUD (contractor)&quot;,&quot;email&quot;:&quot;pascal.paccaud@amadeus.com&quot;,&quot;avatarURL&quot;:&quot;https://www.gravatar.com/avatar/91460414b924ac03ceb78d51d1790c98?d=mm&amp;s=16&quot;,&quot;description&quot;:&quot;Pascal PACCAUD (contractor) - pascal.paccaud@amadeus.com (ppaccaud)&quot;}]"
+             data-checklist-issuestore="{}"
+             data-checklist-prioritystore="[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Blocker&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#cc0000&quot;},{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/critical.svg&quot;,&quot;statusColor&quot;:&quot;#EC3536&quot;},{&quot;id&quot;:&quot;10200&quot;,&quot;name&quot;:&quot;3 - Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29342&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;Major&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#ff9900&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;Minor&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#006600&quot;},{&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;Trivial&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/trivial.svg&quot;,&quot;statusColor&quot;:&quot;#003300&quot;},{&quot;id&quot;:&quot;8&quot;,&quot;name&quot;:&quot;4 - Low&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#006600&quot;},{&quot;id&quot;:&quot;7&quot;,&quot;name&quot;:&quot;Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29342&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;9&quot;,&quot;name&quot;:&quot;2 - High Attention&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;10&quot;,&quot;name&quot;:&quot;1 - Resolve Immediately&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#cc0000&quot;},{&quot;id&quot;:&quot;11&quot;,&quot;name&quot;:&quot;To Be Assessed&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29347&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#eeeeee&quot;},{&quot;id&quot;:&quot;10000&quot;,&quot;name&quot;:&quot;Medium&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/medium.svg&quot;,&quot;statusColor&quot;:&quot;#f79232&quot;},{&quot;id&quot;:&quot;10001&quot;,&quot;name&quot;:&quot;Highest&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/highest.svg&quot;,&quot;statusColor&quot;:&quot;#d04437&quot;},{&quot;id&quot;:&quot;10002&quot;,&quot;name&quot;:&quot;High&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#f15C75&quot;},{&quot;id&quot;:&quot;10003&quot;,&quot;name&quot;:&quot;Low&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/low.svg&quot;,&quot;statusColor&quot;:&quot;#707070&quot;},{&quot;id&quot;:&quot;10004&quot;,&quot;name&quot;:&quot;Lowest&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/lowest.svg&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;10100&quot;,&quot;name&quot;:&quot;Top&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priority_major.gif&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;10300&quot;,&quot;name&quot;:&quot;Mandatory by Contract&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#ff0000&quot;},{&quot;id&quot;:&quot;10301&quot;,&quot;name&quot;:&quot;Important&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/medium.svg&quot;,&quot;statusColor&quot;:&quot;#f79232&quot;},{&quot;id&quot;:&quot;10302&quot;,&quot;name&quot;:&quot;Mandatory Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/highest.svg&quot;,&quot;statusColor&quot;:&quot;#d04437&quot;},{&quot;id&quot;:&quot;10303&quot;,&quot;name&quot;:&quot;Mandatory&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#f15C75&quot;},{&quot;id&quot;:&quot;10304&quot;,&quot;name&quot;:&quot;Preferred&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/low.svg&quot;,&quot;statusColor&quot;:&quot;#707070&quot;},{&quot;id&quot;:&quot;10305&quot;,&quot;name&quot;:&quot;Priority 1 Blocker&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#EC3536&quot;},{&quot;id&quot;:&quot;10306&quot;,&quot;name&quot;:&quot;Priority 2 Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/critical.svg&quot;,&quot;statusColor&quot;:&quot;#ED335A&quot;},{&quot;id&quot;:&quot;10307&quot;,&quot;name&quot;:&quot;Priority 3 Major&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#EF612C&quot;},{&quot;id&quot;:&quot;10308&quot;,&quot;name&quot;:&quot;Priority 4 Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#279904&quot;},{&quot;id&quot;:&quot;10309&quot;,&quot;name&quot;:&quot;Priority 5 Minor&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/trivial.svg&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;10310&quot;,&quot;name&quot;:&quot;Urgent&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#ffffff&quot;},{&quot;id&quot;:&quot;10400&quot;,&quot;name&quot;:&quot;Blocker - Testing&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#000000&quot;},{&quot;id&quot;:&quot;10401&quot;,&quot;name&quot;:&quot;Hold&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/attachment/225149/Pause-icon.png&quot;,&quot;statusColor&quot;:&quot;#0068CB&quot;},{&quot;id&quot;:&quot;10402&quot;,&quot;name&quot;:&quot;TBD&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/attachment/225150/R.png&quot;,&quot;statusColor&quot;:&quot;#78788D&quot;}]"
+                    >
+            <div class="o-checklist-subcontainer">
+                                                                            <div class="o-completion" style="display: flex; flex-shrink: 0;"><span  class="aui-lozenge aui-lozenge-complete" style="font-size: 12px; font-weight: normal; display: flex; flex-direction: row; align-items: center;" ><span style="padding-right: 4px; vertical-align: middle;"><svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path clip-rule="evenodd" d="m10.41037,3.42544l-7.86501,0c-0.72395,0 -1.31084,0.58688 -1.31084,1.31084l0,7.86508c0,0.7239 0.58689,1.3108 1.31084,1.3108l7.86501,0c0.724,0 1.3109,-0.5869 1.3109,-1.3108l0,-7.86508c0,-0.72396 -0.5869,-1.31084 -1.3109,-1.31084zm-7.86501,-0.65542c-1.08593,0 -1.96626,0.88032 -1.96626,1.96626l0,7.86508c0,1.0859 0.88033,1.9662 1.96626,1.9662l7.86501,0c1.086,0 1.9663,-0.8803 1.9663,-1.9662l0,-7.86508c0,-1.08594 -0.8803,-1.96626 -1.9663,-1.96626l-7.86501,0z" fill-rule="evenodd"/><path d="m5.09049,10.18526l-1.82767,-1.82766l-0.78479,0.78479l2.61246,2.61246l5.38758,-5.38754l-0.78483,-0.78479l-4.60275,4.60274z"/></svg></span><span>Empty</span></span></div>
+                                    
+                                                    <div class="o-checklist-header"></div>
+    
+                                          
+
+
+
+
+                                      </div>
+        </div>
+    </td>
+            </tr>
+                                                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Agile Release Train (SAFe):</b></td>
+                <td id="customfield_20203-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+
+
+    <div class="shorten" id="customfield_20203-field">
+        							<span>Engineering ToolChain</span>			            </div>
+</td>
+            </tr>
+                                                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Epic Status:</b></td>
+                <td id="customfield_10008-9509105-value" class="value" bgcolor="#ffffff" width="80%">    To Do
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>MoSCoW:</b></td>
+                <td id="customfield_10600-9509105-value" class="value" bgcolor="#ffffff" width="80%">    Must
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Record type:</b></td>
+                <td id="customfield_15400-9509105-value" class="value" bgcolor="#ffffff" width="80%">    Tech Debt
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Flagged:</b></td>
+                <td id="customfield_10000-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+
+
+    <div class="shorten" id="customfield_10000-field">
+        							<span>Impediment</span>			            </div>
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Target start:</b></td>
+                <td id="customfield_12807-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+          <span title="2023-10-02"><time datetime="2023-10-02">2023-10-02</time></span>
+    </td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Target end:</b></td>
+                <td id="customfield_12808-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+          <span title="2023-12-15"><time datetime="2023-12-15">2023-12-15</time></span>
+    </td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Team:</b></td>
+                <td id="customfield_12300-9509105-value" class="value" bgcolor="#ffffff" width="80%"><img class="jpo-team-field-avatar" src="https://jira.amadeus.com/agile/download/resources/com.atlassian.teams:jpo-wr-images-and-fonts/images/teams/default-avatar.svg"/><span>[SACP] Automated End to End Release Orchestration</span><img class="jpo-team-field-shareable-icon" src="https://jira.amadeus.com/agile/download/resources/com.atlassian.teams:jpo-wr-images-and-fonts/images-common/misc/shared-red.svg"/></td>
+            </tr>
+                                                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Time Criticality (WSJF):</b></td>
+                <td id="customfield_16102-9509105-value" class="value" bgcolor="#ffffff" width="80%">    100
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Business Value (WSJF):</b></td>
+                <td id="customfield_16120-9509105-value" class="value" bgcolor="#ffffff" width="80%">    40
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Risk Reduction / Opportunity Enablement (WSJF):</b></td>
+                <td id="customfield_16104-9509105-value" class="value" bgcolor="#ffffff" width="80%">    20
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Job Size (WSJF):</b></td>
+                <td id="customfield_16103-9509105-value" class="value" bgcolor="#ffffff" width="80%">    60
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>WSJF:</b></td>
+                <td id="customfield_16127-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+        2.667
+
+</td>
+            </tr>
+                                                                    <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Planned Iteration:</b></td>
+                <td id="customfield_18200-9509105-value" class="value" bgcolor="#ffffff" width="80%">      SACP 25.1 IT3 - 17/02-07/03
+  </td>
+            </tr>
+                                                                    <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>D of D:</b></td>
+                <td id="customfield_15301-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                    
+        
+        <div id="customfield_15301-view"
+            class="o-checklist"
+            data-checklist="[{&quot;id&quot;:1,&quot;name&quot;:&quot;User Documentation&quot;,&quot;mandatory&quot;:false,&quot;rank&quot;:0,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:2,&quot;name&quot;:&quot;Internal Quality Documentation&quot;,&quot;mandatory&quot;:false,&quot;rank&quot;:1,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:3,&quot;name&quot;:&quot;Test&quot;,&quot;mandatory&quot;:false,&quot;rank&quot;:2,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:4,&quot;name&quot;:&quot;Acceptance Criteria&quot;,&quot;mandatory&quot;:true,&quot;rank&quot;:3,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:5,&quot;name&quot;:&quot;Defect Management&quot;,&quot;mandatory&quot;:false,&quot;rank&quot;:4,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:6,&quot;name&quot;:&quot;Fallback&quot;,&quot;mandatory&quot;:false,&quot;rank&quot;:5,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:7,&quot;name&quot;:&quot;Verification&quot;,&quot;mandatory&quot;:false,&quot;rank&quot;:6,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:8,&quot;name&quot;:&quot;Feature&quot;,&quot;mandatory&quot;:true,&quot;rank&quot;:7,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:false,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:9,&quot;name&quot;:&quot;Feature DoD v2.0 [Details](https://rndwww.nce.amadeus.net/confluence/display/SACP/Feature+Definition+of+Done)&quot;,&quot;mandatory&quot;:true,&quot;rank&quot;:8,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:true,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}, {&quot;id&quot;:10,&quot;name&quot;:&quot;All criteria in the DoD are mandatory to be verified during the acceptance. Some of the criteria might be non-applicable for certain type of features. Two criteria (Acceptance Criteria, Feature) are always applicable for all features.&quot;,&quot;mandatory&quot;:true,&quot;rank&quot;:9,&quot;statusId&quot;:&quot;none&quot;,&quot;dueDate&quot;:null,&quot;isHeader&quot;:true,&quot;checked&quot;:false,&quot;priorityId&quot;:null,&quot;assigneeIds&quot;:[],&quot;globalItemId&quot;:-1,&quot;version&quot;:&quot;5.0&quot;,&quot;linkedIssueKey&quot;:null}]"
+            data-app-properties="{&quot;projectKeyPattern&quot;:&quot;([A-Z][A-Z0-9]+)&quot;,&quot;javascriptDateFormat&quot;:&quot;%e/%b/%y&quot;,&quot;javascriptDateTimeFormat&quot;:&quot;%e/%b/%y %I:%M %p&quot;,&quot;timePickerUseISO8601&quot;:true}"
+            data-checklist-mode="preview"
+            data-checklist-context="{&quot;permissionScheme&quot;:{&quot;ALL&quot;:{&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;CHANGE_DUE_DATE&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHECK_ITEM&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;INTERACT_WITH_TEMPLATE&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;CHANGE_PRIORITY&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHANGE_STATUS&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CREATE_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;DELETE_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CONVERT_TO_ISSUE&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;EDIT_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHANGE_ASSIGNEE&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;TOGGLE_MANDATORY&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;EDIT_CHECKLIST&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;WORK_ON_ITEM&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;REORDER_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;MANAGE_OWNED_TEMPLATES&quot;:{&quot;parent&quot;:&quot;INTERACT_WITH_TEMPLATE&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;IMPORT_TEMPLATE&quot;:{&quot;parent&quot;:&quot;INTERACT_WITH_TEMPLATE&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]}},&quot;appParameters&quot;:{&quot;historyDateFormat&quot;:&quot;yyyy-MM-dd HH:mm Z&quot;,&quot;allowProjectAdminsToConfigure&quot;:false,&quot;cleverChangelog&quot;:true,&quot;validateGlobalItems&quot;:true,&quot;showContactSupport&quot;:false,&quot;allowIssueConversion&quot;:true,&quot;showChecklistsInAgileDetailsView&quot;:true,&quot;showProvideFeedback&quot;:true,&quot;issuePanelViewWeight&quot;:250,&quot;issueSidePanelViewWeight&quot;:50,&quot;agileSidePanelViewWeight&quot;:1000},&quot;canConvertToSubtask&quot;:true,&quot;canLinkIssues&quot;:true,&quot;loggedInUser&quot;:&quot;ppaccaud&quot;,&quot;viewLocation&quot;:&quot;DEFAULT&quot;,&quot;fieldType&quot;:&quot;CHECKLIST&quot;,&quot;savesOnEdit&quot;:false,&quot;isTemplateViewLocation&quot;:false,&quot;isGlobalItemsViewLocation&quot;:false,&quot;isDefaultItemsViewLocation&quot;:false,&quot;isCustomerPortalViewLocation&quot;:false,&quot;issueKey&quot;:&quot;SACP-172207&quot;,&quot;projectId&quot;:24822,&quot;projectKey&quot;:&quot;SACP&quot;,&quot;issueId&quot;:9509105,&quot;customFieldId&quot;:&quot;customfield_15301&quot;,&quot;fieldConfigId&quot;:26803,&quot;id&quot;:15301,&quot;parameters&quot;:{&quot;version&quot;:7,&quot;discretionaryOptionIds&quot;:[],&quot;statusCsv&quot;:&quot;notApplicable, N/A, DEFAULT, COMPLETE, KEEP\r\ninProgress, In Progress, CURRENT, INCOMPLETE, REMOVE\r\nblocked, Blocked, ERROR, INCOMPLETE, REMOVE&quot;,&quot;showStatusMenu&quot;:false,&quot;statusesAreMandatory&quot;:false,&quot;defaultStatusId&quot;:null,&quot;allowLocalItems&quot;:true,&quot;allowMandatory&quot;:true,&quot;lockOnResolution&quot;:true,&quot;canConvertToIssue&quot;:true,&quot;canBulkEdit&quot;:true,&quot;canBulkComplete&quot;:true,&quot;issueLinkType&quot;:null,&quot;canAssignUsers&quot;:false,&quot;canSetDueDate&quot;:false,&quot;canSetPriority&quot;:false,&quot;enableAdvancedMarkdown&quot;:false,&quot;enableExternalAssetLinking&quot;:false,&quot;enableHeaderItems&quot;:true,&quot;enableHeaderItemCollapsing&quot;:true,&quot;showHeaderItemSummaries&quot;:true,&quot;defaultHeaderCollapsedState&quot;:&quot;Expanded&quot;,&quot;defaultMandatoryState&quot;:true,&quot;limitChecklistWidth&quot;:true,&quot;showProgressHeaderInReadOnlyView&quot;:true,&quot;showProgressHeaderInEditView&quot;:true,&quot;strikeThrough&quot;:true,&quot;showMore&quot;:false,&quot;showMoreCount&quot;:0,&quot;alwaysShowEmptyChecklist&quot;:true,&quot;alwaysShowUncheckedChecklist&quot;:true,&quot;hideUncheckedInReadonlyView&quot;:false,&quot;issueViewDisplayMode&quot;:&quot;CustomField&quot;,&quot;summarySource&quot;:&quot;AllItems&quot;,&quot;bannerParameters&quot;:{&quot;completedLabel&quot;:&quot;&quot;,&quot;allMandatoryLabel&quot;:&quot;&quot;,&quot;incompleteLabel&quot;:&quot;&quot;,&quot;emptyLabel&quot;:&quot;&quot;,&quot;type&quot;:&quot;Progression&quot;,&quot;appearance&quot;:&quot;Normal&quot;},&quot;assigneeDisplay&quot;:&quot;Avatar&quot;,&quot;descriptionDisplay&quot;:&quot;LinkUnderItem&quot;,&quot;compactView&quot;:false,&quot;checklistPermissionSchemeId&quot;:null,&quot;reporterCanEdit&quot;:true,&quot;allCanComplete&quot;:true,&quot;limitEditionWithRoles&quot;:false,&quot;editRoleIds&quot;:[],&quot;canImportTemplateIntoChecklist&quot;:true,&quot;canCreateTemplateFromChecklist&quot;:true,&quot;createTemplateFromChecklistRoleIds&quot;:[],&quot;useConfluenceRenderer&quot;:true},&quot;statuses&quot;:[]}"
+            data-checklist-userstore="[{&quot;userName&quot;:&quot;ppaccaud&quot;,&quot;displayName&quot;:&quot;Pascal PACCAUD (contractor)&quot;,&quot;email&quot;:&quot;pascal.paccaud@amadeus.com&quot;,&quot;avatarURL&quot;:&quot;https://www.gravatar.com/avatar/91460414b924ac03ceb78d51d1790c98?d=mm&amp;s=16&quot;,&quot;description&quot;:&quot;Pascal PACCAUD (contractor) - pascal.paccaud@amadeus.com (ppaccaud)&quot;}]"
+             data-checklist-issuestore="{}"
+             data-checklist-prioritystore="[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Blocker&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#cc0000&quot;},{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/critical.svg&quot;,&quot;statusColor&quot;:&quot;#EC3536&quot;},{&quot;id&quot;:&quot;10200&quot;,&quot;name&quot;:&quot;3 - Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29342&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;Major&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#ff9900&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;Minor&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#006600&quot;},{&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;Trivial&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/trivial.svg&quot;,&quot;statusColor&quot;:&quot;#003300&quot;},{&quot;id&quot;:&quot;8&quot;,&quot;name&quot;:&quot;4 - Low&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#006600&quot;},{&quot;id&quot;:&quot;7&quot;,&quot;name&quot;:&quot;Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29342&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;9&quot;,&quot;name&quot;:&quot;2 - High Attention&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;10&quot;,&quot;name&quot;:&quot;1 - Resolve Immediately&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#cc0000&quot;},{&quot;id&quot;:&quot;11&quot;,&quot;name&quot;:&quot;To Be Assessed&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29347&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#eeeeee&quot;},{&quot;id&quot;:&quot;10000&quot;,&quot;name&quot;:&quot;Medium&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/medium.svg&quot;,&quot;statusColor&quot;:&quot;#f79232&quot;},{&quot;id&quot;:&quot;10001&quot;,&quot;name&quot;:&quot;Highest&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/highest.svg&quot;,&quot;statusColor&quot;:&quot;#d04437&quot;},{&quot;id&quot;:&quot;10002&quot;,&quot;name&quot;:&quot;High&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#f15C75&quot;},{&quot;id&quot;:&quot;10003&quot;,&quot;name&quot;:&quot;Low&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/low.svg&quot;,&quot;statusColor&quot;:&quot;#707070&quot;},{&quot;id&quot;:&quot;10004&quot;,&quot;name&quot;:&quot;Lowest&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/lowest.svg&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;10100&quot;,&quot;name&quot;:&quot;Top&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priority_major.gif&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;10300&quot;,&quot;name&quot;:&quot;Mandatory by Contract&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#ff0000&quot;},{&quot;id&quot;:&quot;10301&quot;,&quot;name&quot;:&quot;Important&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/medium.svg&quot;,&quot;statusColor&quot;:&quot;#f79232&quot;},{&quot;id&quot;:&quot;10302&quot;,&quot;name&quot;:&quot;Mandatory Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/highest.svg&quot;,&quot;statusColor&quot;:&quot;#d04437&quot;},{&quot;id&quot;:&quot;10303&quot;,&quot;name&quot;:&quot;Mandatory&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#f15C75&quot;},{&quot;id&quot;:&quot;10304&quot;,&quot;name&quot;:&quot;Preferred&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/low.svg&quot;,&quot;statusColor&quot;:&quot;#707070&quot;},{&quot;id&quot;:&quot;10305&quot;,&quot;name&quot;:&quot;Priority 1 Blocker&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#EC3536&quot;},{&quot;id&quot;:&quot;10306&quot;,&quot;name&quot;:&quot;Priority 2 Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/critical.svg&quot;,&quot;statusColor&quot;:&quot;#ED335A&quot;},{&quot;id&quot;:&quot;10307&quot;,&quot;name&quot;:&quot;Priority 3 Major&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#EF612C&quot;},{&quot;id&quot;:&quot;10308&quot;,&quot;name&quot;:&quot;Priority 4 Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#279904&quot;},{&quot;id&quot;:&quot;10309&quot;,&quot;name&quot;:&quot;Priority 5 Minor&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/trivial.svg&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;10310&quot;,&quot;name&quot;:&quot;Urgent&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#ffffff&quot;},{&quot;id&quot;:&quot;10400&quot;,&quot;name&quot;:&quot;Blocker - Testing&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#000000&quot;},{&quot;id&quot;:&quot;10401&quot;,&quot;name&quot;:&quot;Hold&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/attachment/225149/Pause-icon.png&quot;,&quot;statusColor&quot;:&quot;#0068CB&quot;},{&quot;id&quot;:&quot;10402&quot;,&quot;name&quot;:&quot;TBD&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/attachment/225150/R.png&quot;,&quot;statusColor&quot;:&quot;#78788D&quot;}]"
+                    >
+            <div class="o-checklist-subcontainer">
+                
+                                                    <div class="o-checklist-header"></div>
+    
+                                          
+
+
+
+
+                        <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]&nbsp                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    User Documentation
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]&nbsp                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Internal Quality Documentation
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]&nbsp                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Test
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]*                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Acceptance Criteria
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]&nbsp                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Defect Management
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]&nbsp                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Fallback
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]&nbsp                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Verification
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                            <span style="align-self: flex-start; font-family: Lucida Console;">
+                    [&nbsp]*                </span>
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Feature
+                </span>
+
+                                                        
+                    
+                                        
+                                                </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    Feature DoD v2.0 <a href="https://rndwww.nce.amadeus.net/confluence/display/SACP/Feature+Definition+of+Done">Details</a>
+                </span>
+
+                            </span>
+        </div>
+                            <div style="display: flex; align-items: center; width: 100%; padding: 0; margin-left: 0; float: none; font-size: 14px;">
+                        <span style="width: 100%; padding-left: 5px; cursor: default; text-align: left;">
+                                
+                                
+                                <span style="">
+                    All criteria in the DoD are mandatory to be verified during the acceptance. Some of the criteria might be non-applicable for certain type of features. Two criteria (Acceptance Criteria, Feature) are always applicable for all features.
+                </span>
+
+                            </span>
+        </div>
+                                          </div>
+        </div>
+    </td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>D of R:</b></td>
+                <td id="customfield_20406-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+
+
+
+
+
+
+
+
+
+
+
+
+                                    
+        
+        <div id="customfield_20406-view"
+            class="o-checklist"
+            data-checklist="[]"
+            data-app-properties="{&quot;projectKeyPattern&quot;:&quot;([A-Z][A-Z0-9]+)&quot;,&quot;javascriptDateFormat&quot;:&quot;%e/%b/%y&quot;,&quot;javascriptDateTimeFormat&quot;:&quot;%e/%b/%y %I:%M %p&quot;,&quot;timePickerUseISO8601&quot;:true}"
+            data-checklist-mode="preview"
+            data-checklist-context="{&quot;permissionScheme&quot;:{&quot;ALL&quot;:{&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;CHANGE_DUE_DATE&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHECK_ITEM&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;INTERACT_WITH_TEMPLATE&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;CHANGE_PRIORITY&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHANGE_STATUS&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CREATE_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;DELETE_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CONVERT_TO_ISSUE&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;EDIT_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;CHANGE_ASSIGNEE&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;TOGGLE_MANDATORY&quot;:{&quot;parent&quot;:&quot;WORK_ON_ITEM&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;EDIT_CHECKLIST&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;WORK_ON_ITEM&quot;:{&quot;parent&quot;:&quot;ALL&quot;,&quot;generallyCan&quot;:true,&quot;rules&quot;:[]},&quot;REORDER_ITEM&quot;:{&quot;parent&quot;:&quot;EDIT_CHECKLIST&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;MANAGE_OWNED_TEMPLATES&quot;:{&quot;parent&quot;:&quot;INTERACT_WITH_TEMPLATE&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]},&quot;IMPORT_TEMPLATE&quot;:{&quot;parent&quot;:&quot;INTERACT_WITH_TEMPLATE&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;SERVER&quot;,&quot;value&quot;:true}]}},&quot;appParameters&quot;:{&quot;historyDateFormat&quot;:&quot;yyyy-MM-dd HH:mm Z&quot;,&quot;allowProjectAdminsToConfigure&quot;:false,&quot;cleverChangelog&quot;:true,&quot;validateGlobalItems&quot;:true,&quot;showContactSupport&quot;:false,&quot;allowIssueConversion&quot;:true,&quot;showChecklistsInAgileDetailsView&quot;:true,&quot;showProvideFeedback&quot;:true,&quot;issuePanelViewWeight&quot;:250,&quot;issueSidePanelViewWeight&quot;:50,&quot;agileSidePanelViewWeight&quot;:1000},&quot;canConvertToSubtask&quot;:true,&quot;canLinkIssues&quot;:true,&quot;loggedInUser&quot;:&quot;ppaccaud&quot;,&quot;viewLocation&quot;:&quot;DEFAULT&quot;,&quot;fieldType&quot;:&quot;CHECKLIST&quot;,&quot;savesOnEdit&quot;:false,&quot;isTemplateViewLocation&quot;:false,&quot;isGlobalItemsViewLocation&quot;:false,&quot;isDefaultItemsViewLocation&quot;:false,&quot;isCustomerPortalViewLocation&quot;:false,&quot;issueKey&quot;:&quot;SACP-172207&quot;,&quot;projectId&quot;:24822,&quot;projectKey&quot;:&quot;SACP&quot;,&quot;issueId&quot;:9509105,&quot;customFieldId&quot;:&quot;customfield_20406&quot;,&quot;fieldConfigId&quot;:29453,&quot;id&quot;:20406,&quot;parameters&quot;:{&quot;version&quot;:7,&quot;discretionaryOptionIds&quot;:[],&quot;statusCsv&quot;:&quot;notApplicable, N/A, DEFAULT, COMPLETE, KEEP\r\ninProgress, In Progress, CURRENT, INCOMPLETE, REMOVE\r\nblocked, Blocked, ERROR, INCOMPLETE, REMOVE&quot;,&quot;showStatusMenu&quot;:false,&quot;statusesAreMandatory&quot;:false,&quot;defaultStatusId&quot;:null,&quot;allowLocalItems&quot;:true,&quot;allowMandatory&quot;:true,&quot;lockOnResolution&quot;:true,&quot;canConvertToIssue&quot;:true,&quot;canBulkEdit&quot;:true,&quot;canBulkComplete&quot;:true,&quot;issueLinkType&quot;:null,&quot;canAssignUsers&quot;:false,&quot;canSetDueDate&quot;:false,&quot;canSetPriority&quot;:false,&quot;enableAdvancedMarkdown&quot;:false,&quot;enableExternalAssetLinking&quot;:false,&quot;enableHeaderItems&quot;:true,&quot;enableHeaderItemCollapsing&quot;:true,&quot;showHeaderItemSummaries&quot;:true,&quot;defaultHeaderCollapsedState&quot;:&quot;Expanded&quot;,&quot;defaultMandatoryState&quot;:true,&quot;limitChecklistWidth&quot;:true,&quot;showProgressHeaderInReadOnlyView&quot;:true,&quot;showProgressHeaderInEditView&quot;:true,&quot;strikeThrough&quot;:true,&quot;showMore&quot;:false,&quot;showMoreCount&quot;:0,&quot;alwaysShowEmptyChecklist&quot;:true,&quot;alwaysShowUncheckedChecklist&quot;:true,&quot;hideUncheckedInReadonlyView&quot;:false,&quot;issueViewDisplayMode&quot;:&quot;CustomField&quot;,&quot;summarySource&quot;:&quot;AllItems&quot;,&quot;bannerParameters&quot;:{&quot;completedLabel&quot;:&quot;&quot;,&quot;allMandatoryLabel&quot;:&quot;&quot;,&quot;incompleteLabel&quot;:&quot;&quot;,&quot;emptyLabel&quot;:&quot;&quot;,&quot;type&quot;:&quot;Progression&quot;,&quot;appearance&quot;:&quot;Normal&quot;},&quot;assigneeDisplay&quot;:&quot;Avatar&quot;,&quot;descriptionDisplay&quot;:&quot;LinkUnderItem&quot;,&quot;compactView&quot;:false,&quot;checklistPermissionSchemeId&quot;:null,&quot;reporterCanEdit&quot;:true,&quot;allCanComplete&quot;:true,&quot;limitEditionWithRoles&quot;:false,&quot;editRoleIds&quot;:[],&quot;canImportTemplateIntoChecklist&quot;:true,&quot;canCreateTemplateFromChecklist&quot;:true,&quot;createTemplateFromChecklistRoleIds&quot;:[],&quot;useConfluenceRenderer&quot;:true},&quot;statuses&quot;:[]}"
+            data-checklist-userstore="[{&quot;userName&quot;:&quot;ppaccaud&quot;,&quot;displayName&quot;:&quot;Pascal PACCAUD (contractor)&quot;,&quot;email&quot;:&quot;pascal.paccaud@amadeus.com&quot;,&quot;avatarURL&quot;:&quot;https://www.gravatar.com/avatar/91460414b924ac03ceb78d51d1790c98?d=mm&amp;s=16&quot;,&quot;description&quot;:&quot;Pascal PACCAUD (contractor) - pascal.paccaud@amadeus.com (ppaccaud)&quot;}]"
+             data-checklist-issuestore="{}"
+             data-checklist-prioritystore="[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Blocker&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#cc0000&quot;},{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/critical.svg&quot;,&quot;statusColor&quot;:&quot;#EC3536&quot;},{&quot;id&quot;:&quot;10200&quot;,&quot;name&quot;:&quot;3 - Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29342&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;Major&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#ff9900&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;Minor&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#006600&quot;},{&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;Trivial&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/trivial.svg&quot;,&quot;statusColor&quot;:&quot;#003300&quot;},{&quot;id&quot;:&quot;8&quot;,&quot;name&quot;:&quot;4 - Low&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#006600&quot;},{&quot;id&quot;:&quot;7&quot;,&quot;name&quot;:&quot;Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29342&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;9&quot;,&quot;name&quot;:&quot;2 - High Attention&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;10&quot;,&quot;name&quot;:&quot;1 - Resolve Immediately&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#cc0000&quot;},{&quot;id&quot;:&quot;11&quot;,&quot;name&quot;:&quot;To Be Assessed&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=29347&amp;avatarType=issuetype&quot;,&quot;statusColor&quot;:&quot;#eeeeee&quot;},{&quot;id&quot;:&quot;10000&quot;,&quot;name&quot;:&quot;Medium&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/medium.svg&quot;,&quot;statusColor&quot;:&quot;#f79232&quot;},{&quot;id&quot;:&quot;10001&quot;,&quot;name&quot;:&quot;Highest&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/highest.svg&quot;,&quot;statusColor&quot;:&quot;#d04437&quot;},{&quot;id&quot;:&quot;10002&quot;,&quot;name&quot;:&quot;High&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#f15C75&quot;},{&quot;id&quot;:&quot;10003&quot;,&quot;name&quot;:&quot;Low&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/low.svg&quot;,&quot;statusColor&quot;:&quot;#707070&quot;},{&quot;id&quot;:&quot;10004&quot;,&quot;name&quot;:&quot;Lowest&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/lowest.svg&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;10100&quot;,&quot;name&quot;:&quot;Top&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priority_major.gif&quot;,&quot;statusColor&quot;:&quot;#009900&quot;},{&quot;id&quot;:&quot;10300&quot;,&quot;name&quot;:&quot;Mandatory by Contract&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#ff0000&quot;},{&quot;id&quot;:&quot;10301&quot;,&quot;name&quot;:&quot;Important&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/medium.svg&quot;,&quot;statusColor&quot;:&quot;#f79232&quot;},{&quot;id&quot;:&quot;10302&quot;,&quot;name&quot;:&quot;Mandatory Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/highest.svg&quot;,&quot;statusColor&quot;:&quot;#d04437&quot;},{&quot;id&quot;:&quot;10303&quot;,&quot;name&quot;:&quot;Mandatory&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#f15C75&quot;},{&quot;id&quot;:&quot;10304&quot;,&quot;name&quot;:&quot;Preferred&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/low.svg&quot;,&quot;statusColor&quot;:&quot;#707070&quot;},{&quot;id&quot;:&quot;10305&quot;,&quot;name&quot;:&quot;Priority 1 Blocker&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#EC3536&quot;},{&quot;id&quot;:&quot;10306&quot;,&quot;name&quot;:&quot;Priority 2 Critical&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/critical.svg&quot;,&quot;statusColor&quot;:&quot;#ED335A&quot;},{&quot;id&quot;:&quot;10307&quot;,&quot;name&quot;:&quot;Priority 3 Major&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/major.svg&quot;,&quot;statusColor&quot;:&quot;#EF612C&quot;},{&quot;id&quot;:&quot;10308&quot;,&quot;name&quot;:&quot;Priority 4 Normal&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/minor.svg&quot;,&quot;statusColor&quot;:&quot;#279904&quot;},{&quot;id&quot;:&quot;10309&quot;,&quot;name&quot;:&quot;Priority 5 Minor&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/trivial.svg&quot;,&quot;statusColor&quot;:&quot;#999999&quot;},{&quot;id&quot;:&quot;10310&quot;,&quot;name&quot;:&quot;Urgent&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/high.svg&quot;,&quot;statusColor&quot;:&quot;#ffffff&quot;},{&quot;id&quot;:&quot;10400&quot;,&quot;name&quot;:&quot;Blocker - Testing&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/images/icons/priorities/blocker.svg&quot;,&quot;statusColor&quot;:&quot;#000000&quot;},{&quot;id&quot;:&quot;10401&quot;,&quot;name&quot;:&quot;Hold&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/attachment/225149/Pause-icon.png&quot;,&quot;statusColor&quot;:&quot;#0068CB&quot;},{&quot;id&quot;:&quot;10402&quot;,&quot;name&quot;:&quot;TBD&quot;,&quot;iconUrl&quot;:&quot;https://jira.amadeus.com/agile/secure/attachment/225150/R.png&quot;,&quot;statusColor&quot;:&quot;#78788D&quot;}]"
+                    >
+            <div class="o-checklist-subcontainer">
+                                                                            <div class="o-completion" style="display: flex; flex-shrink: 0;"><span  class="aui-lozenge aui-lozenge-complete" style="font-size: 12px; font-weight: normal; display: flex; flex-direction: row; align-items: center;" ><span style="padding-right: 4px; vertical-align: middle;"><svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path clip-rule="evenodd" d="m10.41037,3.42544l-7.86501,0c-0.72395,0 -1.31084,0.58688 -1.31084,1.31084l0,7.86508c0,0.7239 0.58689,1.3108 1.31084,1.3108l7.86501,0c0.724,0 1.3109,-0.5869 1.3109,-1.3108l0,-7.86508c0,-0.72396 -0.5869,-1.31084 -1.3109,-1.31084zm-7.86501,-0.65542c-1.08593,0 -1.96626,0.88032 -1.96626,1.96626l0,7.86508c0,1.0859 0.88033,1.9662 1.96626,1.9662l7.86501,0c1.086,0 1.9663,-0.8803 1.9663,-1.9662l0,-7.86508c0,-1.08594 -0.8803,-1.96626 -1.9663,-1.96626l-7.86501,0z" fill-rule="evenodd"/><path d="m5.09049,10.18526l-1.82767,-1.82766l-0.78479,0.78479l2.61246,2.61246l5.38758,-5.38754l-0.78483,-0.78479l-4.60275,4.60274z"/></svg></span><span>Empty</span></span></div>
+                                    
+                                                    <div class="o-checklist-header"></div>
+    
+                                          
+
+
+
+
+                                      </div>
+        </div>
+    </td>
+            </tr>
+                                            <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Last Comment:</b></td>
+                <td id="customfield_19709-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+          We need to determine the phase from webhook call. Is it easy ?
+  
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Sprint Sync To Octane:</b></td>
+                <td id="customfield_20500-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+          
+  
+</td>
+            </tr>
+                                                                                                                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Parent Link:</b></td>
+                <td id="customfield_12103-9509105-value" class="value" bgcolor="#ffffff" width="80%">
+<img class="jpo-parent-field-issue-type-icon" src="https://jira.amadeus.com/agile/secure/viewavatar?size=xsmall&amp;avatarId=12606&amp;avatarType=issuetype"/><a class="jpo-parent-field-issue-key" href="https://jira.amadeus.com/agile/browse/SACP-193522">SACP-193522</a><span>Hybrid Toolchain - Curiosity gaps and fixes 2025</span></td>
+            </tr>
+                                                                                                                                                                                                                                                                                                                </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>Description</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td id="descriptionArea">
+            <p><b>Description</b>:</p>
+<ul>
+	<li>Extend the Application Service to detect open PRs in GitOps repositories that modify phase-specific configuration files (e.g., value files) without component version changes.</li>
+	<li>Automatically import these PRs as <b>Configuration-only Deployment Requests</b>.</li>
+	<li>Treat these Deployment Requests like any other: allow them to be scheduled, aggregated, submitted, and loaded by the toolchain.</li>
+	<li>Ensure visibility and traceability of these requests in existing orchestration tools (e.g., Bird UI).</li>
+	<li>Integrate fallback mechanisms to revert configuration changes alongside other deployments.</li>
+</ul>
+
+
+<p><span class="image-wrap" style=""><img src="https://jira.amadeus.com/agile/secure/attachment/1931806/1931806_image-2025-05-20-18-07-09-045.png" height="399" width="746" style="border: 0px solid black" /></span></p>
+
+<p> </p>
+
+<p><span class="image-wrap" style=""><img src="https://jira.amadeus.com/agile/secure/attachment/1876598/1876598_image-2025-04-03-17-39-10-317.png" height="517" width="881" style="border: 0px solid black" /></span></p>
+
+<p> </p>
+
+<p>During PI25.1 we will implement this MVP :</p>
+<ul>
+	<li>Customer imports the PR in Bird by giving the URL of the PR in a simple UI.</li>
+	<li>PR should be mergeable (notably should be approved )</li>
+	<li>The content of PR will deployed during the next deployment performed on the target phase. It will NOT be deployed alone and the user can not modify the schedule</li>
+	<li>The Bird will add a comment  in the TR to explain that this PR is part of the deployment. </li>
+</ul>
+
+            <br/>
+        </td>
+    </tr>
+    </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>Comments</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="grid" style="margin: 0;">
+                <tr id="comment-header-9158226"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="brechou" id="word_commented_brechou" href="https://jira.amadeus.com/agile/secure/ViewProfile.jspa?name=brechou">Benjamin RECHOU</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">2025-09-23</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-9158226"><td bgcolor="#ffffff">
+            <p>We need to determine the phase from webhook call. Is it easy ?</p>
+        </td></tr>
+                <tr id="comment-header-9156503"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="acallens" id="word_commented_acallens" href="https://jira.amadeus.com/agile/secure/ViewProfile.jspa?name=acallens">Anton CALLENS</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">2025-09-22</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-9156503"><td bgcolor="#ffffff">
+            <p>Proposed Manual PR Detection Rough Plan:<br/>
+ <br/>
+-&gt; Webhook detection on commits in default branch not authored by automation tools (Bird, DM, etc)<br/>
+-&gt; Improvement: Manual sync button on gitops repo if webhook fails<br/>
+ <br/>
+-&gt; Trigger ceremonial release on Bird with manual sign off, repackaging/get DU.json from DB, and call to DM to load with commit<br/>
+-&gt; Call to DM handled by a special deployment flow with associated deployment job<br/>
+-&gt; Use dummy DRPR for attaching deployment jobs, builds, etc -&gt; declined once it's no longer needed<br/>
+ <br/>
+-&gt; No submit necessary<br/>
+ <br/>
+-&gt; Freezes will be checked by DM<br/>
+ <br/>
+-&gt; Scheduling not needed for MVP<br/>
+ <br/>
+-&gt; PriA and Freeze Breaker releases must go through the regular Bird release process<br/>
+-&gt; At a later date, users could provide a TR via manual action</p>
+
+<p> </p>
+
+<p>Estimated Story Points: 20</p>
+        </td></tr>
+                <tr id="comment-header-9037156"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="abenza" id="word_commented_abenza" href="https://jira.amadeus.com/agile/secure/ViewProfile.jspa?name=abenza">Amandine BENZA</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">2025-08-20</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-9037156"><td bgcolor="#ffffff">
+            <p>WIN@: TR 36107993: PM AI <span class="error">&#91;HIGH&#93;</span>: Bird review configuration changes (move out of bird)<br/>
+PMR Portal: <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fimr-pmr.amadeus.net%3A21443%2Fproblem%2Fdetails.html%3Fid%3D3720%26tab%3D10&amp;data=05%7C02%7Camitabh.rout%40amadeus.com%7C7595978ea42e4bfca8d308ddd9ee4b1a%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638906339659264109%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=W21WycZQNb5%2FV%2FL%2FhVgovOGTJ3LZO3EcW6NvOi0bl8g%3D&amp;reserved=0" class="external-link" target="_blank" rel="nofollow noopener">https://imr-pmr.amadeus.net:21443/problem/details.html?id=3720</a><br/>
+Wish Date: 30-09-2025</p>
+
+<p>WIN@: TR 36107983: PM AI <span class="error">&#91;HIGH&#93;</span>: <br/>
+PMR Portal: <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fimr-pmr.amadeus.net%3A21443%2Fproblem%2Fdetails.html%3Fid%3D3720%26tab%3D10&amp;data=05%7C02%7Camitabh.rout%40amadeus.com%7C47751777200d4ac3601c08ddd9eddc9c%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638906337803038985%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=wlLgPE0xif33dFvTGbT6KnDx1csZtiuVThmkn1jFFII%3D&amp;reserved=0" class="external-link" target="_blank" rel="nofollow noopener">https://imr-pmr.amadeus.net:21443/problem/details.html?id=3720</a></p>
+        </td></tr>
+            </table>
+Generated at Tue Oct 07 10:34:14 UTC 2025 by Pascal PACCAUD (contractor) using Jira 10.3.5#10030005-sha1:190c783f2bd6c69cd5accdb70f97e48812a78d14.
+
+</body>
+</html>
