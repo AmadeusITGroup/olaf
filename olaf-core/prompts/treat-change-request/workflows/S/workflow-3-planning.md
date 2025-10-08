@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 name: workflow-3-planning-s
 description: Small-size planning workflow producing IMPLEMENTATION_PLAN_<PROJECT-ID>.md
@@ -21,6 +22,11 @@ You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
 Use terminal commands, not training data.
 
 ## Workflow Overview
+=======
+# Workflow 3: Planning (S)
+
+## Overview
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 
 **Purpose**: Create implementation plan for small changes
 
@@ -30,6 +36,7 @@ Use terminal commands, not training data.
 
 ---
 
+<<<<<<< HEAD
 ## Input Requirements
 - **Primary Input**: `design-review-notes.md`
 - **Secondary Inputs**: Context package
@@ -41,6 +48,9 @@ Use terminal commands, not training data.
 - **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
 ## Workflow Steps
+=======
+## Prompt Execution
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 
 Execute prompt - no skipping
 
@@ -52,12 +62,16 @@ Execute prompt - no skipping
 
 **Output**: `IMPLEMENTATION_PLAN_<PROJECT-ID>.md`
 
+<<<<<<< HEAD
 **Description**: Produce a concise, actionable implementation plan with task breakdown for a small change.
 
+=======
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 **Validation**: Task breakdown complete
 
 ---
 
+<<<<<<< HEAD
 ## Data Flow Diagram
 ```text
 [design-review-notes.md + context] → [Step 3-1: Implementation Planning] → IMPLEMENTATION_PLAN_<PROJECT-ID>.md
@@ -75,6 +89,17 @@ Execute prompt - no skipping
 
 ## Next Steps
 - Proceed to `workflow-4-implementation.md`
+=======
+## Completion Criteria
+
+✅ **Workflow complete when**:
+
+1. Prompt executed successfully
+2. Implementation plan exists
+3. Ready to hand off to Workflow 4
+
+---
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 
 ## Handoff
 

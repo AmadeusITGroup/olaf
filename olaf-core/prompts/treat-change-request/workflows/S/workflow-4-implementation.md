@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 name: workflow-4-implementation-s
 description: Small change implementation producing working code, tests (>60% coverage) and documentation
@@ -25,11 +26,21 @@ Use terminal commands, not training data.
 **Purpose**: Code implementation and validation for small changes
 
 **Input**: Artifacts from Workflow 3 (`IMPLEMENTATION_PLAN_<PROJECT-ID>.md`)
+=======
+# Workflow 4: Implementation (S)
+
+## Overview
+
+**Purpose**: Code implementation and validation for small changes
+
+**Input**: Artifacts from Workflow 3 (implementation plan)
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 
 **Output**: Working code with tests (>60% coverage) and basic documentation
 
 ---
 
+<<<<<<< HEAD
 ## Input Requirements
 - **Primary Input**: `IMPLEMENTATION_PLAN_<PROJECT-ID>.md`
 - **Secondary Inputs**: Context package and design/spec references as needed
@@ -41,6 +52,9 @@ Use terminal commands, not training data.
 - **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
 ## Workflow Steps
+=======
+## Prompt Execution
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 
 Execute all prompts in sequence - no skipping
 
@@ -68,6 +82,7 @@ Execute all prompts in sequence - no skipping
 
 ---
 
+<<<<<<< HEAD
 ## Data Flow Diagram
 ```text
 [IMPLEMENTATION_PLAN.md] → [Step 4-1: Code Implementation] → code + tests → [Step 4-2: Security & Quality Validation] → test-results.md, security-scan-results.md
@@ -84,6 +99,17 @@ Execute all prompts in sequence - no skipping
 - [ ] Peer review approved
 - [ ] Optional Tech Lead review (if needed)
 - [ ] Ready for deployment
+=======
+## Completion Criteria
+
+✅ **Workflow complete when**:
+
+1. Both prompts executed successfully
+2. Code complete and tested
+3. Peer review approved
+4. Optional Tech Lead review (if needed)
+5. Ready for deployment
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
 
 ---
 
@@ -91,4 +117,8 @@ Execute all prompts in sequence - no skipping
 
 **Next step**: Deployment following standard deployment process
 
+<<<<<<< HEAD
 **Provides**: Working codebase with tests, `test-results.md`, and documentation
+=======
+**Provides**: Working codebase with tests and documentation
+>>>>>>> a756d8e (feat: Add orchestrator and workflows for handling small changes with lightweight governance)
