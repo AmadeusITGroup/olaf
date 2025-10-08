@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 name: workflow-2-design-xl
 description: Extra large change technical design producing DESIGN_<PROJECT-ID>.md
@@ -20,6 +21,10 @@ You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
 
 Use terminal commands, not training data.
 
+=======
+# Workflow 2: Design (XL)
+
+>>>>>>> c5759c0 (feat: Add orchestrator workflows for extra large changes including specification, design, planning, and implementation phases)
 ## Overview
 
 **Purpose**: Define comprehensive technical design for extra large changes
@@ -30,6 +35,7 @@ Use terminal commands, not training data.
 
 ---
 
+<<<<<<< HEAD
 ## Input Requirements
 - **Primary Input**: `SPECIFICATION_<PROJECT-ID>.md`
 - **Secondary Inputs**: Codebase access for validation and references
@@ -40,6 +46,8 @@ Use terminal commands, not training data.
 - **Secondary Outputs**: N/A
 - **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
+=======
+>>>>>>> c5759c0 (feat: Add orchestrator workflows for extra large changes including specification, design, planning, and implementation phases)
 ## Prompt Execution
 
 Execute all prompts in sequence - no skipping
@@ -92,6 +100,7 @@ Execute all prompts in sequence - no skipping
 
 ---
 
+<<<<<<< HEAD
 ## Data Flow Diagram
 ```text
 [SPECIFICATION.md] → [2-1 Initial Design] → DESIGN.md → [2-2 Design Validation] → DESIGN.md → [2-3 Technical Review] → DESIGN.md → [2-4 Finalization] → DESIGN.md (final)
@@ -102,6 +111,8 @@ Execute all prompts in sequence - no skipping
 - **Recovery**: Refresh analysis and update design; re-run failed step
 - **Rollback**: Maintain previous design versions before updates
 
+=======
+>>>>>>> c5759c0 (feat: Add orchestrator workflows for extra large changes including specification, design, planning, and implementation phases)
 ## Completion Criteria
 
 ✅ **Workflow complete when**:

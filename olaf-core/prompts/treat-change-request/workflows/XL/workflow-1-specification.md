@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 name: workflow-1-specification-xl
 description: Extra large change specification producing SPECIFICATION_<PROJECT-ID>.md
@@ -20,6 +21,10 @@ You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
 
 Use terminal commands, not training data.
 
+=======
+# Workflow 1: Specification (XL)
+
+>>>>>>> c5759c0 (feat: Add orchestrator workflows for extra large changes including specification, design, planning, and implementation phases)
 ## Overview
 
 **Purpose**: Define comprehensive requirements specification for extra large changes
@@ -30,6 +35,7 @@ Use terminal commands, not training data.
 
 ---
 
+<<<<<<< HEAD
 ## Input Requirements
 - **Primary Input**: Context package from router
 - **Secondary Inputs**: JIRA ticket, codebase for validation
@@ -40,6 +46,8 @@ Use terminal commands, not training data.
 - **Secondary Outputs**: N/A
 - **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
+=======
+>>>>>>> c5759c0 (feat: Add orchestrator workflows for extra large changes including specification, design, planning, and implementation phases)
 ## Prompt Execution
 
 **Execute all prompts in sequence - no skipping**
@@ -92,6 +100,7 @@ Use terminal commands, not training data.
 
 ---
 
+<<<<<<< HEAD
 ## Data Flow Diagram
 ```text
 [Context package + JIRA] → [1-1 Initial Spec] → SPEC.md → [1-2 Codebase Validation] → SPEC.md → [1-3 User Review] → SPEC.md → [1-4 Finalization] → SPEC.md (final)
@@ -102,6 +111,8 @@ Use terminal commands, not training data.
 - **Recovery**: Gather missing inputs, refine scope, or adjust requirements; re-run failed step
 - **Rollback**: Maintain previous SPEC version before updates
 
+=======
+>>>>>>> c5759c0 (feat: Add orchestrator workflows for extra large changes including specification, design, planning, and implementation phases)
 ## Completion Criteria
 
 ✅ **Workflow complete when**:
