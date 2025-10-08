@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 name: workflow-3-planning-xs
 description: Extra small change implementation planning producing implementation-notes.md
@@ -41,6 +42,21 @@ Use terminal commands, not training data.
 - **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
 ## Workflow Steps
+=======
+# Workflow 3: Planning (XS)
+
+## Overview
+
+**Purpose**: Direct code implementation planning for extra small changes
+
+**Input**: Context package from router
+
+**Output**: Implementation approach
+
+---
+
+## Prompt Execution
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
 
 Execute prompt - no skipping
 
@@ -50,6 +66,7 @@ Execute prompt - no skipping
 
 **Input**: Context package from router
 
+<<<<<<< HEAD
 **Output**: `implementation-notes.md`
 
 **Description**: Produce a concise implementation approach suitable for immediate execution in Workflow 4.
@@ -75,9 +92,30 @@ Execute prompt - no skipping
 
 ## Next Steps
 - Proceed to `workflow-4-implementation.md`
+=======
+**Output**: Implementation notes or inline plan
+
+**Validation**: Approach defined
+
+---
+
+## Completion Criteria
+
+✅ **Workflow complete when**:
+
+1. Prompt executed successfully
+2. Implementation approach clear
+3. Ready to hand off to Workflow 4
+
+---
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
 
 ## Handoff
 
 **Next workflow**: `workflow-4-implementation.md`
 
+<<<<<<< HEAD
 **Provides**: `implementation-notes.md`
+=======
+**Provides**: Implementation approach
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)

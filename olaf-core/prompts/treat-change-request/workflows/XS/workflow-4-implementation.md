@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 name: workflow-4-implementation-xs
 description: Extra small change implementation producing working code and automated validation
@@ -25,11 +26,21 @@ Use terminal commands, not training data.
 **Purpose**: Direct code implementation and automated validation for extra small changes
 
 **Input**: Artifacts from Workflow 3 (`implementation-notes.md`)
+=======
+# Workflow 4: Implementation (XS)
+
+## Overview
+
+**Purpose**: Direct code implementation and automated validation for extra small changes
+
+**Input**: Artifacts from Workflow 3 (implementation approach)
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
 
 **Output**: Working code with basic tests and minimal documentation
 
 ---
 
+<<<<<<< HEAD
 ## Input Requirements
 - **Primary Input**: `implementation-notes.md`
 - **Secondary Inputs**: Context package from router
@@ -41,6 +52,9 @@ Use terminal commands, not training data.
 - **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
 ## Workflow Steps
+=======
+## Prompt Execution
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
 
 Execute all prompts in sequence - no skipping
 
@@ -48,7 +62,11 @@ Execute all prompts in sequence - no skipping
 
 **File**: `../../prompts/prompt-4-1-implementation-execution.md`
 
+<<<<<<< HEAD
 **Input**: `implementation-notes.md`, context package
+=======
+**Input**: Implementation approach, context package
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
 
 **Output**: Source code with basic tests
 
@@ -68,6 +86,7 @@ Execute all prompts in sequence - no skipping
 
 ---
 
+<<<<<<< HEAD
 ## Data Flow Diagram
 ```text
 [implementation-notes.md] → [Step 4-1: Code Implementation] → code + tests → [Step 4-2: Automated Validation] → test-results.md
@@ -84,6 +103,17 @@ Execute all prompts in sequence - no skipping
 - [ ] Peer review approved (or post-merge acceptable)
 - [ ] Automated checks passing
 - [ ] Ready for immediate deployment
+=======
+## Completion Criteria
+
+✅ **Workflow complete when**:
+
+1. Both prompts executed successfully
+2. Code complete and tested
+3. Peer review approved (or post-merge acceptable)
+4. Automated checks passing
+5. Ready for immediate deployment
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
 
 ---
 
@@ -91,4 +121,8 @@ Execute all prompts in sequence - no skipping
 
 **Next step**: Can be deployed immediately if checks pass
 
+<<<<<<< HEAD
 **Provides**: Working code with automated validation and `test-results.md`
+=======
+**Provides**: Working code with automated validation
+>>>>>>> da09d7f (feat: Add orchestrator workflows for extra small changes including planning and implementation phases)
