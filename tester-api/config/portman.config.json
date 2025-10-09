@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "baseUrl": "{{baseUrl}}"
+  },
+  "tests": {
+    "contractTests": true
+  }
+}

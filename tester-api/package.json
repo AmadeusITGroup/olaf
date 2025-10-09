@@ -1,0 +1,16 @@
+{
+  "name": "tester-api",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Hybrid API testing with Portman/Newman + Mermaid diagrams",
+  "scripts": {
+    "portman": "portman",
+    "newman": "newman",
+    "mmdc": "mmdc"
+  },
+  "devDependencies": {
+    "@apideck/portman": "^1.25.0",
+    "newman": "^6.2.0",
+    "@mermaid-js/mermaid-cli": "^10.9.1"
+  }
+}
