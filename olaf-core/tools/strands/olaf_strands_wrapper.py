@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 OLAF Strands Agent Wrapper - Async Process Manager
-A wrapper that spawns OLAF Strands agents as background processes
+A wrapper that Spawns OLAF Strands agents as background processes
 """
 
 
@@ -14,6 +14,7 @@ import psutil
 from datetime import datetime
 from pathlib import Path
 import logging
+import os
 from typing import Dict, Any, Optional
 from aws_config_manager import AWSConfigManager
 
@@ -22,7 +23,9 @@ class AgentProcessManager:
     
     def __init__(self, project_root: Path):
         self.project_root = project_root
-        self.processes_dir = project_root / 'olaf-data' / 'processes'
+        # Route processes into .straf
+        self.base_dir = project_root / '.straf'
+        self.processes_dir = self.base_dir / 'processes'
         self.processes_dir.mkdir(parents=True, exist_ok=True)
     
     def spawn_agent(self, cmd: list, task_id: str) -> Dict[str, Any]:
@@ -31,14 +34,25 @@ class AgentProcessManager:
             # Create process info file
             process_file = self.processes_dir / f"{task_id}.json"
             
-            # Start process
-            process = subprocess.Popen(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if sys.platform == 'win32' else 0
-            )
+            # Set environment to bypass tool consent prompts
+            env = os.environ.copy()
+            env['BYPASS_TOOL_CONSENT'] = 'true'
+            
+            # Prepare stdout/stderr log files under .straf/processes
+            stdout_path = self.processes_dir / f"{task_id}_stdout.log"
+            stderr_path = self.processes_dir / f"{task_id}_stderr.log"
+            self.processes_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Start process with logs redirected to files
+            with open(stdout_path, 'w', encoding='utf-8') as out, open(stderr_path, 'w', encoding='utf-8') as err:
+                process = subprocess.Popen(
+                    cmd,
+                    stdout=out,
+                    stderr=err,
+                    text=True,
+                    env=env,
+                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if sys.platform == 'win32' else 0
+                )
             
             # Create process handle
             handle = {
@@ -48,8 +62,8 @@ class AgentProcessManager:
                 'started_at': datetime.now().isoformat(),
                 'command': cmd,
                 'process_file': str(process_file),
-                'stdout_file': str(self.processes_dir / f"{task_id}_stdout.log"),
-                'stderr_file': str(self.processes_dir / f"{task_id}_stderr.log")
+                'stdout_file': str(stdout_path),
+                'stderr_file': str(stderr_path)
             }
             
             # Save handle to file
@@ -122,7 +136,7 @@ class AgentProcessManager:
         
         try:
             # Look for results files
-            findings_dir = self.project_root / 'olaf-data' / 'findings'
+            findings_dir = self.project_root / '.straf' / 'findings'
             results_pattern = f"*{task_id}*"
             
             results_files = list(findings_dir.glob(results_pattern))
@@ -228,7 +242,11 @@ def main():
                        default='aws-bedrock', choices=['aws-bedrock', 'openai'],
                        help='AI service provider (default: aws-bedrock)')
     parser.add_argument('--model', '--model-name', dest='model_name',
-                       help='Model name (uses service default if not specified)')
+                       help='Model name/modelId (overrides alias & defaults)')
+    parser.add_argument('--model-alias', dest='model_alias',
+                       help='Convenience alias for model & region (e.g., eu, eu-sonnet-4.5, us-sonnet-4.5, us-mistral-large, us-novapro)')
+    parser.add_argument('--model-config', dest='model_config', default=str(Path(__file__).parent / 'model-aliases.json'),
+                       help='Path to JSON file mapping aliases to {model_id, region}')
     parser.add_argument('--context', default='',
                        help='Additional context data')
     parser.add_argument('--timestamp',
@@ -307,7 +325,8 @@ def main():
         prompt_name = Path(args.prompt).stem
         args.task_id = f"{args.timestamp}-{prompt_name}"
     
-    # Setup AWS configuration if using Bedrock
+    # Resolve model & region via alias config
+    resolved_region = 'us-east-1'
     if args.service_provider == 'aws-bedrock':
         # Setup logging for configuration
         config_logger = logging.getLogger('aws_config')
@@ -319,15 +338,37 @@ def main():
         # Initialize AWS configuration manager
         aws_manager = AWSConfigManager(config_logger)
         
-        # Set default model if not provided
-        if not args.model_name:
-            args.model_name = aws_manager.DEFAULT_MODEL  # Sonnet 4 inference profile
+        # Load alias mapping if needed
+        alias_map = {}
+        try:
+            with open(args.model_config, 'r', encoding='utf-8') as f:
+                alias_map = json.load(f)
+        except Exception:
+            # optional file; proceed with defaults
+            alias_map = {}
+
+        # Determine model & region from alias
+        if args.model_name:
+            # explicit model id wins; region stays default unless alias also provided
+            if args.model_alias and args.model_alias in alias_map:
+                resolved_region = alias_map[args.model_alias].get('region', resolved_region)
+        else:
+            # no explicit model; try alias first, then default alias 'eu'
+            alias = args.model_alias or 'eu'
+            entry = alias_map.get(alias)
+            if entry and entry.get('model_id'):
+                args.model_name = entry['model_id']
+                resolved_region = entry.get('region', resolved_region)
+            else:
+                # fallback to library default
+                if not args.model_name:
+                    args.model_name = aws_manager.DEFAULT_MODEL
         
         # Setup AWS environment
         print("Configuring AWS Bedrock environment...")
         config_result = aws_manager.setup_aws_environment(
             profile=args.aws_profile,
-            region='us-east-1',  # Default region
+            region=resolved_region,
             model=args.model_name
         )
         
@@ -377,7 +418,6 @@ def main():
     
     if args.aws_profile:
         cmd.extend(['--aws-profile', args.aws_profile])
-    
     # Always pass the timestamp to the agent
     cmd.extend(['--timestamp', args.timestamp])
     
@@ -394,7 +434,17 @@ def main():
                 print(f"Context: {args.context[:50]}{'...' if len(args.context) > 50 else ''}")
             print()
             
-            result = subprocess.run(cmd, check=True)
+            # Set environment to bypass tool consent prompts for synchronous run
+            env = os.environ.copy()
+            env['BYPASS_TOOL_CONSENT'] = 'true'
+            
+            # Prepare stdout/stderr log files under .straf/processes
+            stdout_path = manager.processes_dir / f"{args.task_id}_stdout.log"
+            stderr_path = manager.processes_dir / f"{args.task_id}_stderr.log"
+            manager.processes_dir.mkdir(parents=True, exist_ok=True)
+            
+            with open(stdout_path, 'w', encoding='utf-8') as out, open(stderr_path, 'w', encoding='utf-8') as err:
+                result = subprocess.run(cmd, check=True, env=env, stdout=out, stderr=err, text=True)
             print(f"\nAgent execution completed successfully!")
             
         except subprocess.CalledProcessError as e:
