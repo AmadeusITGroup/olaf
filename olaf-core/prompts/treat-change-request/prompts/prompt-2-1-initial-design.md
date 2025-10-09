@@ -1,223 +1,230 @@
-﻿# Prompt 2.1: Initial Design Creation
+﻿---
+name: create-initial-technical-design
+description: Create comprehensive technical design from approved specification, informed by existing codebase architecture patterns while proposing optimal solutions for new requirements
+tags: [design, architecture, specification, codebase-analysis, technical-solution]
+---
 
-## Purpose
-Create the initial technical design from the approved specification, **INFORMED BY** existing codebase architecture patterns while proposing optimal solutions for new requirements. Design must align with established patterns while meeting all specification requirements.
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
 
-## Instructions
+## Time Retrieval
+You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
+- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
+- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
 
-Please create a comprehensive technical design document based on the approved specification:
+You WILL use terminal commands, not training data for timestamps.
 
-### Input Required
-- Approved specification document: `SPECIFICATION_<PROJECT-ID>.md` 
-- **Complete specification analysis** (entire document, not just first section)
-- **Existing codebase architecture understanding** (analyze patterns before designing)
-- Understanding of modern architectural patterns and best practices
-- Knowledge of target technology stack (Spring Boot, JPA, Angular, etc.)
+## Input Parameters
+You MUST request these parameters if not provided by the user:
+- **specification_document**: string - Path to approved specification document (REQUIRED)
+- **project_id**: string - Project identifier for file naming and references (REQUIRED)
+- **technology_stack**: string - Target technology stack (Spring Boot, JPA, Angular, etc.) (OPTIONAL, default: "Spring Boot, JPA, Angular")
+- **design_template**: string - Path to design document template (OPTIONAL, default: "../templates/template-design-document.md")
 
-### Task
+## User Interaction Protocol
+You MUST follow the established interaction protocol strictly:
+- Act / Propose-Act / Propose-Confirm-Act (defined externally)
+- You WILL use Propose-Act protocol for design creation due to moderate impact on development workflow
 
-#### 0. Prerequisites (MUST DO FIRST)
+## Prerequisites
+This prompt is part of a workflow chain:
+1. You MUST verify the specification approval phase was completed
+2. You WILL validate expected outcomes from previous step:
+   - Approved specification document exists and is accessible
+   - Specification contains complete functional requirements (FR-001 through FR-XXX)
+   - Specification contains complete non-functional requirements (NFR-001 through NFR-XXX)
+   - Project ID is established and consistent
 
-⚠️ **YOU MUST COMPLETE THESE STEPS BEFORE DESIGNING** ⚠️
+## Process
 
-**Step 0.1: Complete Specification Analysis**
+### 1. Validation Phase
+You WILL verify all requirements:
+- Confirm specification document path is provided and accessible
+- Validate specification document contains complete requirements
+- Check access to existing codebase for architecture analysis
+- Verify design template is available
 
-1. **Read Entire Specification Document**:
-   - Use `read_file` to read ALL sections of the specification (not just first 100-200 lines)
-   - Document total line count and confirm you've read the complete document
-   - Extract all functional requirements (FR-001 through FR-XXX)
-   - Extract all non-functional requirements (NFR-001 through NFR-XXX)
-   - Understand data model requirements completely
-   - Understand integration requirements completely
-   - Note all constraints and assumptions
+### 2. Execution Phase
 
-2. **Create Requirements Summary**:
-   - List all functional requirements with key acceptance criteria
-   - List all non-functional requirements with specifications
-   - Identify critical integration points
-   - Note MVP scope and out-of-scope items
+**Prerequisites Execution (MANDATORY FIRST STEPS):**
+<!-- <specification_analysis> -->
+You MUST complete comprehensive specification analysis:
+- Read ENTIRE specification document using file operations
+- Document total line count to confirm complete reading
+- Extract all functional requirements (FR-001 through FR-XXX)
+- Extract all non-functional requirements (NFR-001 through NFR-XXX)
+- Understand data model requirements completely
+- Understand integration requirements completely
+- Note all constraints and assumptions
+- Create complete requirements summary
+<!-- </specification_analysis> -->
 
-**Step 0.2: Existing Codebase Architecture Analysis**
+<!-- <codebase_analysis> -->
+You MUST complete existing codebase architecture analysis:
+- Analyze entity patterns using search operations to find base classes
+- Examine inheritance strategies and @Inheritance annotations
+- Document existing entity patterns for extension
+- Analyze service patterns and AbstractCRUDService implementations
+- Document dependency injection patterns (@Service, @Autowired)
+- Document transaction boundary patterns (@BirdTransaction)
+- Analyze controller patterns and @RestController implementations
+- Document security patterns (@BirdAuthorized with roles)
+- Document request/response handling patterns
+- Analyze repository patterns and AbstractRepositoryAdapter implementations
+- Document data access and query patterns
+- Create comprehensive architecture summary with specific file paths and class names
+<!-- </codebase_analysis> -->
 
-1. **Analyze Entity Patterns**:
-   - Use `grep_search` to find existing entity base classes
-   - Use `read_file` to examine inheritance strategies (@Inheritance annotations)
-   - Document existing entity patterns (e.g., AbstractAuditingEntity, JOINED inheritance)
-   - Identify entity patterns you'll extend for new entities
+**Architecture Design:**
+<!-- <architecture_design> -->
+You WILL design the optimal technical solution:
+- Create high-level component architecture and relationships
+- Design service layer organization and responsibilities
+- Define data flow and integration patterns
+- Design API organization and endpoint structure
+- Create entity relationship design optimized for requirements
+- Design database schema with proper normalization
+- Define data access patterns and repository design
+- Plan migration strategy for schema changes
+- Design authentication and authorization approach
+- Create role-based access control design
+- Define security validation and enforcement patterns
+- Plan data protection and privacy considerations
+<!-- </architecture_design> -->
 
-2. **Analyze Service Patterns**:
-   - Use `grep_search` to find existing service implementations
-   - Use `read_file` to examine service structure (e.g., AbstractCRUDService)
-   - Document dependency injection patterns (@Service, @Autowired)
-   - Document transaction boundary patterns (@BirdTransaction)
+**Technical Solution Design:**
+<!-- <technical_solution> -->
+You WILL define implementation approach:
+- Specify REST endpoint design with request/response schemas
+- Define service layer interfaces and contracts
+- Create error handling and validation patterns
+- Plan API versioning and backward compatibility
+- Design business logic organization and business rule implementation
+- Define transaction boundaries and data consistency
+- Plan workflow and process management
+- Design integration with external systems
+- Create caching strategies and performance optimization
+- Plan database indexing and query optimization
+- Define scalability considerations and bottleneck prevention
+- Design monitoring and observability approach
+<!-- </technical_solution> -->
 
-3. **Analyze Controller Patterns**:
-   - Use `grep_search` to find existing REST controllers
-   - Use `read_file` to examine controller structure (@RestController, mappings)
-   - Document security patterns (@BirdAuthorized with roles)
-   - Document request/response handling patterns
+**Implementation Planning:**
+<!-- <implementation_planning> -->
+You WILL plan the development approach:
+- Select technology stack with justification
+- Define development tools and build pipeline requirements
+- Plan testing framework and quality assurance approach
+- Consider deployment and infrastructure requirements
+- Create implementation phases and milestone planning
+- Identify risk mitigation and technical challenges
+- Plan team organization and skill requirements
+- Define quality gates and review processes
+<!-- </implementation_planning> -->
 
-4. **Analyze Repository Patterns**:
-   - Use `grep_search` to find existing repository implementations
-   - Use `read_file` to examine repository structure (AbstractRepositoryAdapter)
-   - Document data access patterns
-   - Document query patterns
+**Core Logic**: Execute following protocol requirements
+- Apply Propose-Act protocol for design approval
+- Complete all mandatory prerequisite analyses before design
+- Ensure design aligns with existing codebase patterns
+- Provide comprehensive technical specifications
+- Include complete implementation planning
 
-5. **Create Architecture Summary**:
-   - Document existing patterns you'll follow
-   - Document existing components you'll extend
-   - Document integration points with existing services
-   - Note any architectural constraints
+### 3. Validation Phase
+You WILL validate results meet all requirements:
+- Confirm design addresses all functional requirements
+- Verify design addresses all non-functional requirements
+- Ensure architecture follows existing codebase patterns
+- Validate technical decisions are well-justified
+- Confirm implementation plan is realistic and achievable
+- Verify design is ready for codebase validation phase
 
-**Quality Gate:** If you cannot provide specific file paths and class names from the codebase for existing patterns, you have NOT completed Step 0.2 properly. Go back and analyze deeper.
+## Output Format
+You WILL generate outputs following this structure:
+- Primary deliverable: Complete technical design document following template structure
+- Requirements analysis summary with all FR and NFR items
+- Codebase architecture analysis with specific patterns identified
+- Design validation checklist confirming template compliance
 
-#### 1. Architecture Design
+## User Communication
+You WILL provide these updates to the user:
 
-Now that you understand both the requirements and existing architecture, design the optimal technical solution:
-Design the optimal technical solution focusing on:
+### Progress Updates
+- Confirmation when specification analysis completes with line count verification
+- Confirmation when codebase architecture analysis completes with specific patterns documented
+- Confirmation when each design phase completes
+- Status of design validation against requirements
+- Timestamp identifier used: YYYYMMDD-HHmm format
 
-- **System Architecture**
-  - High-level component architecture and relationships
-  - Service layer organization and responsibilities  
-  - Data flow and integration patterns
-  - API design and endpoint organization
+### Completion Summary
+- Complete technical design document ready for review
+- Summary of design decisions and architectural choices
+- Validation results confirming requirement coverage
+- Files created with locations and naming conventions
 
-- **Data Model Design**
-  - Entity relationship design optimized for requirements
-  - Database schema design with proper normalization
-  - Data access patterns and repository design
-  - Migration strategy for schema changes
+### Next Steps
+You WILL clearly define:
+- Design document ready for codebase validation (Step 2.2)
+- Technical design validated against specification requirements
+- Architecture aligned with existing codebase patterns
+- Implementation plan ready for development team review
 
-- **Security Architecture**
-  - Authentication and authorization approach
-  - Role-based access control design
-  - Security validation and enforcement patterns
-  - Data protection and privacy considerations
+## Domain-Specific Rules
+You MUST follow these constraints:
+- Rule 1: NEVER proceed with design without completing specification analysis (entire document read and documented)
+- Rule 2: NEVER proceed with design without completing codebase architecture analysis (specific patterns documented with file paths)
+- Rule 3: Design MUST align with existing entity, service, controller, and repository patterns
+- Rule 4: Design MUST address ALL functional and non-functional requirements from specification
+- Rule 5: Design MUST use existing security patterns (@BirdAuthorized) and transaction patterns (@BirdTransaction)
+- Rule 6: Design MUST be production-ready and follow established architectural best practices
+- Rule 7: Implementation plan MUST be realistic and achievable with specified technology stack
+- Rule 8: Design MUST include comprehensive error handling and validation strategies
 
-- **User Interface Design**
-  - UI component organization and structure
-  - User experience flow and interaction patterns
-  - Frontend architecture and state management
-  - Responsive design and accessibility considerations
-
-#### 2. Technical Solution Design
-Define implementation approach covering:
-
-- **API Design**
-  - REST endpoint specification with request/response schemas
-  - Service layer interfaces and contracts
-  - Error handling and validation patterns
-  - API versioning and backward compatibility
-
-- **Business Logic Organization**
-  - Service layer design and business rule implementation
-  - Transaction boundaries and data consistency
-  - Workflow and process management
-  - Integration with external systems
-
-- **Performance and Scalability**
-  - Caching strategies and performance optimization
-  - Database indexing and query optimization
-  - Scalability considerations and bottleneck prevention
-  - Monitoring and observability design
-
-#### 3. Implementation Planning
-Plan the development approach including:
-
-- **Technology Stack Selection**
-  - Framework and library choices with justification
-  - Development tools and build pipeline requirements
-  - Testing framework and quality assurance approach
-  - Deployment and infrastructure considerations
-
-- **Development Strategy**
-  - Implementation phases and milestone planning
-  - Risk mitigation and technical challenges
-  - Team organization and skill requirements
-  - Quality gates and review processes
-
-### Interactive Elements
-
-During the design process, please:
-
-1. **Clarify Requirements**
-   - Ask for clarification on ambiguous functional requirements
-   - Confirm non-functional requirement priorities and trade-offs
-   - Validate assumptions about user workflows and data volumes
-
-2. **Present Design Options**
-   - Offer alternative architectural approaches when applicable
-   - Explain trade-offs between different technical solutions
-   - Recommend optimal approaches based on requirements
-
-3. **Validate Design Decisions**
-   - Confirm that design meets all functional requirements
-   - Verify that non-functional requirements are addressed
-   - Ensure design is maintainable and extensible
-
-### Output Format
-
-**Structure:** Follow the comprehensive design template defined in ../templates/template-design-document.md including:
-
-### Document Standards
-- Complete architecture diagrams and component relationships
-- Detailed API specifications with schemas
-- Database design with ERD and migration plans
-- Security design with authentication/authorization details
-- UI/UX design with mockups and user flows
-- Implementation planning with technology stack and development strategy
-
-**Template Reference:** ../templates/template-design-document.md provides complete structure for technical design documentation.
-
-### Success Criteria
-
-- Design addresses all functional and non-functional requirements
-- Architecture is scalable, maintainable, and follows best practices
-- Technical decisions are well-justified and documented
-- Implementation plan is realistic and achievable
-- Design is ready for codebase validation in next step
-
-### � Pre-Design Completion Checklist
-
-Before declaring Step 2.1 complete, verify:
-
-**Specification Analysis:**
-- [ ] Read ENTIRE specification document (verified line count)
-- [ ] Documented all functional requirements (FR-001 through FR-XXX)
-- [ ] Documented all non-functional requirements (NFR-001 through NFR-XXX)
-- [ ] Understood data model requirements
-- [ ] Understood integration requirements
-- [ ] Noted constraints and assumptions
-
-**Codebase Analysis:**
-- [ ] Analyzed entity patterns (file paths and class names documented)
-- [ ] Analyzed service patterns (specific service implementations examined)
-- [ ] Analyzed controller patterns (specific controllers examined)
-- [ ] Analyzed repository patterns (specific repository implementations examined)
-- [ ] Documented existing patterns to follow/extend
-
-**Design Completeness:**
-- [ ] Entity design aligns with existing entity patterns
-- [ ] Service design aligns with existing service patterns
-- [ ] API design aligns with existing controller patterns
-- [ ] Repository design aligns with existing repository patterns
-- [ ] All requirements addressed in design
-- [ ] Technology stack matches existing stack
+## Success Criteria
+You WILL consider the task complete when:
+- [ ] Complete specification analysis performed (all FR and NFR items documented)
+- [ ] Complete codebase architecture analysis performed (specific patterns and file paths documented)
+- [ ] Technical design addresses all functional requirements
+- [ ] Technical design addresses all non-functional requirements
+- [ ] Architecture aligns with existing codebase patterns
+- [ ] API design follows existing controller patterns
 - [ ] Security design uses existing @BirdAuthorized patterns
 - [ ] Transaction design uses existing @BirdTransaction patterns
+- [ ] Database design includes proper migration strategy
+- [ ] Implementation plan is comprehensive and realistic
+- [ ] Design document follows template structure completely
+- [ ] User approval obtained via Propose-Act protocol
+- [ ] Design ready for Step 2.2 (Design Validation)
 
-**If ANY checkbox is unchecked, Step 2.1 is INCOMPLETE.**
+## Required Actions
+1. Validate all required input parameters and prerequisites
+2. Execute mandatory specification and codebase analysis
+3. Create comprehensive technical design following existing patterns
+4. Generate outputs in specified template format
+5. Obtain user approval via Propose-Act protocol
+6. Prepare for next phase (Step 2.2 Design Validation)
 
-### �🔒 MANDATORY EXIT DECLARATION
+## Error Handling
+You WILL handle these scenarios:
+- **Specification Document Access Failed**: Request valid file path and verify document completeness
+- **Incomplete Specification Analysis**: Stop and complete full document analysis before proceeding
+- **Codebase Access Issues**: Request alternative access methods or manual pattern documentation
+- **Missing Architecture Patterns**: Request specific codebase locations or manual pattern specification
+- **Requirement Coverage Gaps**: Iterate design to address all missing requirements
+- **Template Compliance Issues**: Revise design document to match template structure exactly
+- **User Rejection During Propose-Act**: Request specific feedback and iterate design accordingly
+- **Technology Stack Misalignment**: Adjust design to match existing technology choices
 
-Upon completion of ALL checklist items, you MUST declare:
-
-**"Step 2.1 (Initial Design) is complete. Proceeding to Step 2.2 (Design Validation)."**
-
-⚠️ **YOU MUST NOT:**
-- Say "design is ready for finalization"
-- Say "ready for implementation phase"
-- Skip to Step 2.3 or 2.4
-- Ask user if they want to proceed to implementation
-
-**NEXT STEP IS ALWAYS 2.2 - NO EXCEPTIONS**
+Critical Requirements
+- MANDATORY: Complete specification analysis BEFORE any design work (verify by documenting line count)
+- MANDATORY: Complete codebase architecture analysis BEFORE any design work (verify with specific file paths and class names)
+- MANDATORY: Follow Propose-Act protocol for design approval
+- MANDATORY: Design MUST align with existing codebase patterns (entity, service, controller, repository)
+- NEVER skip prerequisite analysis phases
+- NEVER proceed to Step 2.3 or beyond without completing Step 2.2 first
+- ALWAYS declare "Step 2.1 (Initial Design) is complete. Proceeding to Step 2.2 (Design Validation)." upon completion
+- ALWAYS ensure design addresses ALL requirements from specification
+- ALWAYS validate design follows existing architectural patterns before approval

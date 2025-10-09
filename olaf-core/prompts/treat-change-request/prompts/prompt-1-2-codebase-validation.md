@@ -1,229 +1,170 @@
-﻿# Prompt 1.2: Codebase Validation & Feasibility Assessment
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to**:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
 
-## Purpose
-Validate that the specification requirements are **TECHNICALLY FEASIBLE** within the existing codebase architecture and constraints. Assess implementation reality without designing specific solutions.
+## Time Retrieval
+You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
+- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
+- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
 
-## Instructions
+You WILL use terminal commands, not training data for timestamps.
 
-Please validate and refine the specification document by conducting a comprehensive analysis of the existing codebase:
+## Input Parameters
+You MUST request these parameters if not provided by the user:
+- **specification_document**: string - Path to initial specification document (REQUIRED)
+- **codebase_access**: string - Path or access method to complete codebase (REQUIRED)
+- **architectural_docs**: string - Path to existing architectural documentation (OPTIONAL)
+- **project_id**: string - Project identifier for output naming (REQUIRED)
+- **validation_depth**: string - Level of validation detail: "standard" or "comprehensive" (OPTIONAL, default: "standard")
 
-### Input Required
-- Initial specification document: `SPECIFICATION_<PROJECT-ID>.md`
-- Access to the complete codebase
-- Existing architectural documentation (if available)
+## User Interaction Protocol
+You MUST follow the established interaction protocol strictly:
+- Act / Propose-Act / Propose-Confirm-Act (defined externally)
+- You WILL use Propose-Act for codebase validation due to moderate impact
 
-### Task
+## Process
 
-#### 1. Deep Feasibility Assessment (MANDATORY)
-Analyze the existing codebase to validate specification feasibility with **EVIDENCE-BASED VALIDATION**:
+### 1. Validation Phase
+You WILL verify all requirements:
+- Confirm specification document exists and is accessible
+- Verify codebase access is available and complete
+- Check architectural documentation availability
+- Validate project identifier format
+- Confirm validation depth requirements
 
-**🔍 CRITICAL: You MUST read actual implementation code, not just file names or summaries.**
+### 2. Execution Phase
 
-- **Security Requirements Validation**
-  - **MUST DO**: Use `grep_search` to find security configuration classes (e.g., `SecurityConfiguration`, `@BirdAuthorized`)
-  - **MUST DO**: Use `read_file` to examine actual authentication/authorization implementation
-  - **Evidence Required**: Document specific annotations, security filter chains, role definitions with file paths and line numbers
-  - **Example**: "`@BirdAuthorized` annotation found in `SecurityAspect.java:45` supports DESIGNER, APPROVER, RELEASE roles"
-  - Verify that required authentication/authorization mechanisms are available
-  - Confirm that role-based access control supports required permissions
-  - Validate that security annotations can enforce required access patterns
-  - Check for any security constraints that would block requirements
+**Deep Feasibility Assessment:**
+<!-- <feasibility_analysis> -->
+You MUST analyze existing codebase to validate specification feasibility with EVIDENCE-BASED assessment:
+- You WILL examine current architecture patterns and constraints
+- You MUST identify technical dependencies and integration points
+- You WILL assess data flow and storage requirements compatibility
+- You MUST evaluate security and authentication framework alignment
+- You WILL analyze performance and scalability implications
+- You MUST check third-party service integration feasibility
+<!-- </feasibility_analysis> -->
 
-- **Data and Transaction Feasibility**
-  - **MUST DO**: Use `grep_search` to find entity base classes (e.g., `AbstractAuditingEntity`, inheritance strategies)
-  - **MUST DO**: Use `read_file` to examine actual entity implementations, annotations, and relationships
-  - **Evidence Required**: Document inheritance strategy (e.g., `@Inheritance(strategy = InheritanceType.JOINED)` at `Entity.java:15`), field annotations, cascade types
-  - **Example**: "DeploymentRequestIdentifierEntity uses JOINED inheritance at line 17, supports extending with ConfigurationDeploymentRequestIdentifierEntity"
-  - Confirm database schema can support required data models
-  - Validate transaction patterns support required consistency levels
-  - Check that JPA patterns can handle required entity relationships
-  - Verify migration capabilities for required schema changes
+**Technical Constraint Analysis:**
+<!-- <constraint_analysis> -->
+You MUST identify and document technical constraints:
+- You WILL catalog existing technology stack limitations
+- You MUST assess framework and library compatibility
+- You WILL evaluate database schema modification requirements
+- You MUST analyze API contract and interface constraints
+- You WILL identify deployment and infrastructure limitations
+- You MUST assess testing framework and coverage requirements
+<!-- </constraint_analysis> -->
 
-- **API and Service Layer Compatibility**
-  - **MUST DO**: Use `grep_search` to find controller endpoints and service implementations
-  - **MUST DO**: Use `read_file` to examine actual REST mappings, request/response handling, validation logic
-  - **Evidence Required**: Document endpoint paths, HTTP methods, security headers with file paths and line numbers
-  - **Example**: "Webhook endpoint `POST /webhook` at `DeploymentRepositoryController.java:572` uses HMAC-SHA256 signature validation"
-  - Validate that REST patterns support required API endpoints
-  - Confirm service layer can implement required business logic
-  - Check dependency injection supports required component integration
-  - Verify existing patterns align with functional requirements
+**Implementation Reality Check:**
+<!-- <implementation_analysis> -->
+You WILL conduct comprehensive implementation assessment:
+- You MUST validate each specification requirement against codebase reality
+- You WILL identify requirements that need modification or clarification
+- You MUST assess development effort and complexity for each feature
+- You WILL flag potential breaking changes or backward compatibility issues
+- You MUST evaluate resource and timeline implications
+- You WILL provide alternative approaches for infeasible requirements
+<!-- </implementation_analysis> -->
 
-- **State Management & Workflow Validation**
-  - **MUST DO**: Use `grep_search` to find state enums, workflow controllers, lifecycle management
-  - **MUST DO**: Use `read_file` to examine actual state transitions, validation logic, rollback mechanisms
-  - **Evidence Required**: Document enum values, state transition logic, recovery actions with file paths and line numbers
-  - **Example**: "DeploymentRequestState enum at `DeploymentRequestState.java:10` has 6 states (OPEN, SUBMITTED, SUCCESSFUL, FALLBACKED, DECLINED, FAILED) covering full lifecycle"
+**Specification Refinement:**
+<!-- <specification_refinement> -->
+You MUST produce refined specification following validation:
+- You WILL maintain original requirement intent while ensuring feasibility
+- You MUST document all modifications with technical justification
+- You WILL provide implementation recommendations and best practices
+- You MUST include risk assessment for each requirement
+- You WILL specify testing and validation approaches
+- You MUST ensure compliance with existing architectural standards
+<!-- </specification_refinement> -->
 
-- **Integration and Performance Constraints**
-  - **MUST DO**: Use `grep_search` to find integration clients, async patterns, caching mechanisms
-  - **MUST DO**: Use `read_file` to examine actual integration implementations, performance optimizations
-  - **Evidence Required**: Document integration patterns, transaction boundaries, async handling with file paths and line numbers
-  - Identify any existing integrations that could conflict with requirements
-  - Validate performance characteristics meet non-functional requirements
-  - Check for architectural constraints that would prevent implementation
-  - Assess scalability limitations that could impact requirements
+### 3. Validation Phase
+You WILL validate the refined specification meets all requirements:
+- Confirms technical feasibility within existing codebase constraints
+- Documents all constraint-driven modifications with justification
+- Includes comprehensive risk assessment and mitigation strategies
+- Provides clear implementation guidance and recommendations
+- Maintains original business intent while ensuring technical reality
+- Contains measurable acceptance criteria for each requirement
 
-#### 2. Constraint and Risk Identification
-Identify potential blockers and implementation risks:
+## Output Format
+You WILL generate outputs following this structure:
+- Primary deliverable: Refined specification document with validation results
+- Feasibility assessment report with evidence-based conclusions
+- Technical constraint documentation with impact analysis
+- Implementation roadmap with effort estimates and risk factors
+- File naming: `SPECIFICATION_VALIDATED_<PROJECT-ID>_<timestamp>.md`
 
-- **Technical Constraints**
-  - Database limitations that could prevent required data models
-  - Security framework limitations that could block access patterns
-  - Performance bottlenecks that could prevent scale requirements
-  - Integration conflicts with existing systems
+## User Communication
 
-- **Architecture Compatibility**
-  - Requirements that don't align with established patterns
-  - Functional needs that would require major architectural changes
-  - Non-functional requirements that exceed current capabilities
-  - Dependencies that could create circular references or conflicts
+### Progress Updates
+- Confirmation when specification document is successfully loaded
+- Status of codebase analysis and constraint identification
+- Progress on feasibility assessment for each requirement
+- Validation results and modification recommendations
 
-#### 3. Visual Architecture Documentation (MANDATORY)
+### Completion Summary
+- Refined specification presented for review via Propose-Act
+- Summary of all modifications made with technical justification
+- Risk assessment results with mitigation recommendations
+- Implementation roadmap with effort and timeline estimates
 
-Create Mermaid diagrams to clarify specification understanding:
+### Next Steps
+You WILL clearly define:
+- Refined specification ready for design phase (pending user approval)
+- Technical constraints documented for development team
+- Risk mitigation strategies identified and prioritized
+- Implementation recommendations ready for technical review
 
-- **🎨 REQUIRED DIAGRAMS**:
-  
-  **a) Data Model Entity Relationship Diagram**
-  - Use `erDiagram` syntax to show all entities and relationships
-  - Include cardinality (1..1, 1..*, *..*)
-  - Show inheritance with existing base classes
-  - Label foreign key relationships
-  - **Example**:
-    ```mermaid
-    erDiagram
-        DeploymentRequestIdentifierEntity ||--o{ ConfigurationOnlyDeploymentRequest : extends
-        ConfigurationOnlyDeploymentRequest ||--o{ ConfigurationFileChange : contains
-        ConfigurationOnlyDeploymentRequest }o--|| DeploymentRequest : "aggregated in"
-        ConfigurationOnlyDeploymentRequest }o--|| User : "imported by"
-    ```
+## Domain-Specific Rules
+You MUST follow these constraints:
+- Rule 1: NEVER modify requirements without technical justification
+- Rule 2: ALL feasibility assessments MUST be evidence-based from codebase analysis
+- Rule 3: Refined specification MUST preserve original business intent
+- Rule 4: ALL technical constraints MUST be documented with impact analysis
+- Rule 5: Implementation recommendations MUST be specific and actionable
+- Rule 6: Risk assessments MUST include probability and impact ratings
+- Rule 7: Alternative approaches MUST be provided for infeasible requirements
+- Rule 8: Validation results MUST be measurable and testable
 
-  **b) Workflow State Machine Diagram**
-  - Use `stateDiagram-v2` syntax to show state transitions
-  - Include all states and transition triggers
-  - Show happy path and error paths
-  - Include rollback/fallback states
-  - **Example**:
-    ```mermaid
-    stateDiagram-v2
-        [*] --> IMPORTED : PR Imported
-        IMPORTED --> SCHEDULED : Added to Deployment
-        SCHEDULED --> DEPLOYED : Deployment Success
-        SCHEDULED --> FAILED : Deployment Failure
-        DEPLOYED --> FALLBACKED : Rollback Triggered
-        FAILED --> [*]
-        FALLBACKED --> [*]
-    ```
+## Success Criteria
+You WILL consider the task complete when:
+- [ ] Specification document successfully analyzed and understood
+- [ ] Complete codebase assessment conducted with evidence gathering
+- [ ] All technical constraints identified and documented
+- [ ] Feasibility validation completed for every requirement
+- [ ] Refined specification produced maintaining business intent
+- [ ] Risk assessment completed with mitigation strategies
+- [ ] Implementation roadmap created with effort estimates
+- [ ] User approval obtained via Propose-Act protocol
 
-  **c) Integration Architecture Diagram**
-  - Use `graph TB` (top-bottom) or `graph LR` (left-right) syntax
-  - Show all external system integrations
-  - Include API endpoints and protocols
-  - Show data flow directions
-  - **Example**:
-    ```mermaid
-    graph TB
-        UI[Bird UI] --> API[Configuration API]
-        API --> Service[Configuration Service]
-        Service --> GitOps[GitOps Repository]
-        Service --> DM[Deployment Manager]
-        Service --> TR[Task Record System]
-        Service --> DB[(PostgreSQL)]
-    ```
+## Required Actions
+1. Validate all required input parameters and prerequisites
+2. Execute codebase analysis following appropriate interaction protocol
+3. Generate refined specification in specified format
+4. Provide comprehensive validation documentation
+5. Define next steps for design phase transition
 
-  **d) MVP Workflow Sequence Diagram**
-  - Use `sequenceDiagram` syntax for FR-001 manual import
-  - Show user interaction, validation steps, persistence
-  - Include error handling paths
-  - **Example**:
-    ```mermaid
-    sequenceDiagram
-        User->>+UI: Enter PR URL
-        UI->>+API: POST /import-pr
-        API->>+Service: importPullRequest()
-        Service->>+GitOps: Fetch PR Details
-        GitOps-->>-Service: PR Metadata
-        Service->>Service: Validate Configuration-only
-        Service->>+DB: Save ConfigurationOnlyDeploymentRequest
-        DB-->>-Service: Entity Saved
-        Service-->>-API: Success Response
-        API-->>-UI: Display Success
-        UI-->>-User: PR Imported
-    ```
+## Error Handling
+You WILL handle these scenarios:
+- **Specification Document Access Failed**: Provide clear error message and request valid document path
+- **Codebase Access Denied or Incomplete**: Request alternative access methods or partial analysis scope
+- **Architectural Documentation Missing**: Proceed with code-only analysis and document assumptions
+- **Invalid Project Identifier**: Request properly formatted project ID following conventions
+- **Infeasible Requirements Identified**: Provide alternative approaches and modification recommendations
+- **Technical Constraint Conflicts**: Prioritize constraints and provide resolution strategies
+- **Validation Depth Specification Unclear**: Default to standard validation and confirm scope
+- **User Rejection During Propose-Act**: Request specific feedback and iterate refinement
 
-**📋 Quality Gate**: All 4 diagrams MUST be embedded in the specification document. If any diagram is missing, validation is INCOMPLETE.
-
-#### 4. Validation Summary and Recommendations
-
-Update the specification with validation results:
-
-- **Feasibility Confirmation with Evidence**
-  - Mark each requirement as "Feasible", "Requires Modification", or "Blocked"
-  - **MUST INCLUDE**: For each "Feasible" requirement, cite specific code evidence (class names, file paths, line numbers, annotations)
-  - **Quality Gate**: If you cannot cite specific implementation details, your validation is INCOMPLETE - go deeper
-  - Document any constraints that affect requirement implementation
-  - Note existing patterns and frameworks that support requirements
-
-- **Implementation Notes (High-Level Only)**
-  - Reference existing security roles that could be leveraged (with file paths)
-  - Note existing transaction patterns that align with requirements (with annotations)
-  - Identify existing services that could be extended (with class names)
-  - Flag any requirements needing architectural discussion
-
-- **Risk Mitigation Recommendations**
-  - Suggest requirement modifications to address technical constraints
-  - Recommend alternative approaches for blocked requirements
-  - Flag high-risk requirements for design phase attention
-
-### 📋 Evidence-Based Validation Checklist
-
-Before finalizing validation, ensure you have:
-
-- ✅ Used `grep_search` to find ALL relevant components for each requirement
-- ✅ Used `read_file` to examine ACTUAL implementations (not just summaries)
-- ✅ Documented specific file paths, line numbers, class names, annotations
-- ✅ Verified inheritance patterns (e.g., `@Inheritance(strategy = ...)`)
-- ✅ Confirmed security mechanisms (e.g., filter chains, role definitions)
-- ✅ Validated state management (e.g., enum values, transitions)
-- ✅ Checked audit/transaction frameworks (e.g., `@EntityListeners`, `@BirdTransaction`)
-- ✅ Created validation table with code references for each requirement
-- ✅ **Entity Relationship Diagram** (erDiagram) embedded in specification
-- ✅ **State Machine Diagram** (stateDiagram-v2) embedded in specification
-- ✅ **Integration Architecture Diagram** (graph) embedded in specification
-- ✅ **MVP Workflow Sequence Diagram** (sequenceDiagram) embedded in specification
-
-**If you cannot check all boxes above, your validation is NOT COMPLETE.**
-
-### Output Format
-
-- **Document Name**: `SPECIFICATION_<PROJECT-ID>.md` (validation-enhanced version)
-- **Template Reference**: Use `../templates/template-specification-enhanced.md` for validation sections
-- **Content Updates**: Add feasibility assessment and constraint documentation
-- **Preservation**: Maintain all original requirements with validation status
-- **Focus**: Technical feasibility validation without detailed design decisions
-
-### Success Criteria
-
-- Each requirement validated for technical feasibility **WITH CODE EVIDENCE**
-- Validation includes specific file paths, line numbers, class names, annotations
-- Constraints and risks clearly documented
-- No detailed architectural design decisions included
-- Validation focuses on "Can we build this?" not "How will we build this?"
-- Document ready for stakeholder review with realistic expectations
-- **Quality Gate**: Every "Feasible" requirement must have at least one code reference
-
-### 🔒 MANDATORY EXIT DECLARATION
-
-Upon completion, you MUST declare:
-
-**"Step 1.2 (Codebase Validation) is complete. Proceeding to Step 1.3 (User Review)."**
-
-⚠️ **YOU MUST NOT:**
-- Say "specification is ready for finalization"
-- Say "ready for design phase"
-- Skip to Step 1.4
-- Assume user is satisfied without asking
-
-**NEXT STEP IS ALWAYS 1.3 - NO EXCEPTIONS**
-
+WARNING **Critical Requirements**
+- MANDATORY: Follow Propose-Act protocol for specification modifications
+- MANDATORY: All feasibility assessments MUST be evidence-based from actual codebase analysis
+- NEVER modify requirements without clear technical justification
+- NEVER sacrifice business intent for technical convenience
+- ALWAYS preserve requirement traceability through refinement process
+- ALWAYS provide alternative approaches for infeasible requirements
+- ALWAYS validate refined specifications maintain original business value
+- NEVER proceed without user approval for significant requirement modifications

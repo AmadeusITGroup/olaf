@@ -1,182 +1,261 @@
-# Prompt 4-3: Functional Testing Execution
+---
+name: execute-functional-testing-comprehensive
+description: Execute comprehensive functional testing through AI-driven test scenario generation, automation implementation, and validation following Gherkin-based approach
+tags: [functional-testing, test-automation, gherkin-scenarios, quality-assurance]
+---
 
-## Context Loading
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
 
-Load planning documents and implemented system:
+## Time Retrieval
+You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
+- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
+- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
 
-- Review `TEST_PLAN.md` for planned testing scenarios and coverage requirements
-- Analyze implemented codebase to understand actual functionality and business logic
-- Review documentation to understand user workflows and expected behaviors
-- Identify all user-facing features, APIs, and integration points from actual implementation
+You WILL use terminal commands, not training data for timestamps.
 
-## Functional Testing Approach
+## Input Parameters
+You MUST request these parameters if not provided by the user:
+- **test_plan_path**: string - Path to TEST_PLAN.md for planned testing scenarios and coverage requirements (REQUIRED)
+- **codebase_path**: string - Path to implemented codebase to understand actual functionality (REQUIRED)
+- **documentation_path**: string - Path to generated documentation for user workflows and expected behaviors (REQUIRED)
+- **project_id**: string - Project identifier for test file naming and tracking (REQUIRED)
+- **testing_framework**: string - Testing framework to use (cucumber, specflow, pytest-bdd) (OPTIONAL, default: "cucumber")
+- **output_directory**: string - Directory for generated test scenarios and automation code (OPTIONAL, default: "functional-tests")
 
-### Gherkin-Based Test Design
+## User Interaction Protocol
+You MUST follow the established interaction protocol strictly:
+- Act / Propose-Act / Propose-Confirm-Act (defined externally)
+- You WILL use Act protocol for functional testing execution due to systematic nature with built-in validation
 
-Create functional tests as Gherkin scenarios that can be automated:
+## Prerequisites
+You MUST verify the preceding phase/action was completed:
+1. You WILL validate expected outcomes from previous phases:
+   - Test plan document exists: `TEST_PLAN_<PROJECT-ID>.md`
+   - Implementation is complete with working codebase
+   - Documentation is available describing user workflows and system behavior
+   - All planning artifacts are complete and approved
 
-1. **Business-Readable Tests**
-   - Write scenarios in Given-When-Then format
-   - Use business language that stakeholders understand
-   - Focus on user behaviors and expected outcomes
-   - Create scenarios that validate business requirements
+## Process
 
-2. **Executable Scenarios**
-   - Design scenarios that can be automated with testing frameworks
-   - Include specific test data and expected results
-   - Create scenarios for both positive and negative test cases
-   - Ensure scenarios can be run independently and repeatedly
+### 1. Validation Phase
+You WILL verify all requirements:
+- Confirm test plan document exists and contains complete testing scenarios and coverage requirements
+- Validate codebase path contains implemented functionality and business logic
+- Check documentation path contains user workflows and expected system behaviors
+- Verify access to all user-facing features, APIs, and integration points from actual implementation
+- Confirm testing framework availability and configuration requirements
 
-3. **Comprehensive Coverage**
-   - Cover all major user workflows and business processes
-   - Include edge cases and error conditions as implemented
-   - Test integration points and external system interactions
-   - Validate business rules and data validation logic
+### 2. Execution Phase
 
-## Test Scenario Generation
+<!-- <context_loading> -->
+**Context Loading Operations:**
+You WILL execute these operations systematically:
+- Read and analyze: `TEST_PLAN.md` for planned testing scenarios and coverage requirements
+- Scan codebase: `[codebase_path]` to understand actual functionality and business logic implementation
+- Review documentation: `[documentation_path]` to understand user workflows and expected behaviors
+- Identify all user-facing features, APIs, and integration points from actual implementation analysis
+<!-- </context_loading> -->
 
-### User Journey Testing
+<!-- <gherkin_test_design> -->
+**Gherkin-Based Test Design Implementation:**
+You WILL create functional tests as executable Gherkin scenarios:
 
-**Use Template**: `../templates/template-functional-test-scenarios.md`
+**Business-Readable Test Creation:**
+- You MUST write scenarios in Given-When-Then format using business language that stakeholders understand
+- You WILL focus on user behaviors and expected outcomes from actual implemented functionality
+- You MUST create scenarios that validate business requirements as implemented in the codebase
+- You WILL ensure scenarios reflect actual system capabilities and constraints
 
-**Primary User Workflows**: Refer to the template for complete Gherkin scenario patterns including:
-- Feature and scenario structure
-- Given-When-Then format examples
-- Data-driven scenario outlines with examples
-- Error handling and edge case patterns
+**Executable Scenario Development:**
+- You MUST design scenarios that can be automated with specified testing frameworks
+- You WILL include specific test data and expected results based on actual system behavior
+- You MUST create scenarios for both positive and negative test cases as supported by implementation
+- You WILL ensure scenarios can be run independently and repeatedly with consistent results
 
-### API and Integration Testing
+**Comprehensive Coverage Implementation:**
+- You MUST cover all major user workflows and business processes as implemented
+- You WILL include edge cases and error conditions as actually handled in the codebase
+- You MUST test integration points and external system interactions as implemented
+- You WILL validate business rules and data validation logic as coded in the system
+<!-- </gherkin_test_design> -->
 
-**Use Template**: `../templates/template-functional-test-scenarios.md`
+<!-- <test_scenario_generation> -->
+**Test Scenario Generation Operations:**
+You WILL generate comprehensive test scenarios following template patterns:
 
-**REST API Testing**: Refer to the template for API testing patterns including:
-- Successful API call scenarios
-- Error handling scenarios
-- Authentication and authorization testing
+**User Journey Testing Implementation:**
+For each user workflow identified in documentation and implemented in codebase:
+- You MUST create feature files with complete scenario structure
+- You WILL implement Given-When-Then format examples with realistic test data
+- You MUST create data-driven scenario outlines with comprehensive examples tables
+- You WILL include error handling and edge case patterns as implemented in code
 
-**Integration Scenarios**: See template for patterns covering:
-- External system connectivity and data exchange
-- Database operations and data consistency
-- File processing and data import/export
-- Background job processing and scheduling
+**API and Integration Testing Implementation:**
+For each API endpoint and integration point discovered in codebase:
+- You MUST create successful API call scenarios with actual request/response structures
+- You WILL implement error handling scenarios for all error conditions coded in system
+- You MUST include authentication and authorization testing as implemented
+- You WILL create integration scenarios covering external system connectivity and data exchange
+- You MUST test database operations and data consistency as implemented
+- You WILL include file processing and data import/export scenarios if applicable
+- You MUST test background job processing and scheduling if implemented
 
-### Performance and Load Testing
+**Performance and Load Testing Implementation:**
+For performance-critical components identified in codebase:
+- You MUST create response time scenarios under normal load with specific acceptance criteria
+- You WILL implement system behavior testing under concurrent load conditions
+- You MUST define performance acceptance criteria based on actual system capabilities
+<!-- </test_scenario_generation> -->
 
-**Use Template**: `../templates/template-functional-test-scenarios.md`
+<!-- <test_automation_implementation> -->
+**Test Automation Implementation Operations:**
+You WILL generate complete automated test implementation:
 
-**Performance Scenarios**: Refer to the template for performance testing patterns including:
-- Response time under normal load
-- System behavior under concurrent load
-- Performance acceptance criteria
+**Test Framework Setup:**
+- You MUST configure Cucumber, SpecFlow, or similar Gherkin runner for specified framework
+- You WILL implement step definitions that interact with actual system endpoints and interfaces
+- You MUST create test data management procedures with setup and cleanup automation
+- You WILL configure test environments and system dependencies for automated execution
 
-## Test Automation Implementation
+**Step Definition Implementation:**
+- You MUST implement API testing steps for health checks, request execution, and response validation
+- You WILL create UI testing steps for browser navigation, user interactions, and page verification
+- You MUST implement test data management with automated setup and cleanup procedures
+- You WILL configure test environment setup and system dependency management
+- You MUST implement framework configuration for continuous integration and automated execution
+<!-- </test_automation_implementation> -->
 
-### Test Framework Setup
+<!-- <data_environment_management> -->
+**Test Data and Environment Management Operations:**
+You WILL implement comprehensive data and environment strategies:
 
-Generate automated test implementation:
+**Test Data Strategy Implementation:**
+- You MUST create test data that supports all scenario variations with realistic business examples
+- You WILL implement automated data cleanup procedures after test execution
+- You MUST use database fixtures or API-based data setup procedures
+- You WILL ensure test data isolation preventing interference between test executions
 
-- **Test Runner Configuration**: Set up Cucumber, SpecFlow, or similar Gherkin runner
-- **Step Definitions**: Implement step definitions that interact with actual system
-- **Test Data Management**: Create test data sets and cleanup procedures
-- **Environment Configuration**: Set up test environments and system dependencies
+**Environment Configuration Implementation:**
+- You MUST set up isolated test environments with proper system configuration
+- You WILL configure external system mocks or test instances for integration testing
+- You MUST manage test database state and migration procedures
+- You WILL handle configuration differences between test, staging, and production environments
 
-### Test Implementation Patterns
+**Continuous Testing Integration:**
+- You MUST integrate tests with CI/CD pipeline for automated execution
+- You WILL configure test execution triggers on code changes and deployments
+- You MUST implement test reporting and coverage metrics generation
+- You WILL set up automated alerts and notifications for test failures
+<!-- </data_environment_management> -->
 
-**Use Template**: `../templates/template-functional-test-implementation.md`
+**Core Logic**: Execute following protocol requirements
+- Apply Act protocol for systematic functional testing execution
+- Use imperative language throughout test scenario creation and automation
+- Include comprehensive error handling for all testing scenarios
+- Ensure all test scenarios reflect actual implemented functionality
+- Validate all test automation works with real system components
 
-Refer to the template for complete implementation patterns including:
-- **API Testing Steps**: Step definitions for API health checks, requests, and response validation
-- **UI Testing Steps**: Step definitions for browser navigation, user interactions, and page verification
-- **Test Data Management**: Setup and cleanup patterns for test data
-- **Environment Configuration**: Test environment setup and configuration examples
-- **Framework Setup**: Cucumber, SpecFlow, and other framework configuration patterns
+### 3. Validation Phase
+You WILL validate the functional testing implementation:
+- Confirm all key user scenarios are covered by executable Gherkin tests
+- Verify all test scenarios can be run automatically and consistently
+- Validate business rules and validation logic are verified through test scenarios
+- Ensure critical workflows are tested end-to-end with realistic data
+- Confirm test results provide clear pass/fail feedback with useful error information
+- Verify test suite integration with continuous integration systems
+- Validate test coverage meets requirements specified in the test plan
 
-## Test Data and Environment Management
+## Output Format
+You WILL generate outputs following this structure:
+- **Primary deliverable**: Complete test automation suite with executable Gherkin scenarios
+- **Gherkin Feature Files**: Business-readable test scenarios organized by feature area
+- **Step Definition Code**: Automated test implementation with framework integration
+- **Test Configuration**: Environment setup and test runner configuration files
+- **Test Data**: Realistic test data sets and fixtures with management procedures
+- **Test Reports**: Execution results templates and coverage metrics configuration
+- **Maintenance Guide**: Instructions for updating and extending test scenarios
 
-### Test Data Strategy
+## User Communication
+You WILL provide these updates to the user:
 
-**Data Setup and Cleanup**:
+### Progress Updates
+- Confirmation when test plan and context loading is completed successfully
+- Status updates during Gherkin scenario generation for each feature area
+- Progress on test automation implementation and step definition creation
+- Completion status for test data and environment management setup
+- Validation results for test execution and coverage verification
 
-- Create test data that supports all scenario variations
-- Implement data cleanup after test execution
-- Use database fixtures or API-based data setup
-- Ensure test data doesn't interfere with other tests
+### Completion Summary
+- Summary of functional testing implementation with total scenarios created
+- Test automation coverage results across all user workflows and system components
+- Integration status with CI/CD pipeline and automated execution capabilities
+- Quality validation results confirming comprehensive test coverage
+- File locations for all generated test artifacts and documentation
 
-**Environment Configuration**:
+### Next Steps
+You WILL clearly define:
+- Functional testing suite ready for continuous execution and monitoring
+- Test scenarios available for regression testing during ongoing development
+- Quality gates established for release validation and acceptance criteria
+- Monitoring and maintenance procedures for test suite evolution
 
-- Set up isolated test environments
-- Configure external system mocks or test instances
-- Manage test database state and migrations
-- Handle configuration differences between environments
+## Domain-Specific Rules
+You MUST follow these constraints:
+- Rule 1: ALL test scenarios MUST be based on actual implemented functionality, never theoretical features
+- Rule 2: Gherkin scenarios MUST use business language understandable by stakeholders
+- Rule 3: Test automation MUST work with real system endpoints and interfaces
+- Rule 4: Test data MUST be realistic and support all scenario variations
+- Rule 5: Test coverage MUST include all major user workflows and business processes
+- Rule 6: Error handling scenarios MUST reflect actual system error conditions
+- Rule 7: Integration tests MUST validate actual external system connections
+- Rule 8: Performance tests MUST use realistic load patterns and acceptance criteria
 
-### Continuous Testing Integration
-
-**Automated Test Execution**:
-
-- Integrate tests with CI/CD pipeline
-- Run tests on code changes and deployments
-- Generate test reports and coverage metrics
-- Set up alerts for test failures
-
-## Quality Validation
-
-### Test Coverage Assessment
-
-**Functional Coverage**:
-
-- All major user workflows tested
-- Business rules and validation logic verified
-- Error conditions and edge cases covered
-- Integration points validated
-
-**Technical Coverage**:
-
-- API endpoints tested with various inputs
-- Database operations verified
-- External system interactions validated
-- Performance characteristics measured
-
-### Test Maintenance
-
-**Living Test Suite**:
-
-- Tests stay current with implementation changes
-- Scenarios reflect actual user behaviors
-- Test data remains relevant and realistic
-- Test automation stays maintainable and reliable
-
-## Validation Criteria
-
-Functional testing execution is complete when:
-
-- [ ] Key user scenarios are covered by executable Gherkin tests
+## Success Criteria
+You WILL consider the task complete when:
+- [ ] All test plan requirements analyzed and converted to executable scenarios
+- [ ] Key user scenarios covered by executable Gherkin tests with business language
 - [ ] All test scenarios can be run automatically and consistently
-- [ ] Business rules and validation logic are verified through test scenarios
-- [ ] Critical workflows are tested end-to-end with realistic data
+- [ ] Business rules and validation logic verified through comprehensive test scenarios
+- [ ] Critical workflows tested end-to-end with realistic data and expected outcomes
 - [ ] Test results provide clear pass/fail feedback with useful error information
-- [ ] Test suite can be integrated with continuous integration systems
-- [ ] Test coverage meets requirements specified in the test plan
+- [ ] Test suite integrated with continuous integration systems
+- [ ] Test coverage meets all requirements specified in the test plan
+- [ ] Test automation framework configured and operational
+- [ ] Test data management and environment setup procedures implemented
+- [ ] Documentation and maintenance guides created for ongoing test evolution
 
-## Output Generation
+## Required Actions
+1. Validate all required input parameters and test plan accessibility
+2. Execute systematic functional testing implementation following Act protocol
+3. Generate comprehensive test automation suite with executable scenarios
+4. Implement test data management and environment configuration
+5. Provide complete testing deliverables ready for continuous execution
 
-### Test Suite Deliverables
+## Error Handling
+You WILL handle these scenarios:
+- **Test Plan Access Failed**: Provide clear error message and request valid file path
+- **Codebase Access Issues**: Request alternative access methods or provide manual analysis guidance
+- **Documentation Access Failed**: Request alternative documentation sources or manual workflow specification
+- **Testing Framework Configuration Issues**: Provide troubleshooting guidance and alternative framework options
+- **Test Data Generation Failures**: Offer manual test data creation alternatives with clear templates
+- **Environment Setup Issues**: Provide alternative environment configuration and troubleshooting steps
+- **Test Automation Implementation Failures**: Debug automation issues and provide corrective implementations
+- **Integration Testing Failures**: Identify integration issues and provide resolution strategies
+- **Coverage Validation Failures**: Iterate test creation addressing specific coverage gaps
 
-Generate complete test automation:
-
-- **Gherkin Feature Files**: Business-readable test scenarios
-- **Step Definition Code**: Automated test implementation
-- **Test Configuration**: Environment setup and test runner configuration
-- **Test Data**: Realistic test data sets and fixtures
-- **Test Reports**: Execution results and coverage metrics
-- **Maintenance Guide**: Instructions for updating and extending tests
-
-### Test Documentation
-
-Create supporting documentation:
-
-- **Test Execution Guide**: How to run tests locally and in CI/CD
-- **Test Data Guide**: How to manage and update test data
-- **Scenario Mapping**: Traceability from requirements to test scenarios
-- **Troubleshooting Guide**: Common test failures and solutions
-
-This prompt ensures AI generates comprehensive, executable functional tests that validate the implemented system against business requirements while providing maintainable automation for ongoing validation.
+**Critical Requirements**
+- MANDATORY: Follow Act protocol for systematic functional testing execution
+- MANDATORY: All test scenarios MUST reflect actual implemented functionality
+- NEVER create test scenarios for features not implemented in the codebase
+- NEVER use placeholder or theoretical test data that doesn't work with actual system
+- ALWAYS ensure test automation works with real system endpoints and interfaces
+- ALWAYS validate that Gherkin scenarios use business language understandable by stakeholders
+- ALWAYS implement comprehensive error handling for all testing scenarios
+- ALWAYS provide realistic test data supporting all scenario variations
+- ALWAYS ensure test coverage meets all requirements specified in test plan
+- NEVER declare completion without full validation of automated test execution
