@@ -1,3 +1,9 @@
+---
+name: project-complexity-rating
+description: Project complexity rating levels and criteria used to modify size classification in the Change Evaluation Matrix
+tags: [decision-matrix, complexity, governance]
+---
+
 # Project Complexity Rating
 
 **Purpose**: Rate the overall complexity and criticality of the BIRD project to influence change size classification.

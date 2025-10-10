@@ -1,169 +1,261 @@
-# Orchestrator Prerequisite: Demand Document Analysis
-
-**Purpose**: Analyze demand documents from a specified folder and create a structured change request document with Epic, Features, and User Stories.
-
-**Version**: 1.0  
-**Last Updated**: October 8, 2025  
-**Owner**: Engineering Architecture Team
-
+---
+name: orchestrator-prerequisite-workflow
+description: Master/orchestrator workflow that coordinates prerequisite demand analysis and change request generation (Prerequisite-0 → Prerequisite-1 → Prerequisite-2)
+tags: [workflow, orchestrator, prerequisite, demand-analysis, change-request, coordination]
 ---
 
-## Overview
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
 
-Entry point for demands that exist as documents in a folder. Ensures work is done in a proper branch, scans all provided documents, extracts information without interpretation, and structures them into a change request document.
+## orchestrator-prerequisite-workflow: Demand Document Analysis Orchestrator Workflow
 
-Executes three workflows in sequence:
+> Note: All files referenced below are either prompts located in `[id:prompts_dir]` or tools located in `[id:tools_dir]`, as specified in the memory map file.
+> The solution to analyze is in `[id:core_dir]` and all new non-temporary created files are to be created in `[id:findings_dir]` folder.
 
-1. Git branch validation and setup
-2. Demand document gathering and analysis
-3. Change request document generation
+## Template Variables
+- `[WORKFLOW_NAME]`: orchestrator-prerequisite-workflow
+- `[WORKFLOW_DESCRIPTION]`: Analyze demand folder and generate structured change request
+- `[SUB_WORKFLOW_NAME]`: Git Branch Setup | Demand Analysis | Change Request Generation
+- `[sub-workflow-file]`: treat-change-request/workflows/prerequisite/workflow-prerequisite-0-git-branch-setup | treat-change-request/workflows/prerequisite/workflow-prerequisite-1-demand-analysis | treat-change-request/workflows/prerequisite/workflow-prerequisite-2-change-request-generation
+- `[descriptive-orchestrator-log-name]`: prerequisite-orchestrator-execution-log
+- `[descriptive-final-output-name]`: prerequisite-final-output
+- `[sub-workflow-output-file]`: prerequisite-0-branch-setup.md | prerequisite-1-demand-inventory.md | prerequisite-2-extracted-information.md | prerequisite-3-change-request.md
+- `[orchestrator-state-name]`: orchestrator-prerequisite-state
+- `[unique-execution-id]`: prerequisite-[timestamp]
+- `[transformation-description]`: Extract and transform document contents into structured change request while preserving literal fidelity
 
----
+## Workflow Type
+Master/Orchestrator - Chains and coordinates complete sub-workflows and prompts in sequence
 
-## Workflows
+## Workflow Overview
+Executes three sub-workflows to prepare prerequisites:
+1) Validate and set up Git branch.
+2) Gather and analyze demand documents from a folder (inventory + literal extraction).
+3) Generate a structured change request with Epic, Features, and User Stories when available.
 
+## Prerequisites
+- Demand Folder Path provided and accessible
+- Optional MCP server access (JIRA/Confluence/GitHub) available if needed
+- Repository access for branch operations
+
+## Input Requirements
+- Primary Input: Demand Folder Path; optional MCP server access; optional Requestor
+- Configuration Input: Output directory under `[id:findings_dir]`
+- Input Format: Markdown/YAML artifacts for outputs; JSON for orchestrator state/log
+
+## Output Specifications
+- Orchestrator Log: `prerequisite-orchestrator-execution-log.json`
+- Final Consolidated Output: `prerequisite-final-output.json`
+- Sub-workflow Outputs:
+  - `prerequisite-0-branch-setup.md`
+  - `prerequisite-1-demand-inventory.md`
+  - `prerequisite-2-extracted-information.md`
+  - `prerequisite-3-change-request.md`
+- Tracking File: `prerequisite-tracking.md`
+- Output Location: `[id:findings_dir]`
+
+## Sub-Workflow Chain
+
+### Sub-Workflow 1: Git Branch Setup (Prerequisite-0)
+- Type: Sequential
+- Prompt/Workflow: `[id:prompts_dir]treat-change-request/workflows/prerequisite/workflow-prerequisite-0-git-branch-setup.md`
+- Input Requirements:
+  - Primary: Current git repository state
+- Output Produced: `prerequisite-0-branch-setup.md`
+- Description: Validate git state and ensure work proceeds on a non-main branch
+- Success Criteria: `prerequisite-0-branch-setup.md` exists and branch validation succeeds
+- Failure Handling: Report and pause; request corrective action to establish proper branch
+
+### Sub-Workflow 2: Demand Analysis (Prerequisite-1)
+- Type: Sequential
+- Prompt/Workflow: `[id:prompts_dir]treat-change-request/workflows/prerequisite/workflow-prerequisite-1-demand-analysis.md`
+- Input Requirements:
+  - Primary: Demand folder path; optional MCP server access
+  - From Previous: Confirmation that git branch is valid
+- Output Produced: `prerequisite-1-demand-inventory.md`, `prerequisite-2-extracted-information.md`
+- Description: Inventory all documents and extract all literal information with no omissions or inventions
+- Success Criteria: All documents scanned; all extractable information captured
+- Failure Handling: If folder not found or empty, stop and report; if unreadable docs, list and proceed with readable
+
+### Sub-Workflow 3: Change Request Generation (Prerequisite-2)
+- Type: Sequential
+- Prompt/Workflow: `[id:prompts_dir]treat-change-request/workflows/prerequisite/workflow-prerequisite-2-change-request-generation.md`
+- Input Requirements:
+  - Primary: Artifacts from Demand Analysis
+- Output Produced: `prerequisite-3-change-request.md`
+- Description: Structure a change request (Epic, Features, User Stories) when information is available
+- Success Criteria: Change request generated per available information; no invention or interpretation
+- Failure Handling: If information incomplete, mark sections as [Not Provided]; do not invent; proceed with what is available
+
+## Data Flow Between Sub-Workflows
+
+### Input/Output Chain
 ```
-Orchestrator-Prerequisite
-├── Workflow Prerequisite-0: Git Branch Setup
-├── Workflow Prerequisite-1: Demand Analysis
-└── Workflow Prerequisite-2: Change Request Generation
+[Demand Folder Path]
+    ↓
+[Git Branch Setup] → prerequisite-0-branch-setup.md
+    ↓
+[Demand Analysis] → prerequisite-1-demand-inventory.md + prerequisite-2-extracted-information.md
+    ↓
+[Change Request Generation] → prerequisite-3-change-request.md
+    ↓
+[Consolidated Final Output]
 ```
 
----
+### Data Transformation Points
+- Between Demand Analysis & Change Request Generation: Map extracted information to structured sections (Epic/Features/User Stories) when present; otherwise retain flat extraction
+- Final Consolidation: Combine inventory, extracted info, and structured change request into final outputs and log
 
-## Inputs
+## Orchestrator Control Logic
 
-| Input | Description | Required |
-|-------|-------------|----------|
-| **Demand Folder Path** | Absolute or relative path to the folder containing demand documents | Yes |
-| **MCP Server Access** | Optional access to JIRA, Confluence, GitHub via MCP server | No |
-| **Requestor** | Person requesting the change | No |
+### Execution Flow
+```
+1. VALIDATE orchestrator prerequisites (folder path exists; repo state ok)
+2. PREPARE inputs for Git Branch Setup
+3. FOR each sub-workflow in chain:
+   a. VALIDATE sub-workflow prerequisites
+   b. PREPARE sub-workflow inputs from previous outputs
+   c. EXECUTE sub-workflow
+   d. VALIDATE sub-workflow completion
+   e. LOG sub-workflow results
+   f. PREPARE outputs for next sub-workflow
+4. CONSOLIDATE all sub-workflow outputs
+5. GENERATE final orchestrator output
+```
 
----
+## Template Validation
+- All `[id:...]` references must exist in memory map
+- All sub-workflow files exist in `[id:prompts_dir]treat-change-request/workflows/prerequisite/`
+- Sub-workflow chain is Prerequisite-0 → Prerequisite-1 → Prerequisite-2
+- Data flow between sub-workflows is compatible and traceable
+- State management/log files are structured in JSON
+- Error recovery strategies defined per sub-workflow
+- No circular dependencies between sub-workflows
 
-## Outputs
+### Error Recovery Strategy
+- Sub-Workflow Failure: Pause orchestrator, capture error context in log, request correction, allow resume
+- Chain Interruption: Resume from last successful sub-workflow using state file
+- Data Corruption: Re-generate affected outputs from prior validated step; maintain backups
+- Rollback Capability: Keep intermediate artifacts; rollback by reverting to prior validated state
 
-| Output | Description |
-|--------|-------------|
-| **Demand Inventory** | List of all documents found in the folder |
-| **Change Request Document** | Structured document with Epic, Features, User Stories |
-| **Analysis Directory** | Complete analysis with all artifacts |
-| **Tracking File** | `prerequisite-tracking.md` - Progress tracking for all workflows |
+## Progress Tracking
 
----
+### Orchestrator State File: `orchestrator-prerequisite-state.json`
+```json
+{
+  "orchestrator_name": "orchestrator-prerequisite-workflow",
+  "execution_id": "prerequisite-[timestamp]",
+  "start_time": "2025-07-28T14:00:00Z",
+  "current_status": "running|paused|completed|failed",
+  "completed_sub_workflows": [
+    {
+      "name": "git-branch-setup",
+      "status": "completed",
+      "output": "prerequisite-0-branch-setup.md",
+      "completion_time": "2025-07-28T14:10:00Z"
+    }
+  ],
+  "current_sub_workflow": {
+    "name": "demand-analysis",
+    "status": "running",
+    "start_time": "2025-07-28T14:10:00Z"
+  },
+  "pending_sub_workflows": [
+    "change-request-generation"
+  ],
+  "overall_progress": {
+    "completed": 1,
+    "total": 3,
+    "percentage": 33
+  }
+}
+```
 
-## Workflow Execution
+## Sub-Workflow Coordination
 
-### Workflow Prerequisite-0: Git Branch Setup
+### Input Preparation Logic
+```json
+{
+  "input_preparation_rules": {
+    "git-branch-setup": {
+      "sources": ["orchestrator_input"],
+      "transformations": ["validate-git-state"]
+    },
+    "demand-analysis": {
+      "sources": ["demand_folder_path"],
+      "transformations": ["inventory-documents", "extract-literal-information"]
+    },
+    "change-request-generation": {
+      "sources": ["demand-analysis.outputs"],
+      "transformations": ["map-extraction-to-structure"]
+    }
+  }
+}
+```
 
-**File**: `../workflows/prerequisite/workflow-prerequisite-0-git-branch-setup.md`
+### Output Consolidation Logic
+```json
+{
+  "consolidation_rules": {
+    "final_output_structure": {
+      "orchestrator_metadata": {
+        "execution_summary": "from orchestrator-prerequisite-state.json",
+        "sub_workflow_results": "summary of each sub-workflow"
+      },
+      "consolidated_data": {
+        "primary_results": "structured change request + inventory + extraction",
+        "secondary_data": "notes on MCP usage and exceptions"
+      },
+      "validation_results": {
+        "overall_success": "boolean",
+        "sub_workflow_successes": "array of individual results"
+      }
+    }
+  }
+}
+```
 
-**Input**: Current git repository state
+## User Interaction Points
 
-**Outputs**: `prerequisite-0-branch-setup.md`
+### Orchestrator-Level Approvals
+- Start Execution: "This orchestrator will execute 3 sub-workflows in sequence. Proceed?"
+- Critical Checkpoints: Folder/path validation; Extraction completeness confirmation; Change request structure confirmation
+- Sub-Workflow Failures: "Sub-workflow [X] failed. Continue/Retry/Abort?"
 
-**Validation**: Work is being done in appropriate branch (not main/master)
+### Progress Reporting
+- Status Updates: After each sub-workflow completion
+- Milestone Notifications: Branch validated; Demand analyzed; Change request generated
+- Completion Summary: Final orchestrator execution summary
 
----
+## Validation and Completion
 
-### Workflow Prerequisite-1: Demand Analysis
+### Sub-Workflow Validation
+- [ ] Each sub-workflow completed successfully
+- [ ] All sub-workflow outputs generated and validated
+- [ ] No critical errors in sub-workflow chain
 
-**File**: `../workflows/prerequisite/workflow-prerequisite-1-demand-analysis.md`
-
-**Input**: Demand folder path, optional MCP server access
-
-**Outputs**: `prerequisite-1-demand-inventory.md`, `prerequisite-2-extracted-information.md`
-
-**Validation**: All documents scanned, all information extracted without omission or invention
-
----
-
-### Workflow Prerequisite-2: Change Request Generation
-
-**File**: `../workflows/prerequisite/workflow-prerequisite-2-change-request-generation.md`
-
-**Input**: Artifacts from Workflow Prerequisite-1
-
-**Outputs**: `prerequisite-3-change-request.md`
-
-**Validation**: Change request structured with Epic, Features, and User Stories (if information available)
-
----
+### Orchestrator Validation
+- [ ] All sub-workflows executed in correct sequence
+- [ ] Data flow between sub-workflows successful
+- [ ] Final consolidated output generated
+- [ ] Orchestrator state properly maintained
+- [ ] All intermediate files preserved for audit
 
 ### Completion Criteria
-
-✅ **Prerequisite orchestrator execution is complete when**:
-
-1. Work is being done in appropriate branch (not main/master)
-2. All documents in the folder have been scanned
-3. All information extracted without omission
-4. Change request document generated with available structure
-5. No data invented or interpreted beyond what's in the documents
-6. MCP server used only if needed and accessible
-
----
-
-## Success Criteria
-
-This orchestrator is successful when:
-
-### Required Outputs (File Validation)
-
-- ✅ **Workflow Prerequisite-0 outputs exist**: `prerequisite-0-branch-setup.md`
-- ✅ **Workflow Prerequisite-1 outputs exist**: `prerequisite-1-demand-inventory.md`, `prerequisite-2-extracted-information.md`
-- ✅ **Workflow Prerequisite-2 outputs exist**: `prerequisite-3-change-request.md`
-
-### Required Content Validation
-
-- ✅ All documents in the folder have been inventoried
-- ✅ All extractable information has been captured
-- ✅ No data has been omitted from the source documents
-- ✅ No data has been invented or assumed
-- ✅ No interpretation beyond literal extraction has been made
-- ✅ Epic, Features, User Stories structured if information is available in documents
-- ✅ MCP server accessed only if information is incomplete and server is available
-
----
-
-## Next Steps
-
-After this orchestrator completes:
-
-1. **Review** the generated change request document for completeness
-2. **Supplement** any missing information if needed
-3. **Route** to **Orchestrator-0-Router** for sizing and workflow assignment
-4. **Optional**: Update demand folder with generated artifacts for traceability
-
----
+- [ ] All three sub-workflows in chain completed
+- [ ] Final consolidated output validated
+- [ ] Orchestrator execution log complete
+- [ ] No unresolved errors or warnings
 
 ## Principles
+- No Omission | No Invention | No Interpretation | No Assumptions | Structure When Possible
 
-This orchestrator follows strict principles:
-
-- **No Omission**: Every piece of information in the source documents must be captured
-- **No Invention**: Do not create data that doesn't exist in the sources
-- **No Interpretation**: Extract literally, do not infer team knowledge or application details
-- **No Assumptions**: If information is missing, mark it as [Not Provided] rather than guessing
-- **Structure When Possible**: If documents contain Epic/Feature/User Story information, structure it. If not, capture in flat format.
-
----
-
-## Exception Handling
-
-If during workflow execution:
-
-- **Folder not found**: Stop and request correct path
-- **No documents found**: Report empty folder, cannot proceed
-- **Documents unreadable**: List problematic files, proceed with readable ones
-- **MCP server unavailable**: Continue without it, note in output
-- **Information incomplete**: Mark missing sections as [Not Provided], do not invent
-
-**Actions**: Document in workflow outputs, complete what's possible, report gaps clearly
-
----
-
-## End of Orchestrator
-
-**Version**: 1.0  
-**Execution Model**: Delegate to workflows (Prerequisite-1 → Prerequisite-2)  
-**Validation**: Check workflow outputs before completion
+## Next Steps
+- Review the generated change request document for completeness
+- Supplement missing information if needed
+- Route to `Orchestrator-0-Router` for sizing and workflow assignment
+- Optional: Update demand folder with generated artifacts for traceability

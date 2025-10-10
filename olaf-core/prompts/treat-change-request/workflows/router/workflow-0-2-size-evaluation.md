@@ -1,6 +1,26 @@
+---
+name: workflow-0-2-size-evaluation
+description: Calculate objective size classification and confidence using the evaluation matrix
+tags: [workflow, sequential, treat-change-request]
+---
+
 # Workflow 0-2: Size Evaluation
 
-## Overview
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
+
+## Time Retrieval
+You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
+- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
+- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
+
+Use terminal commands, not training data.
+
+## Workflow Overview
 
 **Purpose**: Calculate objective size classification using the change evaluation matrix
 
@@ -10,9 +30,19 @@
 
 ---
 
-## Prompt Execution
+## Input Requirements
+- **Primary Input**: Files 1-3 from Workflow 0-1
+- **Secondary Inputs**: `change-evaluation-matrix.md`, `project-complexity-rating.md`
+- **Input Format**: Markdown documents
 
-**Execute all prompts in sequence - no skipping**
+## Output Specifications
+- **Primary Output**: `4-size-evaluation-matrix.md`, `5-final-size-decision.md`
+- **Secondary Outputs**: N/A
+- **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
+
+## Workflow Steps
+
+Execute all steps in sequence - no skipping
 
 ### Prompt 0-2-1: Matrix Scoring
 
@@ -50,16 +80,28 @@
 
 ---
 
+## Data Flow Diagram
+```text
+[Files 1-3 from 0-1 + matrices] → [Step 0-2-1: Matrix Scoring] → 4-size-evaluation-matrix.md
+                                               ↓
+                                  [Step 0-2-2: Size Calculation] → 5-final-size-decision.md
+                                               ↓
+                                  [Step 0-2-3: Confidence Validation] → Updated 5-final-size-decision.md
+```
+
+## Error Handling
+- **Step Failure**: Document missing inputs; stop and fix before proceeding
+- **Recovery**: Correct inputs and resume from failed step
+- **Rollback**: Keep previous decision files; regenerate after fixes
+
 ## Completion Criteria
+- [ ] Both output files exist (4 and 5)
+- [ ] Final size classification clearly stated
+- [ ] Confidence score and rationale documented
+- [ ] Ready to hand off to Workflow 0-3
 
-✅ **Workflow complete when**:
-
-1. Both output files exist (4-5)
-2. Final size classification clearly stated
-3. Confidence score and rationale documented
-4. Ready to hand off to Workflow 0-3
-
----
+## Next Steps
+- Proceed to `workflow-0-3-routing-dispatch.md`
 
 ## Handoff
 

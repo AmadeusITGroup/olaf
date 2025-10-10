@@ -1,6 +1,26 @@
+---
+name: workflow-4-implementation-l
+description: Large change implementation executing implementation, documentation, and testing plans
+tags: [workflow, sequential, treat-change-request]
+---
+
 # Workflow 4: Implementation (L)
 
-## Overview
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
+
+## Time Retrieval
+You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
+- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
+- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
+
+Use terminal commands, not training data.
+
+## Workflow Overview
 
 **Purpose**: Execute all planned work through AI automation for large changes
 
@@ -9,6 +29,16 @@
 **Output**: Working software with documentation and functional tests
 
 ---
+
+## Input Requirements
+- **Primary Inputs**: `IMPLEMENTATION_PLAN_PHASE_*.md`, `DOCUMENTATION_PLAN_<PROJECT-ID>.md`, `TEST_PLAN_<PROJECT-ID>.md`, `DESIGN_<PROJECT-ID>.md`
+- **Secondary Inputs**: None
+- **Input Format**: Markdown plans and local repository
+
+## Output Specifications
+- **Primary Outputs**: Working codebase, complete documentation suite, automated functional test suite
+- **Secondary Outputs**: N/A
+- **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
 ## Prompt Execution
 
@@ -50,15 +80,26 @@ Execute all prompts in sequence - no skipping
 
 ---
 
+## Data Flow Diagram
+```text
+[IMPLEMENTATION_PLAN_PHASE_*.md + DESIGN.md] → [4-1 Implementation Execution] → codebase
+                                       ↓
+                           [4-2 Documentation Execution] → documentation suite
+                                       ↓
+                           [4-3 Functional Testing Execution] → functional test suite
+```
+
+## Error Handling
+- **Step Failure**: If build/tests/documentation generation fail, document and stop
+- **Recovery**: Fix issues and re-run failed step
+- **Rollback**: Use VCS to revert partial/incorrect changes if necessary
+
 ## Completion Criteria
-
-✅ **Workflow complete when**:
-
-1. All 3 prompts executed successfully
-2. Working software implements all requirements
-3. Documentation accurately describes functionality
-4. Functional tests validate business requirements
-5. System ready for deployment
+- [ ] All 3 prompts executed successfully
+- [ ] Working software implements all requirements
+- [ ] Documentation accurately describes functionality
+- [ ] Functional tests validate business requirements
+- [ ] System ready for deployment
 
 ---
 

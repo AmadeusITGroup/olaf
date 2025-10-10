@@ -1,4 +1,24 @@
+---
+name: workflow-2-design-l
+description: Large change technical design producing DESIGN_<PROJECT-ID>.md
+tags: [workflow, sequential, treat-change-request]
+---
+
 # Workflow 2: Design (L)
+
+## Framework Validation
+You MUST apply the <olaf-work-instructions> framework.
+You MUST pay special attention to:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
+You MUST strictly apply <olaf-framework-validation>.
+
+## Time Retrieval
+You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
+- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
+- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
+
+Use terminal commands, not training data.
 
 ## Overview
 
@@ -9,6 +29,16 @@
 **Output**: Complete technical design document ready for planning phase
 
 ---
+
+## Input Requirements
+- **Primary Input**: `SPECIFICATION_<PROJECT-ID>.md`
+- **Secondary Inputs**: Codebase access for validation and references
+- **Input Format**: Markdown specification, codebase
+
+## Output Specifications
+- **Primary Output**: `DESIGN_<PROJECT-ID>.md`
+- **Secondary Outputs**: N/A
+- **Output Location**: `[id:findings_dir]change-requests/[CHANGE-ID]/results/`
 
 ## Prompt Execution
 
@@ -61,6 +91,16 @@ Execute all prompts in sequence - no skipping
 **Validation**: Professional formatting applied, all sections complete
 
 ---
+
+## Data Flow Diagram
+```text
+[SPECIFICATION.md] → [2-1 Initial Design] → DESIGN.md → [2-2 Design Validation] → DESIGN.md → [2-3 Technical Review] → DESIGN.md → [2-4 Finalization] → DESIGN.md (final)
+```
+
+## Error Handling
+- **Step Failure**: Document issues; if conflicts found, loop back to specification
+- **Recovery**: Refresh analysis and update design; re-run failed step
+- **Rollback**: Maintain previous design versions before updates
 
 ## Completion Criteria
 

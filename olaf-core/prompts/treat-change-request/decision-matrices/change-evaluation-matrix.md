@@ -1,3 +1,9 @@
+---
+name: change-evaluation-matrix
+description: Decision matrix to determine XL/L/M/S/XS size classification and support routing in Orchestrator-0-Router
+tags: [decision-matrix, sizing, router, governance]
+---
+
 # Change Evaluation Matrix
 
 **Purpose**: Determine the size classification (XL/L/M/S/XS) of a change request based on objective criteria.

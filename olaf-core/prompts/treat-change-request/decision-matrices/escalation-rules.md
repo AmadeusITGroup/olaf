@@ -1,3 +1,9 @@
+---
+name: escalation-rules
+description: Rules and workflow for escalating or de-escalating change size classifications during execution
+tags: [decision-matrix, escalation, de-escalation, governance]
+---
+
 # Escalation Rules
 
 **Purpose**: Define when and how to escalate (or de-escalate) a change from one size classification to another during execution.
@@ -11,7 +17,6 @@
 ### Trigger Points for Escalation
 
 Changes should be escalated to the next larger size when:
-
 #### 1. **Scope Expansion**
 - **Trigger**: Number of files/modules/services exceeds the original estimate by >50%
 - **Example**: Started as S (5 files) but now requires 10 files
