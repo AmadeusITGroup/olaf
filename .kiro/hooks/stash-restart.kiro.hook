@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Stash Restart",
+  "description": "Resume work from available stashed work sessions",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Execute the OLAF competency for resuming stashed work. Use the prompt file: olaf-core/prompts/project-manager/stash-restart-session.md. Follow the Act protocol as defined in the OLAF framework. Resume work from available stashed work sessions and restore the previous context."
+  }
+}
