@@ -12,12 +12,6 @@ You MUST pay special attention to:
 - <olaf-interaction-protocols> - Appropriate execution protocol
 You MUST strictly apply <olaf-framework-validation>.
 
-## Time Retrieval
-You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
-- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
-- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
-
-Use terminal commands, not training data.
 
 ## Template Variables
 - `[id:templates_dir]`: Directory containing workflow templates (from <olaf-memory-map>)
@@ -29,27 +23,32 @@ Use terminal commands, not training data.
 - `[WORKFLOW_DESCRIPTION]`: Workflow description placeholder in templates
 
 ## Template Information
+
 The following standardized workflow templates are available:
 
 ### Sequential Template
+
 - **File**: `[id:templates_dir]prompt-engineer/workflow-template-sequential.md`
 - **Use For**: Step-by-step processes where each step depends on previous step output
 - **Features**: Individual tools/prompts per step, comprehensive error handling, flexible script support
 - **Best For**: Code analysis pipelines, document processing chains, multi-stage validations
 
-### Iterative Template  
+### Iterative Template 
+
 - **File**: `[id:templates_dir]prompt-engineer/workflow-template-iterative.md`
 - **Use For**: Processes that repeat until completion criteria are met
 - **Features**: State management, user authorization between iterations, progress tracking
 - **Best For**: Optimization processes, quality improvement cycles, convergence algorithms
 
 ### Decision Template
+
 - **File**: `[id:templates_dir]prompt-engineer/workflow-template-decision.md` 
 - **Use For**: Conditional branching based on data from previous workflows
 - **Features**: Lookup tables, multi-criteria decisions, multiple file format support
 - **Best For**: Classification workflows, routing logic, conditional processing
 
 ### Orchestrator Template
+
 - **File**: `[id:templates_dir]prompt-engineer/workflow-template-orchestrator.md`
 - **Use For**: Coordinating and chaining multiple complete sub-workflows
 - **Features**: Sub-workflow coordination, state tracking, data flow management, progress reporting
