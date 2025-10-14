@@ -118,6 +118,17 @@ carry-overs/*
 repo-for-test/
 research/
 
+# Findings directory - keep structure but ignore contents
+olaf-data/findings/*
+!olaf-data/findings/.gitkeep
+
+# Kiro specs - temporary exclusion
+.kiro/specs/
+
+# Product documentation conversations - keep folder structure
+olaf-data/product/documentations/conversations/*
+!olaf-data/product/documentations/conversations/.gitkeep
+
 # Temporary development files
 *_SUMMARY.md
 *_GUIDE.md
