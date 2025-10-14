@@ -13,7 +13,6 @@ from pathlib import Path
 from typing import Dict, Optional, Tuple
 import logging
 
-
 class AWSConfigManager:
     """Manages AWS configuration for OLAF Strands Agent"""
     
