@@ -1,6 +1,5 @@
-<olaf-core-principles>
 # Core Agent Principles
-
+<olaf-core-principles>
 This document contains the mandatory, binding rules that  MUST be followed at all times. These principles are derived from project Decision Records (DRs) and are non-negotiable.
 
 ## 1. Job Creation
