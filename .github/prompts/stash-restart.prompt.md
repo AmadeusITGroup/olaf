@@ -1,5 +1,0 @@
-Execute the OLAF competency for resuming stashed work.
-
-Use the prompt file: olaf-core/prompts/project-manager/stash-restart-session.md
-
-Follow the Act protocol as defined in the OLAF framework.
