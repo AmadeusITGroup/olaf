@@ -257,89 +257,174 @@ Add login/logout functionality with JWT tokens
 - Ensure atomic commits that can be safely reverted
 - Validate against project's contribution guidelines
 #
-# User Interaction Flow
+## Standardized Workflow Process
 
-### Phase 1: File Analysis & Filtering
-1. **Scan Repository**: Analyze all staged and untracked files
-2. **Filter Non-Trackable**: Automatically identify files that shouldn't be committed
-3. **Present Filtered Files**: Show user what was filtered out and why
-4. **Suggest .gitignore Updates**: Propose additions to .gitignore
-5. **User Decision**: User approves .gitignore updates or skips
+### Phase 1: Repository Analysis
+1. **Get Current Timestamp**: Use terminal command for YYYYMMDD-HHmm format
+2. **Scan Repository State**: Analyze all staged, modified, and untracked files
+3. **Get File Timestamps**: Retrieve creation and modification times for clustering
+4. **Filter Non-Trackable**: Automatically identify files that shouldn't be committed
+5. **Clean Malformed Files**: Remove any command artifacts or invalid filenames
 
-### Phase 2: Cluster Presentation & Selection
-1. **Present Clusters**: Show all proposed commit clusters
-2. **Cluster Status Indicators**:
-   - ✅ **Ready**: Clean, focused cluster
-   - ⚠️ **Needs Review**: Mixed concerns or large cluster
-   - 🔍 **Uncertain**: Files that might not belong together
-3. **User Selection**: User chooses which clusters to commit:
-   - Select individual clusters with checkboxes
-   - Modify cluster contents
-   - Split clusters into smaller commits
-   - Skip clusters entirely
+### Phase 2: Intelligent Clustering
+1. **Timestamp-Based Grouping**: Primary clustering by creation/modification time
+2. **Content Analysis**: Secondary clustering by file purpose and relationships
+3. **Semantic Grouping**: Group related functionality (features, fixes, docs, etc.)
+4. **Generate Detailed Messages**: Create comprehensive commit messages with:
+   - Conventional commit format (type(scope): description)
+   - Detailed multi-line descriptions
+   - Bullet points listing specific changes
+   - Rationale for grouping decisions
 
-### Phase 3: Execution
-1. **Commit Selected Clusters**: Only process user-approved clusters
-2. **Show Progress**: Display each commit as it's created
-3. **Handle Errors**: Gracefully handle any commit failures
-4. **Summary Report**: Show what was committed and what was skipped
+### Phase 3: Standardized Cluster Presentation
+**ALWAYS present clusters in chronological order (A, B, C, D, E, F, G, H, I, J, K, L)**
 
-## Interactive Commands During Execution
+**Each cluster MUST include:**
+- **Cluster ID**: Letter designation (A-L)
+- **Commit Type & Scope**: Conventional format
+- **File Count**: Exact number of files
+- **Complete File List**: All files with their status (new/modified/deleted)
+- **Detailed Commit Message**: Full message with description and bullet points
+- **Rationale**: Why these files are grouped together
 
+### Phase 4: User Decision Interface
+**Present standardized command options:**
 ```
-Available commands during cluster selection:
-- 'commit 1,3,5' - Commit specific clusters by number
-- 'skip 2,4' - Skip specific clusters  
-- 'modify 3' - Edit files in cluster 3
-- 'split 2' - Split cluster 2 into smaller commits
-- 'all' - Commit all ready clusters (✅ status only)
-- 'none' - Skip all clusters
-- 'review' - Show detailed view of all clusters
-- 'gitignore' - Update .gitignore with suggestions
+COMMIT OPTIONS:
+- commit A,B,E          # Commit specific clusters
+- commit A-E            # Commit range of clusters  
+- commit untested H     # Commit with UNTESTED prefix
+- wait R                # Skip cluster R for later
+- gitignore F           # Add cluster F files to .gitignore
+- gitkeep folder xxx    # Add .gitkeep to folder xxx
+
+UTILITY OPTIONS:
+- cleanup               # Remove malformed files
+- details C             # Show detailed analysis of cluster C
+- modify H              # Edit cluster H contents
+- list                  # Show cluster list again
 ```
 
-## Example User Session
+### Phase 5: Automated Execution
+1. **Process .gitignore Updates**: Add specified patterns and create .gitkeep files
+2. **Execute Commits in Order**: Process clusters one by one:
+   - `git add` files for the cluster
+   - `git commit` with detailed message
+   - Handle UNTESTED prefix when specified
+3. **Progress Reporting**: Show each commit as it's created
+4. **Final Status**: Display summary of completed actions
 
+## Standardized Cluster Presentation Format
+
+**MANDATORY FORMAT for each cluster:**
+
+```markdown
+### ✅ **Cluster A: `type(scope): description`**
+**Files (X):**
 ```
-🔍 Analyzing repository...
+file1.js                                          (new/modified/deleted)
+file2.md                                          (new/modified/deleted)
+folder/file3.py                                   (new/modified/deleted)
+```
+**Detailed Message:**
+```
+type(scope): description
 
-📊 Found 15 files:
-- 8 commitable files
-- 4 build artifacts (filtered out)
-- 2 log files (filtered out) 
-- 1 .env file (filtered out)
+Comprehensive description of what this cluster accomplishes
+- Specific change 1 with technical details
+- Specific change 2 with technical details
+- Specific change 3 with technical details
+- Impact and benefits of these changes
+```
+**Rationale:** Explanation of why these files belong together based on timestamps, content, and functionality
+```
 
-🚫 Non-trackable files detected:
-- dist/bundle.js (build artifact)
-- debug.log (log file)
-- .env (secrets)
+## Standardized Command Interface
 
-💡 Suggested .gitignore additions:
-+ dist/
-+ *.log
-+ .env
+**USER COMMANDS (case-insensitive):**
+```
+COMMIT ACTIONS:
+commit A,B,E            # Commit specific clusters by letter
+commit A-E              # Commit range of clusters
+commit untested H       # Commit cluster H with UNTESTED prefix
+commit all              # Commit all clusters
 
-❓ Add these to .gitignore? (y/n): y
+MANAGEMENT ACTIONS:
+wait R                  # Skip cluster R for this session
+gitignore F             # Add cluster F files to .gitignore
+gitkeep folder xxx      # Add .gitkeep to specified folder
 
-📦 Proposed commit clusters:
+UTILITY ACTIONS:
+cleanup                 # Remove malformed/invalid files
+details C               # Show detailed analysis of cluster C
+modify H                # Edit cluster H file contents
+list                    # Redisplay all clusters
+status                  # Show current repository status
+```
 
-✅ Cluster 1: feat(auth): add login system
-   - src/auth/login.js
-   - src/auth/login.test.js
-   - docs/auth.md
+## Execution Requirements
 
-⚠️ Cluster 2: mixed changes (needs review)
-   - src/utils/helper.js (refactor)
-   - README.md (docs update)
+### MANDATORY Workflow Steps:
+1. **Always get timestamp** using terminal command first
+2. **Always analyze file timestamps** for chronological clustering
+3. **Always present clusters A-L** in chronological order
+4. **Always use standardized format** for each cluster presentation
+5. **Always provide detailed commit messages** with bullet points
+6. **Always execute git commands** for approved clusters
+7. **Always show progress** during execution
 
-🎯 Which clusters to commit?
-Enter cluster numbers (e.g., '1,2') or commands: 1
+### MANDATORY Commit Message Format:
+```
+type(scope): concise description
 
-✅ Committing cluster 1...
-✅ Created commit: feat(auth): add login system
+Detailed explanation of what this commit accomplishes
+- Specific technical change 1
+- Specific technical change 2  
+- Specific technical change 3
+- Business impact or technical benefit
+- Any warnings or special considerations (for UNTESTED commits)
+```
 
-📋 Summary:
-- 1 cluster committed
-- 1 cluster skipped  
-- 3 files added to .gitignore
+### MANDATORY User Interface:
+```
+# 🔍 Auto-Compose Commits Analysis
+**Timestamp:** YYYYMMDD-HHmm
+**Branch:** branch-name
+**Repository:** repo-name
+
+## 📊 Repository State Analysis
+- Staged files: X
+- Untracked files: Y  
+- Deleted files: Z
+- Total files to analyze: W
+
+## 📦 Intelligent Clusters (Chronological Order)
+
+[Present each cluster using standardized format]
+
+## 🎯 CLUSTER SELECTION
+**Choose which clusters to commit:**
+
+**Commands:**
+- commit A,B,E          # Commit specific clusters
+- commit untested H     # Commit with UNTESTED prefix  
+- wait R                # Skip cluster R
+- gitignore F           # Add cluster F to .gitignore
+- gitkeep folder xxx    # Add .gitkeep to folder
+
+**Which clusters would you like to commit?**
+```
+
+### Example Complete Session:
+```
+User Input: "commit A,B,E commit untested H wait R gitignore F gitkeep folder conversations"
+
+Expected Actions:
+1. Commit clusters A, B, E normally
+2. Commit cluster H with UNTESTED prefix
+3. Skip cluster R for later
+4. Add cluster F files to .gitignore
+5. Create .gitkeep in conversations folder
+6. Execute git commands for each approved cluster
+7. Show progress and final summary
 ```
