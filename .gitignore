@@ -114,6 +114,10 @@ olaf-data/handover-conversation*.md
 carry-overs/*
 !carry-overs/.gitkeep
 
+# Test repositories and research scratch space
+repo-for-test/
+research/
+
 # Temporary development files
 *_SUMMARY.md
 *_GUIDE.md
