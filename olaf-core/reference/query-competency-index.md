@@ -93,6 +93,9 @@ To remove a competency:
   [["stash restart", "resume work", "resume stashed", "continue work", "restart from stash"], "project-manager/stash-restart-session.md", "Act"],
   [["carry over", "carry-over", "create carry over", "session carry over", "carry over note"], "project-manager/carry-over-session.md", "Act"],
   [["carry on", "carry-on", "resume from carry over", "continue from carry over", "carry on work"], "project-manager/carry-on-session.md", "Act"],
+  [["context switch", "switch context", "project switch", "change project context", "switch project"], "other-users/project-switch.md", "Act"],
+  [["compose commits", "intelligent commits", "cluster commits", "smart commits"], "developer/compose-commits.md", "Act"],
+  [["compose pr", "create pull requests", "generate prs", "pr from commits"], "developer/compose-pr.md", "Act"],
 ]
 
 end-of-competency-index
