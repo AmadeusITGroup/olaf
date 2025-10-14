@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "OLAF Reference Monitor",
+  "description": "Monitors all source files in olaf/reference directory (excluding .condensed folder) and triggers condense-olaf framework competency when files are modified",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "olaf-core/reference/**/*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Source files in the olaf/reference directory have been modified. Please run the condense-olaf framework competency to update the condensed framework documentation. Exclude any files in the .condensed subdirectory from processing."
+  }
+}
