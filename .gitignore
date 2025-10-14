@@ -122,6 +122,10 @@ olaf-data/findings/*
 olaf-data/product/documentations/conversations/*
 !olaf-data/product/documentations/conversations/.gitkeep
 
+# Test repositories and research scratch space
+repo-for-test/
+research/
+
 # Temporary development files
 *_SUMMARY.md
 *_GUIDE.md
