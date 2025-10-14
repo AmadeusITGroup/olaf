@@ -110,6 +110,9 @@ olaf-data/handover-conversation*.md
 # Development tools
 
 # Project Folders
+# Ignore all files in carry-overs but keep the folder
+carry-overs/*
+!carry-overs/.gitkeep
 
 # Findings directory - keep structure but ignore contents
 olaf-data/findings/*
