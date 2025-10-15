@@ -1,8 +1,7 @@
 <olaf-query-competency-index>
-
 # Competency Index
 
-**Last Updated:** 20250911-1338 CEDT
+**Last Updated:** 20251014-1445 CEDT
 
 ## How to Use This Index
 
@@ -21,6 +20,7 @@ Protocol to use when interacting through the chat with USER: "Propose-Act"
 Important note: All prompt files are now organized by role in [id:prompts_dir] subdirectories
 
 ## Maintenance Instructions
+
 
 To add a new competency:
 
@@ -50,20 +50,22 @@ To remove a competency:
   [["analyze changelog", "summarize changes"], "project-manager/analyze-changelog-and-report.md", "Act"],
   [["person record", "add team member"], "project-manager/create-person-record.md", "Act"],
   [["generate commits", "commits from changelog"], "project-manager/generate-commits-from-changelog.md", "Act"],
-  [["release notes", "generate release notes", "professional release notes", "create release notes"], "project-manager/generate-professional-release-notes.md", "Act"],
 
   [["review code", "check code", "code review", "examine code"], "developer/review-code.md", "Act"],
   [["review modified", "modified files", "review changes"], "developer/review-modified-files.md", "Act"],
   [["review pr", "pull request", "check pr"], "developer/review-github-pr.md", "Act"],
   [["accessibility review", "accessibility check", "wcag review", "accessibility compliance"], "developer/review-code-accessibility.md", "Act"],
-  [["analyze function", "function analysis", "function complexity", "analyze function complexity"], "developer/analyze-function-complexity.md", "Act"],
+  [["tech stack", "technical stack"], "architect/analyze-technical-stack.md", "Act"],
+  [["improve complexity", "refactor complex", "cyclomatic"], "developer/improve-cyclomatic-complexity.md", "Act"],
   [["evolve code", "iterative development"], "developer/evolve-code-iteratively.md", "Act"],
   [["augment unit tests", "augment code unit test", "unit test augmentation", "improve test coverage iteratively"], "developer/augment-code-unit-test.md", "Act"],
 
+  [["challenge me", "interactive ideation", "idea refinement", "challenge ideas", "ideation session"], "researcher/challenge-me.md", "Act"],
   [["search and learn", "learn and search", "search & learn"], "researcher/search-and-learn.md", "Act"],
   [["autonomous research", "free research", "comprehensive research", "conduct research"], "researcher/autonomous-comprehensive-research.md", "Act"],
  [["research and report", "controlled research", "supervised research", "step by step research"], "researcher/research-and-report.md", "Propose-Confirm-Act"],
   [["tech spec from code", "spec from code"], "developer/generate-tech-spec-from-code.md", "Act"],
+[["release notes", "generate release notes", "professional release notes", "create release notes"], "project-manager/generate-professional-release-notes.md", "Act"],
 
   [["bootstrap functional spec", "func spec from code"], "business-analyst/bootstrap-functional-spec-from-code.md", "Act"],
   [["user story", "story review"], "business-analyst/review-user-story.md", "Act"],
@@ -85,7 +87,16 @@ To remove a competency:
 
   [["fix code smells", "code smells"], "developer/fix-code-smells.md", "Act"],
   [["test prompt", "try prompt", "test new prompt", "validate prompt", "prompt testing"], "prompt-engineer/test-prompt.md", "Act"],
-
+  [["condense olaf", "compress olaf", "optimize olaf", "reduce olaf size", "condense framework"], "prompt-engineer/condense-olaf-framework.md", "Act"],
+  [["change request", "treat change", "handle change", "process change", "change management"], "treat-change-request/orchestrators/orchestrator-0-router.md", "Propose-Act"],
+  [["stash work", "stash current work", "pause work", "transition work", "new work session"], "project-manager/stash-work-session.md", "Act"],
+  [["stash restart", "resume work", "resume stashed", "continue work", "restart from stash"], "project-manager/stash-restart-session.md", "Act"],
+  [["carry over", "carry-over", "create carry over", "session carry over", "carry over note"], "project-manager/carry-over-session.md", "Act"],
+  [["carry on", "carry-on", "resume from carry over", "continue from carry over", "carry on work"], "project-manager/carry-on-session.md", "Act"],
+  [["context switch", "switch context", "project switch", "change project context", "switch project"], "other-users/project-switch.md", "Act"],
+  [["compose commits", "intelligent commits", "cluster commits", "smart commits"], "developer/compose-commits.md", "Act"],
+  [["compose pr", "create pull requests", "generate prs", "pr from commits"], "developer/compose-pr.md", "Act"],
 ]
+
 end-of-competency-index
 </olaf-query-competency-index>

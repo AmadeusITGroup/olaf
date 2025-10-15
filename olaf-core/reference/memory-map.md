@@ -1,12 +1,8 @@
----
-trigger: always_on
----
-
 # Project Memory Map
 <metadata>
-version: 1.4.2
-last_updated: 2025-08-04
-purpose: LLM navigation aid
+version: 1.5.0
+last_updated: 2025-10-13
+purpose: LLM navigation aid - consolidated OLAF framework
 </metadata>
 
 <olaf-memory-map>
@@ -27,7 +23,12 @@ purpose: LLM navigation aid
 - **Templates Directory** [id:templates_dir] = `[id:ack_dir]templates/`
 - **Questionnaires Directory** [id:questionnaires_dir] = `[id:ack_dir]questionnaires/`
 - **Reference Directory** [id:reference_dir] = `[id:ack_dir]reference/`
+- **Condensed Framework Directory** [id:condensed_dir] = `[id:reference_dir].condensed/`
+- **Condensed Framework** [id:condensed_framework] = `[id:condensed_dir]olaf-framework-condensed.md`
 - **Competency Index** [id:competency_index] = `[id:reference_dir]query-competency-index.md`
+- **Core Principles** [id:core_principles] = `[id:reference_dir]core-principles.md`
+- **Team Delegation** [id:team_delegation] = `[id:reference_dir]team-delegation.md`
+- **Memory Map** [id:memory_map] = `[id:reference_dir]memory-map.md`
 - **LLM vs IDE Task Guide** [id:llm_vs_ide_task_guide] = `[id:reference_dir]llm-vs-ide-task-guide.md`
 
 ### Work Environment [id:ads_dir] = `olaf-data/` 

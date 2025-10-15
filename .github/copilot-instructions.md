@@ -1,4 +1,4 @@
-# Instructions: Delegation Protocol
+# OLAF Framework - GitHub Copilot Instructions
 
 **CRITICAL FIRST STEP**: At the beginning of a new session, read and apply the complete delegation protocol from:
 

@@ -1,7 +1,6 @@
 # Instructions: Delegation Protocol
 
 <olaf-work-instructions>
-
 <olaf-session-initialization>
 ## Session Initialization
 
@@ -71,7 +70,7 @@ To ensure a balance between safety and efficiency, our interaction model is gove
 1. You WILL find and execute <olaf-session-initialization>
 2. If still missing, TELL the user: "I need to restart the session to access the OLAF framework properly"
 
-**Once validated, you WILL apply the olaf-work-instructions framework 
+**Once validated, you WILL apply the olaf-work-instructions framework
 You MUST pay special attention to**:
 - <olaf-general-role-and-behavior> - Expert domain approach
 - <olaf-interaction-protocols> - Appropriate execution protocol

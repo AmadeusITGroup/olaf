@@ -1,0 +1,149 @@
+# OLAF Framework Condensation Prompt
+
+## Task
+Condense the OLAF framework steering files into a single optimized file maintaining all functionality while reducing size by 70-80%.
+
+## Source Files to Process (STRICT LIST)
+**CRITICAL**: ONLY process these exact files. Do NOT include any content from open editor files, templates, or other sources.
+
+- `olaf-core/reference/team-delegation.md`
+- `olaf-core/reference/query-competency-index.md` 
+- `olaf-core/reference/memory-map.md`
+- `olaf-core/reference/core-principles.md`
+
+**EXCLUSIONS**: Exclude any files in the `.condensed` subdirectory from processing.
+
+## Condensation Rules
+
+### 1. Structure (Keep This Exact Order)
+```
+# OLAF Framework - Condensed
+## Session Init
+## Protocol Hierarchy & Execution
+## Protocols  
+## Memory Map
+## Core Rules
+## File References
+## Behavior
+## Competency Patterns→Workflow|Protocol
+## Framework Validation
+```
+
+### 2. Compression Techniques
+- **Competency Index**: Convert arrays to `pattern→workflow.md|Protocol` format - ONLY from `query-competency-index.md`
+- **Memory Map**: Use `var=path/` format, remove examples - ONLY from `memory-map.md`
+- **Protocols**: 1-line descriptions only - ONLY from `team-delegation.md`
+- **Protocol Hierarchy**: Include a 5-step execution process with a user-consent gate before applying any matched competency workflow (even if protocol=Act)
+- **Remove**: All examples, verbose explanations, metadata
+- **Keep**: All functional mappings, rules, and execution methodology
+
+**STRICT RULE**: Do NOT add any competencies, patterns, or content that is not explicitly present in the source reference files listed above.
+
+### 3. XML Tag Preservation (CRITICAL)
+- **MUST include ALL XML tags** from source files with their complete content
+- Required tags: `<olaf-work-instructions>`, `<olaf-general-role-and-behavior>`, `<olaf-interaction-protocols>`, `<olaf-framework-validation>`, `<olaf-core-principles>`, `<olaf-session-initialization>`, `<olaf-protocol-hierarchy>`
+- **Embed XML tags around relevant sections** - do not just reference them
+- XML tags ensure prompt compatibility and prevent LLM confusion
+
+**Example Structure:**
+```markdown
+# OLAF Framework - Condensed
+
+<olaf-session-initialization>
+## Session Init
+Framework is self-contained. No external files needed.
+</olaf-session-initialization>
+
+<olaf-protocol-hierarchy>
+## Protocol Hierarchy & Execution
+1. Session setup first (complete session-initialization)
+2. Competency first (use embedded competency patterns below, match first 2-3 words)
+3. User consent: confirm applying the matched competency workflow; proceed only on consent (even if protocol=Act)
+4. Direct execution (tell USER workflow + protocol, then execute)
+5. Request triage (ask clarification if no clear match)
+</olaf-protocol-hierarchy>
+
+<olaf-interaction-protocols>
+## Protocols
+- **Act**: Direct execution
+- **Propose-Act**: Get agreement first  
+- **Propose-Confirm-Act**: Plan→Review→Confirm→Execute
+</olaf-interaction-protocols>
+
+## Memory Map
+- core_dir=my-repo/, ack_dir=olaf-core/, ads_dir=olaf-data/
+- prompts_dir=[ack_dir]prompts/, tools_dir=[ack_dir]tools/
+
+<olaf-core-principles>
+## Core Rules
+- Jobs: Only on explicit USER instruction
+- Files: verb-entity-complement.md, kebab-case
+- Timestamps: YYYYMMDD-HHmm CEDT
+- Language: US English
+</olaf-core-principles>
+
+## File References
+Format: [id:file_id] using memory-map IDs
+
+<olaf-general-role-and-behavior>
+## Behavior
+Expert domain approach. Concise responses. No speculation. Reference sources.
+</olaf-general-role-and-behavior>
+
+## Competency Patterns→Workflow|Protocol
+pattern1|pattern2→workflow.md|Protocol
+[... all competency mappings ...]
+
+<olaf-framework-validation>
+## Framework Validation
+1. Check competency patterns sequentially
+2. Use first match: workflow file + protocol
+3. Apply protocol for user interaction
+4. Use [id:file_id] references throughout
+</olaf-framework-validation>
+
+<olaf-work-instructions>
+**BEFORE ANY TASK**: Apply olaf-general-role-and-behavior and olaf-interaction-protocols. Use embedded competency patterns and memory map for navigation.
+</olaf-work-instructions>
+```
+
+### 4. XML Tag Embedding Strategy
+- **Wrap each section** with its corresponding XML tag from the source files
+- **Session Init section** → wrap with `<olaf-session-initialization>`
+- **Protocol Hierarchy section** → wrap with `<olaf-protocol-hierarchy>`
+- **Protocols section** → wrap with `<olaf-interaction-protocols>`
+- **Core Rules section** → wrap with `<olaf-core-principles>`
+- **Behavior section** → wrap with `<olaf-general-role-and-behavior>`
+- **Framework Validation section** → wrap with `<olaf-framework-validation>`
+- **Add final wrapper** → `<olaf-work-instructions>` at the end with validation summary
+
+### 5. Formatting Standards
+- Competency patterns: `pattern1|pattern2→file.md|Protocol`
+- File paths: `dir=[parent]subdir/` 
+- References: `[id:file_id]` format only
+- No markdown headers beyond ##
+- No bullet points in competency section
+
+### 6. Content Priorities (Keep/Remove)
+**KEEP**: All competency mappings, protocols, file IDs, core rules, execution steps FROM SOURCE FILES ONLY
+**REMOVE**: Examples, explanations, metadata, duplicate information, verbose descriptions
+**NEVER ADD**: Content from open editor files, templates, or any files not in the source list above
+
+### 7. Target Metrics
+- Final size: ~3,500-4,000 characters
+- Reduction: 70-80% from original
+- All functionality preserved
+
+## Output Location (CRITICAL)
+
+**ONLY save to:** `olaf-core/reference/.condensed/olaf-framework-condensed.md`
+
+
+## Execution Instructions
+
+1. **Read ONLY the four source files listed above** - ignore all other context
+2. **Extract competency mappings ONLY from `query-competency-index.md`** - do not infer or add any others
+3. **Process according to compression rules** while maintaining strict fidelity to source content
+4. **Validate final output** contains no content from outside the source files
+
+**Action:** Create or replace `olaf-core/reference/.condensed/olaf-framework-condensed.md` with the condensed framework containing all XML tags and ONLY content from the specified source files.
