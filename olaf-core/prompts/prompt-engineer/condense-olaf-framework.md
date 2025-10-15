@@ -3,6 +3,8 @@
 ## Task
 Condense the OLAF framework steering files into a single optimized file maintaining all functionality while reducing size by 70-80%.
 
+**MANDATORY REQUIREMENT**: The condensed framework MUST be completely self-sufficient and NEVER reference any files in `olaf-core/reference/`. It must contain all necessary components embedded within itself.
+
 ## Source Files to Process (STRICT LIST)
 **CRITICAL**: ONLY process these exact files. Do NOT include any content from open editor files, templates, or other sources.
 
@@ -44,6 +46,7 @@ Condense the OLAF framework steering files into a single optimized file maintain
 - Required tags: `<olaf-work-instructions>`, `<olaf-general-role-and-behavior>`, `<olaf-interaction-protocols>`, `<olaf-framework-validation>`, `<olaf-core-principles>`, `<olaf-session-initialization>`, `<olaf-protocol-hierarchy>`
 - **Embed XML tags around relevant sections** - do not just reference them
 - XML tags ensure prompt compatibility and prevent LLM confusion
+- **MANDATORY**: All XML sections must emphasize self-sufficiency and never reference external olaf-core/reference files
 
 **Example Structure:**
 ```markdown
@@ -51,7 +54,7 @@ Condense the OLAF framework steering files into a single optimized file maintain
 
 <olaf-session-initialization>
 ## Session Init
-Framework is self-contained. No external files needed.
+**CRITICAL**: This condensed OLAF framework is completely self-sufficient and contains all necessary components. No additional files need to be loaded. You have everything required to operate effectively within this single document.
 </olaf-session-initialization>
 
 <olaf-protocol-hierarchy>
@@ -96,14 +99,22 @@ pattern1|pattern2→workflow.md|Protocol
 
 <olaf-framework-validation>
 ## Framework Validation
-1. Check competency patterns sequentially
-2. Use first match: workflow file + protocol
-3. Apply protocol for user interaction
-4. Use [id:file_id] references throughout
+**BEFORE ANY TASK**: This condensed framework contains all necessary components:
+- Memory map with project structure and file ID mappings (embedded above)
+- Core principles with behavioral rules (embedded above)
+- Competency patterns with task mappings (embedded above)
+- Interaction protocols (embedded above)
+- General role and behavior guidelines (embedded above)
+
+**All components are self-contained within this document. No external file access is required.**
+
+**You MUST apply the embedded framework components and pay special attention to**:
+- <olaf-general-role-and-behavior> - Expert domain approach
+- <olaf-interaction-protocols> - Appropriate execution protocol
 </olaf-framework-validation>
 
 <olaf-work-instructions>
-**BEFORE ANY TASK**: Apply olaf-general-role-and-behavior and olaf-interaction-protocols. Use embedded competency patterns and memory map for navigation.
+**BEFORE ANY TASK**: Apply the embedded olaf-general-role-and-behavior and olaf-interaction-protocols. Use the embedded competency patterns and memory map for navigation. This condensed framework is completely self-sufficient and contains all necessary components.
 </olaf-work-instructions>
 ```
 
@@ -145,5 +156,7 @@ pattern1|pattern2→workflow.md|Protocol
 2. **Extract competency mappings ONLY from `query-competency-index.md`** - do not infer or add any others
 3. **Process according to compression rules** while maintaining strict fidelity to source content
 4. **Validate final output** contains no content from outside the source files
+5. **MANDATORY**: Ensure the condensed framework is completely self-sufficient and never references external olaf-core/reference files
+6. **MANDATORY**: All XML sections must emphasize self-sufficiency and embedded components
 
-**Action:** Create or replace `olaf-core/reference/.condensed/olaf-framework-condensed.md` with the condensed framework containing all XML tags and ONLY content from the specified source files.
+**Action:** Create or replace `olaf-core/reference/.condensed/olaf-framework-condensed.md` with the condensed framework containing all XML tags, ONLY content from the specified source files, and mandatory self-sufficiency enforcement.

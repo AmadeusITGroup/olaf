@@ -3,17 +3,14 @@
 <olaf-session-initialization>
 ## Session Initialization
 
-**CRITICAL FIRST STEP**: At the beginning of a new session, read and apply once:
-1.  `olaf-core/memory-map.md` - Project structure and file locations
-2.  `olaf-core/reference/core-principles.md` - Core behavioral rules
-3.  `olaf-core/reference/query-competency-index.md` - Task competency mapping (read FULL file including all mappings)
+**CRITICAL FIRST STEP**: This condensed OLAF framework is completely self-sufficient and contains all necessary components. No additional files need to be loaded. You have everything required to operate effectively within this single document.
 </olaf-session-initialization>
 
 <olaf-protocol-hierarchy>
 ## Protocol Hierarchy & Execution
 
-1.  **Session Setup First**: You MUST complete <olaf-session-initialization> once at the beginning of a new session, before any other action.
-2.  **Competency First**: You MUST always consult the <olaf-query-competency-index> first.
+1.  **Session Setup First**: You MUST acknowledge this condensed framework is loaded and self-sufficient at the beginning of a new session.
+2.  **Competency First**: You MUST always consult the embedded competency patterns first.
 3.  **Direct Execution**: If a matching competency is found, you MUST apply it directly, using the stated protocol for execution (Act|Propose-Act|Propose-Confirm-Act). Tell the USER the workflow you are starting and the protocol you are using.
 4.  **Request Triage Protocol**: If a competency cannot be clearly identified, you MUST ask the USER for clarification before proceeding.
 </olaf-protocol-hierarchy>
@@ -145,21 +142,20 @@ create feature for pr|extract feature|feature branch|create feature branch|extra
 <olaf-framework-validation>
 ## Framework Validation
 
-**BEFORE ANY TASK**: You MUST ensure that you have access to:
-- <olaf-memory-map> - Project structure and file ID mappings
-- <olaf-work-instructions> - Behavioral and protocol guidelines  
-- <olaf-query-competency-index> - Task competency mappings
+**BEFORE ANY TASK**: This condensed framework contains all necessary components:
+- Memory map with project structure and file ID mappings (embedded above)
+- Core principles with behavioral rules (embedded above)
+- Competency patterns with task mappings (embedded above)
+- Interaction protocols (embedded above)
+- General role and behavior guidelines (embedded above)
 
-**If any component is missing**:
-1. You WILL find and execute <olaf-session-initialization>
-2. If still missing, TELL the user: "I need to restart the session to access the OLAF framework properly"
+**All components are self-contained within this document. No external file access is required.**
 
-**Once validated, you WILL apply the olaf-work-instructions framework
-You MUST pay special attention to**:
+**You MUST apply the embedded framework components and pay special attention to**:
 - <olaf-general-role-and-behavior> - Expert domain approach
 - <olaf-interaction-protocols> - Appropriate execution protocol
 </olaf-framework-validation>
 
 <olaf-work-instructions>
-**BEFORE ANY TASK**: Apply olaf-general-role-and-behavior and olaf-interaction-protocols. Use embedded competency patterns and memory map for navigation.
+**BEFORE ANY TASK**: Apply the embedded olaf-general-role-and-behavior and olaf-interaction-protocols. Use the embedded competency patterns and memory map for navigation. This condensed framework is completely self-sufficient.
 </olaf-work-instructions>
