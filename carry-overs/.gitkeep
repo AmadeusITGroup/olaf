@@ -1,1 +1,2 @@
-# This file keeps the carry-overs folder in git while ignoring its contents
+# This file ensures the carry-overs directory is tracked by git
+# The directory is used for session carry-over notes
