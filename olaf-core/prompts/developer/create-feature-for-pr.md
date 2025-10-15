@@ -77,10 +77,15 @@ You WILL execute these operations:
 - Allow iterative refinement of file list as user identifies more components
 - Confirm final file selection with user before proceeding
 
-### 4. Documentation Generation Phase
-You WILL create feature documentation:
+### 4. Documentation Generation Phase (Optional)
+You WILL ask user if they want feature documentation:
 
-**Documentation Creation**:
+**Documentation Decision**:
+- Ask user: "Do you want to generate comprehensive feature documentation? (y/n)"
+- **If YES**: Create feature documentation
+- **If NO**: Skip documentation generation and proceed to branch creation
+
+**Documentation Creation** (if requested):
 - Generate `docs/olaf-[feature_name].md` with:
   - Feature overview and purpose
   - Bootstrap sequence integration explanation
@@ -89,6 +94,10 @@ You WILL create feature documentation:
   - File structure and dependencies
 - Request user guidance for documentation content
 - Allow user review and iteration of documentation
+
+**Skip Documentation** (if not requested):
+- Proceed directly to branch creation phase
+- Note: Suitable for routine file updates, bug fixes, or simple changes
 
 ### 5. Branch Creation and File Extraction Phase
 You WILL execute following protocol requirements:
@@ -168,12 +177,14 @@ You MUST follow these constraints:
 - Rule 9: ALWAYS ask user before deleting local branches
 - Rule 10: Use --no-pager option with git commands that support it and may produce paginated output (like diff, log, branch -a)
 - **Rule 11: MANDATORY - Stage and commit any modified files in source branch before feature extraction (CANNOT be skipped)**
+- **Rule 12: ALWAYS ask user if they want documentation - suitable to skip for routine updates, bug fixes, or simple file changes**
 
 ## Success Criteria
 You WILL consider the task complete when:
 - [ ] Source and target branches selected by user from numbered lists
 - [ ] Feature files successfully identified and confirmed by user
-- [ ] Feature documentation generated and approved by user
+- [ ] Documentation decision made by user (generate or skip)
+- [ ] Feature documentation generated and approved by user (if requested)
 - [ ] Feature branch created from latest target branch
 - [ ] All selected files extracted from source branch
 - [ ] Changes committed and pushed to origin
@@ -185,7 +196,7 @@ You WILL consider the task complete when:
 ## Required Actions
 1. Validate repository state and branch access
 2. Discover and confirm feature files with user interaction
-3. Generate comprehensive feature documentation
+3. Ask user about documentation needs and generate if requested
 4. Create feature branch and extract files following git best practices
 5. Provide PR creation materials and cleanup options
 
@@ -208,4 +219,4 @@ You WILL handle these scenarios:
 - ALWAYS verify source branch updates are successful
 - ALWAYS provide rollback instructions for each major operation
 - NEVER proceed with file extraction if working directory is not clean
-- ALWAYS generate comprehensive documentation before code extraction
+- ALWAYS ask user about documentation needs before code extraction
