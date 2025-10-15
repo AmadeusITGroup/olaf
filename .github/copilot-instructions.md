@@ -1,7 +1,17 @@
 # OLAF Framework - GitHub Copilot Instructions
 
-**CRITICAL FIRST STEP**: At the beginning of a new session, read and apply the complete delegation protocol from:
+**CRITICAL: ALWAYS LOAD FIRST**
 
-`olaf-core/reference/team-delegation.md`
+Before responding to ANY user request, you MUST first load the condensed OLAF framework. This is mandatory for all interactions.
 
-This file contains all necessary OLAF framework instructions, behavioral guidelines, and interaction protocols.
+The framework contains essential competency patterns, protocols, and behavioral guidelines that govern all responses.
+
+**LOAD THIS IMMEDIATELY AT SESSION START:**
+
+`olaf-core/reference/.condensed/olaf-framework-condensed.md`
+
+**THEN LOAD PROJECT CONTEXT (if exists):**
+
+`olaf-data/projects/project-context.md`
+
+**DO NOT proceed with any task until the condensed framework is loaded and available.**
