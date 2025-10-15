@@ -1,0 +1,2 @@
+# This file ensures the specs directory is tracked by git
+# Specs directory should remain empty except for this .gitkeep file
