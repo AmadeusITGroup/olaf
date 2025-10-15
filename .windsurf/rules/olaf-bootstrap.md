@@ -14,4 +14,8 @@ The framework contains essential competency patterns, protocols, and behavioral 
 
 #[[file:olaf-core/reference/.condensed/olaf-framework-condensed.md]]
 
+**THEN LOAD PROJECT CONTEXT (if exists):**
+
+#[[file:olaf-data/projects/project-context.md]]
+
 **DO NOT proceed with any task until the condensed framework is loaded and available.**
