@@ -95,6 +95,12 @@ You WILL generate outputs following this structure:
 - Validation checklist: Compliance verification against template and principles
 - File location specification: `[id:prompts_dir]/[target_sub_category]/[original_name][conversion_suffix].md`
 
+### Output Path Enforcement
+- You MUST derive the canonical output filename as `<original_name><conversion_suffix>.md`.
+- You MUST save ONLY to: `[id:prompts_dir]/[target_sub_category]/<original_name><conversion_suffix>.md`.
+- You MUST NOT save converted files to any other path under `[id:prompts_dir]`.
+- If a file with the canonical name already exists, you MAY overwrite it (never overwrite the original source file).
+
 ## User Communication
 
 ### Progress Updates
@@ -116,6 +122,34 @@ You WILL clearly define:
 - Original prompt location: `[existing_prompt_path]` (preserved unchanged)
 - Converted prompt location: `[id:prompts_dir]/[target_sub_category]/[original_name][conversion_suffix].md`
 - Confirmation that conversion meets all quality standards
+
+## Execution Environment and Closeout Cleanup
+
+### Environment Selection
+- You MUST detect the intended execution environment from context:
+  - If `execution_environment` in context is `"powershell"`, you MUST use PowerShell commands.
+  - If `execution_environment` in context is `"bash"`, you MUST use Bash commands.
+  - If not provided, default to PowerShell on Windows and Bash on Unix.
+
+### Temporary Artifacts Policy
+- You MUST delete these temporary/intermediate files at the end of the conversion (Closeout step below).
+- You MUST keep ONLY the canonical converted prompt file in `[id:prompts_dir]/[target_sub_category]/`.
+
+### Closeout (Mandatory)
+- After saving the final converted prompt to the canonical path, you MUST delete all temporary/intermediate files you created during the conversion.
+- Use the appropriate command based on the selected environment:
+
+PowerShell (Windows):
+```
+Remove-Item -Path "[id:project_root]\.straf\tmp\convert\<TIMESTAMP>" -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+Bash (Unix/macOS/Linux):
+```
+rm -rf "[id:project_root]/.straf/tmp/convert/<TIMESTAMP>"
+```
+
+- If you created any additional drafts/intermediate files outside the temp folder, you MUST delete them too. Prefer deleting by exact paths you created during this run.
 
 ## Domain-Specific Rules
 You MUST follow these constraints:

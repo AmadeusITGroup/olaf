@@ -13,13 +13,14 @@ from pathlib import Path
 from typing import Dict, Optional, Tuple
 import logging
 
+
 class AWSConfigManager:
     """Manages AWS configuration for OLAF Strands Agent"""
     
     # Default configuration
     DEFAULT_PROFILE = "bedrock"
     DEFAULT_REGION = "us-east-1"
-    DEFAULT_MODEL = "us.anthropic.claude-3-5-sonnet-20241022-v2:0"  # Sonnet 4 inference profile
+    DEFAULT_MODEL = "us.anthropic.claude-sonnet-4-20250514-v1:0"  # Claude Sonnet 4 (inference profile)
     
     def __init__(self, logger: Optional[logging.Logger] = None):
         self.logger = logger or logging.getLogger(__name__)
@@ -34,7 +35,7 @@ class AWSConfigManager:
         Args:
             profile: AWS profile name (default: bedrock)
             region: AWS region (default: us-east-1)
-            model: Model ID (default: Sonnet 4 inference profile)
+            model: Model ID (default: Claude Sonnet 4)
             
         Returns:
             Dict with configuration details
@@ -148,10 +149,13 @@ class AWSConfigManager:
     def get_recommended_models(self) -> Dict[str, str]:
         """Get recommended model configurations"""
         return {
-            'sonnet_4': 'us.anthropic.claude-3-5-sonnet-20241022-v2:0',  # Inference profile
-            'sonnet_3_5': 'anthropic.claude-3-5-sonnet-20240620-v1:0',   # Direct model
-            'haiku_3_5': 'anthropic.claude-3-5-haiku-20241022-v1:0',     # Direct model
-            'opus_3': 'anthropic.claude-3-opus-20240229-v1:0'            # Direct model
+            'sonnet_4_5': 'us.anthropic.claude-sonnet-4-5-20250929-v1:0', # Claude Sonnet 4.5 (inference profile)
+            'sonnet_4': 'us.anthropic.claude-sonnet-4-20250514-v1:0',     # Claude Sonnet 4 (inference profile)
+            'sonnet_3_5_v2': 'us.anthropic.claude-3-5-sonnet-20241022-v2:0', # Claude 3.5 Sonnet v2 (inference profile)
+            'sonnet_3_5_v1': 'us.anthropic.claude-3-5-sonnet-20240620-v1:0', # Claude 3.5 Sonnet v1 (inference profile)
+            'haiku_3_5': 'us.anthropic.claude-3-5-haiku-20241022-v1:0',   # Claude 3.5 Haiku (inference profile)
+            'opus_4': 'us.anthropic.claude-opus-4-20250514-v1:0',         # Claude Opus 4 (inference profile)
+            'opus_3': 'us.anthropic.claude-3-opus-20240229-v1:0'          # Claude 3 Opus (inference profile)
         }
     
     def check_model_availability(self, model_id: str) -> Tuple[bool, str]:
@@ -194,7 +198,7 @@ def setup_aws_for_strands(profile: str = None, region: str = None, model: str = 
     Args:
         profile: AWS profile name (default: bedrock)
         region: AWS region (default: us-east-1)  
-        model: Model ID (default: Sonnet 4 inference profile)
+        model: Model ID (default: Claude Sonnet 4)
         logger: Optional logger instance
         
     Returns:

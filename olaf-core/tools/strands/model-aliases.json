@@ -1,0 +1,45 @@
+{
+  "eu": {
+    "description": "Default EU model (Sonnet 4.5)",
+    "model_id": "global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "region": "eu-central-1"
+  },
+  "eu-sonnet-4.5": {
+    "model_id": "global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "region": "eu-central-1"
+  },
+  "eu-sonnet-4": {
+    "model_id": "anthropic.claude-sonnet-4-20250514-v1:0",
+    "region": "eu-central-1"
+  },
+  "eu-novapro": {
+    "model_id": "amazon.nova-pro-v1:0",
+    "region": "eu-central-1"
+  },
+  "eu-pixtral-large": {
+    "model_id": "mistral.pixtral-large-2502-v1:0",
+    "region": "eu-central-1"
+  },
+
+  "us": {
+    "description": "Default US model (Sonnet 4.5)",
+    "model_id": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "region": "us-east-1"
+  },
+  "us-sonnet-4.5": {
+    "model_id": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "region": "us-east-1"
+  },
+  "us-sonnet-4": {
+    "model_id": "anthropic.claude-sonnet-4-20250514-v1:0",
+    "region": "us-east-1"
+  },
+  "us-mistral-large": {
+    "model_id": "mistral.mistral-large-2402-v1:0",
+    "region": "us-east-1"
+  },
+  "us-novapro": {
+    "model_id": "amazon.nova-pro-v1:0",
+    "region": "us-east-1"
+  }
+}
