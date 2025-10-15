@@ -1,0 +1,2 @@
+# This file ensures the findings directory structure is preserved in git
+# while allowing the contents to be ignored per .gitignore rules

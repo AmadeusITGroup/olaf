@@ -19,8 +19,6 @@ You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
 
 Use terminal commands, not training data.
 
-Use terminal commands, not training data.
-
 ## Input Parameters
 **IMPORTANT**: When you don't have entries provided, ask the USER to provide them.
 - **question_or_problem**: string - The specific question, problem, or type of assistance needed

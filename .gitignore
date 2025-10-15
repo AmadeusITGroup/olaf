@@ -110,6 +110,24 @@ olaf-data/handover-conversation*.md
 # Development tools
 
 # Project Folders
+# Ignore all files in carry-overs but keep the folder
+carry-overs/*
+!carry-overs/.gitkeep
+
+# Findings directory - keep structure but ignore contents
+olaf-data/findings/*
+!olaf-data/findings/.gitkeep
+
+# Kiro specs - temporary exclusion
+.kiro/specs/
+
+# Product documentation conversations - keep folder structure
+olaf-data/product/documentations/conversations/*
+!olaf-data/product/documentations/conversations/.gitkeep
+
+# Test repositories and research scratch space
+repo-for-test/
+research/
 
 # Temporary development files
 *_SUMMARY.md

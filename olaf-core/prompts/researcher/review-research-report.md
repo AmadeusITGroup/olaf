@@ -10,13 +10,7 @@ You MUST pay special attention to:
 - <olaf-general-role-and-behavior> - Expert domain approach
 - <olaf-interaction-protocols> - Appropriate execution protocol
 You MUST strictly apply <olaf-framework-validation>.
-
-## Time Retrieval
-You MUST get current time in YYYYMMDD-HHmm format using terminal commands:
-- Windows: `Get-Date -Format "yyyyMMdd-HHmm"`
-- Unix/Linux/macOS: `date +"%Y%m%d-%H%M"`
-
-You WILL use terminal commands, not training data for timestamps.
+ 
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
