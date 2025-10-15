@@ -140,6 +140,7 @@ carry on|carry-on|resume from carry over|continue from carry over|carry on work�
 context switch|switch context|project switch|change project context|switch project→other-users/project-switch.md|Act
 compose commits|intelligent commits|cluster commits|smart commits→developer/compose-commits.md|Act
 compose pr|create pull requests|generate prs|pr from commits→developer/compose-pr.md|Act
+create feature for pr|extract feature|feature branch|create feature branch|extract feature from integration→developer/create-feature-for-pr.md|Propose-Confirm-Act
 
 <olaf-framework-validation>
 ## Framework Validation
