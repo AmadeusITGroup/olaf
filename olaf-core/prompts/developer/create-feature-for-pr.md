@@ -61,6 +61,12 @@ You WILL execute these operations:
 **Feature File Identification**:
 - Switch to selected source branch: `git checkout [user_selected_source_branch]`
 - Pull latest changes: `git pull origin [user_selected_source_branch]`
+- **MANDATORY: Stage and commit any modified files in source branch**:
+  - Check for modified files: `git status --porcelain`
+  - If modified files exist, stage all: `git add .`
+  - Commit with timestamp: `git commit -m "feat: save work in progress before feature extraction - $(Get-Date -Format 'yyyyMMdd-HHmm')"`
+  - Push changes: `git push origin [user_selected_source_branch]`
+  - **CRITICAL**: This step is mandatory and cannot be skipped - ensures clean feature extraction
 - Ask user to identify which specific files and folders make up their feature
 - List the current directory structure to help user identify feature files
 - Do NOT compare branches - focus on identifying the complete feature file set
@@ -161,6 +167,7 @@ You MUST follow these constraints:
 - Rule 8: Source branch MUST be updated with latest target after feature extraction
 - Rule 9: ALWAYS ask user before deleting local branches
 - Rule 10: Use --no-pager option with git commands that support it and may produce paginated output (like diff, log, branch -a)
+- **Rule 11: MANDATORY - Stage and commit any modified files in source branch before feature extraction (CANNOT be skipped)**
 
 ## Success Criteria
 You WILL consider the task complete when:
@@ -193,6 +200,7 @@ You WILL handle these scenarios:
 - **Network Issues During Git Operations**: Provide offline alternatives and retry instructions
 
 ⚠️ **Critical Requirements**
+- **MANDATORY: Stage and commit any modified files in source branch before feature extraction (CANNOT be skipped)**
 - MANDATORY: Always create feature branch from target branch, never from source branch
 - MANDATORY: Source branch cannot be main or master
 - MANDATORY: Confirm all file selections with user before extraction
