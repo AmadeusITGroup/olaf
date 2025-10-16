@@ -274,6 +274,8 @@ ac56e32 docs(communicator): Add clean-srt-file prompt for subtitle processing
 #### **PR 01: `docs: add comprehensive release notes for v1.6.0`**
 **Commits (1):** `ad96566`
 **Risk Level:** Low | **Files Changed:** 1 file (+120, -0)
+**Files:**
+- `RELEASE_NOTES_v1.6.0.md`
 **Description:**
 ```
 Add comprehensive release notes documenting all features and improvements in v1.6.0
@@ -290,11 +292,21 @@ Document the major features, improvements, and changes delivered in version 1.6.
 - Clear communication of version changes to users
 - Historical record of framework evolution
 - Improved user adoption through transparency
+
+## Test Plan
+**Type:** Documentation Verification
+- [ ] **Content Review**: Verify all features mentioned in release notes exist in codebase
+- [ ] **Link Validation**: Check all URLs and references are accessible
+- [ ] **Format Check**: Ensure markdown formatting renders correctly
+- [ ] **Completeness**: Confirm all major changes since v1.5.x are documented
+- [ ] **Accuracy**: Cross-reference with actual implemented features
 ```
 
 #### **PR 02: `docs: add clean-srt-file prompt for subtitle processing`**
 **Commits (1):** `ac56e32`
-**Risk Level:** Low | **Files Changed:** 2 files (+120, -0)
+**Risk Level:** Low | **Files Changed:** 1 file (+120, -0)
+**Files:**
+- `olaf-core/prompts/communicator/clean-srt-file.md`
 **Description:**
 ```
 Add communicator prompt for cleaning and processing SRT subtitle files
@@ -311,11 +323,22 @@ Introduce a new prompt for processing subtitle files, enabling automated cleanin
 - Automated subtitle file processing
 - Improved video content workflow
 - Standardized subtitle formatting
+
+## Test Plan
+**Type:** Feature Functionality
+- [ ] **File Processing**: Test with various SRT file formats and encodings
+- [ ] **Validation Logic**: Verify subtitle timing and format validation works
+- [ ] **Error Handling**: Test with malformed or corrupted SRT files
+- [ ] **Output Quality**: Confirm cleaned files maintain proper formatting
+- [ ] **Integration**: Ensure prompt integrates correctly with OLAF framework
 ```
 
 #### **PR 03: `docs: add comprehensive OLAF framework design specification`**
 **Commits (1):** `668b0b2`
 **Risk Level:** Low | **Files Changed:** 2 files (+380, -0)
+**Files:**
+- `docs/future-design/olaf-complete-detailed-design.md`
+- `docs/future-design/olaf-framework-specification.md`
 **Description:**
 ```
 Add detailed design specification documenting OLAF framework architecture and future roadmap
@@ -334,11 +357,26 @@ Comprehensive documentation of the OLAF framework's design principles, architect
 - Documented design decisions and rationale
 - Roadmap for future framework evolution
 - Improved onboarding for new developers
+
+## Test Plan
+**Type:** Documentation Validation
+- [ ] **Architecture Accuracy**: Verify design spec matches current implementation
+- [ ] **Completeness**: Ensure all major components are documented
+- [ ] **Clarity**: Review with team members for comprehension
+- [ ] **Consistency**: Check alignment with existing documentation
+- [ ] **Roadmap Validity**: Confirm future plans are realistic and achievable
 ```
 
 #### **PR 04: `fix: update context switch references and remove duplicate documentation`**
 **Commits (3):** `6d5a1e3`, `2bc4208`, `9562420`
 **Risk Level:** Low | **Files Changed:** 6 files (+45, -85)
+**Files:**
+- `docs/olaf-context-switch.md` (updated)
+- `olaf-data/projects/context-monolith.md` (removed)
+- `olaf-core/reference/.condensed/olaf-framework-condensed.md` (updated)
+- `olaf-core/reference/query-competency-index.md` (updated)
+- `olaf-core/prompts/other-users/context-switch.md` (renamed from project-switch.md)
+- `olaf-core/prompts/other-users/project-switch.md` (removed)
 **Description:**
 ```
 Clean up context switch documentation and update competency references for consistency
@@ -357,11 +395,24 @@ Standardize context switch functionality by renaming files, updating references,
 - Reduced confusion from duplicate documentation
 - Cleaner codebase with proper references
 - Improved maintainability
+
+## Test Plan
+**Type:** Reference Integrity & Cleanup Verification
+- [ ] **Reference Updates**: Verify all context-switch.md references work correctly
+- [ ] **File Removal**: Confirm duplicate files are completely removed
+- [ ] **Link Validation**: Test all internal links and references
+- [ ] **Competency Function**: Verify context switch competency works as expected
+- [ ] **Documentation Consistency**: Ensure no broken references remain
+- [ ] **Regression Test**: Confirm existing functionality still works after renames
 ```
 
 #### **PR 05: `feat: add PowerShell utilities and change request documentation`**
 **Commits (3):** `a12a7f3`, `24a006b`, `79210af`
-**Risk Level:** Low | **Files Changed:** 6 files (+180, -15)
+**Risk Level:** Low | **Files Changed:** 3 files (+180, -15)
+**Files:**
+- `olaf-core/tools/convert-to-kebab-case.ps1`
+- `[change-request-reference-files]` (from 24a006b)
+- `[change-request-intent-docs]` (from 79210af)
 **Description:**
 ```
 Add PowerShell utilities for file management and enhance change request documentation
@@ -380,6 +431,15 @@ Introduce PowerShell scripts for automated file operations and improve change re
 - Improved change request traceability
 - Enhanced documentation quality
 - Better compliance with naming conventions
+
+## Test Plan
+**Type:** Utility Function & Documentation
+- [ ] **PowerShell Script**: Test kebab-case conversion with various file types
+- [ ] **Reference Updates**: Verify internal reference updating works correctly
+- [ ] **Edge Cases**: Test with special characters, long names, existing kebab-case
+- [ ] **Documentation Links**: Validate change request reference URLs are accessible
+- [ ] **Cross-Platform**: Test PowerShell script on different Windows versions
+- [ ] **Rollback**: Ensure script can be safely reversed if needed
 ```
 
 #### **PR 06: `fix: update hook configurations and framework initialization sequence`**
@@ -403,6 +463,16 @@ Update OLAF reference monitor hook configurations and enhance framework initiali
 - Consistent hook configuration across environments
 - Improved framework startup reliability
 - Better error handling and monitoring
+
+## Test Plan
+**Type:** Configuration & Integration
+- [ ] **Hook Activation**: Verify olaf-reference-monitor hook activates correctly
+- [ ] **Pattern Matching**: Test hook patterns match intended files/events
+- [ ] **Configuration Loading**: Confirm hook configuration loads without errors
+- [ ] **Framework Init**: Test framework initialization sequence works reliably
+- [ ] **Error Handling**: Verify graceful handling of hook configuration errors
+- [ ] **Cross-Environment**: Test hook functionality across different environments
+- [ ] **Performance**: Ensure hooks don't significantly impact performance
 ```
 
 #### **PR 07: `feat: add comprehensive challenge-me competency and daily reporting capabilities`**
@@ -426,6 +496,16 @@ Introduce interactive challenge-me competency for idea refinement and comprehens
 - Structured approach to idea refinement
 - Automated daily work reporting
 - Improved productivity tracking and reflection
+
+## Test Plan
+**Type:** Feature Functionality & User Experience
+- [ ] **Challenge-Me Flow**: Test complete challenge-me interactive session
+- [ ] **Idea Refinement**: Verify structured exploration generates useful insights
+- [ ] **Daily Reporting**: Test daily work report generation with various inputs
+- [ ] **User Guide**: Follow user guide step-by-step to ensure accuracy
+- [ ] **Interactive Elements**: Test all interactive prompts and responses
+- [ ] **Output Quality**: Verify generated reports and challenges are valuable
+- [ ] **Integration**: Ensure competencies integrate with existing framework
 ```
 
 #### **PR 08: `fix: comprehensive cleanup of deprecated workflows and project maintenance`**
@@ -454,6 +534,17 @@ Large-scale cleanup effort to remove deprecated workflows, fix project structure
 - Improved project structure and organization
 - Better file management and gitignore rules
 - Reduced technical debt
+
+## Test Plan
+**Type:** Cleanup Verification & Regression Testing
+- [ ] **File Removal**: Verify all deprecated files are completely removed
+- [ ] **Gitignore Rules**: Test new gitignore patterns work correctly
+- [ ] **Directory Structure**: Confirm carry-overs folder structure is proper
+- [ ] **No Broken References**: Ensure cleanup didn't break existing functionality
+- [ ] **Session Tracking**: Verify session tracking improvements work
+- [ ] **Style Consistency**: Check AWS config manager style fixes
+- [ ] **Build Process**: Ensure project still builds and runs after cleanup
+- [ ] **Regression Test**: Run full test suite to catch any broken dependencies
 ```
 
 ### 🟡 **MEDIUM RISK PRs** (Merge Second - Moderate Impact)
@@ -480,11 +571,17 @@ Add a complete API testing framework with Portman integration and Newman workflo
 - Improved API quality assurance
 - Integration with existing development processes
 
-## Testing
-- [ ] Verify Portman installation and configuration
-- [ ] Test Newman workflow generation
-- [ ] Validate API testing scenarios
-- [ ] Confirm integration with existing tools
+## Test Plan
+**Type:** Integration & Framework Testing
+- [ ] **Installation**: Verify Portman and Newman install correctly across environments
+- [ ] **Configuration**: Test framework configuration with various API specifications
+- [ ] **Workflow Generation**: Validate Newman workflow generation from different API specs
+- [ ] **Test Execution**: Run generated tests against sample APIs
+- [ ] **Error Handling**: Test framework behavior with invalid API specs
+- [ ] **Integration**: Confirm integration with existing OLAF development processes
+- [ ] **Documentation**: Verify README instructions are complete and accurate
+- [ ] **Performance**: Test framework performance with large API specifications
+- [ ] **Compatibility**: Ensure compatibility with different API formats (OpenAPI, etc.)
 ```
 
 #### **PR 10: `feat: add comprehensive session and project management with carry-over workflows`**
@@ -514,11 +611,18 @@ Add robust session management, project context handling, and carry-over workflow
 - Enhanced developer productivity
 - Standardized workflow management
 
-## Testing
-- [ ] Test session carry-over functionality
-- [ ] Verify stashing and restoration workflows
-- [ ] Validate context management system
-- [ ] Confirm Copilot integration works correctly
+## Test Plan
+**Type:** Workflow & Integration Testing
+- [ ] **Session Management**: Test complete session creation, management, and termination
+- [ ] **Carry-Over Flow**: Verify carry-over functionality preserves context correctly
+- [ ] **Stashing Workflow**: Test stashing and restoration of work sessions
+- [ ] **Context Switching**: Validate context management across different projects
+- [ ] **Copilot Integration**: Test GitHub Copilot initialization with OLAF framework
+- [ ] **Slash Commands**: Verify all slash command utilities work correctly
+- [ ] **Project Context**: Test default project context loading and management
+- [ ] **Workflow Hooks**: Ensure OLAF competency hooks trigger appropriately
+- [ ] **Data Persistence**: Verify session data persists correctly across restarts
+- [ ] **Error Recovery**: Test recovery from interrupted sessions or corrupted state
 ```
 
 #### **PR 11: `feat: add comprehensive AWS Strands integration and tooling support`**
@@ -548,12 +652,19 @@ Add complete AWS Strands integration with SDK documentation, testing capabilitie
 - Better environment management
 - Enhanced testing and verification tools
 
-## Testing
-- [ ] Verify AWS Strands SDK connectivity
-- [ ] Test prompt conversion workflows
-- [ ] Validate agent functionality
-- [ ] Confirm environment cleanup works
-- [ ] Test token limit and backoff mechanisms
+## Test Plan
+**Type:** External Integration & Performance Testing
+- [ ] **SDK Connectivity**: Test AWS Strands SDK connection and authentication
+- [ ] **Agent Verification**: Validate Strands agent functionality and responses
+- [ ] **Prompt Conversion**: Test batch prompt conversion using Strands API
+- [ ] **Environment Setup**: Verify .straf directory creation and management
+- [ ] **Token Management**: Test token limit backoff and retry mechanisms
+- [ ] **Error Handling**: Test behavior with network issues, API failures
+- [ ] **Performance**: Measure conversion performance with large prompt batches
+- [ ] **Logging**: Verify comprehensive logging to .straf directory
+- [ ] **Cleanup**: Test environment cleanup and output path enforcement
+- [ ] **Documentation**: Validate SDK integration guide accuracy
+- [ ] **Cross-Platform**: Test functionality on different operating systems
 ```
 
 ### 🔴 **HIGH RISK PRs** (Merge Last - Major Changes)
@@ -590,12 +701,21 @@ Implement comprehensive condensed framework architecture that supports multiple 
 - New condensed architecture requirements
 - Updated agent integration patterns
 
-## Testing
-- [ ] Test framework initialization with all supported agents
-- [ ] Verify context switching functionality
-- [ ] Validate multi-agent compatibility
-- [ ] Confirm self-sufficiency requirements
-- [ ] Test backward compatibility where possible
+## Test Plan
+**Type:** Architecture & Compatibility Testing
+- [ ] **Multi-Agent Support**: Test framework with Windsurf, GitHub Copilot, and AWS Kiro
+- [ ] **Self-Sufficiency**: Verify framework operates without external dependencies
+- [ ] **Context Switching**: Test context switching between different projects/environments
+- [ ] **Framework Initialization**: Validate initialization sequence across all agents
+- [ ] **Condensed Architecture**: Test condensed framework loading and operation
+- [ ] **Agent Interoperability**: Verify agents can share framework state appropriately
+- [ ] **Performance Impact**: Measure performance changes from architectural shift
+- [ ] **Memory Usage**: Test memory efficiency of condensed framework
+- [ ] **Backward Compatibility**: Test existing workflows still function
+- [ ] **Error Handling**: Verify graceful degradation when agents unavailable
+- [ ] **Configuration**: Test framework configuration across different environments
+- [ ] **Documentation**: Validate architecture documentation matches implementation
+- [ ] **Migration Path**: Test upgrade path from previous framework versions
 ```
 
 #### **PR 13: `feat: add comprehensive Java migration toolkit with helper tasks and workflows`**
@@ -626,12 +746,22 @@ Add a comprehensive Java migration toolkit including task documentation, bootstr
 - Comprehensive task documentation
 - Phased upgrade strategies
 
-## Testing
-- [ ] Test Java project detection and analysis
-- [ ] Verify migration plan generation
-- [ ] Validate bootstrap renderer functionality
-- [ ] Test migration execution workflows
-- [ ] Confirm risk assessment accuracy
+## Test Plan
+**Type:** End-to-End Migration Testing
+- [ ] **Project Detection**: Test detection of various Java project types (Maven, Gradle, etc.)
+- [ ] **Analysis Accuracy**: Verify project analysis identifies dependencies and risks correctly
+- [ ] **Migration Planning**: Test migration plan generation with different project complexities
+- [ ] **Bootstrap Process**: Validate bootstrap renderer creates proper project structure
+- [ ] **Risk Assessment**: Test risk assessment accuracy across different project types
+- [ ] **Phased Execution**: Test phased migration strategy execution
+- [ ] **Helper Tasks**: Validate all migration helper tasks function correctly
+- [ ] **Rollback Capability**: Test ability to rollback failed migrations
+- [ ] **Documentation Generation**: Verify migration documentation is comprehensive
+- [ ] **Workflow Integration**: Test integration with existing development workflows
+- [ ] **Performance**: Test migration performance with large codebases
+- [ ] **Error Recovery**: Test recovery from interrupted migrations
+- [ ] **Validation**: Test post-migration validation and verification
+- [ ] **Multiple Java Versions**: Test migrations across different Java versions
 ```
 
 #### **PR 14: `feat: add comprehensive developer workflow automation with enhanced safety controls`**
@@ -668,12 +798,23 @@ Major enhancement to developer workflows with auto-compose functionality for com
 - Enhanced safety checks that may block operations
 - Updated competency management system
 
-## Testing
-- [ ] Test auto-compose commit functionality
-- [ ] Verify PR composition workflow safety
-- [ ] Validate competency management system
-- [ ] Test git command automation
-- [ ] Confirm safety controls work correctly
+## Test Plan
+**Type:** Workflow Automation & Safety Testing
+- [ ] **Auto-Compose Commits**: Test automatic commit composition with various change types
+- [ ] **PR Composition**: Validate PR composition workflow with different commit patterns
+- [ ] **Safety Controls**: Test all safety checks prevent dangerous operations
+- [ ] **User Validation**: Verify user confirmation prompts work correctly
+- [ ] **Git Command Safety**: Test git command requirements prevent pager issues
+- [ ] **Competency Management**: Validate competency indexing and management system
+- [ ] **Workflow Integration**: Test integration with existing development workflows
+- [ ] **Error Handling**: Test behavior with git conflicts, network issues
+- [ ] **Branch Management**: Test feature branch creation and management
+- [ ] **Commit Quality**: Verify auto-composed commits follow conventions
+- [ ] **PR Quality**: Test generated PR descriptions are comprehensive
+- [ ] **Performance**: Test workflow performance with large repositories
+- [ ] **Rollback Safety**: Test ability to safely abort operations
+- [ ] **Cross-Platform**: Test workflows on different operating systems
+- [ ] **Repository States**: Test with various git repository states and conditions
 ```
 
 #### **PR 15: `feat: add comprehensive change request orchestration system with prompt corrections`**
@@ -707,12 +848,23 @@ Implement a comprehensive change request orchestration system supporting extra s
 - Standardized change request processes
 - Improved change success rates
 
-## Testing
-- [ ] Test change size evaluation accuracy
-- [ ] Verify workflow routing logic
-- [ ] Validate governance compliance
-- [ ] Test template generation
-- [ ] Confirm escalation rules work correctly
+## Test Plan
+**Type:** Orchestration & Governance Testing
+- [ ] **Change Size Evaluation**: Test accurate classification of change requests by size
+- [ ] **Workflow Routing**: Verify correct workflow selection based on change characteristics
+- [ ] **Governance Compliance**: Test all governance rules are enforced appropriately
+- [ ] **Template Generation**: Validate template generation for all change types
+- [ ] **Escalation Logic**: Test escalation rules trigger correctly for complex changes
+- [ ] **Approval Workflows**: Test approval processes for different change sizes
+- [ ] **Documentation Quality**: Verify generated documentation meets standards
+- [ ] **Risk Assessment**: Test risk evaluation accuracy across change types
+- [ ] **Complexity Rating**: Validate project complexity rating system
+- [ ] **Integration**: Test integration with existing change management processes
+- [ ] **Performance**: Test system performance with high volume of change requests
+- [ ] **Audit Trail**: Verify complete audit trail for all change decisions
+- [ ] **Rollback Procedures**: Test rollback capabilities for failed changes
+- [ ] **Notification System**: Test notification and communication workflows
+- [ ] **Compliance Reporting**: Test generation of compliance and governance reports
 ```
 
 ## 📊 Merge Strategy & Risk Analysis
