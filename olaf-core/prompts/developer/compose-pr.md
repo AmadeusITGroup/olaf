@@ -15,9 +15,10 @@ You MUST strictly apply <olaf-framework-validation>.
 
 ## Git Command Requirements
 **CRITICAL**: Always use non-interactive git commands to prevent pager prompts:
-- Use `git --no-pager` prefix for log, show, diff commands
-- Use `--oneline` for concise output
+- **MANDATORY**: Use `git --no-pager` prefix for ALL git commands that support it (log, show, diff, branch, status, etc.)
+- Use `--oneline` for concise output in log commands
 - Use specific commit limits (e.g., `-20`) to prevent excessive output
+- **Examples**: `git --no-pager log --oneline -10`, `git --no-pager show HEAD`, `git --no-pager diff HEAD~1`
 
 ## Input Parameters
 - **source_branch**: string - (Optional) Source branch to analyze (default: current branch)
@@ -69,7 +70,7 @@ You MUST strictly apply <olaf-framework-validation>.
    git --no-pager log --oneline integration-YYYYMMDD-HHmm..HEAD
    ```
    - Get all commits in current branch that are NOT in integration branch
-   - Use `--no-pager` to prevent interactive pager prompts
+   - **MANDATORY**: Use `--no-pager` to prevent interactive pager prompts
    - This ensures we capture EVERY commit that needs to be in PRs
 4. **Filter Out UNTESTED Commits**:
    - **CRITICAL**: Exclude any commits with "UNTESTED" in their title/message
@@ -82,6 +83,8 @@ You MUST strictly apply <olaf-framework-validation>.
 
 ### Phase 3: Commit Analysis & PR Clustering
 1. **Analyze Filtered Commits**: Get commit history with messages, dates, and file changes for production-ready commits only
+   - **Use**: `git --no-pager show --stat <commit>` for file changes
+   - **Use**: `git --no-pager log --oneline --stat` for overview
 2. **Extract Ticket References**: Parse commit messages for ticket/issue references:
    - **JIRA**: Match patterns like `PROJ-123`, `ABC-456`
    - **GitHub Issues**: Match patterns like `#123`, `fixes #456`, `closes #789`
