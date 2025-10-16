@@ -29,6 +29,20 @@ You MUST strictly apply <olaf-framework-validation>.
 
 ## Standardized Workflow Process
 
+### Phase 0: User Input Collection
+**MANDATORY FIRST STEP**: Collect user preferences before any git operations
+1. **Ask for Source Branch**:
+   - "Which branch contains the commits you want to create PRs from?"
+   - Show available branches: `git --no-pager branch -a`
+   - Default to current branch if it's not a protected branch
+2. **Ask for Target Branch**:
+   - "Which branch should the PRs target?" (default: main)
+3. **Ask for Commit Limit**:
+   - "How many recent commits to analyze?" (default: 20)
+4. **Confirm Parameters**:
+   - Show: "Analyzing X commits from 'source-branch' targeting 'target-branch'"
+   - Wait for user confirmation before proceeding
+
 ### Phase 1: Repository Analysis & Validation
 1. **CRITICAL SAFETY CHECK - Uncommitted Changes**:
    - Check for uncommitted changes: `git status --porcelain`
@@ -54,8 +68,20 @@ You MUST strictly apply <olaf-framework-validation>.
    - If conflicts or issues, STOP and report error
 4. **Return to Source Branch**: `git checkout <source_branch>`
 
-### Phase 2: Integration Branch Creation & Commit Identification
-1. **Create Integration Branch FIRST**:
+### Phase 2: User Input & Source Branch Selection
+1. **ASK USER FOR SOURCE BRANCH**:
+   - **MANDATORY**: Ask user which branch contains commits to analyze
+   - List available branches: `git --no-pager branch -a`
+   - **Default**: Current branch if it's not main/master/develop/dev/production/prod/release
+   - **Validate**: Ensure source branch exists and has commits ahead of target branch
+2. **Verify Source Branch Has Commits**:
+   ```bash
+   git --no-pager log --oneline main..<source_branch> -10
+   ```
+   - If no commits ahead of main, inform user and stop
+   - Show commit count: "Found X commits ahead of main"
+### Phase 3: Integration Branch Creation & Commit Identification
+1. **Create Integration Branch AFTER User Confirmation**:
    ```bash
    git checkout main
    git pull origin main  # Ensure up-to-date
@@ -69,7 +95,7 @@ You MUST strictly apply <olaf-framework-validation>.
    ```bash
    git --no-pager log --oneline integration-YYYYMMDD-HHmm..HEAD
    ```
-   - Get all commits in current branch that are NOT in integration branch
+   - Get all commits in source branch that are NOT in integration branch
    - **MANDATORY**: Use `--no-pager` to prevent interactive pager prompts
    - This ensures we capture EVERY commit that needs to be in PRs
 4. **Filter Out UNTESTED Commits**:
@@ -81,7 +107,7 @@ You MUST strictly apply <olaf-framework-validation>.
    - Ensure all production-ready commits are assigned to PRs
    - No commits should be left unassigned
 
-### Phase 3: Commit Analysis & PR Clustering
+### Phase 4: Commit Analysis & PR Clustering
 1. **Analyze Filtered Commits**: Get commit history with messages, dates, and file changes for production-ready commits only
    - **Use**: `git --no-pager show --stat <commit>` for file changes
    - **Use**: `git --no-pager log --oneline --stat` for overview
@@ -104,7 +130,7 @@ You MUST strictly apply <olaf-framework-validation>.
    - Commit lists for each PR
    - Risk assessment (stable, experimental, UNTESTED)
 
-### Phase 4: User PR Selection Interface
+### Phase 5: User PR Selection Interface
 **Present standardized PR proposal format:**
 
 ```markdown
@@ -180,7 +206,7 @@ Optimize OLAF framework performance with condensed reference system
 - create                # Proceed with accepted PRs
 ```
 
-### Phase 5: Feature Branch Creation & Cherry-picking Management
+### Phase 6: Feature Branch Creation & Cherry-picking Management
 **Note**: Integration branch already created in Phase 2
 
 **For each accepted PR:**
