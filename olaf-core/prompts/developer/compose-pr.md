@@ -80,24 +80,18 @@ You MUST strictly apply <olaf-framework-validation>.
    ```
    - If no commits ahead of main, inform user and stop
    - Show commit count: "Found X commits ahead of main"
-### Phase 3: Integration Branch Creation & Commit Identification
-1. **Create Integration Branch AFTER User Confirmation**:
+### Phase 3: Commit Analysis (NO BRANCH CREATION YET)
+1. **Identify ALL Commits to Process**: 
    ```bash
-   git checkout main
-   git pull origin main  # Ensure up-to-date
-   git checkout -b integration-YYYYMMDD-HHmm
-   git push origin integration-YYYYMMDD-HHmm
+   git --no-pager log --oneline main..HEAD
    ```
-   - Integration branch serves as the baseline for all feature branches
-   - Provides staging area and ensures complete commit coverage
-2. **Return to Source Branch**: `git checkout <source_branch>`
-3. **Identify ALL Commits to Process**: 
-   ```bash
-   git --no-pager log --oneline integration-YYYYMMDD-HHmm..HEAD
-   ```
-   - Get all commits in source branch that are NOT in integration branch
+   - Get all commits in source branch that are NOT in main branch
    - **MANDATORY**: Use `--no-pager` to prevent interactive pager prompts
    - This ensures we capture EVERY commit that needs to be in PRs
+2. **Alternative**: If using a tag as baseline:
+   ```bash
+   git --no-pager log --oneline v1.6.0..HEAD
+   ```
 4. **Filter Out UNTESTED Commits**:
    - **CRITICAL**: Exclude any commits with "UNTESTED" in their title/message
    - UNTESTED commits are experimental and must NOT be included in PRs
@@ -204,11 +198,24 @@ Optimize OLAF framework performance with condensed reference system
 - modify D              # Modify PR D contents
 - details B             # Show detailed analysis of PR B
 - create                # Proceed with accepted PRs
+
+**⚠️ CRITICAL**: Only proceed to branch creation and PR generation AFTER user explicitly accepts proposals with "create" command.
 ```
 
-### Phase 6: Feature Branch Creation & Cherry-picking Management
-**Note**: Integration branch already created in Phase 2
+### Phase 6: Integration Branch Creation (ONLY AFTER USER APPROVAL)
+**CRITICAL**: Only execute this phase AFTER user has accepted PR proposals
 
+1. **Create Integration Branch**:
+   ```bash
+   git checkout main
+   git pull origin main  # Ensure up-to-date
+   git checkout -b integration-YYYYMMDD-HHmm
+   git push origin integration-YYYYMMDD-HHmm
+   ```
+   - Integration branch serves as the baseline for all feature branches
+   - Provides staging area and ensures complete commit coverage
+
+### Phase 7: Feature Branch Creation & Cherry-picking Management
 **For each accepted PR:**
 1. **Create Feature Branch**:
    ```bash
@@ -222,7 +229,7 @@ Optimize OLAF framework performance with condensed reference system
 3. **Handle Cherry-pick Conflicts**: If conflicts occur, provide resolution guidance
 4. **Push Feature Branch**: `git push origin feature/framework-optimization`
 
-### Phase 7: GitHub PR Creation
+### Phase 8: GitHub PR Creation
 **For each feature branch:**
 1. **Generate PR via GitHub CLI with Dependency Management**:
    ```bash
@@ -462,16 +469,17 @@ Detailed explanation of the feature/change including business context
 ## Required Actions
 1. **MANDATORY SAFETY CHECK**: Check for uncommitted changes and STOP if any exist (no continue option)
 2. **MANDATORY SAFETY CHECK**: Verify current branch is NOT main/master/develop/dev/production/prod/release
-3. **Validate repository state** and sync target branch
-4. **Create integration branch FIRST** as baseline and push to origin
-3. **Identify ALL commits to process** using `git log integration-branch..HEAD`
-4. **Filter UNTESTED commits** and verify complete coverage
-5. **Analyze production-ready commits** and generate PR clusters
-6. **Present PR proposals** for user selection
-7. **Create feature branches** with cherry-picked commits from integration branch
-8. **Push all feature branches** to origin
-9. **Generate GitHub PRs** with detailed descriptions targeting main (not integration)
-10. **Verify no commits left unassigned** to PRs
+3. **ASK USER**: Get source branch, target branch, and commit range preferences
+4. **Identify ALL commits to process** using `git --no-pager log main..HEAD` or `git --no-pager log v1.6.0..HEAD`
+5. **Filter UNTESTED commits** and verify complete coverage
+6. **Analyze production-ready commits** and generate PR clusters
+7. **Present PR proposals** for user selection
+8. **WAIT FOR USER APPROVAL**: Do NOT proceed until user accepts with "create" command
+9. **ONLY AFTER APPROVAL**: Create integration branch as baseline and push to origin
+10. **Create feature branches** with cherry-picked commits from integration branch
+11. **Push all feature branches** to origin
+12. **Generate GitHub PRs** with detailed descriptions targeting main (not integration)
+13. **Verify no commits left unassigned** to PRs
 
 ## Integration Branch Strategy
 **Purpose of integration-YYYYMMDD-HHmm:**
