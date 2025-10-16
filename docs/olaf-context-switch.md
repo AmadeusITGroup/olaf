@@ -62,7 +62,7 @@ graph LR
 - `olaf-data/projects/context-current.md` - Currently active context (copied from template)
 
 ### Core Functionality
-- `olaf-core/prompts/other-users/project-switch.md` - Context switch competency prompt
+- `olaf-core/prompts/other-users/context-switch.md` - Context switch competency prompt
 
 ## Usage Examples
 
