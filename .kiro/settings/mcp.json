@@ -11,9 +11,9 @@
     },
     "filesystem": {
       "command": "uvx",
-      "args": ["mcp-server-filesystem@latest"],
+      "args": ["mcp-server-filesystem"],
       "env": {},
-      "disabled": false,
+      "disabled": true,
       "autoApprove": ["read_file", "list_directory"]
     },
     "web-search": {
@@ -24,6 +24,20 @@
       },
       "disabled": true,
       "autoApprove": []
+    },
+    "pdf": {
+      "command": "uvx",
+      "args": ["mcp-server-pdf"],
+      "env": {},
+      "disabled": true,
+      "autoApprove": ["extract_text", "get_metadata"]
+    },
+    "image": {
+      "command": "uvx",
+      "args": ["mcp-server-image"],
+      "env": {},
+      "disabled": true,
+      "autoApprove": ["analyze_image", "extract_text", "get_metadata"]
     }
   }
 }
