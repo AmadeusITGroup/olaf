@@ -1,13 +1,18 @@
 # OLAF Deployment Manifest
 # This file defines which files and directories should be included in installation bundles
 
+# Directory path format:
+# - Simple string: "directory-name" (uses default destination)
+# - Colon notation: "source-directory:destination-path" (custom destination)
+# - If no custom destination specified, uses dest_root_folder as default
+
 # Common components included in all installation bundles
 common:
   # Core framework folders
   directories:
-    - "olaf-core/"
-    - "olaf-data/"
-    - "docs/"
+    - "olaf-core"
+    - "olaf-data"
+    - "docs"
   
   # Root level files
   # files:
@@ -16,7 +21,6 @@ common:
   
   # Patterns for files to include (glob patterns)
   include_patterns:
-    - "*.md"
     - "docs/**/*"
     - "olaf-core/**/*"
     - "olaf-data/**/*"
@@ -41,13 +45,14 @@ environments:
     name: "GitHub Copilot Bundle"
     description: "Installation bundle for GitHub Copilot environment"
     directories:
-      - ".github/"
+      - ".github:."  # Copy to project root (same as old hardcoded behavior)
     files: []
     include_patterns:
       - ".github/**/*"
     exclude_patterns:
       - ".github/workflows/**/*"
       - ".github/actions/**/*"
+      - ".github/prompts/**/*"
     bundle_structure:
       preserve_paths: true
       root_folder: ""
@@ -56,7 +61,7 @@ environments:
     name: "Windsurf Bundle"
     description: "Installation bundle for Windsurf IDE environment"
     directories:
-      - ".windsurf/"
+      - ".windsurf"  # Uses default destination (.olaf/.windsurf)
     files: []
     include_patterns:
       - ".windsurf/**/*"
@@ -69,7 +74,7 @@ environments:
     name: "Kiro Bundle"
     description: "Installation bundle for Kiro IDE environment"
     directories:
-      - ".kiro/"
+      - ".kiro"  # Uses default destination (.olaf/.kiro)
     files: []
     include_patterns:
       - ".kiro/**/*"
@@ -97,7 +102,20 @@ bundle_settings:
 
 # Metadata
 metadata:
-  manifest_version: "1.0"
+  manifest_version: "1.1"
   olaf_version_compatibility: ">=1.0.0"
-  last_updated: "2025-09-20"
+  last_updated: "2025-10-31"
   description: "OLAF deployment manifest for automated bundle generation"
+
+# Directory mapping format specification:
+# directories:
+#   - "source-dir"                    # Copies to {dest_root_folder}/source-dir
+#   - "source-dir:custom-dest"        # Copies to custom-dest/source-dir
+#   - "source-dir:custom-dest/"       # Copies contents to custom-dest/
+#   - "source-dir:."                  # Copies to project root
+#
+# Examples:
+#   - ".github"           → .olaf/.github/
+#   - ".github:."         → .github/ (project root)
+#   - ".github:config"    → config/.github/
+#   - ".github:config/"   → config/ (contents only)
