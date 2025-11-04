@@ -189,8 +189,6 @@ export class InstallCommand {
         switch (selectedItem.label) {
             case '👤 User':
                 return InstallationScope.USER;
-            case '📁 Workspace':
-                return InstallationScope.WORKSPACE;
             case '📂 Project':
                 return InstallationScope.PROJECT;
             default:

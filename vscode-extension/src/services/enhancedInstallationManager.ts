@@ -107,8 +107,7 @@ export class EnhancedInstallationManager {
                 version: bundleVersion,
                 platform: Platform.UNKNOWN, // Default to unknown editor platform
                 scope: scope === InstallationScope.PROJECT ? 'project' : 
-                       scope === InstallationScope.USER ? 'user' : 
-                       scope === InstallationScope.WORKSPACE ? 'workspace' : 'unknown',
+                       scope === InstallationScope.USER ? 'user' : 'unknown',
                 installedAt: new Date().toISOString(),
                 osplatform: currentOSPlatform, // OS platform information
                 bundleInfo: {
@@ -346,8 +345,6 @@ export class EnhancedInstallationManager {
         switch (scope) {
             case InstallationScope.USER:
                 return path.join(os.homedir(), '.olaf');
-            case InstallationScope.WORKSPACE:
-                return path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf');
             case InstallationScope.PROJECT:
                 return path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || os.homedir(), '.olaf');
             default:

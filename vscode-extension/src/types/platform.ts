@@ -40,6 +40,5 @@ export interface PlatformConfig {
  */
 export enum InstallationScope {
   USER = 'user',
-  WORKSPACE = 'workspace',
   PROJECT = 'project'
 }

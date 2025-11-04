@@ -85,12 +85,6 @@ export class EnhancedInstallCommand {
                 scope: InstallationScope.USER
             },
             {
-                label: '$(folder) Workspace Installation', 
-                description: 'Install for current workspace',
-                detail: 'Installs in workspace folder (.olaf/)',
-                scope: InstallationScope.WORKSPACE
-            },
-            {
                 label: '$(project) Project Installation',
                 description: 'Install for current project',
                 detail: 'Installs in project-specific location',

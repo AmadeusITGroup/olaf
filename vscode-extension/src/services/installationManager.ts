@@ -369,7 +369,7 @@ export class InstallationManager {
      * Get all installation scopes where OLAF is installed
      */
     public async getInstalledScopes(): Promise<InstallationScope[]> {
-        const scopes = [InstallationScope.USER, InstallationScope.WORKSPACE, InstallationScope.PROJECT];
+        const scopes = [InstallationScope.USER, InstallationScope.PROJECT];
         const installedScopes: InstallationScope[] = [];
 
         for (const scope of scopes) {
