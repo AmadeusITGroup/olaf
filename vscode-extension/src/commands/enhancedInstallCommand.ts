@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
-import { InstallationManager } from '../services/installationManager';
 import { EnhancedInstallationManager } from '../services/enhancedInstallationManager';
 import { GitHubService } from '../services/githubService';
 import { PlatformDetector } from '../services/platformDetector';
@@ -15,14 +14,12 @@ import { Logger } from '../utils/logger';
  */
 export class EnhancedInstallCommand {
     private readonly logger: Logger;
-    private readonly legacyInstallationManager: InstallationManager;
     private readonly enhancedInstallationManager: EnhancedInstallationManager;
     private readonly githubService: GitHubService;
     private readonly platformDetector: PlatformDetector;
 
     constructor() {
         this.logger = Logger.getInstance();
-        this.legacyInstallationManager = InstallationManager.getInstance();
         this.enhancedInstallationManager = EnhancedInstallationManager.getInstance();
         this.githubService = GitHubService.getInstance();
         this.platformDetector = PlatformDetector.getInstance();
@@ -81,7 +78,7 @@ export class EnhancedInstallCommand {
             {
                 label: '$(account) User Installation',
                 description: 'Install for current user only',
-                detail: 'Installs in user directory (~/.olaf)',
+                detail: 'Installs in user data directory',
                 scope: InstallationScope.USER
             },
             {
@@ -117,7 +114,7 @@ export class EnhancedInstallCommand {
             // Check for legacy installation
             const platform = await this.platformDetector.detectPlatform();
             const installationPath = this.platformDetector.getInstallationPath(platform.platform, scope);
-            const legacyMetadataPath = path.join(installationPath, '.olaf-metadata.json');
+            const legacyMetadataPath = path.join(installationPath, '.olaf', '.olaf-metadata.json');
             
             if (fs.existsSync(legacyMetadataPath)) {
                 const legacyMetadata = JSON.parse(fs.readFileSync(legacyMetadataPath, 'utf8'));
@@ -180,7 +177,7 @@ export class EnhancedInstallCommand {
                 await this.enhancedInstallationManager.uninstall(scope, policy);
             } else {
                 // Use legacy uninstallation
-                await this.legacyInstallationManager.uninstall(scope);
+                // await this.legacyInstallationManager.uninstall(scope);
             }
             
             this.logger.info('Existing installation removed successfully');

@@ -2,11 +2,12 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
+import * as yauzl from 'yauzl';
 import { GitHubAsset } from "../types/github";
 import { Platform, InstallationScope } from '../types/platform';
 import { Logger } from '../utils/logger';
 import { FileIntegrityService } from './fileIntegrityService';
-import { InstallationManager } from './installationManager';
+import { PlatformDetector } from './platformDetector';
 import { 
     FileIntegrityInfo,
     EnhancedInstallationMetadata,
@@ -16,20 +17,27 @@ import {
     VerificationPolicy
 } from '../types/integrityTypes';
 
+import { promisify } from 'util';
+const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
+const mkdir = promisify(fs.mkdir);
+const access = promisify(fs.access);
+const unlink = promisify(fs.unlink);
+
 /**
  * Enhanced InstallationManager with comprehensive file integrity verification
  * and smart uninstallation capabilities
  */
 export class EnhancedInstallationManager {
     private static instance: EnhancedInstallationManager;
-    private readonly legacyManager: InstallationManager;
     private readonly integrityService: FileIntegrityService;
     private readonly logger: Logger;
+    private readonly platformDetector: PlatformDetector;
 
     private constructor() {
-        this.legacyManager = InstallationManager.getInstance();
         this.integrityService = new FileIntegrityService();
         this.logger = Logger.getInstance();
+        this.platformDetector = PlatformDetector.getInstance();
     }
 
     public static getInstance(): EnhancedInstallationManager {
@@ -75,20 +83,48 @@ export class EnhancedInstallationManager {
                     browser_download_url: "file://" + bundlePath
                 } as GitHubAsset
             };
-            
-            const legacyResult = await this.legacyManager.installBundle(bundleBuffer, bundleInfo, scope, (progress: number, message: string) => {
-                onProgress?.(30 + (progress * 0.5), message);
-            });
 
-            if (!legacyResult.success) {
-                throw new Error(legacyResult.error || 'Legacy installation failed');
-            }
+            // ===========
+            const platform = await this.platformDetector.detectPlatform();
+            
+            // For project scope, extract files to project root; for others use the standard path
+            const extractionPath = scope === InstallationScope.PROJECT 
+                ? vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || ''
+                : this.platformDetector.getInstallationPath(platform.platform, scope);
+            const dotOlafPath = path.join(extractionPath, ".olaf");
+
+            // Update progress
+            onProgress?.(20, 'Preparing installation directory...');
+
+            // Ensure metadata directory exists
+            await this.ensureDirectoryExists(extractionPath);
+            
+            // Update progress
+            onProgress?.(30, 'Extracting bundle...');
+
+            // Extract bundle to the appropriate location
+            const extractedFiles = await this.extractBundle(bundleBuffer, extractionPath, onProgress);
+
+            // Update progress
+            onProgress?.(50, 'Finalizing installation...');
+
+            // Create installation metadata (always in metadata path)
+            // await this.createInstallationMetadata(dotOlafPath, bundleInfo, scope, platform.platform, extractedFiles, extractionPath);
+
+            // Update progress
+            onProgress?.(60, 'Updating configuration...');
+
+            // Update platform-specific configuration if needed
+            await this.updatePlatformConfiguration(platform.platform, scope, extractionPath);
+
+            // Create symbolic link from workspace to installation path
+            await this.createWorkspaceSymbolicLink(scope, extractionPath);
 
             // 3. Calculate integrity information for installed files
             onProgress?.(80, 'Computing file integrity data...');
-            const installedFiles = legacyResult.installedFiles || [];
+            const installedFiles = extractedFiles || [];
             const fileIntegrities = await this.calculateFileIntegrities(
-                installedFiles.map(file => path.join(legacyResult.installedPath, file))
+                installedFiles.map(file => path.join(extractionPath, file))
             );
 
             // 4. Create enhanced metadata
@@ -105,7 +141,7 @@ export class EnhancedInstallationManager {
             
             const enhancedMetadata: EnhancedInstallationMetadata = {
                 version: bundleVersion,
-                platform: Platform.UNKNOWN, // Default to unknown editor platform
+                platform: platform.platform, // Default to unknown editor platform
                 scope: scope === InstallationScope.PROJECT ? 'project' : 
                        scope === InstallationScope.USER ? 'user' : 'unknown',
                 installedAt: new Date().toISOString(),
@@ -113,12 +149,12 @@ export class EnhancedInstallationManager {
                 bundleInfo: {
                     filename: path.basename(bundlePath),
                     size: fs.statSync(bundlePath).size,
-                    platform: Platform.UNKNOWN, // Editor platform, not OS platform
+                    platform: platform.platform, // Editor platform, not OS platform
                     sha256: await this.calculateFileSHA256(bundlePath),
                     manifestVersion: '1.0.0'
                 },
-                files: fileIntegrities,
-                extractionPath: this.getInstallationPath(scope),
+                originalFiles: fileIntegrities,
+                extractionPath: await this.getInstallationPath(scope),
                 integrityVersion: '1.0.0',
                 // lastVerified: new Date().toISOString(),
                 verificationPolicy: { autoVerify: true, preserveModified: true, reportModifications: true },
@@ -173,19 +209,16 @@ export class EnhancedInstallationManager {
             const metadata = await this.loadEnhancedMetadata(scope);
             
             if (!metadata) {
-                // Fall back to legacy uninstall
-                onProgress?.(50, 'Using legacy uninstallation...');
-                const legacySuccess = await this.legacyManager.uninstall(scope);
-                return this.createBasicReport(legacySuccess);
+                throw new Error(`Failed to load installation metadata for ${scope} scope`);
             }
 
             // 2. Verify current file states
             onProgress?.(30, 'Verifying file integrity...');
-            const verificationResults = await this.verifyFiles(metadata.files);
+            const verificationResults = await this.verifyFiles(metadata.originalFiles);
             
             // 3. Categorize files and handle user choices
             onProgress?.(60, 'Processing file removal...');
-            const { intactFiles, modifiedFiles } = this.categorizeFiles(metadata.files, verificationResults);
+            const { intactFiles, modifiedFiles } = this.categorizeFiles(metadata.originalFiles, verificationResults);
             
             // 4. Remove files based on policy
             onProgress?.(80, 'Removing files...');
@@ -197,7 +230,7 @@ export class EnhancedInstallationManager {
 
             onProgress?.(100, 'Uninstallation completed');
 
-            return this.createDetailedReport(metadata.files.length, modifiedFiles.length, removedCount, []);
+            return this.createDetailedReport(metadata.originalFiles.length, modifiedFiles.length, removedCount, []);
 
         } catch (error) {
             this.logger.error("Enhanced installation failed", error instanceof Error ? error : new Error(String(error)));
@@ -218,11 +251,11 @@ export class EnhancedInstallationManager {
         }
     }
 
-    private getInstalledFilesList(scope: InstallationScope): string[] {
+    private async getInstalledFilesList(scope: InstallationScope): Promise<string[]> {
         // Try to read files from existing metadata or scan directory
         try {
-            const installationPath = this.getInstallationPath(scope);
-            const metadataPath = path.join(installationPath, '.olaf-metadata.json');
+            const installationPath = await this.getInstallationPath(scope);
+            const metadataPath = path.join(installationPath, '.olaf', '.olaf-metadata.json');
             
             if (fs.existsSync(metadataPath)) {
                 const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
@@ -341,23 +374,16 @@ export class EnhancedInstallationManager {
         return hash.digest('hex');
     }
 
-    private getInstallationPath(scope: InstallationScope): string {
-        switch (scope) {
-            case InstallationScope.USER:
-                return path.join(os.homedir(), '.olaf');
-            case InstallationScope.PROJECT:
-                return path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || os.homedir(), '.olaf');
-            default:
-                // Fallback to user directory instead of system directory
-                return path.join(os.homedir(), '.olaf');
-        }
+    private async getInstallationPath(scope: InstallationScope): Promise<string> {
+        const platform = await this.platformDetector.detectPlatform();
+        return this.platformDetector.getInstallationPath(platform.platform, scope);
     }
 
     private async saveEnhancedMetadata(
-        scope: InstallationScope, 
+        scope: InstallationScope,
         metadata: EnhancedInstallationMetadata
     ): Promise<void> {
-        const metadataPath = this.getEnhancedMetadataPath(scope);
+        const metadataPath = await this.getEnhancedMetadataPath(scope);
         const metadataDir = path.dirname(metadataPath);
 
         if (!fs.existsSync(metadataDir)) {
@@ -369,8 +395,8 @@ export class EnhancedInstallationManager {
     }
 
     private async loadEnhancedMetadata(scope: InstallationScope): Promise<EnhancedInstallationMetadata | null> {
-        const metadataPath = this.getEnhancedMetadataPath(scope);
-        
+        const metadataPath = await this.getEnhancedMetadataPath(scope);
+
         if (!fs.existsSync(metadataPath)) {
             return null;
         }
@@ -384,9 +410,11 @@ export class EnhancedInstallationManager {
         }
     }
 
-    private getEnhancedMetadataPath(scope: InstallationScope): string {
-        const basePath = this.getInstallationPath(scope);
-        return path.join(basePath, '.olaf-enhanced-metadata.json');
+    private async getEnhancedMetadataPath(scope: InstallationScope): Promise<string> {
+        const platform = await this.platformDetector.detectPlatform();
+        const installationPath = this.platformDetector.getInstallationPath(platform.platform, scope);
+        const metadataPath = path.join(installationPath, ".olaf", ".olaf-enhanced-metadata.json");
+        return metadataPath;
     }
 
     private async verifyFiles(files: FileIntegrityInfo[]): Promise<Map<string, FileIntegrityInfo | null>> {
@@ -526,8 +554,8 @@ export class EnhancedInstallationManager {
     }
 
     private async cleanupEnhancedMetadata(scope: InstallationScope): Promise<void> {
-        const metadataPath = this.getEnhancedMetadataPath(scope);
-        
+        const metadataPath = await this.getEnhancedMetadataPath(scope);
+
         try {
             if (fs.existsSync(metadataPath)) {
                 fs.unlinkSync(metadataPath);
@@ -590,5 +618,325 @@ export class EnhancedInstallationManager {
         } catch (error) {
             return null;
         }
+    }
+
+    private async ensureDirectoryExists(dirPath: string): Promise<void> {
+        try {
+            await access(dirPath);
+        } catch {
+            await mkdir(dirPath, { recursive: true });
+            this.logger.debug(`Created directory: ${dirPath}`);
+        }
+    }
+
+    private async extractBundle(
+        bundleBuffer: Buffer,
+        extractPath: string,
+        onProgress?: (progress: number, message: string) => void
+    ): Promise<string[]> {
+        return new Promise((resolve, reject) => {
+            const extractedFiles: string[] = [];
+            let processedEntries = 0;
+            let totalEntries = 0;
+
+            yauzl.fromBuffer(bundleBuffer, { lazyEntries: true }, (err: Error | null, zipfile?: yauzl.ZipFile) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                if (!zipfile) {
+                    reject(new Error('Failed to open zip file'));
+                    return;
+                }
+
+                totalEntries = zipfile.entryCount;
+                this.logger.debug(`Extracting ${totalEntries} entries from bundle to ${extractPath}`);
+
+                zipfile.readEntry();
+
+                zipfile.on('entry', (entry: yauzl.Entry) => {
+                    const fileName = entry.fileName;
+                    
+                    // Skip directories
+                    if (fileName.endsWith('/')) {
+                        processedEntries++;
+                        zipfile.readEntry();
+                        return;
+                    }
+
+                    // Skip common hidden files but allow important dot directories like .github
+                    const isHiddenFile = fileName.startsWith('.') && 
+                        !fileName.startsWith('.github/') && 
+                        !fileName.startsWith('.vscode/') &&
+                        !fileName.startsWith('.windsurf/') && 
+                        !fileName.startsWith('.kiro/') && 
+                        !fileName.startsWith('.cursor/') &&
+                        !fileName.startsWith('.olaf/');
+                    
+                    if (isHiddenFile) {
+                        processedEntries++;
+                        zipfile.readEntry();
+                        return;
+                    }
+
+                    const outputPath = path.join(extractPath, fileName);
+                    const outputDir = path.dirname(outputPath);
+
+                    // Ensure output directory exists
+                    fs.mkdir(outputDir, { recursive: true }, (mkdirErr) => {
+                        if (mkdirErr) {
+                            reject(mkdirErr);
+                            return;
+                        }
+
+                        zipfile.openReadStream(entry, (streamErr: Error | null, readStream?: NodeJS.ReadableStream) => {
+                            if (streamErr) {
+                                reject(streamErr);
+                                return;
+                            }
+
+                            if (!readStream) {
+                                reject(new Error('Failed to open read stream'));
+                                return;
+                            }
+
+                            const writeStream = fs.createWriteStream(outputPath);
+                            
+                            readStream.pipe(writeStream);
+
+                            writeStream.on('close', () => {
+                                extractedFiles.push(fileName);
+                                processedEntries++;
+                                
+                                // Update progress
+                                const progress = 20 + (processedEntries / totalEntries) * 60; // 20-80% for extraction
+                                onProgress?.(progress, `Extracting: ${fileName}`);
+
+                                this.logger.debug(`Extracted: ${fileName}`);
+                                
+                                if (processedEntries === totalEntries) {
+                                    resolve(extractedFiles);
+                                } else {
+                                    zipfile.readEntry();
+                                }
+                            });
+
+                            writeStream.on('error', (writeErr) => {
+                                reject(writeErr);
+                            });
+                        });
+                    });
+                });
+
+                zipfile.on('end', () => {
+                    if (processedEntries === totalEntries) {
+                        resolve(extractedFiles);
+                    }
+                });
+
+                zipfile.on('error', (zipErr: Error) => {
+                    reject(zipErr);
+                });
+            });
+        });
+    }
+
+    private async updatePlatformConfiguration(
+        platform: Platform,
+        scope: InstallationScope,
+        installationPath: string
+    ): Promise<void> {
+        try {
+            // Platform-specific configuration updates
+            switch (platform) {
+                case Platform.VSCODE:
+                    await this.updateVSCodeConfiguration(scope, installationPath);
+                    break;
+                case Platform.WINDSURF:
+                    await this.updateWindsurfConfiguration(scope, installationPath);
+                    break;
+                case Platform.KIRO:
+                    await this.updateKiroConfiguration(scope, installationPath);
+                    break;
+                case Platform.CURSOR:
+                    await this.updateCursorConfiguration(scope, installationPath);
+                    break;
+                default:
+                    this.logger.debug('No platform-specific configuration updates needed');
+            }
+        } catch (error) {
+            this.logger.warn('Failed to update platform configuration', error as Error);
+            // Don't fail the installation for configuration updates
+        }
+    }
+
+    private async updateVSCodeConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
+        // Add VSCode-specific configuration updates here
+        this.logger.debug(`Updating VSCode configuration for scope: ${scope}`);
+
+        // Create symbolic link from workspace/.github to installationPath/.github
+        await this.createGitHubSymbolicLink(scope, installationPath);
+    }
+
+    private async updateWindsurfConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
+        // Add Windsurf-specific configuration updates here
+        this.logger.debug(`Updating Windsurf configuration for scope: ${scope}`);
+    }
+
+    private async updateKiroConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
+        // Add Kiro-specific configuration updates here
+        this.logger.debug(`Updating Kiro configuration for scope: ${scope}`);
+    }
+
+    private async updateCursorConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
+        // Add Cursor-specific configuration updates here
+        this.logger.debug(`Updating Cursor configuration for scope: ${scope}`);
+    }
+
+    /**
+     * Create symbolic link from workspace/.github to installation path/.github
+     */
+    private async createGitHubSymbolicLink(scope: InstallationScope, installationPath: string): Promise<void> {
+        try {
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.warn('No workspace folder found, skipping .github symbolic link creation');
+                return;
+            }
+
+            const workspaceGitHubPath = path.join(workspaceRoot, '.github');
+            const installationGitHubPath = path.join(installationPath, '.github');
+
+            // Check if .github directory exists in the installation
+            if (!fs.existsSync(installationGitHubPath)) {
+                this.logger.debug('No .github directory found in installation, skipping .github symbolic link creation');
+                return;
+            }
+
+            // Remove existing .github in workspace if it exists
+            if (fs.existsSync(workspaceGitHubPath)) {
+                const stats = fs.lstatSync(workspaceGitHubPath);
+                if (stats.isSymbolicLink()) {
+                    fs.unlinkSync(workspaceGitHubPath);
+                    this.logger.debug(`Removed existing .github symbolic link: ${workspaceGitHubPath}`);
+                } else if (stats.isDirectory()) {
+                    // If it's a real directory, we should be more cautious
+                    this.logger.warn(`Existing .github directory found at ${workspaceGitHubPath}. Manual intervention may be required.`);
+                    return;
+                }
+            }
+
+            // Create symbolic link
+            fs.symlinkSync(installationGitHubPath, workspaceGitHubPath, 'dir');
+            this.logger.info(`Created .github symbolic link: ${workspaceGitHubPath} -> ${installationGitHubPath}`);
+
+        } catch (error) {
+            this.logger.warn('Failed to create .github symbolic link', error as Error);
+            // Don't fail the installation for symbolic link creation issues
+        }
+    }
+
+    /**
+     * Create symbolic link from workspace/.olaf to installation path/.olaf
+     */
+    private async createWorkspaceSymbolicLink(scope: InstallationScope, extractionPath: string): Promise<void> {
+        try {
+            // Only create symbolic link for non-project installations
+            if (scope === InstallationScope.PROJECT) {
+                this.logger.debug('Skipping symbolic link creation for project installation (files already in workspace)');
+                return;
+            }
+
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.warn('No workspace folder found, skipping symbolic link creation');
+                return;
+            }
+
+            const workspaceOlafPath = path.join(workspaceRoot, '.olaf');
+            const installationOlafPath = path.join(extractionPath, '.olaf');
+
+            // Check if .olaf directory exists in the installation
+            if (!fs.existsSync(installationOlafPath)) {
+                this.logger.debug('No .olaf directory found in installation, skipping symbolic link creation');
+                return;
+            }
+
+            // Remove existing .olaf in workspace if it exists
+            if (fs.existsSync(workspaceOlafPath)) {
+                const stats = fs.lstatSync(workspaceOlafPath);
+                if (stats.isSymbolicLink()) {
+                    fs.unlinkSync(workspaceOlafPath);
+                    this.logger.debug(`Removed existing symbolic link: ${workspaceOlafPath}`);
+                } else if (stats.isDirectory()) {
+                    // If it's a real directory, we should be more cautious
+                    this.logger.warn(`Existing .olaf directory found at ${workspaceOlafPath}. Manual intervention may be required.`);
+                    return;
+                }
+            }
+
+            // Create symbolic link
+            fs.symlinkSync(installationOlafPath, workspaceOlafPath, 'dir');
+            this.logger.info(`Created symbolic link: ${workspaceOlafPath} -> ${installationOlafPath}`);
+
+        } catch (error) {
+            this.logger.warn('Failed to create workspace symbolic link', error as Error);
+            // Don't fail the installation for symbolic link creation issues
+        }
+    }
+
+    /**
+     * Get all installation scopes where OLAF is installed
+     */
+    public async getInstalledScopes(): Promise<InstallationScope[]> {
+        const scopes = [InstallationScope.USER, InstallationScope.PROJECT];
+        const installedScopes: InstallationScope[] = [];
+
+        for (const scope of scopes) {
+            if (await this.isInstalled(scope)) {
+                installedScopes.push(scope);
+            }
+        }
+
+        return installedScopes;
+    }
+
+    /**
+     * Check if OLAF is installed in a specific scope
+     */
+    public async isInstalled(scope: InstallationScope): Promise<boolean> {
+        try {
+            const platform = await this.platformDetector.detectPlatform();
+            const installationPath = this.platformDetector.getInstallationPath(platform.platform, scope);
+            const metadataPath = path.join(installationPath, '.olaf', '.olaf-enhanced-metadata.json');
+
+            await access(metadataPath);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * Get current installation information
+     */
+    public async getInstallationInfo(scope: InstallationScope): Promise<any | null> {
+        try {
+            const platform = await this.platformDetector.detectPlatform();
+            const installationPath = this.platformDetector.getInstallationPath(platform.platform, scope);
+
+            return await this.readInstallationMetadata(installationPath);
+        } catch {
+            return null;
+        }
+    }
+
+    private async readInstallationMetadata(installationPath: string): Promise<any> {
+        const metadataPath = path.join(installationPath, '.olaf', '.olaf-enhanced-metadata.json');
+        const metadataContent = await readFile(metadataPath, 'utf8');
+        return JSON.parse(metadataContent);
     }
 }

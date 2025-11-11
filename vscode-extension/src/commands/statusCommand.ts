@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { UpdateManager } from '../services/updateManager';
-import { InstallationManager } from '../services/installationManager';
 import { Logger } from '../utils/logger';
+import { EnhancedInstallationManager } from '../services/enhancedInstallationManager';
 
 /**
  * Command handler for checking OLAF updates
@@ -9,12 +9,12 @@ import { Logger } from '../utils/logger';
 export class StatusCommand {
     private readonly logger: Logger;
     private readonly updateManager: UpdateManager;
-    private readonly installationManager: InstallationManager;
+    private readonly installationManager: EnhancedInstallationManager;
 
     constructor() {
         this.logger = Logger.getInstance();
         this.updateManager = UpdateManager.getInstance();
-        this.installationManager = InstallationManager.getInstance();
+        this.installationManager = EnhancedInstallationManager.getInstance();
     }
 
     /**

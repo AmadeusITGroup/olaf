@@ -165,11 +165,6 @@ export class InstallCommand {
                 picked: true
             },
             {
-                label: '📁 Workspace',
-                description: 'Install for current workspace only',
-                detail: 'Shared with team members'
-            },
-            {
                 label: '📂 Project',
                 description: 'Install for current project only',
                 detail: 'Project-specific configuration'

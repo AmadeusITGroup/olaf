@@ -61,24 +61,19 @@ export class InstallationManager {
             this.logger.info(`Starting installation of ${bundleInfo.filename} with scope: ${scope}`);
 
             const platform = await this.platformDetector.detectPlatform();
-            const metadataPath = this.platformDetector.getInstallationPath(platform.platform, scope);
             
             // For project scope, extract files to project root; for others use the standard path
             const extractionPath = scope === InstallationScope.PROJECT 
                 ? vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || ''
-                : metadataPath;
+                : this.platformDetector.getInstallationPath(platform.platform, scope);
+            const dotOlafPath = path.join(extractionPath, ".olaf");
 
             // Update progress
             onProgress?.(10, 'Preparing installation directory...');
 
             // Ensure metadata directory exists
-            await this.ensureDirectoryExists(metadataPath);
+            await this.ensureDirectoryExists(extractionPath);
             
-            // Ensure extraction directory exists (if different from metadata)
-            if (extractionPath !== metadataPath) {
-                await this.ensureDirectoryExists(extractionPath);
-            }
-
             // Update progress
             onProgress?.(20, 'Extracting bundle...');
 
@@ -89,13 +84,16 @@ export class InstallationManager {
             onProgress?.(80, 'Finalizing installation...');
 
             // Create installation metadata (always in metadata path)
-            await this.createInstallationMetadata(metadataPath, bundleInfo, scope, platform.platform, extractedFiles, extractionPath);
+            // await this.createInstallationMetadata(dotOlafPath, bundleInfo, scope, platform.platform, extractedFiles, extractionPath);
 
             // Update progress
             onProgress?.(90, 'Updating configuration...');
 
             // Update platform-specific configuration if needed
             await this.updatePlatformConfiguration(platform.platform, scope, extractionPath);
+
+            // Create symbolic link from workspace to installation path
+            await this.createWorkspaceSymbolicLink(scope, extractionPath);
 
             // Update progress
             onProgress?.(100, 'Installation completed successfully!');
@@ -189,23 +187,35 @@ export class InstallationManager {
 
         this.logger.debug(`Checking ${sortedDirectories.length} directories for emptiness`);
 
+        // Determine the root path (parent of extraction path) - we don't want to remove anything beyond this
+        const rootPath = path.dirname(extractionPath);
+
         // Remove empty directories, starting from the deepest
         for (const dir of sortedDirectories) {
-            await this.removeIfEmpty(dir);
+            await this.removeEmptyParentsRecursively(dir, rootPath);
         }
 
         // Finally, remove the installation/metadata directory if it's different from extraction path
         if (installationPath !== extractionPath) {
             // Remove metadata file first if it exists
             try {
-                const metadataPath = path.join(installationPath, '.olaf-metadata.json');
+                const metadataPath = path.join(installationPath, '.olaf', '.olaf-metadata.json');
                 await fs.promises.unlink(metadataPath);
                 this.logger.info(`Removed metadata file: ${metadataPath}`);
             } catch (error) {
                 // Metadata file might not exist or already removed, which is fine
                 this.logger.debug(`Metadata file not found or already removed: ${installationPath}`);
             }
-            await this.removeIfEmpty(installationPath);
+            // Remove the .olaf directory
+            try {
+                const olafDir = path.join(installationPath, '.olaf');
+                await fs.promises.rmdir(olafDir);
+                this.logger.info(`Removed .olaf directory: ${olafDir}`);
+            } catch (error) {
+                this.logger.debug(`.olaf directory not empty or already removed: ${installationPath}`);
+            }
+            // Remove the installation path if empty
+            await this.removeEmptyParentsRecursively(installationPath, rootPath);
         }
 
         this.logger.info(`Completed pruning empty directories for scope: ${scope}`);
@@ -244,11 +254,22 @@ export class InstallationManager {
     /**
      * Recursively remove empty parent directories up to a root path
      * @param dirPath - Starting directory path
-     * @param rootPath - Root path to stop at (won't remove this)
+     * @param rootPath - Root path to stop before (won't remove this or go beyond it)
      */
     private async removeEmptyParentsRecursively(dirPath: string, rootPath: string): Promise<void> {
-        if (dirPath === rootPath || dirPath === path.dirname(dirPath)) {
-            return; // Reached root or filesystem root
+        // Stop if we've reached filesystem root
+        if (dirPath === path.dirname(dirPath)) {
+            return;
+        }
+
+        // Stop if we've reached the root path itself
+        if (dirPath === rootPath) {
+            return;
+        }
+
+        // Stop if the directory is not within the root path
+        if (!dirPath.startsWith(rootPath + path.sep) && dirPath !== rootPath) {
+            return;
         }
 
         try {
@@ -262,6 +283,8 @@ export class InstallationManager {
                 // Recursively check parent directory
                 const parentDir = path.dirname(dirPath);
                 await this.removeEmptyParentsRecursively(parentDir, rootPath);
+            } else {
+                this.logger.debug(`Directory not empty, keeping: ${dirPath} (${files.length} items)`);
             }
         } catch (error) {
             // Directory doesn't exist or can't be read/removed - stop recursion
@@ -288,7 +311,7 @@ export class InstallationManager {
             }
 
             // Read installation metadata to get list of installed files
-            const metadataPath = path.join(installationPath, '.olaf-metadata.json');
+            const metadataPath = path.join(installationPath, '.olaf', '.olaf-metadata.json');
             let installedFiles: string[] = [];
             let extractionPath = installationPath;
 
@@ -312,6 +335,13 @@ export class InstallationManager {
                     }
                 }
             }
+
+            // Remove workspace symbolic link if it exists
+            await this.removeWorkspaceSymbolicLink(scope, extractionPath);
+
+            // Remove platform-specific symbolic links
+            const detectedPlatform = await this.platformDetector.detectPlatform();
+            await this.removePlatformSymbolicLinks(detectedPlatform.platform, scope, extractionPath);
 
             // Remove empty directories using the comprehensive pruning method
             await this.pruneEmptyDirs(scope);
@@ -356,7 +386,7 @@ export class InstallationManager {
         try {
             const platform = await this.platformDetector.detectPlatform();
             const installationPath = this.platformDetector.getInstallationPath(platform.platform, scope);
-            const metadataPath = path.join(installationPath, '.olaf-metadata.json');
+            const metadataPath = path.join(installationPath, '.olaf', '.olaf-metadata.json');
 
             await access(metadataPath);
             return true;
@@ -525,6 +555,8 @@ export class InstallationManager {
             extractionPath: extractionPath
         };
 
+        await this.ensureDirectoryExists(metadataPath);
+
         const metadataFilePath = path.join(metadataPath, '.olaf-metadata.json');
         await writeFile(metadataFilePath, JSON.stringify(metadata, null, 2));
         
@@ -532,7 +564,7 @@ export class InstallationManager {
     }
 
     private async readInstallationMetadata(installationPath: string): Promise<any> {
-        const metadataPath = path.join(installationPath, '.olaf-metadata.json');
+        const metadataPath = path.join(installationPath, '.olaf', '.olaf-metadata.json');
         const metadataContent = await readFile(metadataPath, 'utf8');
         return JSON.parse(metadataContent);
     }
@@ -569,6 +601,9 @@ export class InstallationManager {
     private async updateVSCodeConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
         // Add VSCode-specific configuration updates here
         this.logger.debug(`Updating VSCode configuration for scope: ${scope}`);
+
+        // Create symbolic link from workspace/.github to installationPath/.github
+        await this.createGitHubSymbolicLink(scope, installationPath);
     }
 
     private async updateWindsurfConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
@@ -584,5 +619,211 @@ export class InstallationManager {
     private async updateCursorConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
         // Add Cursor-specific configuration updates here
         this.logger.debug(`Updating Cursor configuration for scope: ${scope}`);
+    }
+
+    /**
+     * Create symbolic link from workspace/.olaf to installation path/.olaf
+     */
+    private async createWorkspaceSymbolicLink(scope: InstallationScope, extractionPath: string): Promise<void> {
+        try {
+            // Only create symbolic link for non-project installations
+            if (scope === InstallationScope.PROJECT) {
+                this.logger.debug('Skipping symbolic link creation for project installation (files already in workspace)');
+                return;
+            }
+
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.warn('No workspace folder found, skipping symbolic link creation');
+                return;
+            }
+
+            const workspaceOlafPath = path.join(workspaceRoot, '.olaf');
+            const installationOlafPath = path.join(extractionPath, '.olaf');
+
+            // Check if .olaf directory exists in the installation
+            if (!fs.existsSync(installationOlafPath)) {
+                this.logger.debug('No .olaf directory found in installation, skipping symbolic link creation');
+                return;
+            }
+
+            // Remove existing .olaf in workspace if it exists
+            if (fs.existsSync(workspaceOlafPath)) {
+                const stats = fs.lstatSync(workspaceOlafPath);
+                if (stats.isSymbolicLink()) {
+                    fs.unlinkSync(workspaceOlafPath);
+                    this.logger.debug(`Removed existing symbolic link: ${workspaceOlafPath}`);
+                } else if (stats.isDirectory()) {
+                    // If it's a real directory, we should be more cautious
+                    this.logger.warn(`Existing .olaf directory found at ${workspaceOlafPath}. Manual intervention may be required.`);
+                    return;
+                }
+            }
+
+            // Create symbolic link
+            fs.symlinkSync(installationOlafPath, workspaceOlafPath, 'dir');
+            this.logger.info(`Created symbolic link: ${workspaceOlafPath} -> ${installationOlafPath}`);
+
+        } catch (error) {
+            this.logger.warn('Failed to create workspace symbolic link', error as Error);
+            // Don't fail the installation for symbolic link creation issues
+        }
+    }
+
+    /**
+     * Remove symbolic link from workspace/.olaf during uninstallation
+     */
+    private async removeWorkspaceSymbolicLink(scope: InstallationScope, extractionPath: string): Promise<void> {
+        try {
+            // Only remove symbolic link for non-project installations
+            if (scope === InstallationScope.PROJECT) {
+                this.logger.debug('Skipping symbolic link removal for project installation');
+                return;
+            }
+
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.debug('No workspace folder found, skipping symbolic link removal');
+                return;
+            }
+
+            const workspaceOlafPath = path.join(workspaceRoot, '.olaf');
+
+            // Check if .olaf exists in workspace and is a symbolic link
+            if (fs.existsSync(workspaceOlafPath)) {
+                const stats = fs.lstatSync(workspaceOlafPath);
+                if (stats.isSymbolicLink()) {
+                    // Verify that the symbolic link points to our installation
+                    const linkTarget = fs.readlinkSync(workspaceOlafPath);
+                    const expectedTarget = path.join(extractionPath, '.olaf');
+
+                    if (path.resolve(path.dirname(workspaceOlafPath), linkTarget) === path.resolve(expectedTarget)) {
+                        fs.unlinkSync(workspaceOlafPath);
+                        this.logger.info(`Removed workspace symbolic link: ${workspaceOlafPath}`);
+                    } else {
+                        this.logger.warn(`Symbolic link points to different location, not removing: ${workspaceOlafPath} -> ${linkTarget}`);
+                    }
+                } else {
+                    this.logger.debug(`Workspace .olaf is not a symbolic link, not removing: ${workspaceOlafPath}`);
+                }
+            } else {
+                this.logger.debug(`No workspace .olaf symbolic link found at: ${workspaceOlafPath}`);
+            }
+
+        } catch (error) {
+            this.logger.warn('Failed to remove workspace symbolic link', error as Error);
+            // Don't fail the uninstallation for symbolic link removal issues
+        }
+    }
+
+    /**
+     * Create symbolic link from workspace/.github to installation path/.github
+     */
+    private async createGitHubSymbolicLink(scope: InstallationScope, installationPath: string): Promise<void> {
+        try {
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.warn('No workspace folder found, skipping .github symbolic link creation');
+                return;
+            }
+
+            const workspaceGitHubPath = path.join(workspaceRoot, '.github');
+            const installationGitHubPath = path.join(installationPath, '.github');
+
+            // Check if .github directory exists in the installation
+            if (!fs.existsSync(installationGitHubPath)) {
+                this.logger.debug('No .github directory found in installation, skipping .github symbolic link creation');
+                return;
+            }
+
+            // Remove existing .github in workspace if it exists
+            if (fs.existsSync(workspaceGitHubPath)) {
+                const stats = fs.lstatSync(workspaceGitHubPath);
+                if (stats.isSymbolicLink()) {
+                    fs.unlinkSync(workspaceGitHubPath);
+                    this.logger.debug(`Removed existing .github symbolic link: ${workspaceGitHubPath}`);
+                } else if (stats.isDirectory()) {
+                    // If it's a real directory, we should be more cautious
+                    this.logger.warn(`Existing .github directory found at ${workspaceGitHubPath}. Manual intervention may be required.`);
+                    return;
+                }
+            }
+
+            // Create symbolic link
+            fs.symlinkSync(installationGitHubPath, workspaceGitHubPath, 'dir');
+            this.logger.info(`Created .github symbolic link: ${workspaceGitHubPath} -> ${installationGitHubPath}`);
+
+        } catch (error) {
+            this.logger.warn('Failed to create .github symbolic link', error as Error);
+            // Don't fail the installation for symbolic link creation issues
+        }
+    }
+
+    /**
+     * Remove platform-specific symbolic links during uninstallation
+     */
+    private async removePlatformSymbolicLinks(platform: Platform, scope: InstallationScope, extractionPath: string): Promise<void> {
+        try {
+            switch (platform) {
+                case Platform.VSCODE:
+                    await this.removeGitHubSymbolicLink(extractionPath);
+                    break;
+                case Platform.WINDSURF:
+                case Platform.KIRO:
+                case Platform.CURSOR:
+                    // Add platform-specific symbolic link removal here if needed
+                    this.logger.debug(`No platform-specific symbolic links to remove for: ${platform}`);
+                    break;
+                default:
+                    this.logger.debug('No platform-specific symbolic links to remove');
+            }
+        } catch (error) {
+            this.logger.warn('Failed to remove platform-specific symbolic links', error as Error);
+            // Don't fail the uninstallation for symbolic link removal issues
+        }
+    }
+
+    /**
+     * Remove .github symbolic link from workspace during uninstallation
+     */
+    private async removeGitHubSymbolicLink(extractionPath: string): Promise<void> {
+        try {
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.debug('No workspace folder found, skipping .github symbolic link removal');
+                return;
+            }
+
+            const workspaceGitHubPath = path.join(workspaceRoot, '.github');
+
+            // Check if .github exists in workspace and is a symbolic link
+            if (fs.existsSync(workspaceGitHubPath)) {
+                const stats = fs.lstatSync(workspaceGitHubPath);
+                if (stats.isSymbolicLink()) {
+                    // Verify that the symbolic link points to our installation
+                    const linkTarget = fs.readlinkSync(workspaceGitHubPath);
+                    const expectedTarget = path.join(extractionPath, '.github');
+
+                    if (path.resolve(path.dirname(workspaceGitHubPath), linkTarget) === path.resolve(expectedTarget)) {
+                        fs.unlinkSync(workspaceGitHubPath);
+                        this.logger.info(`Removed workspace .github symbolic link: ${workspaceGitHubPath}`);
+                    } else {
+                        this.logger.warn(`GitHub symbolic link points to different location, not removing: ${workspaceGitHubPath} -> ${linkTarget}`);
+                    }
+                } else {
+                    this.logger.debug(`Workspace .github is not a symbolic link, not removing: ${workspaceGitHubPath}`);
+                }
+            } else {
+                this.logger.debug(`No workspace .github symbolic link found at: ${workspaceGitHubPath}`);
+            }
+
+        } catch (error) {
+            this.logger.warn('Failed to remove .github symbolic link', error as Error);
+            // Don't fail the uninstallation for symbolic link removal issues
+        }
     }
 }

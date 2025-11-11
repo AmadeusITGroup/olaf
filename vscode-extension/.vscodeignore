@@ -1,8 +1,17 @@
+# Production VS Code ignore - minimal package size
+# This file is used during packaging to create small VSIX files
+
 # Source files and build artifacts (exclude everything except final bundle)
 src/
-out/
+dist/
 test/
 test-dist/
+out/test/
+out/commands/
+out/services/
+out/types/
+out/ui/
+out/utils/
 **/*.ts
 **/*.map
 **/*.d.ts
@@ -40,8 +49,8 @@ build/
 tools/
 *.sh
 *.js
-!dist/extension.js
-!dist/extension.js.LICENSE.txt
+!out/extension.js
+!out/extension.js.LICENSE.txt
 apply_*.sh
 create-*.sh
 ensure-*.sh
@@ -62,6 +71,8 @@ Thumbs.db
 package_broken.json
 package_fixed.json
 .vscodeignore.backup
+.vscodeignore.production
+.vscodeignore.development
 *.backup
 temp_*.patch
 temp_*.txt
@@ -109,55 +120,14 @@ secrets.json
 *.rar
 *.vsix
 
+# Integration test files
+INTEGRATION_TEST_*.md
+
 # Explicitly include only these files:
 !package.json
 !README.md
 !CHANGELOG.md
 !LICENSE.txt
 !icon.png
-!dist/extension.js
-!dist/extension.js.LICENSE.txt
-
-# Python development and fix scripts (EXCLUDE FROM DISTRIBUTION)
-*.py
-fix_*.py
-create_*.py  
-improve_*.py
-debug_*.py
-test_*.py
-*_fix.py
-*_debug.py
-
-# Additional development artifacts
-*.js.backup*
-*.ts.backup*
-*.ts.debug-backup*
-*.ts.fix-backup*
-temp_changelog.md
-test_integrity.js
-
-
-# Additional JavaScript development files
-post-compile-fixes.js
-test_*.js  
-*_paths.js
-*_integrity.js
-
-# More backup patterns
-*.backup*
-*.bak-*
-*.fix-backup*
-*.debug-backup*
-
-# Webpack configuration (build tool files)
-webpack.config.js*
-
-
-# Explicitly include only these essential files:
-!package.json
-!README.md
-!CHANGELOG.md
-!LICENSE.txt
-!icon.png
-!dist/extension.js
-!dist/extension.js.LICENSE.txt
+!out/extension.js
+!out/extension.js.LICENSE.txt
