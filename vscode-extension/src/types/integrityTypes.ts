@@ -114,7 +114,7 @@ export interface EnhancedInstallationMetadata {
     };
     
     // Enhanced file tracking with integrity information
-    files: FileIntegrityInfo[];
+    originalFiles: FileIntegrityInfo[];
     extractionPath: string;
     
     // New integrity features

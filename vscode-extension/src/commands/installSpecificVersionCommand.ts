@@ -87,7 +87,6 @@ export class InstallSpecificVersionCommand {
             // Get installation scope
             const scopeItems = [
                 { label: 'User', description: 'Install for current user', scope: InstallationScope.USER },
-                { label: 'Workspace', description: 'Install for current workspace', scope: InstallationScope.WORKSPACE },
                 { label: 'Project', description: 'Install in current project folder', scope: InstallationScope.PROJECT }
             ];
 
@@ -155,8 +154,7 @@ export class InstallSpecificVersionCommand {
                 );
 
                 if (result.success) {
-                    const scopeText = scope === InstallationScope.USER ? 'user' : 
-                                   scope === InstallationScope.WORKSPACE ? 'workspace' : 'project';
+                    const scopeText = scope === InstallationScope.USER ? 'user' : 'project';
                     
                     vscode.window.showInformationMessage(
                         `OLAF ${version} installed successfully! (${scopeText} scope)\nPath: ${result.installedPath}`

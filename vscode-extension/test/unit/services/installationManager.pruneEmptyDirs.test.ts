@@ -97,8 +97,10 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
                 version: '1.0.0',
                 platform: 'vscode'
             };
+            const metadataDir = path.join(installPath, '.olaf');
+            await fs.promises.mkdir(metadataDir, { recursive: true });
             await fs.promises.writeFile(
-                path.join(installPath, '.olaf-metadata.json'),
+                path.join(metadataDir, '.olaf-metadata.json'),
                 JSON.stringify(metadata, null, 2)
             );
 
@@ -113,7 +115,7 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
             
             // Verify logging
             const logs = mockLogger.getLogs();
-            const removedDirLogs = logs.filter(log => log.message.includes('Removed empty directory'));
+            const removedDirLogs = logs.filter(log => log.message.includes('Removed empty') && log.message.includes('directory'));
             assert.strictEqual(removedDirLogs.length > 0, true, 'Should log removed directories');
         });
 
@@ -139,8 +141,10 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
                 version: '1.0.0',
                 platform: 'vscode'
             };
+            const metadataDir = path.join(installPath, '.olaf');
+            await fs.promises.mkdir(metadataDir, { recursive: true });
             await fs.promises.writeFile(
-                path.join(installPath, '.olaf-metadata.json'),
+                path.join(metadataDir, '.olaf-metadata.json'),
                 JSON.stringify(metadata, null, 2)
             );
 
@@ -175,8 +179,10 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
                 version: '1.0.0',
                 platform: 'vscode'
             };
+            const metadataDir = path.join(installPath, '.olaf');
+            await fs.promises.mkdir(metadataDir, { recursive: true });
             await fs.promises.writeFile(
-                path.join(installPath, '.olaf-metadata.json'),
+                path.join(metadataDir, '.olaf-metadata.json'),
                 JSON.stringify(metadata, null, 2)
             );
 
@@ -206,8 +212,10 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
             await fs.promises.mkdir(installPath, { recursive: true });
             
             // Create corrupted metadata file
+            const metadataDir = path.join(installPath, '.olaf');
+            await fs.promises.mkdir(metadataDir, { recursive: true });
             await fs.promises.writeFile(
-                path.join(installPath, '.olaf-metadata.json'),
+                path.join(metadataDir, '.olaf-metadata.json'),
                 'invalid json content'
             );
 
@@ -240,8 +248,10 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
                 scope: 'user',
                 version: '1.0.0'
             };
+            const metadataDir = path.join(installPath, '.olaf');
+            await fs.promises.mkdir(metadataDir, { recursive: true });
             await fs.promises.writeFile(
-                path.join(installPath, '.olaf-metadata.json'),
+                path.join(metadataDir, '.olaf-metadata.json'),
                 JSON.stringify(metadata, null, 2)
             );
 
@@ -250,7 +260,7 @@ describe('InstallationManager.pruneEmptyDirs Test Suite', () => {
 
             // Assert
             const logs = mockLogger.getLogs();
-            const removedLogs = logs.filter(log => log.message.includes('Removed empty directory'));
+            const removedLogs = logs.filter(log => log.message.includes('Removed empty') && log.message.includes('directory'));
             assert.strictEqual(removedLogs.length > 0, true, 'Should have removed empty directories');
         });
     });

@@ -1,25 +1,59 @@
 import * as assert from 'assert';
-import { UnifiedUninstaller } from '../../services/unifiedUninstaller';
+import { OlafUninstaller } from '../../services/olafUninstaller';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as os from 'os';
+import * as crypto from 'crypto';
+import { FileIntegrityInfo, EnhancedInstallationMetadata } from '../../types/integrityTypes';
 
 describe('🚨 CRITICAL SAFETY Tests', () => {
     let tempDir: string;
-    let uninstaller: UnifiedUninstaller;
+    let uninstaller: OlafUninstaller;
+
+    // Helper function to create FileIntegrityInfo from file content
+    async function createFileIntegrityInfo(filePath: string, content: string): Promise<FileIntegrityInfo> {
+        await fs.writeFile(filePath, content);
+        const stats = await fs.stat(filePath);
+        const buffer = Buffer.from(content);
+
+        const sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
+        let xxhash64: string;
+
+        try {
+            // Try BLAKE2b first, fallback to SHA-512 truncated
+            const blake2bHash = crypto.createHash('blake2b512').update(buffer).digest('hex');
+            xxhash64 = blake2bHash.substring(0, 64);
+        } catch {
+            // Fallback to SHA-512 truncated if BLAKE2b not available
+            const sha512Hash = crypto.createHash('sha512').update(buffer).digest('hex');
+            xxhash64 = sha512Hash.substring(0, 64);
+        }
+
+        return {
+            path: filePath,
+            sha256,
+            xxhash64,
+            size: stats.size,
+            mtime: stats.mtime.toISOString(),
+            permissions: stats.mode.toString(8),
+            isExecutable: !!(stats.mode & fs.constants.S_IXUSR),
+            isSymlink: stats.isSymbolicLink(),
+            symlinkTarget: stats.isSymbolicLink() ? await fs.readlink(filePath) : undefined
+        };
+    }
 
     beforeEach(async () => {
         // Create a temporary directory that looks like a real workspace
         tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'olaf-safety-test-'));
-        
+
         // Create fake workspace structure with .git, node_modules, user files
         await fs.ensureDir(path.join(tempDir, '.git', 'objects'));
         await fs.ensureDir(path.join(tempDir, 'node_modules'));
         await fs.writeFile(path.join(tempDir, '.git', 'HEAD'), 'ref: refs/heads/main');
         await fs.writeFile(path.join(tempDir, 'important-user-file.txt'), 'CRITICAL USER DATA');
         await fs.writeFile(path.join(tempDir, 'node_modules', 'some-module.js'), 'module content');
-        
-        uninstaller = new UnifiedUninstaller();
+
+        uninstaller = new OlafUninstaller();
     });
 
     afterEach(async () => {
@@ -75,16 +109,33 @@ describe('🚨 CRITICAL SAFETY Tests', () => {
         // Create minimal metadata
         const metadataDir = path.join(tempDir, '.olaf');
         await fs.ensureDir(metadataDir);
-        
-        const testFile = path.join(tempDir, 'test-olaf-file.txt');
-        await fs.writeFile(testFile, 'test content');
-        
+
+        const testFile = path.join(metadataDir, 'test-olaf-file.txt');
+        const testFileInfo = await createFileIntegrityInfo(testFile, 'test content');
+
         const metadata = {
-            originalFiles: [testFile],
-            modifiedFiles: [],
-            userCreatedFiles: [],
-            installationPath: tempDir,
-            installationDate: new Date().toISOString()
+            version: '1.0.0',
+            platform: 'test',
+            scope: 'workspace',
+            installedAt: new Date().toISOString(),
+            osplatform: 'test',
+            bundleInfo: {
+                filename: 'test-bundle.zip',
+                size: 1024,
+                platform: 'test',
+                sha256: 'test-sha256',
+                manifestVersion: '1.0.0'
+            },
+            originalFiles: [testFileInfo],
+            extractionPath: metadataDir,
+            integrityVersion: '1.0.0',
+            verificationPolicy: {
+                autoVerify: true,
+                preserveModified: true,
+                preserveUserCreated: true,
+                reportModifications: true
+            },
+            rollbackSupported: false
         };
         
         const result = await uninstaller.uninstall({

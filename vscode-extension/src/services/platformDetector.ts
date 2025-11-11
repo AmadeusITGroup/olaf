@@ -74,7 +74,7 @@ export class PlatformDetector {
                 installationPaths: {
                     user: this.getUserDataPath('Code'),
                     workspace: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.vscode'),
-                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf')
+                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '')
                 },
                 configFiles: ['settings.json', 'keybindings.json'],
                 environmentVariables: ['VSCODE_PID', 'VSCODE_IPC_HOOK']
@@ -134,7 +134,10 @@ export class PlatformDetector {
     public getInstallationPath(platform: Platform, scope: InstallationScope): string {
         const config = this.getPlatformConfig(platform);
         const basePath = config.installationPaths[scope];
-        return path.join(basePath, 'olaf');
+        if (scope === InstallationScope.USER) {
+            return path.join(basePath, 'olaf');    
+        }
+        return path.join(basePath);
     }
 
     private async detectByExecutablePath(): Promise<PlatformDetectionResult> {
