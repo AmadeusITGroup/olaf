@@ -111,7 +111,7 @@ jobs:
       - name: Create installation bundles using manifest
         run: |
           # Use the manifest parser script to create bundles
-          ./.github/workflows/parse-manifest.sh ${{ steps.release.outputs.tag_name }}
+          ./.github/workflows/create-bundles.sh ${{ steps.release.outputs.tag_name }}
           
           # List created bundles
           echo "Created bundles:"

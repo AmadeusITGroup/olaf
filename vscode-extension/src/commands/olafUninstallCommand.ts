@@ -5,18 +5,27 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { UnifiedUninstaller, UninstallOptions, UninstallResult } from '../services/unifiedUninstaller';
+import * as fs from 'fs';
+import { OlafUninstaller, UninstallOptions, UninstallResult } from '../services/olafUninstaller';
 import { Logger } from '../utils/logger';
+// import { InstallationManager } from '../services/installationManager';
+import { EnhancedInstallationManager } from '../services/enhancedInstallationManager';
+import { InstallationScope } from '../types/platform';
+import { promisify } from 'util';
 
-export class RefactoredUninstallCommand {
-    private readonly unifiedUninstaller: UnifiedUninstaller;
+const readFile = promisify(fs.readFile);
+
+export class OlafUninstallCommand {
+    private readonly olafUninstaller: OlafUninstaller;
     private readonly outputChannel: vscode.OutputChannel;
     private readonly logger: Logger;
+    private readonly installationManager: EnhancedInstallationManager;
 
     constructor() {
-        this.unifiedUninstaller = new UnifiedUninstaller();
+        this.olafUninstaller = new OlafUninstaller();
         this.outputChannel = vscode.window.createOutputChannel('OLAF Uninstall');
         this.logger = Logger.getInstance();
+        this.installationManager = EnhancedInstallationManager.getInstance();
     }
 
     /**
@@ -34,6 +43,19 @@ export class RefactoredUninstallCommand {
                 return;
             }
 
+            // Detect installed scopes and get metadata
+            this.outputChannel.appendLine('Detecting OLAF installations...');
+            // const installedScopes = await this.installationManager.getInstalledScopes();
+
+                // Load metadata for the selected scope
+            this.outputChannel.appendLine(`Trying to load installation metadata...`);
+            const metadata = await this.loadMetadataForScope(InstallationScope.PROJECT);
+            
+            if (!metadata || !metadata.scope) {
+                vscode.window.showWarningMessage('No OLAF installations found.');
+                return;
+            }
+
             // Ask user for uninstall type
             const uninstallType = await this.promptForUninstallType();
             if (!uninstallType) {
@@ -45,6 +67,7 @@ export class RefactoredUninstallCommand {
                 type: uninstallType,
                 targetDir: workspaceRoot,
                 createBackup: uninstallType !== 'complete', // Always backup unless complete removal
+                metadata: metadata, // Include the loaded metadata
                 onProgress: (progress: number, message: string) => {
                     this.outputChannel.appendLine(`[${progress}%] ${message}`);
                     this.logger.info(`Progress: ${progress}% - ${message}`);
@@ -61,7 +84,7 @@ export class RefactoredUninstallCommand {
 
             // Execute the uninstall
             this.outputChannel.appendLine(`\nExecuting ${uninstallType} uninstall...`);
-            const result = await this.unifiedUninstaller.uninstall(options);
+            const result = await this.olafUninstaller.uninstall(options);
             
             // Show results
             await this.showResults(result, uninstallType);
@@ -69,7 +92,7 @@ export class RefactoredUninstallCommand {
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : String(error);
             this.outputChannel.appendLine(`Error: ${errorMessage}`);
-            this.logger.error('Uninstall failed', error as Error);
+            this.logger.error('', error as Error);
             
             // Check if this is a safety error about missing metadata
             if (errorMessage.includes('SAFETY ERROR: Cannot uninstall without installation metadata')) {
@@ -137,6 +160,48 @@ export class RefactoredUninstallCommand {
     }
 
     /**
+     * Prompt user to select installation scope when multiple are available
+     */
+    private async promptForInstallationScope(installedScopes: InstallationScope[]): Promise<InstallationScope | undefined> {
+        const choices = installedScopes.map(scope => ({
+            label: scope === InstallationScope.USER ? 'User Installation' : 'Project Installation',
+            description: scope === InstallationScope.USER
+                ? 'Remove from user profile'
+                : 'Remove from current project',
+            value: scope
+        }));
+
+        const selected = await vscode.window.showQuickPick(choices, {
+            placeHolder: 'Select which OLAF installation to uninstall',
+            ignoreFocusOut: true
+        });
+
+        return selected?.value;
+    }
+
+    /**
+     * Load metadata for a specific installation scope
+     */
+    private async loadMetadataForScope(scope: InstallationScope): Promise<any | undefined> {
+        try {
+            const metadataPath = path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf', '.olaf-enhanced-metadata.json');
+            const metadataContent = await readFile(metadataPath, 'utf8');
+            const metadata = JSON.parse(metadataContent);
+
+            if (!metadata) {
+                this.logger.warn(`No metadata found for ${scope} installation`);
+                return undefined;
+            }
+
+            this.logger.info(`Loaded metadata for ${scope} installation: ${metadata.installedFiles?.length || 0} files`);
+            return metadata;
+        } catch (error) {
+            this.logger.error(`Failed to load metadata for ${scope} installation`, error as Error);
+            throw new Error(`Failed to load installation metadata for "${scope}" scope: ${error instanceof Error ? error.message : String(error)}\nIf you believe OLAF is installed, you can remove manually the OLAF files from your workspace or user profile:\n\tolaf-core, olaf-data, or .olaf`);
+        }
+    }
+
+    /**
      * Get custom file selection from user
      */
     private async getCustomSelection(targetDir: string): Promise<string[] | undefined> {
@@ -170,44 +235,48 @@ export class RefactoredUninstallCommand {
             `  • Files preserved: ${result.filesPreserved}`,
             result.backupPath ? `  • Backup created at: ${result.backupPath}` : '  • No backup created',
             ``
-        ];
+        ].join("\n");
 
+        const report:string[] = [];
         // Show errors if any
         if (result.errors.length > 0) {
-            summary.push(`⚠️ Errors encountered:`);
+            report.push(`⚠️ Errors encountered:`);
             result.errors.forEach(error => 
-                summary.push(`  - ${error}`)
+                report.push(`  - ${error}`)
             );
-            summary.push('');
+            report.push('');
         }
 
         // Show detailed file lists
         if (result.details.removed.length > 0) {
-            summary.push(`📝 Removed files:`);
+            report.push(`📝 Removed files:`);
             result.details.removed.forEach(file => 
-                summary.push(`  - ${file}`)
+                report.push(`  - ${file}`)
             );
-            summary.push('');
+            report.push('');
         }
 
         if (result.details.preserved.length > 0) {
-            summary.push(`💾 Preserved files:`);
+            report.push(`💾 Preserved files:`);
             result.details.preserved.forEach(file => 
-                summary.push(`  - ${file}`)
+                report.push(`  - ${file}`)
             );
-            summary.push('');
+            report.push('');
         }
 
         if (result.details.backedUp.length > 0) {
-            summary.push(`📦 Backed up files:`);
+            report.push(`📦 Backed up files:`);
             result.details.backedUp.forEach(file => 
-                summary.push(`  - ${file}`)
+                report.push(`  - ${file}`)
             );
-            summary.push('');
+            report.push('');
         }
 
+        report.push(summary);
+
+        this.outputChannel.appendLine(summary);
         // Output to channel
-        summary.forEach(line => this.outputChannel.appendLine(line));
+        // report.forEach(line => this.outputChannel.appendLine(line));
 
         // Show appropriate message
         if (result.success) {
@@ -226,6 +295,7 @@ export class RefactoredUninstallCommand {
                     this.outputChannel.appendLine('UNINSTALL DETAILS - ' + new Date().toLocaleString());
                     this.outputChannel.appendLine('='.repeat(80));
                     this.outputChannel.appendLine('');
+                    report.forEach(line => this.outputChannel.appendLine(line));
                 }
             });
         } else {
@@ -242,7 +312,7 @@ export class RefactoredUninstallCommand {
                     this.outputChannel.appendLine('');
                     
                     // Add detailed console logging for debugging
-                    console.error(`[${new Date().toISOString()}] ERROR in refactoredUninstallCommand:`);
+                    console.error(`[${new Date().toISOString()}] ERROR in olafUninstallCommand:`);
                     console.error('='.repeat(60));
                     if (result.errors && result.errors.length > 0) {
                         console.error(`Found ${result.errors.length} error(s):`);

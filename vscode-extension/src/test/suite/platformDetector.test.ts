@@ -30,16 +30,13 @@ describe('PlatformDetector Tests', () => {
         const detector = PlatformDetector.getInstance();
         
         const userPath = detector.getInstallationPath(Platform.VSCODE, InstallationScope.USER);
-        const workspacePath = detector.getInstallationPath(Platform.VSCODE, InstallationScope.WORKSPACE);
         const projectPath = detector.getInstallationPath(Platform.VSCODE, InstallationScope.PROJECT);
         
         assert.ok(userPath);
-        assert.ok(workspacePath);
         assert.ok(projectPath);
         
         // Paths should be different
-        assert.notStrictEqual(userPath, workspacePath);
-        assert.notStrictEqual(workspacePath, projectPath);
+        assert.notStrictEqual(userPath, projectPath);
     });
 
     it('Should handle different platforms', () => {

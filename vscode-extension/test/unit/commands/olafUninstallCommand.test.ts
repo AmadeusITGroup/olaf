@@ -3,15 +3,15 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as os from 'os';
-import { RefactoredUninstallCommand } from '../../../src/commands/refactoredUninstallCommand';
+import { OlafUninstallCommand } from '../../../src/commands/olafUninstallCommand';
 
-describe('RefactoredUninstallCommand', () => {
+describe('OlafUninstallCommand', () => {
     let tempDir: string;
-    let command: RefactoredUninstallCommand;
+    let command: OlafUninstallCommand;
 
     beforeEach(async () => {
         tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'olaf-test-'));
-        command = new RefactoredUninstallCommand();
+        command = new OlafUninstallCommand();
     });
 
     afterEach(async () => {
@@ -20,8 +20,8 @@ describe('RefactoredUninstallCommand', () => {
         }
     });
 
-    it('should create RefactoredUninstallCommand instance', () => {
-        assert.ok(command instanceof RefactoredUninstallCommand);
+    it('should create OlafUninstallCommand instance', () => {
+        assert.ok(command instanceof OlafUninstallCommand);
     });
 
     it('should have execute method', () => {
