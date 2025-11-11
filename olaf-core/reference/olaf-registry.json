@@ -1,0 +1,4 @@
+{
+  "secondary-repos": ["Amadeus-xDLC/genai.olaf@develop"],
+  "use-oss": true
+}
