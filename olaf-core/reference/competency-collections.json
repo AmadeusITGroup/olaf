@@ -5,33 +5,35 @@
       "name": "Core/Always-On",
       "description": "Always included in all indices. Universal kernel competencies essential for all users.",
       "competencies": [
+        "common",
         "prompt-engineer",
-        "common"
+        "git-assistant"
       ],
       "locked": true,
       "created": "2025-10-21",
-      "notes": "This collection cannot be modified or deleted. It forms the foundation for all custom selections. Contains only kernel competencies that appear in every collection."
+      "notes": "This collection cannot be modified or deleted. It forms the foundation for all custom selections. Contains only competencies with classification.type='kernel' in their manifests."
     },
     {
       "id": "developer",
       "name": "Developer Persona",
       "description": "Competencies for software developers: code review, testing, quality improvement, and Git workflow management.",
       "competencies": [
-        "prompt-engineer",
         "common",
-        "developer",
-        "git-assistant"
+        "prompt-engineer",
+        "git-assistant",
+        "developer"
       ],
       "locked": false,
       "created": "2025-10-21"
     },
     {
       "id": "business-analyst",
-      "name": "Business Analyst / Product Manager",
-      "description": "Competencies for BAs and PMs: requirements analysis, planning, research, and feature design.",
+      "name": "Business Analyst Persona",
+      "description": "Competencies for BAs: requirements analysis, planning, research, and feature design.",
       "competencies": [
-        "prompt-engineer",
         "common",
+        "prompt-engineer",
+        "git-assistant",
         "business-analyst"
       ],
       "locked": false,
@@ -42,24 +44,36 @@
       "name": "Project Manager Persona",
       "description": "Competencies for project managers: planning, coordination, progress tracking, and workflow management.",
       "competencies": [
-        "prompt-engineer",
         "common",
+        "prompt-engineer",
+        "git-assistant",
         "project-manager"
       ],
       "locked": false,
       "created": "2025-10-21"
     },
     {
+      "id": "git-assistant",
+      "name": "Git Assistant Persona",
+      "description": "Competencies for Git specialists: branch management, feature extraction, and workflow automation.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant"
+      ],
+      "locked": false,
+      "created": "2025-11-12"
+    },
+    {
       "id": "all",
       "name": "All Competencies",
       "description": "Complete collection including all available competencies with prompts.",
       "competencies": [
-        "prompt-engineer",
         "common",
+        "prompt-engineer",
+        "git-assistant",
         "business-analyst",
         "developer",
-        "git-assistant",
-        "olaf-specific-tools",
         "project-manager"
       ],
       "locked": false,
@@ -68,16 +82,19 @@
   ],
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-12T12:43:30.401781",
+    "lastUpdated": "2025-11-12T13:19:00.201522",
     "active_collection": "all",
     "description": "Competency collections define groupings of competencies for different personas and use cases",
     "notes": [
       "Collections with locked=true cannot be edited or deleted",
       "The 'core' collection is always mandatory and cannot be modified",
-      "Users can create custom collections by running create-competency-collection.ps1",
-      "Users can select collections by running select-competency-collection.ps1",
+      "Kernel competencies are determined by classification.type='kernel' in each competency manifest",
+      "Currently kernel competencies: common, prompt-engineer, git-assistant",
+      "Internal tools (olaf-specific-tools) are excluded from persona collections",
+      "Users can create custom collections by running create_collection.py",
+      "Users can select collections by running select_collection.py",
       "Each collection is a named grouping that generates a competency index"
     ]
   },
-  "last_updated": "2025-10-28T10:45:00.000000"
+  "last_updated": "2025-11-12T13:19:00.188766"
 }

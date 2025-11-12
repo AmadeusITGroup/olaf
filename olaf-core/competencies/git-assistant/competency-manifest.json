@@ -32,8 +32,8 @@
     "intelligent-commit"
   ],
   "classification": {
-    "type": "specialized",
-    "reason": "Specialized Git workflow management for advanced repository operations"
+    "type": "kernel",
+    "reason": "Essential Git workflow management required for all development and collaboration tasks"
   },
   "target_users": {
     "primary": "developer",
