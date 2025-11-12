@@ -1,0 +1,116 @@
+{
+  "id": "business-analyst",
+  "name": "Business Analyst Competency Package",
+  "version": "1.0.0",
+  "description": "Comprehensive business analyst competency package for requirements gathering, specification management, and user story validation with specialized workflows for product and business analysis",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": ["business-analyst", "product-manager", "project-manager"],
+    "description_short": "Business Analyst: requirements analysis, specification management, and user story validation"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-21",
+  "updated": "2025-10-21",
+  "category": "business-analysis",
+  "tags": ["business-analyst", "requirements", "specification", "user-story", "product-analysis"],
+  "classification": {
+    "type": "core",
+    "reason": "Essential foundational competency for the business analyst persona"
+  },
+  "target_users": {
+    "primary": "business-analyst",
+    "secondary": ["product-manager", "project-manager", "architect"],
+    "description": "Business and product analysts performing requirements gathering, product managers defining specifications, project managers tracking requirements"
+  },
+  "maintenance": {
+    "team": "business-analyst",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "Kiro AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Optional: Document analysis tools",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "analyze-business-requirements",
+    "bootstrap-functional-spec-from-code",
+    "extend-specification",
+    "generate-questionnaire",
+    "improve-spec",
+    "review-prd-spec",
+    "review-user-story"
+  ],
+  "entry_points": [
+    {
+      "name": "Analyze Business Requirements",
+      "command": "analyze business requirements",
+      "file": "prompts/analyze-business-requirements.md",
+      "protocol": "Propose-Act",
+      "use_case": "Gather and analyze business requirements from stakeholders"
+    },
+    {
+      "name": "Bootstrap Functional Spec from Code",
+      "command": "bootstrap functional spec from code",
+      "file": "prompts/bootstrap-functional-spec-from-code.md",
+      "protocol": "Act",
+      "use_case": "Extract specifications from existing implementation"
+    },
+    {
+      "name": "Extend Specification",
+      "command": "extend specification",
+      "file": "prompts/extend-specification.md",
+      "protocol": "Propose-Confirm-Act",
+      "use_case": "Enhance existing specifications with new requirements"
+    },
+    {
+      "name": "Generate Questionnaire",
+      "command": "generate questionnaire",
+      "file": "prompts/generate-questionnaire.md",
+      "protocol": "Propose-Act",
+      "use_case": "Create structured questionnaires for requirements gathering"
+    },
+    {
+      "name": "Improve Spec",
+      "command": "improve spec",
+      "file": "prompts/improve-spec.md",
+      "protocol": "Propose-Act",
+      "use_case": "Refine and validate specifications"
+    },
+    {
+      "name": "Review PRD Spec",
+      "command": "review prd spec",
+      "file": "prompts/review-prd-spec.md",
+      "protocol": "Propose-Act",
+      "use_case": "Review PRDs for completeness and format in standardized templates"
+    },
+    {
+      "name": "Review User Story",
+      "command": "review user story",
+      "file": "prompts/review-user-story.md",
+      "protocol": "Act",
+      "use_case": "Validate and refine user stories"
+    }
+  ],
+  "integrations": {
+    "developer": [
+      "generate-tech-spec-from-code"
+    ],
+    "researcher": [
+      "research-and-report",
+      "search-and-learn"
+    ],
+    "technical-writer": [
+      "create-presentation-plan"
+    ],
+    "project-manager": [
+      "create-decision-record"
+    ]
+  },
+  "cross_cutting_intents": [
+    "pdf-analysis",
+    "java-migration"
+  ]
+}

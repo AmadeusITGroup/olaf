@@ -1,0 +1,44 @@
+{
+  "tool_dependencies": [
+    {
+      "tool": "git",
+      "version": ">=2.30",
+      "purpose": "Version control and repository operations",
+      "platforms": ["windows", "linux", "macos"],
+      "install_instruction": "Standard git installation"
+    },
+    {
+      "tool": "language-tools",
+      "description": "Language-specific tools (Java, Python, TypeScript, etc.)",
+      "purpose": "Code analysis and compilation",
+      "platforms": ["windows", "linux", "macos"],
+      "note": "Varies by project language"
+    }
+  ],
+  "external_services": [],
+  "optional_tools": [
+    {
+      "tool": "sonarqube",
+      "version": ">=9.0",
+      "purpose": "Advanced code quality analysis",
+      "integration": "Optional for enhanced metrics"
+    },
+    {
+      "tool": "eslint",
+      "version": ">=8.0",
+      "purpose": "JavaScript/TypeScript linting",
+      "integration": "Optional for JS projects"
+    },
+    {
+      "tool": "pylint",
+      "version": ">=2.0",
+      "purpose": "Python code analysis",
+      "integration": "Optional for Python projects"
+    }
+  ],
+  "llm_requirements": {
+    "minimum_capability": "Code understanding and analysis",
+    "recommended_model": "Claude Sonnet 4.5",
+    "reasoning": "Requires nuanced understanding of code patterns, security concerns, and architectural principles"
+  }
+}

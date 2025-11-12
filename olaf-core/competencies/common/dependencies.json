@@ -1,0 +1,10 @@
+{
+  "tool_dependencies": [],
+  "external_services": [],
+  "optional_tools": [],
+  "llm_requirements": {
+    "minimum_capability": "AI solution evaluation, expert identification, decision support",
+    "recommended_model": "Claude Sonnet 4.5 or higher",
+    "reasoning": "Requires nuanced understanding of AI capabilities, business contexts, and expert domain mapping"
+  }
+}

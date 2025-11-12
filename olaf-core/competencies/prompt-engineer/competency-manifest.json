@@ -1,0 +1,335 @@
+{
+  "id": "prompt-engineer",
+  "name": "Prompt Engineer Competency",
+  "version": "1.0.0",
+  "description": "Complete prompt engineering competency package aggregating all prompt creation, testing, conversion, and documentation capabilities with templates and best practices",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": true,
+    "persona_tags": [
+      "prompt-engineer",
+      "developer",
+      "project-manager",
+      "technical-writer"
+    ],
+    "description_short": "Prompt engineering: create, test, convert, and optimize LLM prompts"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-21",
+  "updated": "2025-10-21",
+  "category": "development-tools",
+  "tags": [
+    "prompt",
+    "engineering",
+    "llm",
+    "prompt-generation",
+    "workflow",
+    "templates",
+    "best-practices"
+  ],
+  "classification": {
+    "type": "kernel",
+    "reason": "Core framework functionality essential for all prompt engineering and workflow design operations"
+  },
+  "target_users": {
+    "primary": "prompt-engineer",
+    "secondary": [
+      "developer",
+      "project-manager"
+    ],
+    "description": "Prompt engineers designing and testing LLM prompts, developers integrating prompting into workflows, project managers coordinating workflow automation"
+  },
+  "maintenance": {
+    "team": "prompt-engineer",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "Kiro AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "File system access, terminal access",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "create prompt",
+    "convert prompt",
+    "check prompt compliance",
+    "generate step-by-step tutorial",
+    "condense olaf framework",
+    "generate workflow",
+    "create competency package",
+    "import prompts to competency",
+    "deploy imported prompts"
+  ],
+  "entry_points": [
+    {
+      "id": "create-prompt",
+      "file": "prompts/create-prompt.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Create new structured prompts following OLAF template and best practices",
+      "aliases": [
+        "create prompt",
+        "new prompt",
+        "write prompt",
+        "generate prompt"
+      ],
+      "required": true,
+      "name": "Create Prompt",
+      "command": "create prompt",
+      "use_case": "Create new structured prompts following OLAF template and best practices"
+    },
+    {
+      "id": "convert-prompt",
+      "file": "prompts/convert-prompt-existing.md",
+      "protocol": "Propose-Act",
+      "description": "Convert existing prompts to OLAF template structure",
+      "aliases": [
+        "convert prompt",
+        "refactor prompt",
+        "rewrite prompt",
+        "upgrade prompt"
+      ],
+      "required": false,
+      "name": "Convert Prompt",
+      "command": "convert prompt",
+      "use_case": "Convert existing prompts to OLAF template structure"
+    },
+    {
+      "id": "check-prompt-compliance",
+      "file": "prompts/check-prompt-compliance.md",
+      "protocol": "Act",
+      "description": "Check and validate prompts for template compliance and effectiveness",
+      "aliases": [
+        "check prompt compliance",
+        "validate prompt",
+        "check prompt",
+        "prompt compliance",
+        "audit prompt"
+      ],
+      "required": false,
+      "name": "Check Prompt Compliance",
+      "command": "check prompt compliance",
+      "use_case": "Check and validate prompts for template compliance and effectiveness"
+    },
+    {
+      "id": "generate-tutorial",
+      "file": "prompts/generate-step-by-step-tutorial.md",
+      "protocol": "Propose-Act",
+      "description": "Generate step-by-step tutorials from workflows or conversations",
+      "aliases": [
+        "generate tutorial",
+        "create tutorial",
+        "step by step tutorial",
+        "tutorial from conversation",
+        "conversation to tutorial"
+      ],
+      "required": false,
+      "name": "Generate Tutorial",
+      "command": "generate tutorial",
+      "use_case": "Generate step-by-step tutorials from workflows or conversations"
+    },
+    {
+      "id": "condense-framework",
+      "file": "prompts/condense-olaf-framework.md",
+      "protocol": "Act",
+      "description": "Condense OLAF framework while maintaining functionality",
+      "aliases": [
+        "condense olaf",
+        "compress olaf",
+        "optimize olaf",
+        "reduce olaf size",
+        "condense framework"
+      ],
+      "required": false,
+      "name": "Condense Framework",
+      "command": "condense olaf",
+      "use_case": "Condense OLAF framework while maintaining functionality"
+    },
+    {
+      "id": "generate-workflow",
+      "file": "prompts/generate-workflow.md",
+      "protocol": "Act",
+      "description": "Generate structured workflows from templates or specifications",
+      "aliases": [
+        "generate workflow",
+        "create workflow",
+        "design workflow",
+        "workflow generation"
+      ],
+      "required": false,
+      "name": "Generate Workflow",
+      "command": "generate workflow",
+      "use_case": "Generate structured workflows from templates or specifications"
+    },
+    {
+      "id": "create-competency-package",
+      "file": "prompts/create-competency-package.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Package prompts, scripts, and templates into self-contained OLAF competency packages",
+      "aliases": [
+        "create competency package",
+        "package competency",
+        "competency packaging",
+        "create competency"
+      ],
+      "required": false,
+      "name": "Create Competency Package",
+      "command": "create competency package",
+      "use_case": "Package prompts, scripts, and templates into self-contained OLAF competency packages"
+    },
+    {
+      "id": "select-competency-collection",
+      "file": "prompts/select-competency-collection.md",
+      "protocol": "Act",
+      "description": "Select an OLAF competency collection and update the framework accordingly",
+      "aliases": [
+        "select collection",
+        "choose collection",
+        "collection selection",
+        "select competency collection",
+        "switch collection"
+      ],
+      "required": false,
+      "name": "Select Competency Collection",
+      "command": "select collection",
+      "use_case": "Select an OLAF competency collection and update the framework accordingly"
+    },
+    {
+      "id": "import-prompts-to-competency",
+      "file": "prompts/import-prompts-to-competency.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Analyze external prompts collection and generate mapping recommendations for OLAF competency integration (Phase 1 - Analysis)",
+      "aliases": [
+        "import prompts",
+        "analyze prompts",
+        "batch import",
+        "import prompt collection",
+        "migrate prompts",
+        "prompts to competency"
+      ],
+      "required": false,
+      "name": "Import Prompts To Competency",
+      "command": "import prompts",
+      "use_case": "Analyze external prompts collection and generate mapping recommendations for OLAF competency integration (Phase 1 - Analysis)"
+    },
+    {
+      "id": "deploy-imported-prompts",
+      "file": "prompts/deploy-imported-prompts.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Convert and deploy external prompts to OLAF competencies following approved mapping plan (Phase 2 - Implementation)",
+      "aliases": [
+        "deploy prompts",
+        "convert imported prompts",
+        "implement prompt mapping",
+        "finalize prompt import"
+      ],
+      "required": false,
+      "name": "Deploy Imported Prompts",
+      "command": "deploy prompts",
+      "use_case": "Convert and deploy external prompts to OLAF competencies following approved mapping plan (Phase 2 - Implementation)"
+    }
+  ],
+  "templates": [
+    {
+      "id": "prompt-template",
+      "file": "templates/prompt-template.md",
+      "description": "Standard OLAF prompt structure template"
+    },
+    {
+      "id": "prompting-principles",
+      "file": "templates/prompting-principles.md",
+      "description": "Best practices and principles for prompt engineering"
+    },
+    {
+      "id": "tutorial-template",
+      "file": "templates/step-by-step-tutorial-template.md",
+      "description": "Template for generating step-by-step tutorials"
+    }
+  ],
+  "scripts": [
+    {
+      "id": "select-collection",
+      "file": "scripts/select_collection.py",
+      "name": "Competency Collection Selector",
+      "description": "End-user tool to select competency collections and generate personalized competency index",
+      "usage": "python select_collection.py [--collection NAME] [--custom] [--list]",
+      "language": "python"
+    },
+    {
+      "id": "create-collection",
+      "file": "scripts/create_collection.py",
+      "name": "Competency Collection Manager",
+      "description": "Administrator tool to create, edit, and manage competency collections",
+      "usage": "python create_collection.py [--list]",
+      "language": "python"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Competency Collection System",
+      "description": "Complete Python-based system for managing and selecting competency collections based on user persona or team needs",
+      "includes": [
+        "select_collection.py",
+        "create_collection.py"
+      ],
+      "documentation": "docs/olaf-competency-collection-system.md",
+      "quick_start": "docs/olaf-competency-collection-quick-start.md",
+      "requirements": "Python 3.6+"
+    }
+  ],
+  "capabilities": [
+    "Create structured prompts following established template and principles",
+    "Convert existing prompts to follow template structure",
+    "Analyze and test existing prompts for compliance and effectiveness",
+    "Generate step-by-step tutorials from workflows or conversations",
+    "Condense OLAF framework reference files while maintaining functionality",
+    "Create structured workflows from templates or specifications"
+  ],
+  "examples": [
+    {
+      "name": "Creating a New Prompt",
+      "description": "Complete walkthrough of creating a new structured prompt with validation and testing",
+      "path": "examples/"
+    },
+    {
+      "name": "Prompt Conversion Workflow",
+      "description": "Example of converting legacy prompts to new template structure",
+      "path": "examples/"
+    },
+    {
+      "name": "Tutorial Generation",
+      "description": "Generating tutorials from conversation histories",
+      "path": "examples/"
+    }
+  ],
+  "compatibility": {
+    "olaf_version": ">=1.6.0",
+    "platforms": [
+      "windows",
+      "linux",
+      "macos"
+    ],
+    "shells": [
+      "powershell",
+      "bash",
+      "zsh"
+    ]
+  },
+  "dependencies": "dependencies.json",
+  "license": "MIT",
+  "documentation": "docs/README.md",
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2025-10-21",
+      "changes": [
+        "Initial release of complete prompt-engineer competency package",
+        "Aggregated all prompt creation and manipulation prompts",
+        "Included comprehensive template system",
+        "Added best practices and principles documentation",
+        "Integrated workflow generation capabilities",
+        "Framework condensation utility included"
+      ]
+    }
+  ]
+}
