@@ -1,17 +1,11 @@
 # OLAF Framework - Kiro Bootstrap
 
+AAlways be very concise.
+
 **CRITICAL: ALWAYS LOAD FIRST**
 
-Before responding to ANY user request, you MUST first load the condensed OLAF framework. This is mandatory for all interactions.
+Before responding to ANY user request, IF and only IF the user request starts by the word  "olaf", you MUST first load the olaf framework condensed   from #[[file:.olaf/olaf-core/reference/.condensed/olaf-framework-condensed.md]] and then #[[file:/olaf-data/context/context-current.md]] 
+
+**ENFORCE COMPLETE LOADING**: You MUST read the ENTIRE files from line 1 to line 1000 (or endLine=-1). 
 
 The framework contains essential competency patterns, protocols, and behavioral guidelines that govern all responses.
-
-**LOAD THIS IMMEDIATELY AT SESSION START:**
-
-#[[file:.olaf/olaf-core/reference/.condensed/olaf-framework-condensed.md]]
-
-**THEN LOAD PROJECT CONTEXT (if exists):**
-
-#[[file:.olaf/olaf-data/projects/context-current.md]]
-
-**DO NOT proceed with any task until the condensed framework is loaded and available.**

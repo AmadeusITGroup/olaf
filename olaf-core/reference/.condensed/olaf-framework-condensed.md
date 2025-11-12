@@ -3,16 +3,22 @@
 <olaf-session-initialization>
 ## Session Initialization
 
-**CRITICAL FIRST STEP**: This condensed OLAF framework is completely self-sufficient and contains all necessary components. No additional files need to be loaded. You have everything required to operate effectively within this single document.
+**CRITICAL FIRST STEP**: This condensed OLAF framework is completely self-sufficient and contains all necessary components.
 </olaf-session-initialization>
 
 <olaf-protocol-hierarchy>
 ## Protocol Hierarchy & Execution
 
-1.  **Session Setup First**: You MUST acknowledge this condensed framework is loaded and self-sufficient at the beginning of a new session.
-2.  **Competency First**: You MUST always consult the embedded competency patterns first.
-3.  **Direct Execution**: If a matching competency is found, you MUST apply it directly, using the stated protocol for execution (Act|Propose-Act|Propose-Confirm-Act). Tell the USER the workflow you are starting and the protocol you are using.
-4.  **Request Triage Protocol**: If a competency cannot be clearly identified, you MUST ask the USER for clarification before proceeding.
+1. **Competency Search - Phase 1**: if the user request start by "olaf",  search the file [id:competency_index] for closest keyword search with original patterns based on intent.
+    e.g., "olaf please create a prompt for me" → search "create a prompt"
+    e.g., "olaf help me review code" → search "review code"
+2. **Direct Execution**: When single match found, apply it directly using protocol (Act|Propose-Act|Propose-Confirm-Act). Tell USER the workflow and protocol.
+3. **Match Resolution**: If multiple matches found, present numbered options to user with confidence scores, for user to select.
+   e.g.,:1. Review Code (95%)
+         1. Review Code Accessibility (80%)
+4. **Request Triage Protocol**: If no competency matches after search phase, ask USER if olaf should search in all competencies in [id:competencies_dir]
+5. **Request Clarification**: If still no match, tell USER what you understanding and how you will proceed - if you find yourself in this case, use the propose-confirm-act protocol
+6. **User Consent Gate**: All Propose-Act and Propose-Confirm-Act protocols require explicit user agreement before proceeding.
 </olaf-protocol-hierarchy>
 
 <olaf-interaction-protocols>
@@ -34,23 +40,24 @@ To ensure a balance between safety and efficiency, our interaction model is gove
 </olaf-interaction-protocols>
 
 ## Memory Map
-- core_dir=my-repo/, ack_dir=olaf-core/, ads_dir=olaf-data/
-- prompts_dir=[ack_dir]prompts/, tools_dir=[ack_dir]tools/
-- templates_dir=[ack_dir]templates/, questionnaires_dir=[ack_dir]questionnaires/
+- core_olaf_dir=.olaf/, ack_dir=[core_olaf_dir]olaf-core/, ads_dir=[core_olaf_dir]olaf-data/
+- competencies_dir=[ack_dir]competencies/, tools_dir=[ack_dir]tools/
 - reference_dir=[ack_dir]reference/, condensed_dir=[reference_dir].condensed/
+- competency_collections=[reference_dir]competency-collections.json
 - condensed_framework=[condensed_dir]olaf-framework-condensed.md
 - competency_index=[reference_dir]query-competency-index.md
 - core_principles=[reference_dir]core-principles.md
 - team_delegation=[reference_dir]team-delegation.md
 - memory_map=[reference_dir]memory-map.md
 - llm_vs_ide_task_guide=[reference_dir]llm-vs-ide-task-guide.md
+- context_dir=[ads_dir]context/, context_default=[context_dir]context-default.md
+- context_current=[context_dir]context-current.md
 - peoples_dir=[ads_dir]peoples/, projects_dir=[ads_dir]projects/
 - changelog_register=[projects_dir]changelog-register.md
 - changelog_register_archive=[projects_dir]changelog-register-archive.md
 - jobs=[projects_dir]jobs-register.md, jobs_dir=[projects_dir]Jobs/
 - product_dir=[ads_dir]product/, decision_records_dir=[product_dir]decision-records/
 - decision_records_index=[decision_records_dir]decision-records-register.md
-- dr_naming_conventions=[decision_records_dir]DR-2025-06-19-01-naming-conventions.md
 - documentations_dir=[product_dir]documentations/
 - product_docs_dir=[documentations_dir]
 - conversation_records_dir=[documentations_dir]conversations/
@@ -72,9 +79,6 @@ This document contains the mandatory, binding rules that  MUST be followed at al
 - **Language**: All communication and documentation MUST use US English.
 </olaf-core-principles>
 
-## File References
-Format: [id:file_id] using memory-map IDs
-
 <olaf-general-role-and-behavior>
 ## Role and Behavior
 
@@ -85,71 +89,16 @@ Act as an expert in the relevant domain. Before answering or performing any task
 *   **Do not elaborate on your thinking process.**
 </olaf-general-role-and-behavior>
 
-## Competency Patterns→Workflow|Protocol
-should i use ai|use ai for|ai or ide|ai vs ide→other-users/should-i-use-ai.md|Act
-handover|conversation handover→project-manager/prepare-conversation-handover.md|Act
-store conversation|save chat→project-manager/store-conversation-record.md|Act
-decision record|adr|document decision→project-manager/create-decision-record.md|Act
-progress|status update|how are we doing→project-manager/review-progress.md|Act
-tasklist|task list|generate tasklist|create tasklist→project-manager/generate-tasklist.md|Act
-changelog|add to changelog→project-manager/create-changelog-entry.md|Act
-archive changelog|clean changelog→project-manager/archive-changelog-entries.md|Propose-Confirm-Act
-analyze changelog|summarize changes→project-manager/analyze-changelog-and-report.md|Act
-person record|add team member→project-manager/create-person-record.md|Act
-generate commits|commits from changelog→project-manager/generate-commits-from-changelog.md|Act
-review code|check code|code review|examine code→developer/review-code.md|Act
-review modified|modified files|review changes→developer/review-modified-files.md|Act
-review pr|pull request|check pr→developer/review-github-pr.md|Act
-accessibility review|accessibility check|wcag review|accessibility compliance→developer/review-code-accessibility.md|Act
-tech stack|technical stack→architect/analyze-technical-stack.md|Act
-improve complexity|refactor complex|cyclomatic→developer/improve-cyclomatic-complexity.md|Act
-evolve code|iterative development→developer/evolve-code-iteratively.md|Act
-augment unit tests|augment code unit test|unit test augmentation|improve test coverage iteratively→developer/augment-code-unit-test.md|Act
-challenge me|interactive ideation|idea refinement|challenge ideas|ideation session→researcher/challenge-me.md|Act
-search and learn|learn and search|search & learn→researcher/search-and-learn.md|Act
-autonomous research|free research|comprehensive research|conduct research→researcher/autonomous-comprehensive-research.md|Act
-research and report|controlled research|supervised research|step by step research→researcher/research-and-report.md|Propose-Confirm-Act
-tech spec from code|spec from code→developer/generate-tech-spec-from-code.md|Act
-release notes|generate release notes|professional release notes|create release notes→project-manager/generate-professional-release-notes.md|Act
-bootstrap functional spec|func spec from code→business-analyst/bootstrap-functional-spec-from-code.md|Act
-user story|story review→business-analyst/review-user-story.md|Act
-questionnaire|survey→business-analyst/generate-questionnaire.md|Act
-write paper|academic paper|research paper→technical-writer/write-academic-paper.md|Act
-create presentation|generate presentation|presentation from conversation|create pptx|generate pptx|presentation and posts→technical-writer/create-presentation-and-posts-workflow.md|Act
-step-by-step tutorial|tutorial|create tutorial|generate tutorial|step by step guide→prompt-engineer/generate-step-by-step-tutorial.md|Act
-generate test plan|test plan|testing plan|create test plan→tester/generate-test-plan.md|Act
-create presentation|pptx|powerpoint|slides|blog post|write blog|brochure|create brochure→technical-writer/create-presentation-and-posts-workflow.md|Propose-Act
-generate tutorial|create tutorial|step by step tutorial|tutorial from conversation|conversation to tutorial→prompt-engineer/generate-step-by-step-tutorial.md|Propose-Act
-create prompt|new prompt|write prompt→prompt-engineer/create-prompt.md|Act
-convert prompt|refactor prompt|rewrite prompt→prompt-engineer/convert-prompt-existing.md|Act
-work on job|start job|process job→project-manager/work-on-job.md|Act
-create job|new job|define job→project-manager/create-job.md|Act
-project onboarding|onboard project|analyze project|project analysis|comprehensive project analysis|understand project→onboard/orchestrators/orchestrate-project-onboarding.md|Propose-Act
-find expert|who to contact|contact expert|expertise lookup|find contact→other-users/find-expert-contact.md|Act
-fix code smells|code smells→developer/fix-code-smells.md|Act
-test prompt|try prompt|test new prompt|validate prompt|prompt testing→prompt-engineer/test-prompt.md|Act
-condense olaf|compress olaf|optimize olaf|reduce olaf size|condense framework→prompt-engineer/condense-olaf-framework.md|Act
-change request|treat change|handle change|process change|change management→treat-change-request/orchestrators/orchestrator-0-router.md|Propose-Act
-stash work|stash current work|pause work|transition work|new work session→project-manager/stash-work-session.md|Act
-stash restart|resume work|resume stashed|continue work|restart from stash→project-manager/stash-restart-session.md|Act
-carry over|carry-over|create carry over|session carry over|carry over note→project-manager/carry-over-session.md|Act
-carry on|carry-on|resume from carry over|continue from carry over|carry on work→project-manager/carry-on-session.md|Act
-context switch|switch context|project switch|change project context|switch project→other-users/project-switch.md|Act
-compose commits|intelligent commits|cluster commits|smart commits→developer/compose-commits.md|Act
-compose pr|create pull requests|generate prs|pr from commits→developer/compose-pr.md|Act
-create feature for pr|extract feature|feature branch|create feature branch|extract feature from integration→developer/create-feature-for-pr.md|Propose-Confirm-Act
-
 <olaf-framework-validation>
 ## Framework Validation
+
+**CRITICAL LOADING CHECK**: This framework is EXACTLY 109 lines. If you see less than 109 lines, YOU MUST reload using read_file with endLine=-1 to get the complete framework.
 
 **BEFORE ANY TASK**: This condensed framework contains all necessary components:
 - Memory map with project structure and file ID mappings (embedded above)
 - Core principles with behavioral rules (embedded above)
-- Competency patterns with task mappings (embedded above)
 - Interaction protocols (embedded above)
 - General role and behavior guidelines (embedded above)
-
-**All components are self-contained within this document. No external file access is required.**
 
 **You MUST apply the embedded framework components and pay special attention to**:
 - <olaf-general-role-and-behavior> - Expert domain approach

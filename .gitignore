@@ -114,13 +114,24 @@ olaf-data/handover-conversation*.md
 carry-overs/*
 !carry-overs/.gitkeep
 
+# Ignore all files in olaf-stashes but keep the folder
+olaf-stashes/*
+!olaf-stashes/.gitkeep
+
 # Test repositories and research scratch space
 repo-for-test/
 research/
 
+# User-specific data and repositories
+your-data/
+your-repos/
+
 # Findings directory - keep structure but ignore contents
 olaf-data/findings/*
 !olaf-data/findings/.gitkeep
+
+# STRAF execution logs - ignore completely
+olaf-data/straf-execution-logs/
 
 # Kiro specs - temporary exclusion
 .kiro/specs/

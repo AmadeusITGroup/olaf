@@ -1,0 +1,38 @@
+{
+  "tool_dependencies": [
+    {
+      "tool": "git",
+      "version": ">=2.30",
+      "purpose": "Version control for requirements tracking",
+      "platforms": ["windows", "linux", "macos"],
+      "install_instruction": "Standard git installation"
+    }
+  ],
+  "external_services": [
+    {
+      "service": "Stakeholder Communication Tools",
+      "purpose": "Requirements gathering from stakeholders",
+      "optional": true,
+      "description": "Email, meeting platforms, chat systems for stakeholder engagement"
+    }
+  ],
+  "optional_tools": [
+    {
+      "tool": "requml",
+      "version": ">=1.0",
+      "purpose": "Requirements visualization and management",
+      "integration": "Optional for advanced requirements visualization"
+    },
+    {
+      "tool": "markdown-to-slides",
+      "version": ">=1.0",
+      "purpose": "Convert specifications to presentations",
+      "integration": "Optional for stakeholder presentations"
+    }
+  ],
+  "llm_requirements": {
+    "minimum_capability": "Requirements analysis, specification writing, and business logic understanding",
+    "recommended_model": "Claude Sonnet 4.5 or higher",
+    "reasoning": "Requires nuanced understanding of business domains, stakeholder communication patterns, and specification best practices"
+  }
+}

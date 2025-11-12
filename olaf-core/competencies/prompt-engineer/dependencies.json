@@ -1,0 +1,55 @@
+{
+  "dependencies": [
+    {
+      "name": "OLAF Framework",
+      "version": ">=1.6.0",
+      "description": "Core OLAF framework for competency execution",
+      "type": "framework"
+    },
+    {
+      "name": "File System",
+      "version": "native",
+      "description": "File system access for reading and writing prompts and templates",
+      "type": "system"
+    },
+    {
+      "name": "Terminal",
+      "version": "native",
+      "description": "Terminal/shell access for time retrieval and command execution",
+      "type": "system"
+    },
+    {
+      "name": "Text Processing",
+      "version": "native",
+      "description": "Text processing capabilities for prompt analysis and generation",
+      "type": "capability"
+    }
+  ],
+  "references": [
+    {
+      "name": "Memory Map",
+      "file": "[id:reference_dir]/memory-map.md",
+      "description": "OLAF memory map for file and directory references"
+    },
+    {
+      "name": "Core Principles",
+      "file": "[id:reference_dir]/core-principles.md",
+      "description": "OLAF core principles binding all competencies"
+    },
+    {
+      "name": "Interaction Protocols",
+      "file": "[id:reference_dir]/team-delegation.md",
+      "description": "OLAF interaction protocols (Act, Propose-Act, Propose-Confirm-Act)"
+    }
+  ],
+  "related_competencies": [
+    {
+      "name": "competency-creation",
+      "description": "For packaging additional prompt engineering features into competencies"
+    },
+    {
+      "name": "developer",
+      "description": "For integrating prompts into development workflows"
+    }
+  ]
+}

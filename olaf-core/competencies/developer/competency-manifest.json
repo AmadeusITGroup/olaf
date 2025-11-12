@@ -1,0 +1,358 @@
+{
+  "id": "developer",
+  "name": "Developer Competency Package",
+  "version": "1.0.0",
+  "description": "Comprehensive developer competency package aggregating code review, analysis, testing, and quality improvement capabilities with specialized workflows for software development tasks",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": true,
+    "persona_tags": [
+      "developer",
+      "architect",
+      "prompt-engineer"
+    ],
+    "description_short": "Developer: code review, analysis, refactoring, and quality improvement"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-21",
+  "updated": "2025-10-21",
+  "category": "development",
+  "tags": [
+    "developer",
+    "code-review",
+    "refactoring",
+    "testing",
+    "quality",
+    "analysis"
+  ],
+  "classification": {
+    "type": "core",
+    "reason": "Essential foundational competency for the developer persona"
+  },
+  "target_users": {
+    "primary": "developer",
+    "secondary": [
+      "architect",
+      "prompt-engineer"
+    ],
+    "description": "Software developers performing code reviews and refactoring, architects reviewing technical implementation, prompt engineers optimizing AI-assisted coding"
+  },
+  "maintenance": {
+    "team": "developer",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "Kiro AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Git, programming language tools, code analysis tools",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "review-code",
+    "review-code-accessibility",
+    "review-github-pr",
+    "analyze-function-complexity",
+    "improve-cyclomatic-complexity",
+    "fix-code-smells",
+    "augment-code-unit-test",
+    "evolve-code-iteratively",
+    "generate-tech-spec-from-code",
+    "deepen-tech-spec-developer",
+    "check-todos-in-code",
+    "assess-code-quality-principles",
+    "detect-test-directives"
+  ],
+  "entry_points": [
+    {
+      "id": "review-code",
+      "file": "prompts/review-code.md",
+      "protocol": "Propose-Act",
+      "description": "Comprehensive code review with multiple input modes - manual selection, git-modified files, or batch processing. Focuses on quality, security, and maintainability.",
+      "aliases": [
+        "review code",
+        "code review",
+        "examine code",
+        "check code",
+        "inspect code",
+        "review modified",
+        "review changes",
+        "modified files",
+        "changes review",
+        "git changes",
+        "review git",
+        "review branch"
+      ],
+      "required": true,
+      "name": "Review Code",
+      "command": "review code",
+      "use_case": "Comprehensive code review with multiple input modes - manual selection, git-modified files, or batch processing. Focuses on quality, security, and maintainability."
+    },
+    {
+      "id": "review-code-accessibility",
+      "file": "prompts/review-code-accessibility.md",
+      "protocol": "Act",
+      "description": "Review code for accessibility compliance and WCAG standards",
+      "aliases": [
+        "accessibility review",
+        "wcag review",
+        "accessibility check",
+        "accessibility compliance"
+      ],
+      "required": false,
+      "name": "Review Code Accessibility",
+      "command": "accessibility review",
+      "use_case": "Review code for accessibility compliance and WCAG standards"
+    },
+    {
+      "id": "review-github-pr",
+      "file": "prompts/review-github-pr.md",
+      "protocol": "Propose-Act",
+      "description": "Review pull request with user-guided selection, integration analysis, and action plan generation",
+      "aliases": [
+        "review pr",
+        "pull request review",
+        "check pr",
+        "github pr"
+      ],
+      "required": false,
+      "name": "Review Github Pr",
+      "command": "review pr",
+      "use_case": "Review pull request with user-guided selection, integration analysis, and action plan generation"
+    },
+    {
+      "id": "analyze-function-complexity",
+      "file": "prompts/analyze-function-complexity.md",
+      "protocol": "Act",
+      "description": "Analyze function complexity and provide optimization recommendations",
+      "aliases": [
+        "analyze complexity",
+        "function complexity",
+        "complexity analysis"
+      ],
+      "required": false,
+      "name": "Analyze Function Complexity",
+      "command": "analyze complexity",
+      "use_case": "Analyze function complexity and provide optimization recommendations"
+    },
+    {
+      "id": "improve-cyclomatic-complexity",
+      "file": "prompts/improve-cyclomatic-complexity.md",
+      "protocol": "Propose-Act",
+      "description": "Reduce cyclomatic complexity with refactoring suggestions",
+      "aliases": [
+        "improve complexity",
+        "reduce complexity",
+        "cyclomatic"
+      ],
+      "required": false,
+      "name": "Improve Cyclomatic Complexity",
+      "command": "improve complexity",
+      "use_case": "Reduce cyclomatic complexity with refactoring suggestions"
+    },
+    {
+      "id": "fix-code-smells",
+      "file": "prompts/fix-code-smells.md",
+      "protocol": "Propose-Act",
+      "description": "Identify and refactor code smells and anti-patterns",
+      "aliases": [
+        "fix code smells",
+        "code smells",
+        "refactor smells"
+      ],
+      "required": false,
+      "name": "Fix Code Smells",
+      "command": "fix code smells",
+      "use_case": "Identify and refactor code smells and anti-patterns"
+    },
+    {
+      "id": "augment-code-unit-test",
+      "file": "prompts/augment-code-unit-test.md",
+      "protocol": "Propose-Act",
+      "description": "Enhance unit tests and improve test coverage",
+      "aliases": [
+        "augment tests",
+        "augment unit test",
+        "improve test coverage",
+        "unit test augmentation"
+      ],
+      "required": false,
+      "name": "Augment Code Unit Test",
+      "command": "augment tests",
+      "use_case": "Enhance unit tests and improve test coverage"
+    },
+    {
+      "id": "evolve-code-iteratively",
+      "file": "prompts/evolve-code-iteratively.md",
+      "protocol": "Act",
+      "description": "Incrementally improve and evolve code with iterative refinement",
+      "aliases": [
+        "evolve code",
+        "iterative development",
+        "improve iteratively"
+      ],
+      "required": false,
+      "name": "Evolve Code Iteratively",
+      "command": "evolve code",
+      "use_case": "Incrementally improve and evolve code with iterative refinement"
+    },
+    {
+      "id": "generate-tech-spec-from-code",
+      "file": "prompts/generate-tech-spec-from-code.md",
+      "protocol": "Act",
+      "description": "Extract and generate technical specifications from code",
+      "aliases": [
+        "tech spec from code",
+        "spec from code",
+        "extract spec"
+      ],
+      "required": false,
+      "name": "Generate Tech Spec From Code",
+      "command": "tech spec from code",
+      "use_case": "Extract and generate technical specifications from code"
+    },
+    {
+      "id": "deepen-tech-spec-developer",
+      "file": "prompts/deepen-tech-spec-developer.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Deep-dive technical analysis focused on developer concerns - code quality, unit testing, architecture patterns, design principles assessment with evidence-based evaluation",
+      "aliases": [
+        "deepen tech spec",
+        "deep dive spec",
+        "chapter mode",
+        "detailed chapters",
+        "tech spec chapters",
+        "expand specification"
+      ],
+      "required": false,
+      "name": "Deepen Tech Spec Developer",
+      "command": "deepen tech spec",
+      "use_case": "Deep-dive technical analysis focused on developer concerns - code quality, unit testing, architecture patterns, design principles assessment with evidence-based evaluation"
+    },
+    {
+      "id": "check-todos-in-code",
+      "file": "prompts/check-todos-in-code.md",
+      "protocol": "Propose-Act",
+      "description": "Search and analyze TODO comments in codebase, assess validity, and generate complete code solutions with user decision tracking",
+      "aliases": [
+        "check todos",
+        "todo analysis",
+        "find todos",
+        "scan todos",
+        "analyze todos",
+        "todo cleanup",
+        "check todo comments"
+      ],
+      "required": false,
+      "name": "Check Todos In Code",
+      "command": "check todos",
+      "use_case": "Search and analyze TODO comments in codebase, assess validity, and generate complete code solutions with user decision tracking"
+    },
+    {
+      "id": "assess-code-quality-principles",
+      "file": "prompts/assess-code-quality-principles.md",
+      "protocol": "Propose-Act",
+      "description": "Critical evaluation of codebase against established engineering principles (SOLID, DRY, YAGNI) with evidence-based scoring and specific improvement recommendations",
+      "aliases": [
+        "assess quality",
+        "code quality assessment",
+        "evaluate principles",
+        "solid assessment",
+        "quality evaluation"
+      ],
+      "required": false,
+      "name": "Assess Code Quality Principles",
+      "command": "assess quality",
+      "use_case": "Critical evaluation of codebase against established engineering principles (SOLID, DRY, YAGNI) with evidence-based scoring and specific improvement recommendations"
+    },
+    {
+      "id": "detect-test-directives",
+      "file": "prompts/detect-test-directives.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Use this prompt to reproduce the workflow in any repository (any language/framework).",
+      "aliases": [
+        "detect test directives",
+        "discover test directives"
+      ],
+      "required": false
+    }
+  ],
+  "capabilities": [
+    "Comprehensive code review with multiple input modes (manual, git-modified, batch)",
+    "Git repository change detection and analysis",
+    "Multi-file batch processing and aggregated reporting",
+    "Accessibility compliance validation (WCAG)",
+    "Pull request analysis and review",
+    "Function complexity analysis and reporting",
+    "Cyclomatic complexity reduction",
+    "Code smell detection and refactoring",
+    "Unit test generation and augmentation",
+    "Iterative code improvement workflows",
+    "Technical specification extraction from code",
+    "Feature development with PR preparation",
+    "Integration test coordination"
+  ],
+  "examples": [
+    {
+      "name": "Git-Modified Files Review Workflow",
+      "description": "Automated discovery and review of git-modified files with batch processing and summary reporting",
+      "competencies": [
+        "review-code",
+        "improve-cyclomatic-complexity"
+      ]
+    },
+    {
+      "name": "Quality Improvement Cycle",
+      "description": "Identify and fix code smells with test coverage enhancement",
+      "competencies": [
+        "fix-code-smells",
+        "augment-code-unit-test",
+        "evolve-code-iteratively"
+      ]
+    },
+    {
+      "name": "Code Quality & Review Cycle",
+      "description": "Comprehensive code quality improvement with accessibility and PR review",
+      "competencies": [
+        "fix-code-smells",
+        "review-code-accessibility",
+        "review-github-pr"
+      ]
+    }
+  ],
+  "compatibility": {
+    "olaf_version": ">=1.6.0",
+    "platforms": [
+      "windows",
+      "linux",
+      "macos"
+    ],
+    "shells": [
+      "powershell",
+      "bash",
+      "zsh"
+    ]
+  },
+  "dependencies": "dependencies.json",
+  "license": "MIT",
+  "repository": "https://github.com/Amadeus-xDLC/genai.olaf",
+  "documentation": "docs/developer-competency.md",
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2025-10-21",
+      "changes": [
+        "Initial beta release",
+        "10 developer competencies aggregated",
+        "Merged review-code and review-modified-files into unified competency",
+        "Code review and analysis workflows",
+        "Quality improvement and refactoring support",
+        "Accessibility compliance validation",
+        "Pull request review integration",
+        "Unit test augmentation workflows",
+        "Technical specification extraction",
+        "Comprehensive documentation"
+      ]
+    }
+  ]
+}

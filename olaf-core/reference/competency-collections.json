@@ -1,0 +1,100 @@
+{
+  "collections": [
+    {
+      "id": "core",
+      "name": "Core/Always-On",
+      "description": "Always included in all indices. Universal kernel competencies essential for all users.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant"
+      ],
+      "locked": true,
+      "created": "2025-10-21",
+      "notes": "This collection cannot be modified or deleted. It forms the foundation for all custom selections. Contains only competencies with classification.type='kernel' in their manifests."
+    },
+    {
+      "id": "developer",
+      "name": "Developer Persona",
+      "description": "Competencies for software developers: code review, testing, quality improvement, and Git workflow management.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant",
+        "developer"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "business-analyst",
+      "name": "Business Analyst Persona",
+      "description": "Competencies for BAs: requirements analysis, planning, research, and feature design.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant",
+        "business-analyst"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "project-manager",
+      "name": "Project Manager Persona",
+      "description": "Competencies for project managers: planning, coordination, progress tracking, and workflow management.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant",
+        "project-manager"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "git-assistant",
+      "name": "Git Assistant Persona",
+      "description": "Competencies for Git specialists: branch management, feature extraction, and workflow automation.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant"
+      ],
+      "locked": false,
+      "created": "2025-11-12"
+    },
+    {
+      "id": "all",
+      "name": "All Competencies",
+      "description": "Complete collection including all available competencies with prompts.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant",
+        "business-analyst",
+        "developer",
+        "project-manager"
+      ],
+      "locked": false,
+      "created": "2025-10-23"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-11-12T13:19:00.201522",
+    "active_collection": "all",
+    "description": "Competency collections define groupings of competencies for different personas and use cases",
+    "notes": [
+      "Collections with locked=true cannot be edited or deleted",
+      "The 'core' collection is always mandatory and cannot be modified",
+      "Kernel competencies are determined by classification.type='kernel' in each competency manifest",
+      "Currently kernel competencies: common, prompt-engineer, git-assistant",
+      "Internal tools (olaf-specific-tools) are excluded from persona collections",
+      "Users can create custom collections by running create_collection.py",
+      "Users can select collections by running select_collection.py",
+      "Each collection is a named grouping that generates a competency index"
+    ]
+  },
+  "last_updated": "2025-11-12T13:19:00.188766"
+}

@@ -1,0 +1,158 @@
+{
+  "id": "common",
+  "name": "Common Competency Package",
+  "version": "1.0.0",
+  "description": "Cross-organizational utilities competency package for ad-hoc users, decision-makers, and general staff with specialized workflows for common use cases",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": true,
+    "persona_tags": ["common", "decision-maker", "general-staff"],
+    "description_short": "Common: kernel utilities for all users"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-21",
+  "updated": "2025-10-21",
+  "category": "general-utilities",
+  "tags": ["common", "utilities", "ai-assessment", "expert-finding"],
+  "classification": {
+    "type": "kernel",
+    "reason": "Core framework utilities essential for all users: session management, context switching, help discovery, and competency selection"
+  },
+  "target_users": {
+    "primary": "common",
+    "secondary": ["decision-maker", "general-staff", "new-users"],
+    "description": "Cross-organizational users needing common utilities, decision-makers evaluating solutions, general staff needing framework guidance"
+  },
+  "maintenance": {
+    "team": "admin",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "Kiro AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Minimal - mostly pure LLM capabilities",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "carry-on-session",
+    "carry-over-session",
+    "delete-stash", 
+    "find-expert-contact",
+    "assess-genai-initiative-idea",
+    "olaf-help-me",
+    "report-my-daily",
+    "switch-context",
+    "should-i-use-ai",
+    "stash-restart-session",
+    "stash-work-session",
+    "use-competency",
+    "list-competencies"
+  ],
+  "entry_points": [
+    {
+      "name": "Carry-On Work",
+      "command": "carry on",
+      "file": "prompts/carry-on-session.md",
+      "protocol": "Act",
+      "use_case": "Resume work from carry-over notes",
+      "aliases": ["carry on", "resume work", "continue work", "continue session", "resume session"]
+    },
+    {
+      "name": "Create Carry-Over",
+      "command": "create carry-over",
+      "file": "prompts/carry-over-session.md",
+      "protocol": "Act",
+      "use_case": "Create session carry-over notes",
+      "aliases": ["create carry-over", "carry over", "handover", "create handover", "save carry-over"]
+    },
+    {
+      "name": "Find Expert Contact",
+      "command": "find expert contact",
+      "file": "prompts/find-expert-contact.md",
+      "protocol": "Act",
+      "use_case": "Expert location and connection",
+      "aliases": ["find expert", "expert contact", "find SME", "find subject matter expert", "locate expert"]
+    },
+    {
+      "name": "Assess GenAI Initiative Idea",
+      "command": "assess genai initiative",
+      "file": "prompts/assess-genai-initiative-idea.md",
+      "protocol": "Propose-Act",
+      "use_case": "GenAI initiative evaluation through research and challenge-based analysis",
+      "aliases": ["assess genai initiative", "evaluate genai", "idea assessment", "initiative assessment", "genai assessment"]
+    },
+    {
+      "name": "Context Switch",
+      "command": "switch context",
+      "file": "prompts/switch-context.md",
+      "protocol": "Propose-Act",
+      "use_case": "Context switching between projects",
+      "aliases": ["switch context", "context switch", "change project", "change context", "switch task"]
+    },
+    {
+      "name": "Report My Daily",
+      "command": "report my daily",
+      "file": "prompts/report-my-daily.md",
+      "protocol": "Propose-Act",
+      "use_case": "Generate daily work report by analyzing git activity, files, PRs, and project artifacts",
+      "aliases": ["my daily", "daily report", "create daily", "daily summary", "generate daily"]
+    },
+    {
+      "name": "Should I Use AI?",
+      "command": "should i use ai",
+      "file": "prompts/should-i-use-ai.md",
+      "protocol": "Act",
+      "use_case": "AI appropriateness evaluation",
+      "aliases": ["should i use ai", "use ai?", "ai or not", "should we use ai", "ai decision"]
+    },
+    {
+      "name": "Stash Restart",
+      "command": "stash restart",
+      "file": "prompts/stash-restart-session.md",
+      "protocol": "Act",
+      "use_case": "Resume stashed work sessions",
+      "aliases": ["stash restart", "restart stash", "resume stash", "resume stashed work", "restore stash"]
+    },
+    {
+      "name": "Stash Work",
+      "command": "stash work",
+      "file": "prompts/stash-work-session.md",
+      "protocol": "Act",
+      "use_case": "Stash current work for later",
+      "aliases": ["stash work", "stash session", "save work stash", "stash current work", "create stash"]
+    },
+    {
+      "name": "Delete Stash",
+      "command": "delete stash",
+      "file": "prompts/delete-stash.md",
+      "protocol": "Act",
+      "use_case": "Permanently delete unwanted stash directories",
+      "aliases": ["remove stash", "clean stash", "stash delete"]
+    },
+    {
+      "name": "OLAF Help",
+      "command": "help me",
+      "file": "prompts/olaf-help-me.md",
+      "protocol": "Act",
+      "use_case": "Discover available competencies and prompts",
+      "aliases": ["olaf help", "olaf i need you", "olaf help me"]
+    },
+    {
+      "name": "Use Competency",
+      "command": "use competency",
+      "file": "prompts/use-competency.md",
+      "protocol": "Act",
+      "use_case": "Intelligent competency discovery and execution router",
+      "aliases": ["find competency", "search competency", "use workflow", "execute competency", "run competency"]
+    },
+    {
+      "name": "List Competencies",
+      "command": "list competencies",
+      "file": "prompts/list-competencies.md",
+      "protocol": "Act",
+      "use_case": "Display available competencies and their protocols from the current index",
+      "aliases": ["list competency", "show competencies", "list olaf commands", "competency list"]
+    }
+  ]
+}

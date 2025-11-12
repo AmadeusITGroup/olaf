@@ -1,0 +1,228 @@
+{
+  "id": "git-assistant",
+  "name": "Git Assistant Competency Package",
+  "version": "1.2.0",
+  "description": "Git workflow management and branch operations competency package focusing on feature extraction, branch management, safe merging with tagging, intelligent commit operations, and pull request workflows",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": [
+      "developer",
+      "git-specialist",
+      "devops"
+    ],
+    "description_short": "Git Assistant: branch management, feature extraction, workflow automation"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-21",
+  "updated": "2025-10-31",
+  "category": "version-control",
+  "tags": [
+    "git",
+    "version-control",
+    "branches",
+    "workflow",
+    "pr",
+    "feature-extraction",
+    "merge",
+    "safety",
+    "tagging",
+    "commit",
+    "staging",
+    "intelligent-commit"
+  ],
+  "classification": {
+    "type": "kernel",
+    "reason": "Essential Git workflow management required for all development and collaboration tasks"
+  },
+  "target_users": {
+    "primary": "developer",
+    "secondary": [
+      "devops",
+      "git-specialist",
+      "project-manager"
+    ],
+    "description": "Developers managing complex Git workflows, DevOps engineers automating branch operations, specialists handling feature extractions and complex merges"
+  },
+  "maintenance": {
+    "team": "developer",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "OLAF Competency Migration"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Git, GitHub CLI (optional), repository access",
+    "platform_limitations": "Cross-platform compatible, requires Git installation"
+  },
+  "competencies": [
+    "create-feature-for-pr",
+    "propose-commit-thread",
+    "merge-branch-with-safety",
+    "git-add-commit"
+  ],
+  "entry_points": [
+    {
+      "id": "create-feature-for-pr",
+      "file": "prompts/create-feature-for-pr.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Extract features from integration branch to create a feature branch and PR to main",
+      "aliases": [
+        "create feature",
+        "feature for pr",
+        "feature branch",
+        "extract feature",
+        "feature extraction",
+        "git feature"
+      ],
+      "required": false,
+      "name": "Create Feature For Pr",
+      "command": "create feature",
+      "use_case": "Extract features from integration branch to create a feature branch and PR to main"
+    },
+    {
+      "id": "propose-commit-thread",
+      "file": "prompts/propose-commit-thread.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Analyze git changes, cluster into logical commits, and execute commit thread with interactive modification and GitHub issue integration",
+      "aliases": [
+        "propose commit",
+        "commit thread",
+        "smart commit",
+        "cluster commits",
+        "interactive commit",
+        "staged commit",
+        "organize commits",
+        "commit workflow"
+      ],
+      "required": false,
+      "name": "Propose Commit Thread",
+      "command": "propose commit",
+      "use_case": "Analyze git changes, cluster into logical commits, and execute commit thread with interactive modification and GitHub issue integration"
+    },
+    {
+      "id": "merge-branch-with-safety",
+      "file": "prompts/merge-branch-with-safety.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Perform safe branch merge with dry-run validation, automatic tagging before/after, and rollback capability",
+      "aliases": [
+        "merge branch",
+        "safe merge",
+        "merge with tags",
+        "dry run merge",
+        "merge safely",
+        "merge branches",
+        "branch merge",
+        "git merge"
+      ],
+      "required": false,
+      "name": "Merge Branch With Safety",
+      "command": "merge branch",
+      "use_case": "Perform safe branch merge with dry-run validation, automatic tagging before/after, and rollback capability"
+    },
+    {
+      "id": "git-add-commit",
+      "file": "prompts/git-add-commit.md",
+      "protocol": "Propose-Act",
+      "description": "Intelligently handle git add and commit operations with proper staging analysis, meaningful commit messages, and staged file conflict resolution",
+      "aliases": [
+        "git add commit",
+        "add and commit",
+        "git add and commit",
+        "commit changes",
+        "add commit",
+        "stage and commit",
+        "intelligent commit",
+        "smart add commit"
+      ],
+      "required": false,
+      "name": "Git Add And Commit",
+      "command": "git add commit",
+      "use_case": "Intelligently handle git add and commit operations with proper staging analysis, meaningful commit messages, and staged file conflict resolution"
+    }
+  ],
+  "capabilities": [
+    "Feature extraction from integration branches",
+    "Branch workflow management and validation",
+    "Interactive file selection for feature components",
+    "Automated feature documentation generation",
+    "Pull request preparation and material generation",
+    "Branch cleanup and maintenance workflows",
+    "Git operation safety and validation",
+    "GitHub integration and URL generation",
+    "Intelligent commit clustering and organization",
+    "Interactive commit modification and approval workflows",
+    "GitHub issue integration with commit threading",
+    "Multi-stage commit execution with rollback support",
+    "Dry-run merge validation with conflict detection",
+    "Automatic pre/post-merge tagging for safety",
+    "Branch merge with rollback capability and audit trail",
+    "Intelligent git staging analysis and conflict resolution",
+    "Context-aware commit message generation",
+    "Safety checks for large files and sensitive data",
+    "Mixed staging scenario handling with user options"
+  ],
+  "examples": [
+    {
+      "name": "Feature Extraction Workflow",
+      "description": "Extract a complete feature from integration branch to create isolated feature branch for PR",
+      "competencies": [
+        "create-feature-for-pr"
+      ]
+    }
+  ],
+  "planned_competencies": [
+    "resolve-git-conflicts",
+    "manage-git-workflow",
+    "create-hotfix-branch",
+    "prepare-release-branch",
+    "git-history-analysis",
+    "branch-protection-management",
+    "rebase-branch-interactive",
+    "cherry-pick-commits"
+  ],
+  "compatibility": {
+    "olaf_version": ">=1.6.0",
+    "platforms": [
+      "windows",
+      "linux",
+      "macos"
+    ],
+    "shells": [
+      "powershell",
+      "bash",
+      "zsh"
+    ],
+    "git_version": ">=2.20.0"
+  },
+  "dependencies": "dependencies.json",
+  "license": "MIT",
+  "repository": "https://github.com/Amadeus-xDLC/genai.olaf",
+  "documentation": "docs/git-assistant-competency.md",
+  "changelog": [
+    {
+      "version": "1.1.0",
+      "date": "2025-10-24",
+      "changes": [
+        "Added merge-branch-with-safety competency for safe branch merging",
+        "Implemented dry-run merge validation with conflict detection",
+        "Added automatic pre/post-merge tagging strategy (4-tag system)",
+        "Implemented rollback capability with detailed instructions",
+        "Added merge audit trail through timestamped tags"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2025-10-21",
+      "changes": [
+        "Initial release of Git Assistant competency package",
+        "Migrated create-feature-for-pr from developer competency",
+        "Established Git workflow management framework",
+        "Added branch validation and safety protocols",
+        "Implemented interactive file selection workflows",
+        "Added automated documentation generation",
+        "Created PR preparation and cleanup workflows"
+      ]
+    }
+  ]
+}
