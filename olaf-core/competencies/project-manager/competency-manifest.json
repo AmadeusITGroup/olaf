@@ -1,0 +1,295 @@
+{
+  "id": "project-manager",
+  "name": "Project Manager Competency Package",
+  "version": "1.0.0",
+  "description": "Comprehensive project manager competency package for project tracking, task management, and team coordination with specialized workflows for project management activities",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": [
+      "project-manager",
+      "scrum-master",
+      "coordinator"
+    ],
+    "description_short": "Project Manager: project tracking, task management, and team coordination"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-21",
+  "updated": "2025-10-21",
+  "category": "project-management",
+  "tags": [
+    "project-manager",
+    "project-tracking",
+    "task-management",
+    "coordination",
+    "planning"
+  ],
+  "classification": {
+    "type": "core",
+    "reason": "Essential foundational competency for the project manager persona"
+  },
+  "target_users": {
+    "primary": "project-manager",
+    "secondary": [
+      "scrum-master",
+      "coordinator",
+      "team-lead"
+    ],
+    "description": "Project managers overseeing projects, scrum masters coordinating sprints, team coordinators managing workflows"
+  },
+  "maintenance": {
+    "team": "project-manager",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "Kiro AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Git for version control and tracking",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "analyze-changelog-and-report",
+    "archive-changelog-entries",
+    "create-changelog-entry",
+    "create-decision-record",
+    "create-job",
+    "create-person-record",
+    "generate-commits-from-changelog",
+    "generate-professional-release-notes",
+    "generate-tasklist",
+    "prepare-conversation-handover",
+    "review-progress",
+    "store-conversation-record",
+    "work-on-job"
+  ],
+  "entry_points": [
+    {
+      "id": "create-decision-record",
+      "file": "prompts/create-decision-record.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Create a new decision record following the standard template and update related indexes",
+      "aliases": [
+        "create decision record",
+        "decision record",
+        "new decision",
+        "dr",
+        "create dr",
+        "add decision"
+      ],
+      "required": false,
+      "name": "Create Decision Record",
+      "command": "create decision record",
+      "use_case": "Create a new decision record following the standard template and update related indexes"
+    },
+    {
+      "id": "create-changelog-entry",
+      "file": "prompts/create-changelog-entry.md",
+      "protocol": "Propose-Act",
+      "description": "Create a new changelog entry for tracking project progress and modifications",
+      "aliases": [
+        "create changelog",
+        "changelog entry",
+        "add changelog",
+        "log change",
+        "track change"
+      ],
+      "required": false,
+      "name": "Create Changelog Entry",
+      "command": "create changelog",
+      "use_case": "Create a new changelog entry for tracking project progress and modifications"
+    },
+    {
+      "id": "analyze-changelog-and-report",
+      "file": "prompts/analyze-changelog-and-report.md",
+      "protocol": "Act",
+      "description": "Analyze changelog entries and generate comprehensive progress reports",
+      "aliases": [
+        "analyze changelog",
+        "changelog report",
+        "progress analysis",
+        "changelog summary"
+      ],
+      "required": false,
+      "name": "Analyze Changelog And Report",
+      "command": "analyze changelog",
+      "use_case": "Analyze changelog entries and generate comprehensive progress reports"
+    },
+    {
+      "id": "archive-changelog-entries",
+      "file": "prompts/archive-changelog-entries.md",
+      "protocol": "Propose-Act",
+      "description": "Archive completed changelog entries and maintain clean active logs",
+      "aliases": [
+        "archive changelog",
+        "cleanup changelog",
+        "archive entries",
+        "clean changelog"
+      ],
+      "required": false,
+      "name": "Archive Changelog Entries",
+      "command": "archive changelog",
+      "use_case": "Archive completed changelog entries and maintain clean active logs"
+    },
+    {
+      "id": "generate-tasklist",
+      "file": "prompts/generate-tasklist.md",
+      "protocol": "Propose-Act",
+      "description": "Generate comprehensive task lists from project requirements and current state",
+      "aliases": [
+        "generate tasklist",
+        "create tasks",
+        "task list",
+        "todo list",
+        "generate todos"
+      ],
+      "required": false,
+      "name": "Generate Tasklist",
+      "command": "generate tasklist",
+      "use_case": "Generate comprehensive task lists from project requirements and current state"
+    },
+    {
+      "id": "create-job",
+      "file": "prompts/create-job.md",
+      "protocol": "Propose-Confirm-Act",
+      "description": "Create structured job records for project work tracking and coordination",
+      "aliases": [
+        "create job",
+        "new job",
+        "job record",
+        "work item",
+        "create work"
+      ],
+      "required": false,
+      "name": "Create Job",
+      "command": "create job",
+      "use_case": "Create structured job records for project work tracking and coordination"
+    },
+    {
+      "id": "work-on-job",
+      "file": "prompts/work-on-job.md",
+      "protocol": "Act",
+      "description": "Execute and track progress on existing job records",
+      "aliases": [
+        "work on job",
+        "execute job",
+        "job work",
+        "continue job",
+        "work job"
+      ],
+      "required": false,
+      "name": "Work On Job",
+      "command": "work on job",
+      "use_case": "Execute and track progress on existing job records"
+    },
+    {
+      "id": "review-progress",
+      "file": "prompts/review-progress.md",
+      "protocol": "Act",
+      "description": "Review and analyze project progress across all tracked activities",
+      "aliases": [
+        "review progress",
+        "progress review",
+        "check progress",
+        "project status",
+        "status review"
+      ],
+      "required": false,
+      "name": "Review Progress",
+      "command": "review progress",
+      "use_case": "Review and analyze project progress across all tracked activities"
+    },
+    {
+      "id": "create-person-record",
+      "file": "prompts/create-person-record.md",
+      "protocol": "Propose-Act",
+      "description": "Create structured person records for team member and stakeholder tracking",
+      "aliases": [
+        "create person",
+        "person record",
+        "add person",
+        "team member",
+        "add contact"
+      ],
+      "required": false,
+      "name": "Create Person Record",
+      "command": "create person",
+      "use_case": "Create structured person records for team member and stakeholder tracking"
+    },
+    {
+      "id": "generate-professional-release-notes",
+      "file": "prompts/generate-professional-release-notes.md",
+      "protocol": "Propose-Act",
+      "description": "Generate professional-quality release notes from changelog and project data",
+      "aliases": [
+        "release notes",
+        "generate release notes",
+        "professional release",
+        "create release notes"
+      ],
+      "required": false,
+      "name": "Generate Professional Release Notes",
+      "command": "release notes",
+      "use_case": "Generate professional-quality release notes from changelog and project data"
+    },
+    {
+      "id": "generate-commits-from-changelog",
+      "file": "prompts/generate-commits-from-changelog.md",
+      "protocol": "Propose-Act",
+      "description": "Generate git commit messages and structure from changelog entries",
+      "aliases": [
+        "generate commits",
+        "commits from changelog",
+        "changelog to commits",
+        "commit generation"
+      ],
+      "required": false,
+      "name": "Generate Commits From Changelog",
+      "command": "generate commits",
+      "use_case": "Generate git commit messages and structure from changelog entries"
+    },
+    {
+      "id": "prepare-conversation-handover",
+      "file": "prompts/prepare-conversation-handover.md",
+      "protocol": "Act",
+      "description": "Prepare structured handover documentation for conversation context transfer",
+      "aliases": [
+        "conversation handover",
+        "handover",
+        "context handover",
+        "prepare handover"
+      ],
+      "required": false,
+      "name": "Prepare Conversation Handover",
+      "command": "conversation handover",
+      "use_case": "Prepare structured handover documentation for conversation context transfer"
+    },
+    {
+      "id": "store-conversation-record",
+      "file": "prompts/store-conversation-record.md",
+      "protocol": "Act",
+      "description": "Store and organize conversation records for future reference and continuity",
+      "aliases": [
+        "store conversation",
+        "conversation record",
+        "save conversation",
+        "record conversation"
+      ],
+      "required": false,
+      "name": "Store Conversation Record",
+      "command": "store conversation",
+      "use_case": "Store and organize conversation records for future reference and continuity"
+    }
+  ],
+  "integrations": {
+    "researcher": [
+      "research-and-report"
+    ],
+    "business-analyst": [
+      "analyze-business-requirements"
+    ]
+  },
+  "cross_cutting_intents": [
+    "all-intents"
+  ]
+}
