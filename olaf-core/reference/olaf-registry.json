@@ -1,4 +1,6 @@
 {
-  "secondary-repos": ["Amadeus-xDLC/genai.olaf@develop"],
+  "secondary-repos": [
+    "Amadeus-xDLC/genai.olaf@feature/olaf-feature-system"
+  ],
   "use-oss": true
 }
