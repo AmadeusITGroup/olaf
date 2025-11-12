@@ -85,7 +85,7 @@ export class PlatformDetector {
                 installationPaths: {
                     user: this.getUserDataPath('Windsurf'),
                     workspace: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.windsurf'),
-                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf')
+                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '')
                 },
                 configFiles: ['settings.json', 'keybindings.json'],
                 environmentVariables: ['WINDSURF_PID', 'WINDSURF_IPC_HOOK']
@@ -96,7 +96,7 @@ export class PlatformDetector {
                 installationPaths: {
                     user: this.getUserDataPath('Kiro'),
                     workspace: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.kiro'),
-                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf')
+                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '')
                 },
                 configFiles: ['settings.json', 'keybindings.json'],
                 environmentVariables: ['KIRO_PID', 'KIRO_IPC_HOOK']
@@ -107,7 +107,7 @@ export class PlatformDetector {
                 installationPaths: {
                     user: this.getUserDataPath('Cursor'),
                     workspace: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.cursor'),
-                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf')
+                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '')
                 },
                 configFiles: ['settings.json', 'keybindings.json'],
                 environmentVariables: ['CURSOR_PID', 'CURSOR_IPC_HOOK']
@@ -118,7 +118,7 @@ export class PlatformDetector {
                 installationPaths: {
                     user: this.getUserDataPath('Code'),
                     workspace: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.vscode'),
-                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', '.olaf')
+                    project: path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '')
                 },
                 configFiles: ['settings.json'],
                 environmentVariables: []
