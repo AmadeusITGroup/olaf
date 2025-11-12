@@ -339,7 +339,9 @@ func main() {
 		// convert to UI model
 		orderedUI := map[string]uix.Collection{}
 		for id, c := range ordered {
-			orderedUI[id] = uix.Collection{ID: c.ID, Name: c.Name}
+			src := byRepo[id]
+			source := fmt.Sprintf("%s/%s@%s", src.Owner, src.Repo, src.Branch)
+			orderedUI[id] = uix.Collection{ID: c.ID, Name: c.Name, Source: source}
 		}
 		selected = uix.PromptSelect(orderedUI)
 	}

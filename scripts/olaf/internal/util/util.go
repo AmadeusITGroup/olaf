@@ -12,21 +12,42 @@ import (
 	model "github.com/amadeus-xdlc/genai.olaf/scripts/olaf/internal/model"
 )
 
-// ParseGitHubURL parses https://github.com/{owner}/{repo}[.git]
+// ParseGitHubURL parses https://github.com/{owner}/{repo}[.git][@branch]
+// Also supports short format: {owner}/{repo}[@branch]
 func ParseGitHubURL(raw string) (model.RepoRef, error) {
-	// very small parser; callers may already validate format elsewhere
+	// Extract branch if present (format: url@branch or owner/repo@branch)
+	branch := ""
+	repoURL := raw
+	if atIdx := strings.LastIndex(raw, "@"); atIdx != -1 {
+		branch = strings.TrimSpace(raw[atIdx+1:])
+		repoURL = raw[:atIdx]
+	}
+
+	// Handle short format: owner/repo
+	if !strings.HasPrefix(repoURL, "https://") && !strings.HasPrefix(repoURL, "http://") {
+		parts := strings.SplitN(repoURL, "/", 3)
+		if len(parts) < 2 {
+			return model.RepoRef{}, fmt.Errorf("unsupported GitHub URL: %s", raw)
+		}
+		owner := parts[0]
+		repo := strings.TrimSuffix(parts[1], ".git")
+		fullURL := fmt.Sprintf("https://github.com/%s/%s", owner, repo)
+		return model.RepoRef{URL: fullURL, Owner: owner, Repo: repo, Branch: branch}, nil
+	}
+
+	// Handle full URL format: https://github.com/owner/repo
 	const p = "https://github.com/"
-	if !strings.HasPrefix(raw, p) {
+	if !strings.HasPrefix(repoURL, p) {
 		return model.RepoRef{}, fmt.Errorf("unsupported GitHub URL: %s", raw)
 	}
-	rest := strings.TrimPrefix(raw, p)
+	rest := strings.TrimPrefix(repoURL, p)
 	parts := strings.SplitN(rest, "/", 3)
 	if len(parts) < 2 {
 		return model.RepoRef{}, fmt.Errorf("unsupported GitHub URL: %s", raw)
 	}
 	owner := parts[0]
 	repo := strings.TrimSuffix(parts[1], ".git")
-	return model.RepoRef{URL: raw, Owner: owner, Repo: repo}, nil
+	return model.RepoRef{URL: repoURL, Owner: owner, Repo: repo, Branch: branch}, nil
 }
 
 // RawURL builds a raw.githubusercontent.com URL for a repo path at a branch
