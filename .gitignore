@@ -114,6 +114,10 @@ olaf-data/handover-conversation*.md
 carry-overs/*
 !carry-overs/.gitkeep
 
+# Ignore all files in olaf-stashes but keep the folder
+olaf-stashes/*
+!olaf-stashes/.gitkeep
+
 # Test repositories and research scratch space
 repo-for-test/
 research/
