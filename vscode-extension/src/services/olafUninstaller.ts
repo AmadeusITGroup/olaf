@@ -730,45 +730,49 @@ export class OlafUninstaller {
         }
     }
 
-    private async updateVSCodeConfiguration(
-        scope: InstallationScope,
-        installationPath: string
-    ): Promise<void> {
-        // Remove symbolic link to .github if it exists
+    private async removeSymbolicLink(scope: InstallationScope, installationPath: string, symlinkName: string): Promise<void> {
         try {
             const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
             if (!workspaceRoot) {
-                this.logger.debug('No workspace folder found, skipping .github symbolic link removal');
+                this.logger.debug(`No workspace folder found, skipping ${symlinkName} symbolic link removal`);
                 return;
             }
 
-            const githubLinkPath = path.join(workspaceRoot, '.github');
+            const githubLinkPath = path.join(workspaceRoot, symlinkName);
 
             if (fs.existsSync(githubLinkPath)) {
                 const stats = fs.lstatSync(githubLinkPath);
                 if (stats.isSymbolicLink()) {
                     const linkTarget = fs.readlinkSync(githubLinkPath);
-                    const expectedTarget = path.join(installationPath, '.github');
+                    const expectedTarget = path.join(installationPath, symlinkName);
 
                     if (path.resolve(path.dirname(githubLinkPath), linkTarget) === path.resolve(expectedTarget)) {
                         fs.unlinkSync(githubLinkPath);
-                        await fs.remove(path.join(installationPath, '.github'));
-                        this.logger.info(`Removed .github symbolic link: ${githubLinkPath}`);
+                        await fs.remove(path.join(installationPath, symlinkName));
+                        this.logger.info(`Removed ${symlinkName} symbolic link: ${githubLinkPath}`);
                     } else {
-                        this.logger.warn(`.github symbolic link points to different location, not removing: ${githubLinkPath} -> ${linkTarget}`);
+                        this.logger.warn(`${symlinkName} symbolic link points to different location, not removing: ${githubLinkPath} -> ${linkTarget}`);
                     }
                 } else if (scope === InstallationScope.PROJECT) {
                     await fs.remove(githubLinkPath);
                 } else {
-                    this.logger.debug(`.github is not a symbolic link, not removing: ${githubLinkPath}`);
+                    this.logger.debug(`${symlinkName} is not a symbolic link, not removing: ${githubLinkPath}`);
                 }
             } else {
-                this.logger.debug(`No .github symbolic link found at: ${githubLinkPath}`);
+                this.logger.debug(`No ${symlinkName} symbolic link found at: ${githubLinkPath}`);
             }
         } catch (error) {
-            this.logger.warn('Failed to remove .github symbolic link', error as Error);
+            this.logger.warn(`Failed to remove ${symlinkName} symbolic link`, error as Error);
             // Don't fail the uninstallation for symbolic link removal issues
         }
+    }
+
+    private async updateVSCodeConfiguration(
+        scope: InstallationScope,
+        installationPath: string
+    ): Promise<void> {
+        // Remove symbolic link to .github if it exists
+        await this.removeSymbolicLink(scope, installationPath, ".github");
     }
 
     private async updateWindsurfConfiguration(
@@ -776,6 +780,8 @@ export class OlafUninstaller {
         installationPath: string
     ): Promise<void> {
         // Placeholder for Windsurf configuration update logic
+        // Remove symbolic link to .github if it exists
+        await this.removeSymbolicLink(scope, installationPath, ".windsurf");
     }
 
     private async updateKiroConfiguration(
@@ -783,6 +789,8 @@ export class OlafUninstaller {
         installationPath: string
     ): Promise<void> {
         // Placeholder for Kiro configuration update logic
+        // Remove symbolic link to .github if it exists
+        await this.removeSymbolicLink(scope, installationPath, ".kiro");
     }
 
     private async updateCursorConfiguration(
@@ -790,9 +798,7 @@ export class OlafUninstaller {
         installationPath: string
     ): Promise<void> {
         // Placeholder for Cursor configuration update logic
-    }
-
-    private getInstallationScope() {
-
+        // Remove symbolic link to .github if it exists
+        await this.removeSymbolicLink(scope, installationPath, ".cursor");
     }
 }

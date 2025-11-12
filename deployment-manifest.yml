@@ -61,7 +61,7 @@ environments:
     name: "Windsurf Bundle"
     description: "Installation bundle for Windsurf IDE environment"
     directories:
-      - ".windsurf"  # Uses default destination (.olaf/.windsurf)
+      - ".windsurf:."  # Uses default destination (.olaf/.windsurf)
     files: []
     include_patterns:
       - ".windsurf/**/*"
@@ -74,7 +74,7 @@ environments:
     name: "Kiro Bundle"
     description: "Installation bundle for Kiro IDE environment"
     directories:
-      - ".kiro"  # Uses default destination (.olaf/.kiro)
+      - ".kiro:."  # Uses default destination (.olaf/.kiro)
     files: []
     include_patterns:
       - ".kiro/**/*"

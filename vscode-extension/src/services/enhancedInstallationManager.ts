@@ -776,64 +776,78 @@ export class EnhancedInstallationManager {
         this.logger.debug(`Updating VSCode configuration for scope: ${scope}`);
 
         // Create symbolic link from workspace/.github to installationPath/.github
-        await this.createGitHubSymbolicLink(scope, installationPath);
+        await this.createSymbolicLink(scope, installationPath, '.github');
     }
 
     private async updateWindsurfConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
         // Add Windsurf-specific configuration updates here
         this.logger.debug(`Updating Windsurf configuration for scope: ${scope}`);
+
+        // Create symbolic link from workspace/.windsurf to installationPath/.windsurf
+        await this.createSymbolicLink(scope, installationPath, '.windsurf');
     }
 
     private async updateKiroConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
         // Add Kiro-specific configuration updates here
         this.logger.debug(`Updating Kiro configuration for scope: ${scope}`);
+
+        // Create symbolic link from workspace/.kiro to installationPath/.kiro
+        await this.createSymbolicLink(scope, installationPath, '.kiro');
     }
 
     private async updateCursorConfiguration(scope: InstallationScope, installationPath: string): Promise<void> {
         // Add Cursor-specific configuration updates here
         this.logger.debug(`Updating Cursor configuration for scope: ${scope}`);
+
+        // Create symbolic link from workspace/.cursor to installationPath/.cursor
+        await this.createSymbolicLink(scope, installationPath, '.cursor');
     }
 
     /**
      * Create symbolic link from workspace/.github to installation path/.github
      */
-    private async createGitHubSymbolicLink(scope: InstallationScope, installationPath: string): Promise<void> {
+    private async createSymbolicLink(scope: InstallationScope, installationPath: string, symlinkName: string): Promise<void> {
         try {
-            // Get workspace root path
-            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-            if (!workspaceRoot) {
-                this.logger.warn('No workspace folder found, skipping .github symbolic link creation');
+            if (scope !== InstallationScope.USER) {
+                this.logger.debug(`Skipping ${symlinkName} symbolic link creation for non-user scope`);
                 return;
             }
 
-            const workspaceGitHubPath = path.join(workspaceRoot, '.github');
-            const installationGitHubPath = path.join(installationPath, '.github');
+            // Get workspace root path
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (!workspaceRoot) {
+                this.logger.warn(`No workspace folder found, skipping ${symlinkName} symbolic link creation`);
+                return;
+            }
+
+            const workspaceSymlinkPath = path.join(workspaceRoot, symlinkName);
+            const installationSymlinkPath = path.join(installationPath, symlinkName);
 
             // Check if .github directory exists in the installation
-            if (!fs.existsSync(installationGitHubPath)) {
-                this.logger.debug('No .github directory found in installation, skipping .github symbolic link creation');
+            if (!fs.existsSync(installationSymlinkPath)) {
+                this.logger.debug(`No ${symlinkName} directory found in installation, skipping ${symlinkName} symbolic link creation`);
                 return;
             }
 
             // Remove existing .github in workspace if it exists
-            if (fs.existsSync(workspaceGitHubPath)) {
-                const stats = fs.lstatSync(workspaceGitHubPath);
+            if (fs.existsSync(workspaceSymlinkPath)) {
+                const stats = fs.lstatSync(workspaceSymlinkPath);
                 if (stats.isSymbolicLink()) {
-                    fs.unlinkSync(workspaceGitHubPath);
-                    this.logger.debug(`Removed existing .github symbolic link: ${workspaceGitHubPath}`);
+                    fs.unlinkSync(workspaceSymlinkPath);
+                    this.logger.debug(`Removed existing ${symlinkName} symbolic link: ${workspaceSymlinkPath}`);
                 } else if (stats.isDirectory()) {
                     // If it's a real directory, we should be more cautious
-                    this.logger.warn(`Existing .github directory found at ${workspaceGitHubPath}. Manual intervention may be required.`);
+                    this.logger.warn(`Existing ${symlinkName} directory found at ${workspaceSymlinkPath}. Manual intervention may be required.`);
                     return;
                 }
             }
 
             // Create symbolic link
-            fs.symlinkSync(installationGitHubPath, workspaceGitHubPath, 'dir');
-            this.logger.info(`Created .github symbolic link: ${workspaceGitHubPath} -> ${installationGitHubPath}`);
+            fs.symlinkSync(installationSymlinkPath, workspaceSymlinkPath, 'dir');
+            this.logger.info(`Created ${symlinkName} symbolic link: ${workspaceSymlinkPath} -> ${installationSymlinkPath}`);
 
         } catch (error) {
-            this.logger.warn('Failed to create .github symbolic link', error as Error);
+            this.logger.warn(`Failed to create ${symlinkName} symbolic link`, error as Error);
             // Don't fail the installation for symbolic link creation issues
         }
     }
