@@ -32,45 +32,7 @@
       "competencies": [
         "prompt-engineer",
         "common",
-        "business-analyst",
-        "process-documentation"
-      ],
-      "locked": false,
-      "created": "2025-10-21"
-    },
-    {
-      "id": "technical-writer",
-      "name": "Technical Writer Persona",
-      "description": "Competencies for technical writers: documentation, content creation, and professional communications.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "technical-writer",
-        "process-documentation"
-      ],
-      "locked": false,
-      "created": "2025-10-21"
-    },
-    {
-      "id": "researcher",
-      "name": "Researcher Persona",
-      "description": "Competencies for researchers: comprehensive analysis, research workflows, and deep investigation.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "researcher"
-      ],
-      "locked": false,
-      "created": "2025-10-21"
-    },
-    {
-      "id": "architect",
-      "name": "Architect Persona",
-      "description": "Competencies for architects: technical design, system analysis, and solution architecture.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "architect"
+        "business-analyst"
       ],
       "locked": false,
       "created": "2025-10-21"
@@ -88,79 +50,16 @@
       "created": "2025-10-21"
     },
     {
-      "id": "sre",
-      "name": "Site Reliability Engineer (SRE)",
-      "description": "Competencies for SRE: infrastructure, monitoring, deployment, performance, security operations.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "sre"
-      ],
-      "locked": false,
-      "created": "2025-10-22"
-    },
-    {
-      "id": "tester",
-      "name": "Tester / QA Engineer",
-      "description": "Competencies for testers: test coverage, test architecture, performance testing, quality assurance.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "tester"
-      ],
-      "locked": false,
-      "created": "2025-10-22"
-    },
-    {
-      "id": "git-specialist",
-      "name": "Git Specialist / DevOps",
-      "description": "Competencies for Git workflow management, branch operations, and repository automation.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "git-assistant"
-      ],
-      "locked": false,
-      "created": "2025-10-21"
-    },
-    {
-      "id": "straf",
-      "name": "STRAF AI Agents",
-      "description": "AI agent execution and management: spawn background agents, direct execution, and process management with AWS Strands SDK.",
-      "competencies": [
-        "prompt-engineer",
-        "common",
-        "straf"
-      ],
-      "locked": false,
-      "created": "2025-10-28"
-    },
-    {
       "id": "all",
       "name": "All Competencies",
-      "description": "Complete collection including all available competencies. Use this for maximum capability and full OLAF feature access.",
+      "description": "Complete collection including all available competencies with prompts.",
       "competencies": [
         "prompt-engineer",
         "common",
-        "architect",
         "business-analyst",
-        "competency-creation",
         "developer",
-        "dfd",
         "git-assistant",
-        "java-migration",
-        "librarian",
-        "olaf-specific-tools",
-        "onboard",
-        "pdf-analysis",
-        "process-documentation",
-        "product-owner",
-        "project-manager",
-        "researcher",
-        "sre",
-        "straf",
-        "technical-writer",
-        "tester"
+        "project-manager"
       ],
       "locked": false,
       "created": "2025-10-23"
@@ -168,7 +67,7 @@
   ],
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-12T11:48:09.564762",
+    "lastUpdated": "2025-11-12T12:10:22.994705",
     "active_collection": "all",
     "description": "Competency collections define groupings of competencies for different personas and use cases",
     "notes": [
