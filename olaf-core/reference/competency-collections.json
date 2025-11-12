@@ -1,0 +1,183 @@
+{
+  "collections": [
+    {
+      "id": "core",
+      "name": "Core/Always-On",
+      "description": "Always included in all indices. Universal kernel competencies essential for all users.",
+      "competencies": [
+        "prompt-engineer",
+        "common"
+      ],
+      "locked": true,
+      "created": "2025-10-21",
+      "notes": "This collection cannot be modified or deleted. It forms the foundation for all custom selections. Contains only kernel competencies that appear in every collection."
+    },
+    {
+      "id": "developer",
+      "name": "Developer Persona",
+      "description": "Competencies for software developers: code review, testing, quality improvement, and Git workflow management.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "developer",
+        "git-assistant"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "business-analyst",
+      "name": "Business Analyst / Product Manager",
+      "description": "Competencies for BAs and PMs: requirements analysis, planning, research, and feature design.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "business-analyst",
+        "process-documentation"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "technical-writer",
+      "name": "Technical Writer Persona",
+      "description": "Competencies for technical writers: documentation, content creation, and professional communications.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "technical-writer",
+        "process-documentation"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "researcher",
+      "name": "Researcher Persona",
+      "description": "Competencies for researchers: comprehensive analysis, research workflows, and deep investigation.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "researcher"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "architect",
+      "name": "Architect Persona",
+      "description": "Competencies for architects: technical design, system analysis, and solution architecture.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "architect"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "project-manager",
+      "name": "Project Manager Persona",
+      "description": "Competencies for project managers: planning, coordination, progress tracking, and workflow management.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "project-manager"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "sre",
+      "name": "Site Reliability Engineer (SRE)",
+      "description": "Competencies for SRE: infrastructure, monitoring, deployment, performance, security operations.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "sre"
+      ],
+      "locked": false,
+      "created": "2025-10-22"
+    },
+    {
+      "id": "tester",
+      "name": "Tester / QA Engineer",
+      "description": "Competencies for testers: test coverage, test architecture, performance testing, quality assurance.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "tester"
+      ],
+      "locked": false,
+      "created": "2025-10-22"
+    },
+    {
+      "id": "git-specialist",
+      "name": "Git Specialist / DevOps",
+      "description": "Competencies for Git workflow management, branch operations, and repository automation.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "git-assistant"
+      ],
+      "locked": false,
+      "created": "2025-10-21"
+    },
+    {
+      "id": "straf",
+      "name": "STRAF AI Agents",
+      "description": "AI agent execution and management: spawn background agents, direct execution, and process management with AWS Strands SDK.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "straf"
+      ],
+      "locked": false,
+      "created": "2025-10-28"
+    },
+    {
+      "id": "all",
+      "name": "All Competencies",
+      "description": "Complete collection including all available competencies. Use this for maximum capability and full OLAF feature access.",
+      "competencies": [
+        "prompt-engineer",
+        "common",
+        "architect",
+        "business-analyst",
+        "competency-creation",
+        "developer",
+        "dfd",
+        "git-assistant",
+        "java-migration",
+        "librarian",
+        "olaf-specific-tools",
+        "onboard",
+        "pdf-analysis",
+        "process-documentation",
+        "product-owner",
+        "project-manager",
+        "researcher",
+        "sre",
+        "straf",
+        "technical-writer",
+        "tester"
+      ],
+      "locked": false,
+      "created": "2025-10-23"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-11-12T09:09:48.132166",
+    "active_collection": "all",
+    "description": "Competency collections define groupings of competencies for different personas and use cases",
+    "notes": [
+      "Collections with locked=true cannot be edited or deleted",
+      "The 'core' collection is always mandatory and cannot be modified",
+      "Users can create custom collections by running create-competency-collection.ps1",
+      "Users can select collections by running select-competency-collection.ps1",
+      "Each collection is a named grouping that generates a competency index"
+    ]
+  },
+  "last_updated": "2025-10-28T10:45:00.000000"
+}

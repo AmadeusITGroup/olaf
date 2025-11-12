@@ -1,0 +1,60 @@
+{
+  "system_dependencies": {
+    "required": [
+      {
+        "name": "Git",
+        "version": ">=2.20.0",
+        "description": "Version control system for all Git operations",
+        "installation": {
+          "windows": "Download from https://git-scm.com/ or use 'winget install Git.Git'",
+          "linux": "sudo apt install git (Ubuntu/Debian) or sudo yum install git (RHEL/CentOS)",
+          "macos": "xcode-select --install or brew install git"
+        }
+      }
+    ],
+    "optional": [
+      {
+        "name": "GitHub CLI",
+        "version": ">=2.0.0", 
+        "description": "Enhanced GitHub integration for PR operations",
+        "installation": {
+          "windows": "winget install GitHub.cli",
+          "linux": "sudo apt install gh (Ubuntu/Debian)",
+          "macos": "brew install gh"
+        }
+      }
+    ]
+  },
+  "olaf_dependencies": {
+    "competencies": [
+      {
+        "id": "common",
+        "reason": "File management and basic utilities",
+        "optional": false
+      }
+    ],
+    "templates": [],
+    "tools": []
+  },
+  "environment_requirements": {
+    "git_config": [
+      "user.name must be configured",
+      "user.email must be configured"
+    ],
+    "repository_access": [
+      "Read/write access to target repository",
+      "Push permissions for feature branch creation",
+      "Access to both source and target branches"
+    ],
+    "network": [
+      "Internet access for git push/pull operations",
+      "GitHub access for PR URL generation"
+    ]
+  },
+  "validation_commands": {
+    "git_version": "git --version",
+    "git_config_check": "git config --get user.name && git config --get user.email",
+    "repository_status": "git status",
+    "remote_access": "git ls-remote origin"
+  }
+}
