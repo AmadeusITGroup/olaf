@@ -118,9 +118,16 @@ carry-overs/*
 repo-for-test/
 research/
 
+# User-specific data and repositories
+your-data/
+your-repos/
+
 # Findings directory - keep structure but ignore contents
 olaf-data/findings/*
 !olaf-data/findings/.gitkeep
+
+# STRAF execution logs - ignore completely
+olaf-data/straf-execution-logs/
 
 # Kiro specs - temporary exclusion
 .kiro/specs/
