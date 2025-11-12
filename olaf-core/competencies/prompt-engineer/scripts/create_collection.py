@@ -139,60 +139,61 @@ class CollectionManager:
         """Create default collections if file doesn't exist"""
         print("📝 Creating default collections...")
         
+        # Kernel competencies - dynamically read from manifests with type=kernel
+        kernel = self.get_kernel_competencies()
+        
+        if not kernel:
+            print("⚠️  Warning: No kernel competencies found! Using prompt-engineer as fallback.")
+            kernel = ["prompt-engineer"]
+        else:
+            print(f"✅ Found kernel competencies: {', '.join(kernel)}")
+        
+        # Get all available competencies to create persona collections
+        available = self.get_available_competencies()
+        available_ids = [c['id'] for c in available]
+        
+        # Persona competencies (non-kernel)
+        persona_comps = [c['id'] for c in available if c.get('classification') not in ['kernel', 'internal']]
+        
         default = {
             "version": "1.0.0",
             "last_updated": datetime.now().isoformat(),
             "collections": [
                 {
                     "id": "core",
-                    "name": "Core Competencies",
-                    "description": "Essential competencies required for all users",
-                    "competencies": ["prompt-engineer"],
+                    "name": "Core/Always-On",
+                    "description": "Always included in all indices. Universal kernel competencies essential for all users.",
+                    "competencies": kernel,
                     "locked": True,
-                    "created": datetime.now().isoformat()
-                },
-                {
-                    "id": "developer",
-                    "name": "Developer Collection",
-                    "description": "Competencies for software developers",
-                    "competencies": ["prompt-engineer"],
-                    "locked": False,
-                    "created": datetime.now().isoformat()
-                },
-                {
-                    "id": "business-analyst",
-                    "name": "Business Analyst Collection",
-                    "description": "Competencies for business analysts and product managers",
-                    "competencies": ["prompt-engineer"],
-                    "locked": False,
-                    "created": datetime.now().isoformat()
-                },
-                {
-                    "id": "technical-writer",
-                    "name": "Technical Writer Collection",
-                    "description": "Competencies for technical documentation",
-                    "competencies": ["prompt-engineer"],
-                    "locked": False,
-                    "created": datetime.now().isoformat()
-                },
-                {
-                    "id": "researcher",
-                    "name": "Researcher Collection",
-                    "description": "Competencies for researchers and data analysts",
-                    "competencies": ["prompt-engineer"],
-                    "locked": False,
-                    "created": datetime.now().isoformat()
-                },
-                {
-                    "id": "full-stack",
-                    "name": "Full Stack Collection",
-                    "description": "Complete competency set with all available items",
-                    "competencies": ["prompt-engineer"],
-                    "locked": False,
-                    "created": datetime.now().isoformat()
+                    "created": datetime.now().isoformat(),
+                    "notes": "This collection cannot be modified or deleted. It forms the foundation for all custom selections."
                 }
             ]
         }
+        
+        # Create one collection per persona competency
+        for comp_id in persona_comps:
+            comp = next((c for c in available if c['id'] == comp_id), None)
+            if comp:
+                default["collections"].append({
+                    "id": comp_id,
+                    "name": f"{comp['name']} Persona",
+                    "description": f"Competencies for {comp_id}: specialized workflows and tools.",
+                    "competencies": kernel + [comp_id],
+                    "locked": False,
+                    "created": datetime.now().isoformat()
+                })
+        
+        # Add "all" collection with everything
+        all_comps = kernel + persona_comps
+        default["collections"].append({
+            "id": "all",
+            "name": "All Competencies",
+            "description": "Complete collection including all available competencies with prompts.",
+            "competencies": all_comps,
+            "locked": False,
+            "created": datetime.now().isoformat()
+        })
         
         self.save_collections(default)
         return default
@@ -212,12 +213,19 @@ class CollectionManager:
                                 competencies.append({
                                     "id": comp_dir.name,
                                     "name": manifest.get('name', comp_dir.name),
-                                    "version": manifest.get('version', 'unknown')
+                                    "version": manifest.get('version', 'unknown'),
+                                    "classification": manifest.get('classification', {}).get('type', 'unknown')
                                 })
                         except:
                             pass
         
         return sorted(competencies, key=lambda x: x['id'])
+    
+    def get_kernel_competencies(self) -> List[str]:
+        """Get competencies marked as kernel in their manifests"""
+        available = self.get_available_competencies()
+        kernel = [c['id'] for c in available if c.get('classification') == 'kernel']
+        return sorted(kernel)
     
     def show_collections(self, collections: Dict):
         """Display all collections"""
