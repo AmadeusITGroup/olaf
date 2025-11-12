@@ -9,8 +9,9 @@ import (
 )
 
 type Collection struct {
-	ID   string
-	Name string
+	ID     string
+	Name   string
+	Source string // e.g., "owner/repo@branch"
 }
 
 // PromptSelect prints a list of collections and returns selected IDs from user input
@@ -21,7 +22,11 @@ func PromptSelect(ordered map[string]Collection) []string {
 	sort.Strings(ids)
 	for i, id := range ids {
 		c := ordered[id]
-		fmt.Printf("  [%d] %s (%s)\n", i+1, c.Name, c.ID)
+		if c.Source != "" {
+			fmt.Printf("  [%d] %s (%s) [%s]\n", i+1, c.Name, c.ID, c.Source)
+		} else {
+			fmt.Printf("  [%d] %s (%s)\n", i+1, c.Name, c.ID)
+		}
 	}
 	fmt.Println()
 	fmt.Println("Enter one or more numbers or IDs, comma-separated (e.g., 1,3 or core,developer):")
