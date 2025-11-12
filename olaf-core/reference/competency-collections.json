@@ -59,6 +59,7 @@
         "business-analyst",
         "developer",
         "git-assistant",
+        "olaf-specific-tools",
         "project-manager"
       ],
       "locked": false,
@@ -67,7 +68,7 @@
   ],
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-12T12:10:22.994705",
+    "lastUpdated": "2025-11-12T12:43:30.401781",
     "active_collection": "all",
     "description": "Competency collections define groupings of competencies for different personas and use cases",
     "notes": [

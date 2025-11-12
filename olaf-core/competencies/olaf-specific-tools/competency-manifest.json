@@ -1,0 +1,131 @@
+{
+  "id": "olaf-specific-tools",
+  "name": "OLAF-Specific Tools",
+  "version": "1.0.0",
+  "description": "Comprehensive quality assurance and validation tools for OLAF framework artifacts including manifest validation, schema migration, template compliance checking, and documentation integrity verification",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": ["olaf-maintainer", "framework-developer", "qa-engineer"],
+    "description_short": "OLAF-Specific Tools: quality assurance and validation for OLAF artifacts"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-10-27",
+  "updated": "2025-10-27",
+  "category": "olaf-internal",
+  "tags": ["validation", "quality-assurance", "manifest", "schema", "documentation", "olaf-internal"],
+  "classification": {
+    "type": "internal",
+    "reason": "Internal tooling for OLAF framework maintenance and quality assurance"
+  },
+  "target_users": {
+    "primary": "olaf-maintainer",
+    "secondary": ["framework-developer", "qa-engineer", "competency-creator"],
+    "description": "OLAF maintainers ensuring framework consistency, developers creating competencies, QA engineers validating artifacts"
+  },
+  "maintenance": {
+    "team": "olaf-core",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "Kiro AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Python 3.12+, JSON parsing libraries",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "validate-olaf-artifacts",
+    "detect-schema-drift", 
+    "generate-validation-report",
+    "verify-competency-compliance",
+    "merge-competency-pack-to-main"
+  ],
+  "entry_points": [
+    {
+      "id": "validate-olaf-artifacts",
+      "file": "prompts/validate-olaf-artifacts.md",
+      "protocol": "Act",
+      "description": "Comprehensive validation of manifests, documentation, and templates",
+      "aliases": [
+        "validate olaf artifacts",
+        "validate olaf",
+        "check olaf artifacts",
+        "verify olaf artifacts",
+        "olaf validation"
+      ]
+    },
+    {
+      "id": "detect-schema-drift",
+      "file": "prompts/detect-schema-drift.md", 
+      "protocol": "Act",
+      "description": "Find inconsistencies and schema variations across OLAF artifacts",
+      "aliases": [
+        "detect schema drift",
+        "find schema drift", 
+        "check schema drift",
+        "schema inconsistencies",
+        "detect drift"
+      ]
+    },
+    {
+      "id": "generate-validation-report",
+      "file": "prompts/generate-validation-report.md",
+      "protocol": "Propose-Act",
+      "description": "Create comprehensive QA report for OLAF artifacts", 
+      "aliases": [
+        "generate validation report",
+        "create validation report",
+        "validation report",
+        "qa report",
+        "olaf report"
+      ]
+    },
+    {
+      "id": "verify-competency-compliance",
+      "file": "prompts/verify-competency-compliance.md",
+      "protocol": "Analyze-Report",
+      "description": "Comprehensive verification of competency compliance with OLAF standards and templates",
+      "aliases": [
+        "verify competency compliance",
+        "check competency compliance",
+        "validate competency",
+        "competency compliance",
+        "check compliance"
+      ]
+    },
+    {
+      "id": "validate-all-competency-packs",
+      "file": "prompts/validate-all-competency-packs.md",
+      "protocol": "Propose-Act",
+      "description": "Discover all competency packs, run the validator, aggregate results, and propose numbered fixes",
+      "aliases": [
+        "validate all competency packs",
+        "validate packs",
+        "run pack validator"
+      ]
+    },
+    {
+      "id": "merge-competency-pack-to-main",
+      "file": "prompts/merge-competency-pack-to-main.md",
+      "protocol": "Act",
+      "description": "Orchestrate merging a competency pack from feature/olaf-feature-system to main via PR workflow",
+      "aliases": [
+        "merge competency pack to main",
+        "merge pack to main",
+        "add competency to main",
+        "integrate competency pack",
+        "merge competency"
+      ]
+    }
+  ],
+  "integrations": {
+    "competency-creation": [
+      "create-competency-pack"
+    ],
+    "prompt-engineer": [
+      "generate-step-by-step-tutorial"
+    ]
+  },
+  "cross_cutting_intents": []
+}
