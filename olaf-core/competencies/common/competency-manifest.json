@@ -46,7 +46,8 @@
     "should-i-use-ai",
     "stash-restart-session",
     "stash-work-session",
-    "use-competency"
+    "use-competency",
+    "list-competencies"
   ],
   "entry_points": [
     {
@@ -144,6 +145,14 @@
       "protocol": "Act",
       "use_case": "Intelligent competency discovery and execution router",
       "aliases": ["find competency", "search competency", "use workflow", "execute competency", "run competency"]
+    },
+    {
+      "name": "List Competencies",
+      "command": "list competencies",
+      "file": "prompts/list-competencies.md",
+      "protocol": "Act",
+      "use_case": "Display available competencies and their protocols from the current index",
+      "aliases": ["list competency", "show competencies", "list olaf commands", "competency list"]
     }
   ]
 }

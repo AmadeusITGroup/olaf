@@ -1,0 +1,25 @@
+{
+  "tool_dependencies": [
+    {
+      "tool": "git",
+      "version": ">=2.30",
+      "purpose": "Version control for changelog and task tracking",
+      "platforms": ["windows", "linux", "macos"],
+      "install_instruction": "Standard git installation"
+    }
+  ],
+  "external_services": [],
+  "optional_tools": [
+    {
+      "tool": "markdown-tools",
+      "version": ">=1.0",
+      "purpose": "Markdown processing for documentation",
+      "integration": "Optional for advanced markdown features"
+    }
+  ],
+  "llm_requirements": {
+    "minimum_capability": "Project management, team coordination, task tracking",
+    "recommended_model": "Claude Sonnet 4.5 or higher",
+    "reasoning": "Requires understanding of project management principles, team dynamics, and workflow orchestration"
+  }
+}
