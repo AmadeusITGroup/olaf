@@ -768,6 +768,7 @@ export class EnhancedInstallationManager {
         } catch (error) {
             this.logger.warn('Failed to update platform configuration', error as Error);
             // Don't fail the installation for configuration updates
+            throw error;
         }
     }
 
@@ -838,7 +839,8 @@ export class EnhancedInstallationManager {
                 } else if (stats.isDirectory()) {
                     // If it's a real directory, we should be more cautious
                     this.logger.warn(`Existing ${symlinkName} directory found at ${workspaceSymlinkPath}. Manual intervention may be required.`);
-                    return;
+                    vscode.window.showErrorMessage(`Cannot create ${symlinkName} symbolic link because a real directory exists at ${workspaceSymlinkPath}. Please remove or rename it and retry.`);
+                    throw new Error(`Existing ${symlinkName} directory prevents symbolic link creation`);
                 }
             }
 
@@ -849,6 +851,8 @@ export class EnhancedInstallationManager {
         } catch (error) {
             this.logger.warn(`Failed to create ${symlinkName} symbolic link`, error as Error);
             // Don't fail the installation for symbolic link creation issues
+            vscode.window.showErrorMessage(`Failed to create ${symlinkName} symbolic link. Please ensure you have sufficient permissions. Error: ${error instanceof Error ? error.message : String(error)}`);
+            throw error;
         }
     }
 
@@ -888,7 +892,8 @@ export class EnhancedInstallationManager {
                 } else if (stats.isDirectory()) {
                     // If it's a real directory, we should be more cautious
                     this.logger.warn(`Existing .olaf directory found at ${workspaceOlafPath}. Manual intervention may be required.`);
-                    return;
+                    vscode.window.showErrorMessage(`Cannot create .olaf symbolic link because a re  al directory exists at ${workspaceOlafPath}. Please remove or rename it and retry.`);
+                    throw new Error(`Existing .olaf directory prevents symbolic link creation`);
                 }
             }
 
@@ -899,6 +904,8 @@ export class EnhancedInstallationManager {
         } catch (error) {
             this.logger.warn('Failed to create workspace symbolic link', error as Error);
             // Don't fail the installation for symbolic link creation issues
+            vscode.window.showErrorMessage(`Failed to create workspace .olaf symbolic link. Please ensure you have sufficient permissions. Error: ${error instanceof Error ? error.message : String(error)}`);
+            throw error;
         }
     }
 
