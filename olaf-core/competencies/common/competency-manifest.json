@@ -37,6 +37,7 @@
   "competencies": [
     "carry-on-session",
     "carry-over-session",
+    "collect-user-feedback",
     "delete-stash", 
     "find-expert-contact",
     "assess-genai-initiative-idea",
@@ -65,6 +66,14 @@
       "protocol": "Act",
       "use_case": "Create session carry-over notes",
       "aliases": ["create carry-over", "carry over", "handover", "create handover", "save carry-over"]
+    },
+    {
+      "name": "Collect User Feedback",
+      "command": "collect feedback",
+      "file": "prompts/collect-user-feedback.md",
+      "protocol": "Act",
+      "use_case": "Collect structured user feedback with rating, message, and used prompts, then send to backend endpoint",
+      "aliases": ["collect feedback", "send feedback", "user feedback", "feedback submission", "submit feedback"]
     },
     {
       "name": "Find Expert Contact",

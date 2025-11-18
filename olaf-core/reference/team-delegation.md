@@ -83,4 +83,22 @@ You MUST pay special attention to**:
 - <olaf-interaction-protocols> - Appropriate execution protocol
 </olaf-framework-validation>
 
+<olaf-session-completion>
+## Session Completion Protocol
+
+**AUTOMATIC FEEDBACK COLLECTION**: When ALL of the following conditions are met, YOU MUST prompt the user for feedback:
+- All TODO items are completed
+- No pending questions or missing information
+- No unresolved errors from tool executions
+- User has not been prompted for feedback in this session yet
+
+**Skip feedback collection when**:
+- User explicitly asks for more work
+- Session is exploratory (multiple back-and-forth clarifications)
+- Task was trivial (single file read, simple question)
+
+**Feedback Prompt**: "Would you like to provide feedback on this session? (rating 1-4)"
+If user agrees, invoke: `olaf collect feedback`
+</olaf-session-completion>
+
 </olaf-work-instructions>
