@@ -1,0 +1,50 @@
+﻿{
+  "tool_dependencies": [
+    {
+      "tool": "git",
+      "version": ">=2.30",
+      "purpose": "Version control for research tracking and collaboration",
+      "platforms": ["windows", "linux", "macos"],
+      "install_instruction": "Standard git installation"
+    }
+  ],
+  "external_services": [
+    {
+      "service": "Web Search",
+      "purpose": "Research and evidence gathering from web sources",
+      "optional": true,
+      "description": "Web search capabilities for gathering external insights and evidence"
+    },
+    {
+      "service": "Codebase Access",
+      "purpose": "Analyze existing code for context-aware ideation",
+      "optional": true,
+      "description": "Access to local repositories for code analysis and pattern discovery"
+    },
+    {
+      "service": "Documentation Access",
+      "purpose": "Review existing documentation for constraints and best practices",
+      "optional": true,
+      "description": "Access to project documentation, specifications, and design documents"
+    }
+  ],
+  "optional_tools": [
+    {
+      "tool": "markdown-viewer",
+      "version": ">=1.0",
+      "purpose": "View and navigate research outputs",
+      "integration": "Optional for enhanced reading experience of research deliverables"
+    },
+    {
+      "tool": "diagram-tools",
+      "version": ">=1.0",
+      "purpose": "Visualize research findings and trajectories",
+      "integration": "Optional for creating visual representations of ideation paths"
+    }
+  ],
+  "llm_requirements": {
+    "minimum_capability": "Critical thinking, evidence synthesis, constructive challenging, multi-source integration",
+    "recommended_model": "Claude Sonnet 4.5 or higher",
+    "reasoning": "Requires advanced reasoning for challenging ideas constructively, synthesizing information from multiple sources, maintaining context across iterative cycles, and generating evidence-based recommendations"
+  }
+}

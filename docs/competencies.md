@@ -20,10 +20,7 @@ This list reflects the current Query Competency Index. All competencies are orga
 
 ## Research & Documentation
 
-- **Search and Learn** - Autonomous learning and information gathering
-- **Autonomous Comprehensive Research** - Free-form research capabilities
-- **Research and Report** - Controlled, step-by-step research (Propose-Confirm-Act)
-- **Write Academic Paper** - Academic and technical writing
+- **Challenge Me** - Interactive ideation engine for evidence-based exploration and collaborative thinking
 - **Create Decision Record** - Document technical decisions (ADR)
 
 ## Business Analysis & Specifications
