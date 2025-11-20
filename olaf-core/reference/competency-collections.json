@@ -65,6 +65,19 @@
       "created": "2025-11-12"
     },
     {
+      "id": "researcher",
+      "name": "Researcher Persona",
+      "description": "Competencies for researchers: ideation, collaborative thinking, evidence-based exploration, and comprehensive research.",
+      "competencies": [
+        "common",
+        "prompt-engineer",
+        "git-assistant",
+        "researcher"
+      ],
+      "locked": false,
+      "created": "2025-11-20"
+    },
+    {
       "id": "all",
       "name": "All Competencies",
       "description": "Complete collection including all available competencies with prompts.",
@@ -74,7 +87,8 @@
         "git-assistant",
         "business-analyst",
         "developer",
-        "project-manager"
+        "project-manager",
+        "researcher"
       ],
       "locked": false,
       "created": "2025-10-23"
@@ -82,7 +96,7 @@
   ],
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-12T16:37:05.752887",
+    "lastUpdated": "2025-11-20T16:25:00.000000",
     "active_collection": "all",
     "description": "Competency collections define groupings of competencies for different personas and use cases",
     "notes": [
@@ -96,5 +110,5 @@
       "Each collection is a named grouping that generates a competency index"
     ]
   },
-  "last_updated": "2025-11-12T13:19:00.188766"
+  "last_updated": "2025-11-20T16:25:00.000000"
 }

@@ -1,0 +1,69 @@
+﻿{
+  "id": "researcher",
+  "name": "Researcher Competency Package",
+  "version": "1.0.0",
+  "description": "Comprehensive research competency package for ideation, collaborative thinking, and evidence-based exploration with multi-source research integration",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": ["researcher", "innovator", "strategist", "analyst"],
+    "description_short": "Researcher: interactive ideation, challenge-driven thinking, and comprehensive research"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-11-20",
+  "updated": "2025-11-20",
+  "category": "research-ideation",
+  "tags": ["research", "ideation", "challenge", "collaboration", "evidence-based"],
+  "classification": {
+    "type": "core",
+    "reason": "Essential competency for research-driven ideation and evidence-based decision making"
+  },
+  "target_users": {
+    "primary": "researcher",
+    "secondary": ["business-analyst", "product-manager", "architect", "strategist"],
+    "description": "Researchers exploring ideas, product managers validating concepts, strategists evaluating approaches, analysts building evidence-based recommendations"
+  },
+  "maintenance": {
+    "team": "researcher",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "OLAF Framework"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Optional: Web search, codebase access, documentation access",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "challenge-me"
+  ],
+  "entry_points": [
+    {
+      "name": "Challenge Me",
+      "command": "challenge me",
+      "file": "prompts/challenge-me.md",
+      "protocol": "Act",
+      "use_case": "Interactive ideation engine that challenges ideas, provides insights, and tracks collaborative refinement trajectory"
+    }
+  ],
+  "integrations": {
+    "business-analyst": [
+      "analyze-business-requirements",
+      "generate-questionnaire"
+    ],
+    "developer": [
+      "generate-tech-spec-from-code"
+    ],
+    "architect": [
+      "evaluate-technology"
+    ],
+    "project-manager": [
+      "create-decision-record"
+    ]
+  },
+  "cross_cutting_intents": [
+    "research-ideation",
+    "evidence-based-analysis",
+    "collaborative-thinking"
+  ]
+}

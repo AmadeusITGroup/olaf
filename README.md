@@ -43,7 +43,7 @@ OLAF provides several competencies to enhance AI-human collaboration:
 
 ## Available Competencies
 
-OLAF provides competencies across multiple categories including Code Analysis, Documentation & Specification, Requirements Analysis, Project Management, and Software Development.
+OLAF provides competencies across multiple categories including Code Analysis, Documentation & Specification, Requirements Analysis, Project Management, Software Development, and Research & Ideation.
 
 **📖 For the complete list of competencies, see [docs/competencies.md](docs/competencies.md)**
 
