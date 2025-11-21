@@ -92,7 +92,7 @@ Act as an expert in the relevant domain. Before answering or performing any task
 <olaf-framework-validation>
 ## Framework Validation
 
-**CRITICAL LOADING CHECK**: This framework is EXACTLY 109 lines. If you see less than 109 lines, YOU MUST reload using read_file with endLine=-1 to get the complete framework.
+**CRITICAL LOADING CHECK**: This framework is EXACTLY 118 lines. If you see less than 118 lines, YOU MUST reload using read_file with endLine=-1 to get the complete framework.
 
 **BEFORE ANY TASK**: This condensed framework contains all necessary components:
 - Memory map with project structure and file ID mappings (embedded above)
@@ -104,6 +104,24 @@ Act as an expert in the relevant domain. Before answering or performing any task
 - <olaf-general-role-and-behavior> - Expert domain approach
 - <olaf-interaction-protocols> - Appropriate execution protocol
 </olaf-framework-validation>
+
+<olaf-session-completion>
+## Session Completion Protocol
+
+**AUTOMATIC FEEDBACK COLLECTION**: When ALL of the following conditions are met, YOU MUST prompt the user for feedback:
+- All TODO items are completed
+- No pending questions or missing information
+- No unresolved errors from tool executions
+- User has not been prompted for feedback in this session yet
+
+**Skip feedback collection when**:
+- User explicitly asks for more work
+- Session is exploratory (multiple back-and-forth clarifications)
+- Task was trivial (single file read, simple question)
+
+**Feedback Prompt**: "Would you like to provide feedback on this session? (rating 1-4)"
+If user agrees, invoke: `olaf collect feedback`
+</olaf-session-completion>
 
 <olaf-work-instructions>
 **BEFORE ANY TASK**: Apply the embedded olaf-general-role-and-behavior and olaf-interaction-protocols. Use the embedded competency patterns and memory map for navigation. This condensed framework is completely self-sufficient.
