@@ -17,71 +17,15 @@ Use the first matching mapping with its file and protocol.
 - **Competencies Included:** common, prompt-engineer, git-assistant, business-analyst, developer, project-manager, researcher
 - **Total Entry Points:** 61
 
-## Mappings
+## Competencies
 
-[
-  [{"carry on", "resume work", "continue work", "continue session", "resume session"}, "common/prompts/carry-on-session.md", "Act"]
-  [{"create carry-over", "carry over", "handover", "create handover", "save carry-over"}, "common/prompts/carry-over-session.md", "Act"]
-  [{"find expert", "expert contact", "find SME", "find subject matter expert", "locate expert"}, "common/prompts/find-expert-contact.md", "Act"]
-  [{"assess genai initiative", "evaluate genai", "idea assessment", "initiative assessment", "genai assessment"}, "common/prompts/assess-genai-initiative-idea.md", "Propose-Act"]
-  [{"switch context", "context switch", "change project", "change context", "switch task"}, "common/prompts/switch-context.md", "Propose-Act"]
-  [{"my daily", "daily report", "create daily", "daily summary", "generate daily"}, "common/prompts/report-my-daily.md", "Propose-Act"]
-  [{"should i use ai", "use ai?", "ai or not", "should we use ai", "ai decision"}, "common/prompts/should-i-use-ai.md", "Act"]
-  [{"stash restart", "restart stash", "resume stash", "resume stashed work", "restore stash"}, "common/prompts/stash-restart-session.md", "Act"]
-  [{"stash work", "stash session", "save work stash", "stash current work", "create stash"}, "common/prompts/stash-work-session.md", "Act"]
-  [{"remove stash", "clean stash", "stash delete"}, "common/prompts/delete-stash.md", "Act"]
-  [{"olaf help", "olaf i need you", "olaf help me"}, "common/prompts/olaf-help-me.md", "Act"]
-  [{"find competency", "search competency", "use workflow", "execute competency", "run competency"}, "common/prompts/use-competency.md", "Act"]
-  [{"list competency", "show competencies", "list olaf commands", "competency list"}, "common/prompts/list-competencies.md", "Act"]
-  [{"create prompt", "new prompt", "write prompt", "generate prompt"}, "prompt-engineer/prompts/create-prompt.md", "Propose-Confirm-Act"]
-  [{"convert prompt", "refactor prompt", "rewrite prompt", "upgrade prompt"}, "prompt-engineer/prompts/convert-prompt-existing.md", "Propose-Act"]
-  [{"check prompt compliance", "validate prompt", "check prompt", "prompt compliance", "audit prompt"}, "prompt-engineer/prompts/check-prompt-compliance.md", "Act"]
-  [{"generate tutorial", "create tutorial", "step by step tutorial", "tutorial from conversation", "conversation to tutorial"}, "prompt-engineer/prompts/generate-step-by-step-tutorial.md", "Propose-Act"]
-  [{"condense olaf", "compress olaf", "optimize olaf", "reduce olaf size", "condense framework"}, "prompt-engineer/prompts/condense-olaf-framework.md", "Act"]
-  [{"generate workflow", "create workflow", "design workflow", "workflow generation"}, "prompt-engineer/prompts/generate-workflow.md", "Act"]
-  [{"create competency package", "package competency", "competency packaging", "create competency"}, "prompt-engineer/prompts/create-competency-package.md", "Propose-Confirm-Act"]
-  [{"select collection", "choose collection", "collection selection", "select competency collection", "switch collection"}, "prompt-engineer/prompts/select-competency-collection.md", "Act"]
-  [{"import prompts", "analyze prompts", "batch import", "import prompt collection", "migrate prompts", "prompts to competency"}, "prompt-engineer/prompts/import-prompts-to-competency.md", "Propose-Confirm-Act"]
-  [{"deploy prompts", "convert imported prompts", "implement prompt mapping", "finalize prompt import"}, "prompt-engineer/prompts/deploy-imported-prompts.md", "Propose-Confirm-Act"]
-  [{"create feature", "feature for pr", "feature branch", "extract feature", "feature extraction", "git feature"}, "git-assistant/prompts/create-feature-for-pr.md", "Propose-Confirm-Act"]
-  [{"propose commit", "commit thread", "smart commit", "cluster commits", "interactive commit", "staged commit", "organize commits", "commit workflow"}, "git-assistant/prompts/propose-commit-thread.md", "Propose-Confirm-Act"]
-  [{"merge branch", "safe merge", "merge with tags", "dry run merge", "merge safely", "merge branches", "branch merge", "git merge"}, "git-assistant/prompts/merge-branch-with-safety.md", "Propose-Confirm-Act"]
-  [{"git add commit", "add and commit", "git add and commit", "commit changes", "add commit", "stage and commit", "intelligent commit", "smart add commit"}, "git-assistant/prompts/git-add-commit.md", "Propose-Act"]
-  [{}, "business-analyst/prompts/analyze-business-requirements.md", "Propose-Act"]
-  [{}, "business-analyst/prompts/bootstrap-functional-spec-from-code.md", "Act"]
-  [{}, "business-analyst/prompts/extend-specification.md", "Propose-Confirm-Act"]
-  [{}, "business-analyst/prompts/generate-questionnaire.md", "Propose-Act"]
-  [{}, "business-analyst/prompts/improve-spec.md", "Propose-Act"]
-  [{}, "business-analyst/prompts/review-prd-spec.md", "Propose-Act"]
-  [{}, "business-analyst/prompts/review-user-story.md", "Act"]
-  [{"review code", "code review", "examine code", "check code", "inspect code", "review modified", "review changes", "modified files", "changes review", "git changes", "review git", "review branch"}, "developer/prompts/review-code.md", "Propose-Act"]
-  [{"accessibility review", "wcag review", "accessibility check", "accessibility compliance"}, "developer/prompts/review-code-accessibility.md", "Act"]
-  [{"review pr", "pull request review", "check pr", "github pr"}, "developer/prompts/review-github-pr.md", "Propose-Act"]
-  [{"analyze complexity", "function complexity", "complexity analysis"}, "developer/prompts/analyze-function-complexity.md", "Act"]
-  [{"improve complexity", "reduce complexity", "cyclomatic"}, "developer/prompts/improve-cyclomatic-complexity.md", "Propose-Act"]
-  [{"fix code smells", "code smells", "refactor smells"}, "developer/prompts/fix-code-smells.md", "Propose-Act"]
-  [{"augment tests", "augment unit test", "improve test coverage", "unit test augmentation"}, "developer/prompts/augment-code-unit-test.md", "Propose-Act"]
-  [{"evolve code", "iterative development", "improve iteratively"}, "developer/prompts/evolve-code-iteratively.md", "Act"]
-  [{"tech spec from code", "spec from code", "extract spec"}, "developer/prompts/generate-tech-spec-from-code.md", "Act"]
-  [{"deepen tech spec", "deep dive spec", "chapter mode", "detailed chapters", "tech spec chapters", "expand specification"}, "developer/prompts/deepen-tech-spec-developer.md", "Propose-Confirm-Act"]
-  [{"check todos", "todo analysis", "find todos", "scan todos", "analyze todos", "todo cleanup", "check todo comments"}, "developer/prompts/check-todos-in-code.md", "Propose-Act"]
-  [{"assess quality", "code quality assessment", "evaluate principles", "solid assessment", "quality evaluation"}, "developer/prompts/assess-code-quality-principles.md", "Propose-Act"]
-  [{"detect test directives", "discover test directives"}, "developer/prompts/detect-test-directives.md", "Propose-Confirm-Act"]
-  [{"create decision record", "decision record", "new decision", "dr", "create dr", "add decision"}, "project-manager/prompts/create-decision-record.md", "Propose-Confirm-Act"]
-  [{"create changelog", "changelog entry", "add changelog", "log change", "track change"}, "project-manager/prompts/create-changelog-entry.md", "Propose-Act"]
-  [{"analyze changelog", "changelog report", "progress analysis", "changelog summary"}, "project-manager/prompts/analyze-changelog-and-report.md", "Act"]
-  [{"archive changelog", "cleanup changelog", "archive entries", "clean changelog"}, "project-manager/prompts/archive-changelog-entries.md", "Propose-Act"]
-  [{"generate tasklist", "create tasks", "task list", "todo list", "generate todos"}, "project-manager/prompts/generate-tasklist.md", "Propose-Act"]
-  [{"create job", "new job", "job record", "work item", "create work"}, "project-manager/prompts/create-job.md", "Propose-Confirm-Act"]
-  [{"work on job", "execute job", "job work", "continue job", "work job"}, "project-manager/prompts/work-on-job.md", "Act"]
-  [{"review progress", "progress review", "check progress", "project status", "status review"}, "project-manager/prompts/review-progress.md", "Act"]
-  [{"create person", "person record", "add person", "team member", "add contact"}, "project-manager/prompts/create-person-record.md", "Propose-Act"]
-  [{"release notes", "generate release notes", "professional release", "create release notes"}, "project-manager/prompts/generate-professional-release-notes.md", "Propose-Act"]
-  [{"generate commits", "commits from changelog", "changelog to commits", "commit generation"}, "project-manager/prompts/generate-commits-from-changelog.md", "Propose-Act"]
-  [{"conversation handover", "handover", "context handover", "prepare handover"}, "project-manager/prompts/prepare-conversation-handover.md", "Act"]
-  [{"store conversation", "conversation record", "save conversation", "record conversation"}, "project-manager/prompts/store-conversation-record.md", "Act"]
-  [{"challenge me", "challenge my idea", "challenge ideas", "ideation session", "research challenge"}, "researcher/prompts/challenge-me.md", "Act"]
-]
+The competencies are referenced in a structured JSON format at:
+`.olaf/olaf-core/reference/mappings.json`
+
+Each competency contains:
+- **patterns**: Array of trigger phrases that match this competency
+- **file**: Relative path to the competency prompt file
+- **protocol**: Execution protocol (Act, Propose-Act, Propose-Confirm-Act)
 
 end-of-competency-index
 </olaf-query-competency-index>

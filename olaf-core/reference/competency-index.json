@@ -1,0 +1,307 @@
+[
+  {
+    "patterns": ["carry on", "resume work", "continue work", "continue session", "resume session"],
+    "file": "common/prompts/carry-on-session.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["create carry-over", "carry over", "handover", "create handover", "save carry-over"],
+    "file": "common/prompts/carry-over-session.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["find expert", "expert contact", "find SME", "find subject matter expert", "locate expert"],
+    "file": "common/prompts/find-expert-contact.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["assess genai initiative", "evaluate genai", "idea assessment", "initiative assessment", "genai assessment"],
+    "file": "common/prompts/assess-genai-initiative-idea.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["switch context", "context switch", "change project", "change context", "switch task"],
+    "file": "common/prompts/switch-context.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["my daily", "daily report", "create daily", "daily summary", "generate daily"],
+    "file": "common/prompts/report-my-daily.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["should i use ai", "use ai?", "ai or not", "should we use ai", "ai decision"],
+    "file": "common/prompts/should-i-use-ai.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["stash restart", "restart stash", "resume stash", "resume stashed work", "restore stash"],
+    "file": "common/prompts/stash-restart-session.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["stash work", "stash session", "save work stash", "stash current work", "create stash"],
+    "file": "common/prompts/stash-work-session.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["remove stash", "clean stash", "stash delete"],
+    "file": "common/prompts/delete-stash.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["olaf help", "olaf i need you", "olaf help me"],
+    "file": "common/prompts/olaf-help-me.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["find competency", "search competency", "use workflow", "execute competency", "run competency"],
+    "file": "common/prompts/use-competency.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["list competency", "show competencies", "list olaf commands", "competency list"],
+    "file": "common/prompts/list-competencies.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["create prompt", "new prompt", "write prompt", "generate prompt"],
+    "file": "prompt-engineer/prompts/create-prompt.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["convert prompt", "refactor prompt", "rewrite prompt", "upgrade prompt"],
+    "file": "prompt-engineer/prompts/convert-prompt-existing.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["check prompt compliance", "validate prompt", "check prompt", "prompt compliance", "audit prompt"],
+    "file": "prompt-engineer/prompts/check-prompt-compliance.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["generate tutorial", "create tutorial", "step by step tutorial", "tutorial from conversation", "conversation to tutorial"],
+    "file": "prompt-engineer/prompts/generate-step-by-step-tutorial.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["condense olaf", "compress olaf", "optimize olaf", "reduce olaf size", "condense framework"],
+    "file": "prompt-engineer/prompts/condense-olaf-framework.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["generate workflow", "create workflow", "design workflow", "workflow generation"],
+    "file": "prompt-engineer/prompts/generate-workflow.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["create competency package", "package competency", "competency packaging", "create competency"],
+    "file": "prompt-engineer/prompts/create-competency-package.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["select collection", "choose collection", "collection selection", "select competency collection", "switch collection"],
+    "file": "prompt-engineer/prompts/select-competency-collection.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["import prompts", "analyze prompts", "batch import", "import prompt collection", "migrate prompts", "prompts to competency"],
+    "file": "prompt-engineer/prompts/import-prompts-to-competency.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["deploy prompts", "convert imported prompts", "implement prompt mapping", "finalize prompt import"],
+    "file": "prompt-engineer/prompts/deploy-imported-prompts.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["create feature", "feature for pr", "feature branch", "extract feature", "feature extraction", "git feature"],
+    "file": "git-assistant/prompts/create-feature-for-pr.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["propose commit", "commit thread", "smart commit", "cluster commits", "interactive commit", "staged commit", "organize commits", "commit workflow"],
+    "file": "git-assistant/prompts/propose-commit-thread.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["merge branch", "safe merge", "merge with tags", "dry run merge", "merge safely", "merge branches", "branch merge", "git merge"],
+    "file": "git-assistant/prompts/merge-branch-with-safety.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["git add commit", "add and commit", "git add and commit", "commit changes", "add commit", "stage and commit", "intelligent commit", "smart add commit"],
+    "file": "git-assistant/prompts/git-add-commit.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["analyze requirements", "review requirements", "business requirements analysis", "requirements review", "check requirements", "validate requirements", "requirements audit"],
+    "file": "business-analyst/prompts/analyze-business-requirements.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["spec from code", "functional spec from code", "extract functional spec", "code to spec", "generate spec from code", "reverse engineer spec", "bootstrap spec"],
+    "file": "business-analyst/prompts/bootstrap-functional-spec-from-code.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["extend spec", "enhance specification", "expand spec", "improve specification", "specification extension", "add to spec", "specification enhancement"],
+    "file": "business-analyst/prompts/extend-specification.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["create questionnaire", "generate questionnaire", "survey creation", "create survey", "questionnaire design", "build questionnaire", "design survey"],
+    "file": "business-analyst/prompts/generate-questionnaire.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["improve spec", "enhance spec", "add diagrams to spec", "visualize spec", "specification improvement", "enrich specification", "spec visualization"],
+    "file": "business-analyst/prompts/improve-spec.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["review prd", "prd review", "check prd", "validate prd", "product requirements review", "evolution request review", "prd analysis"],
+    "file": "business-analyst/prompts/review-prd-spec.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["review user story", "user story review", "check user story", "validate user story", "story review", "user story analysis", "story quality check"],
+    "file": "business-analyst/prompts/review-user-story.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["review code", "code review", "examine code", "check code", "inspect code", "review modified", "review changes", "modified files", "changes review", "git changes", "review git", "review branch"],
+    "file": "developer/prompts/review-code.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["accessibility review", "wcag review", "accessibility check", "accessibility compliance"],
+    "file": "developer/prompts/review-code-accessibility.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["review pr", "pull request review", "check pr", "github pr"],
+    "file": "developer/prompts/review-github-pr.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["analyze complexity", "function complexity", "complexity analysis"],
+    "file": "developer/prompts/analyze-function-complexity.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["improve complexity", "reduce complexity", "cyclomatic"],
+    "file": "developer/prompts/improve-cyclomatic-complexity.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["fix code smells", "code smells", "refactor smells"],
+    "file": "developer/prompts/fix-code-smells.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["augment tests", "augment unit test", "improve test coverage", "unit test augmentation"],
+    "file": "developer/prompts/augment-code-unit-test.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["evolve code", "iterative development", "improve iteratively"],
+    "file": "developer/prompts/evolve-code-iteratively.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["tech spec from code", "spec from code", "extract spec"],
+    "file": "developer/prompts/generate-tech-spec-from-code.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["deepen tech spec", "deep dive spec", "chapter mode", "detailed chapters", "tech spec chapters", "expand specification"],
+    "file": "developer/prompts/deepen-tech-spec-developer.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["check todos", "todo analysis", "find todos", "scan todos", "analyze todos", "todo cleanup", "check todo comments"],
+    "file": "developer/prompts/check-todos-in-code.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["assess quality", "code quality assessment", "evaluate principles", "solid assessment", "quality evaluation"],
+    "file": "developer/prompts/assess-code-quality-principles.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["detect test directives", "discover test directives"],
+    "file": "developer/prompts/detect-test-directives.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["create decision record", "decision record", "new decision", "dr", "create dr", "add decision"],
+    "file": "project-manager/prompts/create-decision-record.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["create changelog", "changelog entry", "add changelog", "log change", "track change"],
+    "file": "project-manager/prompts/create-changelog-entry.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["analyze changelog", "changelog report", "progress analysis", "changelog summary"],
+    "file": "project-manager/prompts/analyze-changelog-and-report.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["archive changelog", "cleanup changelog", "archive entries", "clean changelog"],
+    "file": "project-manager/prompts/archive-changelog-entries.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["generate tasklist", "create tasks", "task list", "todo list", "generate todos"],
+    "file": "project-manager/prompts/generate-tasklist.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["create job", "new job", "job record", "work item", "create work"],
+    "file": "project-manager/prompts/create-job.md",
+    "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["work on job", "execute job", "job work", "continue job", "work job"],
+    "file": "project-manager/prompts/work-on-job.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["review progress", "progress review", "check progress", "project status", "status review"],
+    "file": "project-manager/prompts/review-progress.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["create person", "person record", "add person", "team member", "add contact"],
+    "file": "project-manager/prompts/create-person-record.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["release notes", "generate release notes", "professional release", "create release notes"],
+    "file": "project-manager/prompts/generate-professional-release-notes.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["generate commits", "commits from changelog", "changelog to commits", "commit generation"],
+    "file": "project-manager/prompts/generate-commits-from-changelog.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["conversation handover", "handover", "context handover", "prepare handover"],
+    "file": "project-manager/prompts/prepare-conversation-handover.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["store conversation", "conversation record", "save conversation", "record conversation"],
+    "file": "project-manager/prompts/store-conversation-record.md",
+    "protocol": "Act"
+  },
+  {
+    "patterns": ["challenge me", "challenge my idea", "challenge ideas", "ideation session", "research challenge"],
+    "file": "researcher/prompts/challenge-me.md",
+    "protocol": "Act"
+  }
+]
