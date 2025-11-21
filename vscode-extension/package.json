@@ -232,6 +232,9 @@
     "yauzl": "^2.10.0"
   },
   "extensionDependencies": [],
+  "overrides": {
+    "js-yaml": ">=3.14.2"
+  },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
     "all": true,
