@@ -22,6 +22,7 @@ Use the first matching mapping with its file and protocol.
 [
   [{"carry on", "resume work", "continue work", "continue session", "resume session"}, "common/prompts/carry-on-session.md", "Act"]
   [{"create carry-over", "carry over", "handover", "create handover", "save carry-over"}, "common/prompts/carry-over-session.md", "Act"]
+  [{"collect feedback", "send feedback", "user feedback", "feedback submission", "submit feedback"}, "common/prompts/collect-user-feedback.md", "Act"]
   [{"find expert", "expert contact", "find SME", "find subject matter expert", "locate expert"}, "common/prompts/find-expert-contact.md", "Act"]
   [{"assess genai initiative", "evaluate genai", "idea assessment", "initiative assessment", "genai assessment"}, "common/prompts/assess-genai-initiative-idea.md", "Propose-Act"]
   [{"switch context", "context switch", "change project", "change context", "switch task"}, "common/prompts/switch-context.md", "Propose-Act"]
