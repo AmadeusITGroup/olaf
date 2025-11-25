@@ -20,7 +20,7 @@ Use the first matching mapping with its file and protocol.
 ## Competencies
 
 The competencies are referenced in a structured JSON format at:
-`/.olaf/olaf-core/reference/competency-index.json`
+`.olaf/olaf-core/reference/competency-index.json`
 
 Each competency contains:
 - **patterns**: Array of trigger phrases that match this competency

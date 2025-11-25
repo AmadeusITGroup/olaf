@@ -1,8 +1,8 @@
 # Tools and Templates Integration
 
-OLAF allows you to define tools (scripts) and templates (md, json, or other files) that are used by prompts to perform their tasks. These tools and templates are located in the `/olaf-core/tools/` and `/olaf-core/templates/` folders.
+OLAF allows you to define tools (scripts) and templates (md, json, or other files) that are used by prompts to perform their tasks. These tools and templates are located in the `.olaf/olaf-core/tools/` and `.olaf/olaf-core/templates/` folders.
 
-## Tools Directory (`/olaf-core/tools/`)
+## Tools Directory (`.olaf/olaf-core/tools/`)
 
 Contains scripts and utilities that competencies can execute:
 - PowerShell scripts for Windows environments
@@ -10,7 +10,7 @@ Contains scripts and utilities that competencies can execute:
 - Automation scripts for common tasks
 - Project-specific tools
 
-## Templates Directory (`/olaf-core/templates/`)
+## Templates Directory (`.olaf/olaf-core/templates/`)
 
 Contains structured templates for consistent output:
 - Markdown templates for documentation

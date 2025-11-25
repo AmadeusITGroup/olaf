@@ -8,11 +8,6 @@ The prompt engineering enhancements provide a complete toolkit for creating, tes
 
 ## Key Features
 
-### Advanced Prompt Testing
-- **Testing Framework**: Dedicated `test-prompt` functionality for comprehensive prompt validation
-- **Automated Testing**: Systematic validation of prompt structure and behavior
-- **Quality Assurance**: Ensure prompts meet OLAF standards before deployment
-
 ### Enhanced Templates and Guidelines
 - **Structured Templates**: Better structured prompt templates with comprehensive guidance
 - **Best Practices**: Expanded prompting principles documentation
@@ -55,8 +50,7 @@ The prompt engineering enhancements provide a complete toolkit for creating, tes
 - Include proper XML section tagging
 - Implement appropriate interaction protocols
 
-### 2. Testing and Validation
-- Use `test-prompt` for comprehensive validation
+### 2. Validation
 - Check framework compliance
 - Verify expected behaviors
 - Validate output quality

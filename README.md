@@ -9,24 +9,11 @@ OLAF is a simple assistant framework designed to enhance the interactions betwee
 - **Assistant**: It assists humans with simplified prompts and organization of work, while also assisting Agents by providing long and medium term memory and data that the agent uses to construct the best possible context
 - **Framework**: OLAF is continuously evolving to incorporate more efficient and streamlined processes, prompts and workflows. It may need to adapt to the underlying agent you use - Windsurf, Cursor, Claude Code, GitHub Copilot, etc.
 
-## Vanilla incarnation
-Here we provide a shallow incarnation that demonstrates the structures and possibilities of OLAF.
-
-**IT IS NOT A PRODUCT**
-
-It can serve several needs:
-
-- **Use as is**: It delivers a set of features and prerecorded prompts and workflows that can be tested and used on your code or documentation
-- **Explore to learn or teach basics of prompting**: Interacting with an agent through exercising those predefined features or creating new ones
-- **Benchmark agents and LLMs**: By using the features with various combinations of these underlying components
-- **Help change management**: By assisting engineers to become more familiar with the notion and usage of agents and delegating part of their complex tasks to AI
-
 ## Quick Installation
 See [Installation Guide](README-INSTALLATION.md) for detailed steps.
 
 
 **📖 For detailed instructions on getting started, see [docs/getting-started/getting-started.md](docs/getting-started/getting-started.md)**
-
 
 ## Key Features
 
@@ -54,18 +41,6 @@ OLAF integrates with vscode copilot and windsurf agents through core configurati
 
 **📖 For detailed integration information, see [docs/integration.md](docs/integration.md)**
 
-
-## Recommendations
-
-1. **Copy the `olaf-core` and `olaf-data` folders alongside a repository** - DO NOT change these folders' structure initially
-2. **Use windsurf (preferred) or GitHub Copilot in Agent Mode** - Configure agent-specific files carefully
-3. **Read the configuration files** - Understand project context and memory map
-4. **Explore competencies** - Try simple tasks like research-and-report
-5. **Manage outputs** - Find and organize competency outputs appropriately
-6. **Create changelog and jobs** - Use project management features
-
-
-
 ## Documentation
 
 **📖 Complete documentation is available in [docs/](docs/)**
@@ -83,7 +58,6 @@ OLAF integrates with vscode copilot and windsurf agents through core configurati
 - Models may fail to answer (resource limit, latency, etc.). Most agents gracefully handle this but you may need to retry. Don't blame your OLAF assistant.
 
 **📖 For complete limitations and best practices, see [docs/best-practices.md](docs/best-practices.md) and [docs/limitations.md](docs/limitations.md)**
-
 
 
 ## Future Development and Support

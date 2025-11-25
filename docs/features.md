@@ -27,7 +27,6 @@ For immediate understanding of OLAF's capabilities:
 ## New in v1.2.0
 
 - **XML Section Tagging**: Enhanced framework management with structured tagging for better LLM parsing
-- **Advanced Prompt Testing**: Dedicated testing framework for prompt validation and quality assurance
 - **Enhanced Templates**: Improved prompt templates with comprehensive guidelines and best practices
 - **Framework Validation**: Automatic validation across all prompts for consistency and reliability
 - **Legacy Modernization**: Tools to convert and update existing prompts to OLAF standards

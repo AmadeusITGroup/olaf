@@ -9,8 +9,6 @@ OLAF provides several meta-prompts to assist users in this process, located in t
 - **create-prompt.md** - Generate new structured prompts from user requirements following OLAF templates and principles
 - **convert-prompt-existing.md** - Convert existing prompts to follow proper template structure and OLAF principles
 - **generate-workflow.md** - Create structured workflows from templates with different types (sequential, iterative, decision, orchestrator)
-- **generate-mcp-client.md** - Generate a basic MCP client application - this prompt is generated using create-prompt meta prompt but taking as input the windsurf @docs:model-context-protocol integrated documentation
-- **generate-crewai-java-team.md** - Generate Python scripts to create and run CrewAI agent teams for Java coding tasks. This prompt is generated using create-prompt meta prompt but taking as input the windsurf @docs:crewai integrated documentation
 
 These prompts are completely adaptable to your own needs and follow OLAF's competency structure.
 

@@ -1,6 +1,6 @@
 # Competency-Driven Workflow
 
-The full set of competencies is defined in the `/olaf-core/reference/query-competency-index.md` file, or the corresponding .windsurf/rules/ file.
+The full set of competencies is defined in the `.olaf/olaf-core/reference/query-competency-index.md` file.
 
 ## Central Dispatcher
 
