@@ -1,0 +1,50 @@
+{
+  "tool_dependencies": [
+    {
+      "tool": "git",
+      "version": ">=2.30",
+      "purpose": "Version control for test artifacts and test case management",
+      "platforms": ["windows", "linux", "macos"],
+      "install_instruction": "Standard git installation"
+    }
+  ],
+  "external_services": [
+    {
+      "service": "Test Management Tools",
+      "purpose": "Test case management and execution tracking",
+      "optional": true,
+      "description": "Tools like TestRail, Jira, Azure DevOps for test management"
+    },
+    {
+      "service": "Test Automation Frameworks",
+      "purpose": "Automated test execution",
+      "optional": true,
+      "description": "Frameworks like Selenium, Cypress, JUnit, pytest for test automation"
+    }
+  ],
+  "optional_tools": [
+    {
+      "tool": "cucumber",
+      "version": ">=7.0",
+      "purpose": "BDD test case execution with Gherkin syntax",
+      "integration": "Optional for behavior-driven testing"
+    },
+    {
+      "tool": "jest",
+      "version": ">=27.0",
+      "purpose": "JavaScript testing framework",
+      "integration": "Optional for frontend testing"
+    },
+    {
+      "tool": "pytest",
+      "version": ">=7.0",
+      "purpose": "Python testing framework",
+      "integration": "Optional for Python application testing"
+    }
+  ],
+  "llm_requirements": {
+    "minimum_capability": "Test planning, test case design, quality assurance principles, and requirements analysis",
+    "recommended_model": "Claude Sonnet 4.5 or higher",
+    "reasoning": "Requires understanding of testing methodologies, test design patterns, quality metrics, and ability to analyze requirements for testability"
+  }
+}

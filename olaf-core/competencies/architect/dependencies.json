@@ -1,0 +1,50 @@
+{
+  "tool_dependencies": [
+    {
+      "tool": "git",
+      "version": ">=2.30",
+      "purpose": "Version control for architecture documentation and code analysis",
+      "platforms": ["windows", "linux", "macos"],
+      "install_instruction": "Standard git installation"
+    }
+  ],
+  "external_services": [
+    {
+      "service": "Code Analysis Tools",
+      "purpose": "Static code analysis for technical stack discovery",
+      "optional": true,
+      "description": "Tools like SonarQube, CodeClimate for code quality and architecture analysis"
+    },
+    {
+      "service": "Architecture Diagramming Tools",
+      "purpose": "Visual architecture documentation",
+      "optional": true,
+      "description": "Tools like Mermaid, PlantUML, Draw.io for creating architecture diagrams"
+    }
+  ],
+  "optional_tools": [
+    {
+      "tool": "mermaid-cli",
+      "version": ">=9.0",
+      "purpose": "Generate architecture diagrams from markdown",
+      "integration": "Optional for automated diagram generation"
+    },
+    {
+      "tool": "dependency-cruiser",
+      "version": ">=11.0",
+      "purpose": "Analyze and visualize module dependencies",
+      "integration": "Optional for dependency analysis"
+    },
+    {
+      "tool": "jq",
+      "version": ">=1.6",
+      "purpose": "Parse and analyze JSON configuration files",
+      "integration": "Optional for configuration analysis"
+    }
+  ],
+  "llm_requirements": {
+    "minimum_capability": "Technical architecture analysis, system design understanding, and technology evaluation",
+    "recommended_model": "Claude Sonnet 4.5 or higher",
+    "reasoning": "Requires deep understanding of software architecture patterns, technology stacks, design principles, and ability to analyze complex codebases"
+  }
+}

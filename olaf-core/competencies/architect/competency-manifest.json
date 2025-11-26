@@ -1,0 +1,79 @@
+{
+  "id": "architect",
+  "name": "Architect Competency Package",
+  "version": "1.0.0",
+  "description": "Comprehensive architect competency package for technical stack analysis, architecture design, and technical specification generation with specialized workflows for system architecture and technology evaluation",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": ["architect", "technical-lead", "solution-architect"],
+    "description_short": "Architect: technical stack analysis, architecture design, and technical specification generation"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-11-25",
+  "updated": "2025-11-25",
+  "category": "architecture",
+  "tags": ["architect", "technical-stack", "architecture", "technical-specification", "system-design"],
+  "classification": {
+    "type": "core",
+    "reason": "Essential foundational competency for the architect persona"
+  },
+  "target_users": {
+    "primary": "architect",
+    "secondary": ["technical-lead", "solution-architect", "developer", "business-analyst"],
+    "description": "Architects performing technical stack analysis, technical leads designing system architecture, solution architects evaluating technologies, developers understanding architecture decisions"
+  },
+  "maintenance": {
+    "team": "architect",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "OLAF AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Optional: Architecture diagramming tools, code analysis tools",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "analyze-technical-stack",
+    "generate-detailed-tech-spec"
+  ],
+  "entry_points": [
+    {
+      "name": "Analyze Technical Stack",
+      "command": "analyze technical stack",
+      "file": "prompts/analyze-technical-stack.md",
+      "protocol": "Propose-Act",
+      "use_case": "Chapter-based technical stack analysis with automated discovery, assessment, and reporting"
+    },
+    {
+      "name": "Generate Detailed Tech Spec",
+      "command": "generate detailed tech spec",
+      "file": "prompts/generate-detailed-tech-spec.md",
+      "protocol": "Propose-Act",
+      "use_case": "Create comprehensive technical specification documents with code examples and source references"
+    }
+  ],
+  "integrations": {
+    "business-analyst": [
+      "analyze-business-requirements",
+      "bootstrap-functional-spec-from-code"
+    ],
+    "developer": [
+      "review-code",
+      "generate-tech-spec-from-code"
+    ],
+    "researcher": [
+      "research-and-report",
+      "search-and-learn"
+    ],
+    "project-manager": [
+      "create-decision-record",
+      "review-progress"
+    ]
+  },
+  "cross_cutting_intents": [
+    "technical-evaluation",
+    "architecture-design"
+  ]
+}

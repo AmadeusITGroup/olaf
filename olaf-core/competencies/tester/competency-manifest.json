@@ -1,0 +1,71 @@
+{
+  "id": "tester",
+  "name": "Tester Competency Package",
+  "version": "1.0.0",
+  "description": "Comprehensive tester competency package for test planning, test case generation, and quality assurance with specialized workflows for testing strategy and validation",
+  "index_metadata": {
+    "include_in_index": true,
+    "always_required": false,
+    "persona_tags": ["tester", "qa-engineer", "quality-assurance"],
+    "description_short": "Tester: test planning, test case generation, and quality assurance validation"
+  },
+  "author": "OLAF Framework",
+  "created": "2025-11-25",
+  "updated": "2025-11-25",
+  "category": "testing",
+  "tags": ["tester", "quality-assurance", "test-planning", "test-cases", "validation"],
+  "classification": {
+    "type": "core",
+    "reason": "Essential foundational competency for the tester persona"
+  },
+  "target_users": {
+    "primary": "tester",
+    "secondary": ["qa-engineer", "developer", "business-analyst"],
+    "description": "QA engineers performing test planning, testers creating test cases, developers writing tests, business analysts validating requirements"
+  },
+  "maintenance": {
+    "team": "tester",
+    "primary_maintainer": "OLAF Framework Core Team",
+    "created_by": "OLAF AI Assistant"
+  },
+  "status": "public-beta",
+  "technical_requirements": {
+    "recommended_llm": "Claude Sonnet 4.5 or higher",
+    "tool_dependency": "Optional: Test automation frameworks, test management tools",
+    "platform_limitations": "Cross-platform compatible"
+  },
+  "competencies": [
+    "generate-test-plan"
+  ],
+  "entry_points": [
+    {
+      "name": "Generate Test Plan",
+      "command": "generate test plan",
+      "file": "prompts/generate-test-plan.md",
+      "protocol": "Propose-Act",
+      "use_case": "Create comprehensive test plans based on functional specifications and application requirements"
+    }
+  ],
+  "integrations": {
+    "business-analyst": [
+      "analyze-business-requirements",
+      "review-user-story"
+    ],
+    "developer": [
+      "review-code",
+      "augment-code-unit-test"
+    ],
+    "architect": [
+      "analyze-technical-stack",
+      "generate-detailed-tech-spec"
+    ],
+    "project-manager": [
+      "create-decision-record",
+      "review-progress"
+    ]
+  },
+  "cross_cutting_intents": [
+    "quality-assurance",
+    "test-automation"
+  ]
+}
