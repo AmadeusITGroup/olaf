@@ -170,6 +170,16 @@
     "protocol": "Act"
   },
   {
+    "patterns": ["analyze technical stack", "analyze tech stack", "technical stack analysis", "tech stack analysis", "stack analysis", "technology stack", "evaluate stack"],
+    "file": "architect/prompts/analyze-technical-stack.md",
+    "protocol": "Propose-Act"
+  },
+  {
+    "patterns": ["generate detailed tech spec", "detailed tech spec", "technical specification", "detailed specification", "tech spec generation", "create tech spec"],
+    "file": "architect/prompts/generate-detailed-tech-spec.md",
+    "protocol": "Propose-Act"
+  },
+  {
     "patterns": ["review code", "code review", "examine code", "check code", "inspect code", "review modified", "review changes", "modified files", "changes review", "git changes", "review git", "review branch"],
     "file": "developer/prompts/review-code.md",
     "protocol": "Propose-Act"
@@ -233,6 +243,11 @@
     "patterns": ["detect test directives", "discover test directives"],
     "file": "developer/prompts/detect-test-directives.md",
     "protocol": "Propose-Confirm-Act"
+  },
+  {
+    "patterns": ["generate test plan", "create test plan", "test planning", "test plan generation", "plan testing", "qa plan", "testing strategy"],
+    "file": "tester/prompts/generate-test-plan.md",
+    "protocol": "Propose-Act"
   },
   {
     "patterns": ["create decision record", "decision record", "new decision", "dr", "create dr", "add decision"],

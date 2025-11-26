@@ -4,7 +4,7 @@
 
 ## Overview
 
-OLAF (Optimized LLM Agent Framework) is a competency-driven AI agent framework that enables structured, protocol-based interactions with Large Language Models. This guide demonstrates OLAF's core capabilities through practical examples and real conversation records.
+OLAF (Open Lightweight Assistant Framework) is a competency-driven AI agent framework that enables structured, protocol-based interactions with Large Language Models. This guide demonstrates OLAF's core capabilities through practical examples and real conversation records.
 
 ---
 
@@ -28,33 +28,33 @@ Each section includes:
 
 ## Section 1: Discovering Available Competencies
 
-### The `/list-competencies` Command
+### The `olaf list-competencies` Competency
 
-OLAF provides a simple way to discover all available AI competencies through the `/list-competencies` workflow.
+OLAF provides a simple way to discover all available AI competencies through the `olaf list-competencies` competency.
 
 **What it does:**
-- Lists all available AI competencies organized by role (developer, researcher, project-manager, etc.)
+- Lists all available competencies organized by role (developer, researcher, project-manager, etc.)
 - Shows the trigger phrases that activate each competency
 - Displays the execution protocol (Act, Propose-Act, Propose-Confirm-Act)
 
 **How to use it:**
-1. Type `/list-competencies` in your AI chat
+1. Type `olaf list-competencies` in your AI chat
 2. The system will read the competency index and display all available capabilities
 3. Use the trigger phrases to activate specific competencies
 
 **Example Output Structure:**
 ```
 Developer Competencies:
-- "review code" → developer/review-code.md (Act protocol)
-- "code review" → developer/review-code.md (Act protocol)
+- "olaf review code" → developer/review-code.md (Act protocol)
+- "olaf code review" → developer/review-code.md (Act protocol)
 
 Researcher Competencies:  
-- "search and learn" → researcher/search-and-learn.md (Act protocol)
-- "research and report" → researcher/research-and-report.md (Propose-Confirm-Act protocol)
+- "olaf search and learn" → researcher/search-and-learn.md (Act protocol)
+- "olaf research and report" → researcher/research-and-report.md (Propose-Confirm-Act protocol)
 
 Project Manager Competencies:
-- "store conversation" → project-manager/store-conversation-record.md (Act protocol)
-- "create job" → project-manager/create-job.md (Act protocol)
+- "olaf store conversation" → project-manager/store-conversation-record.md (Act protocol)
+- "olaf create job" → project-manager/create-job.md (Act protocol)
 ```
 
 **Key Benefits:**
@@ -68,7 +68,7 @@ Project Manager Competencies:
 
 ### The "Store Conversation" Competency
 
-One of OLAF's most powerful features is automatic conversation documentation using the **"store conversation"** competency.
+One of OLAF's most powerful features is automatic conversation documentation using the **"olaf store conversation"** competency.
 
 **📋 Live Example:** [Conversation Record 20250926-1453](conversations/conversation-record-20250926-1453.md)
 
@@ -76,7 +76,7 @@ This example shows a complete research session where the user:
 1. Requested research on AWS Strands and AgentCore
 2. Approved a research plan  
 3. Received a comprehensive technical report
-4. Used "store conversation" to document the entire session
+4. Used "olaf store conversation" to document the entire session
 
 **What the competency captures:**
 - **Timeline**: Exact timestamps of each interaction
@@ -85,7 +85,7 @@ This example shows a complete research session where the user:
 - **User Interactions**: Full conversation flow with context
 
 **How to use it:**
-1. At the end of any AI session, simply say: **"store conversation"**
+1. At the end of any AI session, simply say: **"olaf store conversation"**
 2. OLAF automatically:
    - Finds the store-conversation competency
    - Retrieves current timestamp
@@ -94,7 +94,7 @@ This example shows a complete research session where the user:
 
 **Generated Output Location:**
 ```
-olaf-data/product/documentations/conversations/
+.olaf/olaf-data/product/documentations/conversations/
 └── conversation-record-YYYYMMDD-HHmm.md
 ```
 
@@ -106,95 +106,14 @@ olaf-data/product/documentations/conversations/
 
 ---
 
-## Section 3: Structured Knowledge Research
-
-### The "Search and Learn" Competency
-
-The **"search and learn"** competency demonstrates OLAF's ability to conduct focused research using web search capabilities.
-
-**How it works:**
-1. **Competency Detection**: OLAF finds the competency in its library using trigger phrases like "search and learn"
-2. **Parameter Collection**: Requests essential information if not provided:
-   - Research topic/question
-   - Scope and focus areas
-   - Target audience level
-3. **Web Research**: Uses the agent's web search tools to gather current information
-4. **Report Generation**: Creates a structured report with findings and sources
-
-**Key Features:**
-- **Current Information**: Always searches for up-to-date web sources
-- **Source Documentation**: Provides full URLs and citations
-- **Structured Output**: Organized findings with clear sections
-- **Scope Management**: Focuses research based on user requirements
-
-**Example Usage:**
-```
-User: "search and learn about microservices architecture patterns"
-
-OLAF Response:
-1. Identifies the search-and-learn competency
-2. Requests any missing parameters (scope, audience)
-3. Conducts web searches for current information
-4. Creates structured report with findings
-5. Saves report to findings directory
-```
-
-**Output Location:**
-```
-olaf-data/findings/research/
-└── research-report-YYYYMMDD-HHmm.md
-```
-
----
-
-## Section 4: Advanced Research with User Review
-
-### The "Research and Report" Competency
-
-For complex research requiring user oversight, OLAF provides the **"research and report"** competency with the **Propose-Confirm-Act** protocol.
-
-**📋 Live Example:** [Research Plan 20250926-1445](research/research-plan-20250926-1445.md)
-
-This example shows how OLAF:
-1. Created a detailed 7-chapter research plan for AWS Strands and AgentCore
-2. Presented the plan for user approval
-3. Executed systematic research across multiple web sources
-4. Generated a comprehensive technical report
-
-**Protocol Flow:**
-1. **Propose**: Creates detailed research plan with scope, questions, and chapter structure
-2. **Confirm**: Waits for user approval before proceeding
-3. **Act**: Executes research systematically, updating progress
-
-**Key Benefits:**
-- **User Control**: Review and modify research scope before execution
-- **Structured Approach**: Organized chapter-by-chapter execution
-- **Progress Tracking**: Clear milestones and deliverables
-- **Session Continuity**: Can pause and resume across multiple sessions
-
-**Generated Outputs:**
-```
-olaf-data/findings/research/
-├── research-plan-YYYYMMDD-HHmm.md      # Approved research plan
-└── research-report-YYYYMMDD-HHmm.md    # Final comprehensive report
-```
-
-**When to use this competency:**
-- Complex research requiring multiple sources
-- Technical analysis for decision-making
-- Competitive analysis and market research
-- Any research where you want to review the approach first
-
----
-
-## Section 5: Creating Custom AI Prompts
+## Section 3: Creating Custom AI Prompts
 
 ### The "Create Prompt" Competency
 
 OLAF enables you to create standardized AI prompts that follow framework principles and templates.
 
 **How it works:**
-1. **Template-Based**: Uses standardized templates from `olaf-core/templates/`
+1. **Template-Based**: Uses standardized templates from `.olaf/olaf-core/templates/`
 2. **Role Organization**: Automatically categorizes prompts by role (developer, researcher, etc.)
 3. **Consistency**: Ensures all prompts follow OLAF core principles
 4. **Deduplication**: Checks for existing similar prompts to avoid duplicates
@@ -236,7 +155,7 @@ tags: [relevant, tags, for, categorization]
 
 After using the "create prompt" competency, you can find your new prompt in:
 ```
-olaf-core/prompts/<category>/
+.olaf/olaf-core/prompts/<category>/
 └── your-new-prompt.md
 ```
 
@@ -245,13 +164,12 @@ olaf-core/prompts/<category>/
 - `researcher/` - Research, analysis, investigation prompts  
 - `project-manager/` - Planning, documentation, tracking prompts
 - `business-analyst/` - Requirements, specifications, user stories
-- `technical-writer/` - Documentation, tutorials, presentations
 
 **Template Analysis:**
 
 The create-prompt competency uses templates from:
 ```
-olaf-core/templates/<category>/
+.olaf/olaf-core/templates/<category>/
 └── prompt-template.md
 ```
 
@@ -263,7 +181,7 @@ These templates ensure:
 
 ---
 
-## Section 6: Understanding OLAF Protocols
+## Section 4: Understanding OLAF Protocols
 
 ### Interaction Protocols Explained
 
@@ -296,7 +214,7 @@ Each competency specifies its protocol in the competency index. This ensures con
 
 ---
 
-## Section 7: File Organization and Memory Map
+## Section 5: File Organization and Memory Map
 
 ### Understanding OLAF's Structure
 
@@ -331,11 +249,9 @@ This system ensures:
 
 ### Getting Started Checklist
 
-- [ ] **Try `/list-competencies`** - Discover available AI capabilities
-- [ ] **Use "store conversation"** - Document your first AI session  
-- [ ] **Experiment with "search and learn"** - Conduct focused research
-- [ ] **Try "research and report"** - Experience the Propose-Confirm-Act protocol
-- [ ] **Create a custom prompt** - Build your own AI competency
+- [ ] **Try `olaf list competencies`** - Discover available AI capabilities
+- [ ] **Use "olaf store conversation"** - Document your first AI session  
+- [ ] **Create a custom prompt by using `olaf create prompt`** - Build your own AI competency
 - [ ] **Explore the file structure** - Understand OLAF's organization
 
 ### Advanced Usage
@@ -343,13 +259,12 @@ This system ensures:
 Once comfortable with basics:
 - **Create Jobs**: Use project management competencies for task tracking
 - **Code Analysis**: Leverage developer competencies for code review and improvement
-- **Documentation**: Use technical writer competencies for comprehensive documentation
 - **Team Collaboration**: Share conversation records and research reports
 
 ### Getting Help
 
-- **Competency Index**: Check `olaf-core/reference/query-competency-index.md` for all available capabilities
-- **Core Principles**: Review `olaf-core/reference/core-principles.md` for framework guidelines
+- **Competency Index**: Check `.olaf/olaf-core/reference/query-competency-index.md` for all available capabilities
+- **Core Principles**: Review `.olaf/olaf-core/reference/core-principles.md` for framework guidelines
 - **Examples**: Explore `docs/getting-started/` for real usage examples
 
 ---
@@ -366,7 +281,7 @@ OLAF transforms AI interactions from ad-hoc conversations into structured, docum
 
 The framework ensures consistency, safety, and knowledge preservation across all AI-assisted work.
 
-**Ready to start?** Try `/list-competencies` in your next AI conversation!
+**Ready to start?** Try `olaf list competencies` in your next AI conversation!
 
 ---
 

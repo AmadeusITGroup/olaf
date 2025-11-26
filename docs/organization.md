@@ -4,7 +4,7 @@
 
 OLAF organizes prompts and templates into structured categories to improve discoverability, maintainability, and user experience. The categorization follows two main approaches:
 
-### 1. User Profile-Based Categories
+### User Profile-Based Categories
 
 These categories are organized around common user personas and their typical responsibilities:
 
@@ -13,10 +13,8 @@ These categories are organized around common user personas and their typical res
 - **Purpose**: Architectural analysis, system design, and technical strategy
 - **Example Prompts**:
   - `analyze-technical-stack.md` - Analyze project technology stack and dependencies
-  - `propose-cloud-native-architecture.md` - Design cloud-native architectural solutions
 - **Example Templates**:
   - `tech-stack-template.md` - Standardized technology stack documentation
-  - `cloud-native-architecture-template.md` - Cloud architecture documentation format
 
 #### **business-analyst/**
 
@@ -51,38 +49,6 @@ These categories are organized around common user personas and their typical res
   - `job-template.md` - Project job documentation format
   - `progress-review-template.md` - Progress assessment structure
 
-#### **technical-writer/**
-
-- **Purpose**: Documentation creation, user manuals, and technical communication
-- **Example Prompts**:
-  - `write-academic-paper.md` - Generate academic-style technical papers
-- **Example Templates**:
-  - `academic-paper-template.md` - Academic paper structure and formatting
-  - `user-manual-template.md` - User documentation format
-
-### 2. Intent-Based Categories
-
-These categories are organized around specific technical intentions or specialized workflows:
-
-
-#### **evolve-unit-tests/**
-
-- **Purpose**: Comprehensive unit testing improvement and evolution
-- **Example Prompts**:
-  - `evolve-unit-tests-workflow.md` - 9-phase unit test evolution process
-- **Example Templates**:
-  - `unit-test-evolution-report-template.md` - Test evolution progress documentation
-
-#### **troubleshooting/**
-
-- **Purpose**: Log analysis, error investigation, and issue resolution
-- **Example Prompts**:
-  - `orchestrate-log-troubleshooting-workflow.md` - Complete troubleshooting workflow
-  - `troubleshoot-logs-to-sources.md` - Map log errors to source code
-- **Example Scripts**:
-  - `analyze-log-priorities.ps1` - Automated log priority analysis
-  - `analyze-log-source-mapping.ps1` - Log-to-source correlation
-
 ### Category Selection Guidelines
 
 **Use User Profile Categories When:**
@@ -108,7 +74,7 @@ These categories are organized around specific technical intentions or specializ
 
 ## Centralized Documentation
 
-All project-related documentation, including architectural decision records, changelogs, and reports, is stored in a structured manner under `/olaf-data/product/documentations`.
+All project-related documentation, including architectural decision records, changelogs, and reports, is stored in a structured manner under `.olaf/olaf-data/product/documentations`.
 
 Note: the idea with `olaf-data` is to avoid "polluting" the project folder with OLAF artifacts. But you could also decide to use a different folder part of the project repository.
 
@@ -116,16 +82,13 @@ Note: the idea with `olaf-data` is to avoid "polluting" the project folder with 
 
 This folder structure is designed to store work artifacts, such as:
 
-- `/olaf-data/findings` : a temporary folder to store findings that require further action (e.g., results from code reviews). The USER is responsible for moving these findings to their final destination or deleting them.
-- `/olaf-data/people` : stores information about the human team members participating in the project
-- `/olaf-data/practices` : documents the practices used in the project
-- `/olaf-data/projects` : stores information about the projects and tasks being worked on, referred to as "jobs"
-- `/olaf-data/progress/changelog-register.md` : maintains a timestamped record of project changes
-- `/olaf-data/progress/jobs-register.md`: keeps a timestamped record of jobs and their tasks
-- `/olaf-data/progress/jobs` : stores detailed information about jobs and their tasks
-- `/olaf-data/product` : stores product-related artifacts, such as specifications and documentation
-- `/olaf-data/product/decision-records` : stores decision records related to the project
+- `olaf-data/findings` : a temporary folder to store findings that require further action (e.g., results from code reviews). The USER is responsible for moving these findings to their final destination or deleting them.
+- `olaf-data/people` : stores information about the human team members participating in the project
+- `olaf-data/practices` : documents the practices used in the project
+- `olaf-data/projects` : stores information about the projects and tasks being worked on, referred to as "jobs"
+- `olaf-data/product` : stores product-related artifacts, such as specifications and documentation
+- `olaf-data/product/decision-records` : stores decision records related to the project
 
-While this structure is extensible, it is not mandatory to use it. However, mant competencies rely on it to provide context to the LLM or to produce artifacts. And it is mapped into teh memory-map.md file. So be careful to update this one if you wish to adapt the structure.
+While this structure is extensible, it is not mandatory to use it. However, many competencies rely on it to provide context to the LLM or to produce artifacts. And it is mapped into the memory-map.md file. So be careful to update this one if you wish to adapt the structure.
 
 Note: OLAF is not a project management framework and does not aim to replace existing project management tools. It is designed to assist in project management tasks and can be used in conjunction with other tools and frameworks.

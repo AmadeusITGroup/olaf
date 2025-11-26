@@ -5,9 +5,7 @@ OLAF provides a Memory-map (a markdown file) that maps the important folders and
 ## Location
 
 The memory-map is present in:
-- `/olaf-core/memory-map.md` for general purpose agents 
-- `.windsurf/rules/memory-map.md` for Cascade agent
-
+- `.olaf/olaf-core/reference/memory-map.md` for agents
 ## Purpose
 
 - **Project Navigation**: Provides LLM with key context pointers (files or structure)
@@ -17,7 +15,7 @@ The memory-map is present in:
 
 ## Usage
 
-The memory-map should be loaded by the LLM at the start of each interaction. This is why we rely on the agent's capabilities to do so (e.g., `.windsurf/team.md` for Windsurf, `.github/copilot-instructions.md` for Copilot).
+The memory-map should be loaded by the LLM at the start of each interaction. This is why we rely on the agent's capabilities to do so (e.g., `.windsurf/rules/olaf-bootstrap.md` for Windsurf, `.github/copilot-instructions.md` for Copilot).
 
 ## limits
 

@@ -7,15 +7,12 @@ This list reflects the current Query Competency Index. All competencies are orga
 ## Code Analysis & Development
 
 - **Review Code** - Comprehensive code review and analysis
-- **Review Modified Files** - Review files in git modified stage
 - **Review GitHub PR** - Pull request review (requires GitHub MCP server)
 - **Accessibility Review** - WCAG compliance and accessibility checks
 - **Improve Cyclomatic Complexity** - Complete workflow for complexity reduction
 - **Evolve Code Iteratively** - Iterative code improvement approach
-- **Evolve Unit Tests** - Enhance test coverage and quality
 - **Augment Code Unit Test** - Improve test coverage iteratively
 - **Fix Code Smells** - Identify and resolve code quality issues
-- **Analyze Technical Stack** - Technical architecture analysis
 - **Generate Tech Spec from Code** - Create technical specifications from existing code
 
 ## Research & Documentation
@@ -33,7 +30,6 @@ This list reflects the current Query Competency Index. All competencies are orga
 
 - **Create Prompt** - Meta-prompting for new OLAF prompts
 - **Convert Prompt** - Refactor existing prompts to OLAF standards
-- **Test Prompt** - Validate and test prompt effectiveness
 
 ## Project Management
 
@@ -54,7 +50,6 @@ This list reflects the current Query Competency Index. All competencies are orga
 
 ## Orchestrators & Utilities
 
-- **Project Onboarding** - Comprehensive project analysis workflow (Propose-Act)
 - **Should I Use AI** - Guidance on AI vs IDE task decisions
 - **Find Expert Contact** - Locate domain experts and contacts
 
@@ -66,4 +61,4 @@ This list reflects the current Query Competency Index. All competencies are orga
 - Some use "Propose-Act" (propose before acting)
 - A few use "Propose-Confirm-Act" (additional confirmation step)
 
-For exact pattern matching and workflow details, see the Query Competency Index in `olaf-core/reference/`.
+For exact pattern matching and workflow details, see the Query Competency Index in `.olaf/olaf-core/reference/competency-index.json`.

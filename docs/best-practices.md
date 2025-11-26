@@ -13,17 +13,14 @@
 
 3. **Use Standardized References**: Use `olaf-` prefixed references for framework components for better navigation
 
-4. **Test Before Deployment**: Use the `test-prompt` competency to validate prompts before deployment
 
 ## Prompt Engineering Best Practices
 
 1. **Follow Enhanced Templates**: Use the improved prompt templates for better structure and guidelines
 
-2. **Implement Proper Testing**: Utilize the testing framework for comprehensive prompt validation
+2. **Maintain Framework Compliance**: Ensure all prompts follow OLAF structure and validation requirements
 
-3. **Maintain Framework Compliance**: Ensure all prompts follow OLAF structure and validation requirements
-
-4. **Document Prompt Evolution**: Track changes and improvements using the enhanced documentation standards
+3. **Document Prompt Evolution**: Track changes and improvements using the enhanced documentation standards
 
 ## General Best Practices
 
@@ -56,4 +53,3 @@
 ## Critical Notes
 - **This is a work in progress** and we are still exploring the best way to use OLAF. You need to **read carefully and understand what the AI answers**. Avoid just entering the 'YES/DO it/Correct/OK' without really reading. This is not a Genius, THIS is an Assistant.
 - Models may fail to answer (resource limit, latency, etc.). Most agents gracefully handle this but you may need to retry. Don't blame your OLAF assistant.
-- **Framework Features**: The framework includes XML tagging and validation capabilities. Take time to understand these features for optimal usage.

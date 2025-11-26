@@ -13,7 +13,7 @@ This approach breaks down lengthy processes into discrete, manageable process st
 
 ## Problem Solved
 
-This design helps mitigate "context rot" issues that can occur when processing large amounts of information in a single session. This context rot is mostly dues to ambiguities , distractor or needle in a hay stack. These are introduced by teh user or by the ouput of the models.
+This design helps mitigate "context rot" issues that can occur when processing large amounts of information in a single session. This context rot is mostly dues to ambiguities, distractors or needle in a hay stack. These are introduced by the user or by the ouput of the models.
 
 
 ## Current Status
