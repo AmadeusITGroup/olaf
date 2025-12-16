@@ -35,7 +35,8 @@
     "platform_limitations": "Cross-platform compatible"
   },
   "competencies": [
-    "challenge-me"
+    "challenge-me",
+    "search-and-learn"
   ],
   "entry_points": [
     {
@@ -44,6 +45,13 @@
       "file": "prompts/challenge-me.md",
       "protocol": "Act",
       "use_case": "Interactive ideation engine that challenges ideas, provides insights, and tracks collaborative refinement trajectory"
+    },
+    {
+      "name": "Search and Learn",
+      "command": "search and learn",
+      "file": "prompts/search-and-learn.md",
+      "protocol": "Act",
+      "use_case": "Systematic information discovery and knowledge acquisition with comprehensive documentation and practical application"
     }
   ],
   "integrations": {

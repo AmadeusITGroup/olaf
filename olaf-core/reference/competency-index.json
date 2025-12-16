@@ -318,5 +318,10 @@
     "patterns": ["challenge me", "challenge my idea", "challenge ideas", "ideation session", "research challenge"],
     "file": "researcher/prompts/challenge-me.md",
     "protocol": "Act"
+  },
+  {
+    "patterns": ["search and learn", "systematic learning", "research and learn", "knowledge acquisition", "information discovery", "learning session"],
+    "file": "researcher/prompts/search-and-learn.md",
+    "protocol": "Act"
   }
 ]
