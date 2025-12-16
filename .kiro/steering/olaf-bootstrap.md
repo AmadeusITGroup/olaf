@@ -1,6 +1,6 @@
 # OLAF Framework - Kiro Bootstrap
 
-AAlways be very concise.
+Always be very concise.
 
 **CRITICAL: ALWAYS LOAD FIRST**
 

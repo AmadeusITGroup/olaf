@@ -61,7 +61,8 @@
     "deepen-tech-spec-developer",
     "check-todos-in-code",
     "assess-code-quality-principles",
-    "detect-test-directives"
+    "detect-test-directives",
+    "coach-developers-to-prompt"
   ],
   "entry_points": [
     {
@@ -275,6 +276,25 @@
         "discover test directives"
       ],
       "required": false
+    },
+    {
+      "id": "coach-developers-to-prompt",
+      "file": "prompts/coach-developers-to-prompt",
+      "protocol": "Act",
+      "description": "Interactive training competency to coach developers in writing effective AI prompts through hands-on practice with real code scenarios. Creates training projects, evaluates prompt quality, and provides iterative feedback.",
+      "aliases": [
+        "coach prompts",
+        "prompt training",
+        "train prompting",
+        "prompt coaching",
+        "learn prompting",
+        "improve prompting",
+        "prompt workshop"
+      ],
+      "required": false,
+      "name": "Coach Developers To Prompt",
+      "command": "coach prompts",
+      "use_case": "Interactive training to improve developer prompt engineering skills through hands-on practice with real code scenarios"
     }
   ],
   "capabilities": [
@@ -290,7 +310,8 @@
     "Iterative code improvement workflows",
     "Technical specification extraction from code",
     "Feature development with PR preparation",
-    "Integration test coordination"
+    "Integration test coordination",
+    "Interactive prompt engineering training and coaching"
   ],
   "examples": [
     {

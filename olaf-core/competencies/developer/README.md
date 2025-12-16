@@ -19,23 +19,32 @@ Comprehensive developer competency package for software development workflows in
    "augment unit tests" with source-code.java
    ```
 
+4. **Learn Better Prompting**:
+   ```
+   "coach prompts"
+   Language: Python, Level: intermediate, Project: API endpoint
+   ```
+
 ## What's Included
 
-### 🎯 Core Competencies (11 total)
+### 🎯 Core Competencies (15 total)
 
 | Competency | Entry Point | Purpose |
 |------------|-------------|---------|
 | Code Review | `review-code` | Quality and maintainability assessment |
 | Accessibility Review | `review-code-accessibility` | WCAG compliance validation |
 | PR Review | `review-github-pr` | Pull request analysis |
-| Modified Files Review | `review-modified-files` | Changes validation |
 | Complexity Analysis | `analyze-function-complexity` | Function complexity assessment |
 | Improve Complexity | `improve-cyclomatic-complexity` | Cyclomatic complexity reduction |
 | Fix Code Smells | `fix-code-smells` | Anti-pattern refactoring |
 | Augment Tests | `augment-code-unit-test` | Test coverage improvement |
 | Evolve Code | `evolve-code-iteratively` | Iterative code improvement |
 | Tech Spec | `generate-tech-spec-from-code` | Specification extraction |
-| Create Feature | `create-feature-for-pr` | Feature development for PR |
+| Deepen Tech Spec | `deepen-tech-spec-developer` | Deep-dive technical analysis |
+| Check TODOs | `check-todos-in-code` | TODO comment analysis and resolution |
+| Assess Quality | `assess-code-quality-principles` | Code quality principles evaluation |
+| Detect Test Directives | `detect-test-directives` | Test directive discovery |
+| **Coach Prompts** | `coach-developers-to-prompt` | **Interactive prompt engineering training** |
 
 ### 📁 Structure
 
@@ -45,19 +54,26 @@ developer/
 ├── competency-manifest.json         # Package metadata
 ├── dependencies.json                # Tool dependencies
 ├── docs/
-│   └── developer-competency.md      # Full documentation
+│   ├── developer-competency.md      # Full documentation
+│   ├── review-code/                 # Code review docs
+│   ├── fix-code-smells/             # Code smells docs
+│   ├── coach-developers-to-prompt/  # Prompt training docs
+│   └── ... (other competency docs)
 ├── prompts/
 │   ├── review-code.md
 │   ├── review-code-accessibility.md
 │   ├── review-github-pr.md
-│   ├── review-modified-files.md
 │   ├── analyze-function-complexity.md
 │   ├── improve-cyclomatic-complexity.md
 │   ├── fix-code-smells.md
 │   ├── augment-code-unit-test.md
 │   ├── evolve-code-iteratively.md
 │   ├── generate-tech-spec-from-code.md
-│   └── create-feature-for-pr.md
+│   ├── deepen-tech-spec-developer.md
+│   ├── check-todos-in-code.md
+│   ├── assess-code-quality-principles.md
+│   ├── detect-test-directives.md
+│   └── coach-developers-to-prompt   # NEW: Prompt training
 ├── templates/
 │   ├── code-review-report.md
 │   ├── refactoring-plan.md
@@ -77,15 +93,17 @@ developer/
 ✅ **Refactoring** - Code smell detection and fixes  
 ✅ **Testing** - Unit test augmentation and coverage  
 ✅ **Specification Extraction** - Documentation from code  
-✅ **Feature Development** - PR-ready implementation  
+✅ **Quality Assessment** - SOLID, DRY, YAGNI principles evaluation  
+✅ **TODO Management** - TODO comment analysis and resolution  
+✅ **Prompt Engineering Training** - Interactive coaching for better AI prompts  
 
 ## Common Workflows
 
 ### 1. Code Review Workflow
 ```
-review-modified-files 
-  → review-code 
+review-code 
   → improve-cyclomatic-complexity
+  → assess-code-quality-principles
 ```
 
 ### 2. Quality Improvement
@@ -95,11 +113,18 @@ fix-code-smells
   → evolve-code-iteratively
 ```
 
-### 3. Feature Development
+### 3. Prompt Engineering Training
 ```
-create-feature-for-pr
-  → review-code-accessibility
-  → review-github-pr
+coach-developers-to-prompt
+  → practice with real scenarios
+  → apply learnings to actual development
+```
+
+### 4. TODO & Technical Debt
+```
+check-todos-in-code
+  → fix-code-smells
+  → review-code
 ```
 
 ## Requirements
@@ -119,7 +144,13 @@ create-feature-for-pr
 
 ## Documentation
 
-See `docs/developer-competency.md` for comprehensive documentation.
+- **Main Documentation**: `docs/developer-competency.md` - Comprehensive package documentation
+- **Competency-Specific Docs**: `docs/<competency-name>/` - Individual competency guides
+  - `description.md` - Overview, parameters, and usage
+  - `tutorial.md` - Step-by-step tutorials and examples
+
+**Featured Documentation**:
+- `docs/coach-developers-to-prompt/` - Interactive prompt engineering training guide
 
 ---
 
