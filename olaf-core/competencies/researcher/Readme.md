@@ -10,13 +10,19 @@ Comprehensive research competency package for ideation, collaborative thinking, 
    "challenge me" with subject="[your topic]" initial_thoughts="[your initial ideas]"
    ```
 
-2. **With Codebase Analysis**:
+2. **Search and Learn**:
+
+   ```bash
+   "search and learn" with learning_objective="[specific topic]" current_knowledge="[your level]" context="[constraints]"
+   ```
+
+3. **With Codebase Analysis**:
 
    ```bash
    "challenge me" with subject="[your topic]" initial_thoughts="[ideas]" codebase_path="[path/to/repo]"
    ```
 
-3. **With Documentation Review**:
+4. **With Documentation Review**:
 
    ```bash
    "challenge me" with subject="[your topic]" initial_thoughts="[ideas]" documentation_path="[path/to/docs]"
@@ -24,11 +30,12 @@ Comprehensive research competency package for ideation, collaborative thinking, 
 
 ## 📦 What's Included
 
-### Core Competencies (1 total)
+### Core Competencies (2 total)
 
 | Competency | Entry Point | Purpose |
 |------------|-------------|---------|
 | Challenge Me | `challenge-me` | Interactive ideation engine with evidence-based challenges |
+| Search and Learn | `search-and-learn` | Systematic information discovery and knowledge acquisition |
 
 ### 📁 Structure
 
@@ -38,21 +45,28 @@ researcher/
 ├── competency-manifest.json         # Package metadata
 ├── dependencies.json                # Tool dependencies
 ├── docs/                            # Documentation
-│   └── challenge-me/                # Challenge Me competency docs
+│   ├── challenge-me/                # Challenge Me competency docs
+│   │   ├── description.md           # Detailed description
+│   │   └── tutorial.md              # Step-by-step tutorial
+│   └── search-and-learn/            # Search and Learn competency docs
 │       ├── description.md           # Detailed description
 │       └── tutorial.md              # Step-by-step tutorial
 └── prompts/
-    └── challenge-me.md              # Interactive ideation prompt
+    ├── challenge-me.md              # Interactive ideation prompt
+    └── search-and-learn.md          # Systematic learning prompt
 ```
 
 ## ⚡ Key Capabilities
 
 ✅ **Interactive Ideation** - Iterative cycles of challenging and refining ideas  
+✅ **Systematic Learning** - Structured information discovery and knowledge acquisition  
 ✅ **Multi-Source Research** - Integrate insights from codebase, documentation, and web  
 ✅ **Evidence-Based Challenges** - Constructive challenges backed by research  
+✅ **Quality Source Validation** - Credibility assessment and cross-reference verification  
 ✅ **Collaborative Engagement** - Interactive questions, polls, and user involvement  
 ✅ **Trajectory Tracking** - Document the evolution of thinking throughout the session  
 ✅ **Comprehensive Citations** - Track all sources consulted during ideation  
+✅ **Practical Application** - Real-world examples and implementation guidance  
 ✅ **Honest Recommendations** - Actionable recommendations including go/no-go decisions  
 ✅ **Source Attribution** - Link insights to specific evidence from all sources
 
@@ -98,7 +112,24 @@ with codebase_path="./src/auth"
 # 6. Track all code references in sources.md
 ```
 
-### Example 3: Comprehensive Multi-Source Research
+### Example 3: Systematic Learning Session
+
+```bash
+"search and learn"
+with learning_objective="Understanding React Server Components and their performance benefits"
+with current_knowledge="Experienced with React hooks and client-side rendering, new to SSR concepts"
+with context="Evaluating for next.js project, team needs training, production deployment in 3 months"
+
+# The competency will:
+# 1. Define clear learning goals and success criteria
+# 2. Develop systematic search strategy across authoritative sources
+# 3. Execute research with quality source validation
+# 4. Synthesize information and identify contradictions
+# 5. Create practical application examples
+# 6. Generate comprehensive learning report with next steps
+```
+
+### Example 4: Comprehensive Multi-Source Research
 
 ```bash
 "challenge me"
