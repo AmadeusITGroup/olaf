@@ -226,7 +226,7 @@
   },
   "dependencies": {
     "@types/glob": "^8.1.0",
-    "axios": "^1.6.0",
+    "axios": "^1.13.5",
     "glob": "^11.1.0",
     "semver": "^7.5.4",
     "yauzl": "^2.10.0"
